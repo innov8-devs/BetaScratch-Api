@@ -8,6 +8,7 @@ export class GqlConfigService implements GqlOptionsFactory {
   createGqlOptions(): ApolloDriverConfig {
     return {
       debug: false,
+      playground: true,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     };
   }
