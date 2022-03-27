@@ -1,0 +1,92 @@
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { UserService } from './user.service';
+import { UserCreateInput } from '../../@generated/prisma-nestjs-graphql/user/user-create.input';
+import { User } from '../../@generated/prisma-nestjs-graphql/user/user.model';
+import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
+import { ValidateFormOneInput, ValidateFormTwoInput } from './dto/user.request';
+import { AuthResponse } from 'modules/auth/dto/auth.response.dto';
+import { Auth } from 'modules/auth/decorators/auth.decorator';
+
+@Resolver(() => User)
+export class UserResolver {
+  constructor(private readonly userService: UserService) {}
+
+  // Get logged in user
+  @Auth()
+  @Query(() => User, { nullable: true })
+  async me(@CurrentUser() user: User): Promise<User> {
+    return this.userService.me(user);
+  }
+
+  @Mutation(() => User)
+  async register(@Args('input') input: UserCreateInput): Promise<User> {
+    return await this.userService.register(input);
+  }
+
+  // @Mutation(() => User)
+  // async adminLogin(
+  //   @Args('input') input: AdminLoginInput,
+  //   @CurrentUser() user: User,
+  // ): Promise<User> {
+  //   return await this.userService.adminLogin(input, user.id);
+  // }
+
+  // Logout a user
+  // @Mutation(() => Boolean)
+  // async logout(
+  //   @CurrentUser() user: User
+  //   ): Promise<Boolean> {
+  //   return this.userService.logout(user.id, res);
+  // }
+
+  @Mutation(() => AuthResponse)
+  async confirmAccount(@Args('token') token: string): Promise<AuthResponse> {
+    const { auth } = await this.userService.confirmAcount(token);
+    return auth;
+  }
+
+  // @Mutation(() => Boolean)
+  // async forgotPassword(
+  //   @Args('email') email: string,
+  //   @Context() { redis }: MyContext,
+  // ): Promise<Boolean> {
+  //   return await this.userService.forgotPassword(email, redis);
+  // }
+
+  // @Mutation(() => Boolean)
+  // async resetPassword(
+  //   @Args('input') input: ChangePasswordInput,
+  //   @Context() { redis, req }: MyContext,
+  // ): Promise<Boolean> {
+  //   return await this.userService.resetPassword(input, redis, req);
+  // }
+
+  @Mutation(() => Boolean)
+  async requestNewToken(@Args('email') email: string): Promise<Boolean> {
+    return await this.userService.requestNewToken(email);
+  }
+
+  @Mutation(() => Boolean)
+  async validateRegistrationFormOne(
+    @Args('input') input: ValidateFormOneInput,
+  ): Promise<Boolean> {
+    return await this.userService.validateRegistrationFormOne(input);
+  }
+
+  @Mutation(() => Boolean)
+  async validateRegistrationFormTwo(
+    @Args('input') input: ValidateFormTwoInput,
+  ): Promise<Boolean> {
+    return await this.userService.validateRegistrationFormTwo(input);
+  }
+
+  @Query(() => User, { nullable: true })
+  async logout(@CurrentUser() user: User): Promise<User> {
+    return this.userService.me(user);
+  }
+
+  @Mutation(() => Boolean)
+  async queryRefetchHelper() {
+    return true;
+  }
+}

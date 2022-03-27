@@ -1,0 +1,163 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator nestgraphql {
+  provider               = "node node_modules/prisma-nestjs-graphql"
+  output                 = "../src/@generated/prisma-nestjs-graphql"
+  fields_Validator_from  = "class-validator"
+  fields_Validator_input = true
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int           @id @default(autoincrement())
+  /// @Validator.IsEmail()
+  email        String        @unique
+  /// @Validator.MinLength(2)
+  /// @Validator.IsString()
+  username     String        @unique
+  /// @Validator.IsString()
+  /// @Validator.MinLength(2)
+  firstName    String
+  /// @Validator.IsString()
+  /// @Validator.MinLength(2)
+  lastName     String
+  /// @Validator.IsDate()
+  dateOfBirth  DateTime
+  // @Validator.IsEnum(ROLE, { each: true })
+  role         ROLE          @default(USER)
+  // @Validator.IsEnum(GENDER, { each: true })
+  gender       GENDER
+  ///@Validator.IsPhoneNumber()
+  mobileNumber String        @unique
+  /// @Validator.IsString()
+  state        String
+  /// @Validaror.IsBoolean()
+  /// @Validation.IsOptional()
+  confirmed    Boolean       @default(false)
+  /// @Validator.IsString()
+  /// @Validation.HideField({output: true})
+  password     String
+  wallet       Wallet?
+  // TODO this is a comment not validator
+  // cart         Cart?
+  transactions Transaction[]
+  tokens       Token[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Wallet {
+  id           Int      @id @default(autoincrement())
+  user         User     @relation(fields: [userId], references: [id])
+  userId       Int      @unique
+  /// @Validator.IsNumber()
+  withdrawable Float
+  /// @Validator.IsNumber()
+  bonus        Float
+  currency     String
+  /// @Validator.IsString()
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Transaction {
+  id             Int      @id @default(autoincrement())
+  /// @Validator.IsNumber()
+  amount         Int
+  /// @Validator.IsString()
+  transactionId  String
+  /// @Validator.IsString()
+  currency       String
+  /// @Validator.IsString()
+  transactionRef String
+  /// @Validator.IsString()
+  status         String
+  /// @Validator.IsString()
+  purpose        String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  User           User?    @relation(fields: [userId], references: [id])
+  userId         Int?
+}
+
+model Game {
+  id               Int      @id @default(autoincrement())
+  /// @Validator.IsString()
+  name             String
+  /// @Validator.IsString()
+  imageUrl         String
+  /// @Validator.IsString()
+  description      String
+  /// @Validator.IsNumber()
+  gameId           String   @unique
+  /// @Validator.IsNumber()
+  price            Int
+  defaultCurrrency CURRENCY @default(USD)
+  /// @Validator.IsNumber()
+  availability     Int
+  // TODO this is a comment not validator
+  // carts            CartGames[]
+}
+
+// model CartGames {
+//   id     Int  @default(autoincrement())
+//   game   Game @relation(fields: [gameId], references: [id])
+//   gameId Int
+//   cart   Cart @relation(fields: [cartId], references: [id])
+//   cartId Int
+
+//   @@id([gameId, cartId])
+// }
+
+// model Cart {
+//   id        Int         @id @default(autoincrement())
+//   quantity  String
+//   user      User        @relation(fields: [userId], references: [id])
+//   userId    Int         @unique
+//   createdAt DateTime    @default(now())
+//   updatedAt DateTime    @updatedAt
+//   games     CartGames[]
+// }
+
+model Token {
+  id           Int      @id @default(autoincrement())
+  /// @Validator.IsString()
+  subject      String
+  /// @Validarot.IsDate()
+  expire       DateTime
+  /// @Validator.IsBoolean()
+  validity     Boolean
+  /// @Validator.IsString()
+  mobileNumber String
+  /// @Validator.IsString()
+  code         String
+  user         User     @relation(fields: [userId], references: [id])
+  userId       Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+enum ROLE {
+  USER
+  ADMIN
+}
+
+enum GENDER {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum CURRENCY {
+  USD
+  NGN
+}
