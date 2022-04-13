@@ -137,4 +137,31 @@ export class TransactionService {
     }
     return status;
   }
+
+  async checkTotalAmountSpent(userId: any) {
+    if (!userId) return null;
+    let totalAmountSpent: number = 0;
+
+    const userSpentTransaction = await this.prisma.transaction.findMany({
+      where: {
+        AND: [
+          {
+            userId: { equals: userId },
+          },
+          {
+            status: { equals: PAYMENT_STATUS.SUCCESSFUL },
+          },
+          {
+            purpose: { equals: PAYMENT_PURPOSE.PURCHASE },
+          },
+        ],
+      },
+    });
+
+    userSpentTransaction.forEach((transaction) => {
+      totalAmountSpent += transaction.amount;
+    });
+
+    return totalAmountSpent;
+  }
 }

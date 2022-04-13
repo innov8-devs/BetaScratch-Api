@@ -1,9 +1,16 @@
-import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
+import { MailService } from 'modules/mail/mail.service';
+import { OtpService } from 'modules/otp/otp.service';
 import {
   PAYMENT_PURPOSE,
   PAYMENT_STATUS,
+  TRANSACTION,
   WALLET_TYPE,
 } from 'types/constants/enum';
 import { generateRandomString } from 'utils/generateRandomString.util';
@@ -12,18 +19,19 @@ import { PrismaService } from '../prisma.service';
 import {
   CashBackTransactionInput,
   DeductUserBalanceInput,
+  WithdrawalRequestPaginationInput,
 } from './dto/request.dto';
 
 @Injectable()
 export class WalletService {
-  constructor(private readonly prisma: PrismaService) {}
-
-  async you(user: User): Promise<User> {
-    return user;
-  }
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly otpService: OtpService,
+    private readonly mailService: MailService,
+  ) {}
 
   async createWallet(input: Prisma.WalletCreateInput) {
-    return await this.prisma.wallet.create({
+    return await this.prismaService.wallet.create({
       data: {
         ...input,
       },
@@ -31,7 +39,7 @@ export class WalletService {
   }
 
   async getUserBalance(userId: number) {
-    return await this.prisma.wallet.findUnique({
+    return await this.prismaService.wallet.findUnique({
       where: {
         userId,
       },
@@ -57,7 +65,7 @@ export class WalletService {
     if (errMessage.length) throw new BadRequestException(errMessage);
     try {
       if (wallet === WALLET_TYPE.WITHDRAWABLE) {
-        await this.prisma.wallet.update({
+        await this.prismaService.wallet.update({
           data: {
             withdrawable: Number(userBalance.withdrawable) - Number(amount),
           },
@@ -66,7 +74,7 @@ export class WalletService {
           },
         });
       } else if (wallet === WALLET_TYPE.BONUS) {
-        await this.prisma.wallet.update({
+        await this.prismaService.wallet.update({
           data: {
             bonus: Number(userBalance.bonus) - Number(amount),
           },
@@ -76,7 +84,7 @@ export class WalletService {
         });
       }
 
-      await this.prisma.transaction.create({
+      await this.prismaService.transaction.create({
         data: {
           amount: Number(amount),
           currency,
@@ -92,7 +100,7 @@ export class WalletService {
       });
       return true;
     } catch (e) {
-      await this.prisma.transaction.create({
+      await this.prismaService.transaction.create({
         data: {
           amount: Number(amount),
           currency,
@@ -113,13 +121,13 @@ export class WalletService {
   async cashBack(input: CashBackTransactionInput, userId: number) {
     const { cashBackAmount, currency } = input;
 
-    const userWallet = await this.prisma.wallet.findUnique({
+    const userWallet = await this.prismaService.wallet.findUnique({
       where: {
         userId,
       },
     });
 
-    await this.prisma.wallet.update({
+    await this.prismaService.wallet.update({
       where: {
         userId,
       },
@@ -128,7 +136,7 @@ export class WalletService {
       },
     });
 
-    await this.prisma.transaction.create({
+    await this.prismaService.transaction.create({
       data: {
         amount: cashBackAmount,
         currency,
@@ -140,5 +148,81 @@ export class WalletService {
       },
     });
     return true;
+  }
+
+  async sendWithDrawalOtp(userId: number) {
+    const user = await this.prismaService.user.findUnique({
+      where: { id: userId },
+    });
+
+    const otp = await this.otpService.createAuthOtp(
+      user,
+      TRANSACTION.REQUEST_WITHDRAWAL,
+    );
+
+    await this.mailService.sendMail({
+      subject: MAIL_SUBJECT.REQUEST_WITHDRAWAL,
+      html: MAIL_MESSAGE.REQUEST_WITHDRAWAL(otp.code),
+      to: user.email,
+    });
+
+    return true;
+  }
+
+  async recordWithdrawalRequest(
+    input: Prisma.WithdrawalRequestCreateInput,
+    otp: string,
+    userId: number,
+  ) {
+    const user = await this.prismaService.user.findUnique({
+      where: { id: userId },
+    });
+    if (!user) return null;
+    const otpValidity = await this.otpService.checkOtpValidity({
+      mobileNumber: user.mobileNumber,
+      otp,
+    });
+
+    if (!otpValidity)
+      throw new UnauthorizedException(MESSAGES.AUTH.INVALID_OTP);
+
+    await this.otpService.validateOtp({
+      mobileNumber: user.mobileNumber,
+      otp,
+    });
+
+    return await this.prismaService.withdrawalRequest.create({
+      data: {
+        ...input,
+        status: 'Pending',
+        User: { connect: { id: userId } },
+      },
+    });
+  }
+
+  async getAllWithdrawalRequest(input?: WithdrawalRequestPaginationInput) {
+    const { skip, take } = input;
+    return await this.prismaService.withdrawalRequest.findMany({
+      skip,
+      take,
+    });
+  }
+
+  async getTotalWalletBalance() {
+    let total = 0;
+    let wallets = await this.prismaService.wallet.findMany();
+    for (let val of wallets) {
+      total += val.withdrawable;
+    }
+    return total;
+  }
+
+  async getTotalBonusBalance() {
+    let total = 0;
+    let wallets = await this.prismaService.wallet.findMany();
+    for (let val of wallets) {
+      total += val.bonus;
+    }
+    return total;
   }
 }

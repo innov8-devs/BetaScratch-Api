@@ -1,6 +1,6 @@
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Auth } from 'modules/auth/decorators/auth.decorator';
 import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
 import {
@@ -29,5 +29,11 @@ export class TransactionResolver {
     @CurrentUser() user: User,
   ): Promise<String> {
     return await this.transactionService.verifyTransaction(input, user.id);
+  }
+
+  @Auth([ROLE.USER])
+  @Query(() => String)
+  async checkTotalAmountSpent(@CurrentUser() user: User): Promise<Number> {
+    return await this.transactionService.checkTotalAmountSpent(user.id);
   }
 }

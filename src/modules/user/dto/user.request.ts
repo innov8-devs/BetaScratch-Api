@@ -3,6 +3,7 @@ import { Field, InputType } from '@nestjs/graphql';
 import {
   IsEmail,
   IsNotEmpty,
+  IsNumber,
   IsPhoneNumber,
   IsString,
   MinLength,
@@ -86,4 +87,15 @@ export class ChangePasswordInput {
   @IsNotEmpty()
   @IsString()
   newPassword!: string;
+}
+
+@InputType()
+export class UserPaginationInput {
+  @Field(() => Number, { nullable: true })
+  @IsNumber()
+  skip?: number;
+
+  @Field(() => Number, { nullable: true })
+  @IsNumber()
+  take?: number;
 }

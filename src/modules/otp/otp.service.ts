@@ -1,24 +1,21 @@
-import { Token } from '@generated/prisma-nestjs-graphql/token/token.model';
+import { Otp } from '@generated/prisma-nestjs-graphql/otp/otp.model';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { MESSAGES } from 'core/messages';
 import { PrismaService } from 'modules/prisma.service';
 import { addMinutes } from 'utils/date.util';
-import { generateRandomString } from 'utils/generateRandomString.util';
-import {
-  TokenValidityInput,
-  ValidateTokenInput,
-} from './dto/token-request.dto';
+import { generateOtp } from 'utils/generateOtp';
+import { OtpValidityInput, ValidateOtpInput } from './dto/otp-request.dto';
 
 @Injectable()
-export class TokenService {
+export class OtpService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  public async createAuthToken(user: User, subject: string) {
+  public async createAuthOtp(user: User, subject: string) {
     return await this.prismaService.token.create({
       data: {
-        code: generateRandomString(),
+        code: generateOtp(),
         expire: addMinutes(new Date(), 15),
         mobileNumber: user.mobileNumber,
         subject,
@@ -28,13 +25,13 @@ export class TokenService {
     });
   }
 
-  public async validateToken(input: ValidateTokenInput) {
-    const token = await this.prismaService.token.findFirst({
+  public async validateOtp(input: ValidateOtpInput) {
+    const otp = await this.prismaService.token.findFirst({
       where: {
         AND: [
           {
             code: {
-              equals: input.token,
+              equals: input.otp,
             },
           },
           {
@@ -45,33 +42,32 @@ export class TokenService {
         ],
       },
     });
-    if (!token) throw new UnauthorizedException(MESSAGES.AUTH.INVALID_TOKEN);
-    const expired = new Date() > token.expire;
-    const valid = token.validity;
+    if (!otp) throw new UnauthorizedException(MESSAGES.AUTH.INVALID_OTP);
+    const expired = new Date() > otp.expire;
+    const valid = otp.validity;
 
     if (!valid || expired)
-      throw new UnauthorizedException(MESSAGES.AUTH.EXPIRED_OTP);
+      throw new UnauthorizedException(MESSAGES.AUTH.INVALID_OTP);
 
     await this.prismaService.token.update({
       where: {
-        id: token.id,
+        id: otp.id,
       },
       data: {
         validity: false,
       },
     });
-
-    return token;
+    return otp;
   }
 
-  async checkTokenValidity(input: TokenValidityInput): Promise<Boolean> {
-    const { mobileNumber, token } = input;
-    const TOKEN = await this.prismaService.token.findFirst({
+  async checkOtpValidity(input: OtpValidityInput): Promise<Boolean> {
+    const { mobileNumber, otp } = input;
+    const OTP = await this.prismaService.token.findFirst({
       where: {
         AND: [
           {
             code: {
-              equals: token,
+              equals: otp,
             },
           },
           {
@@ -82,13 +78,13 @@ export class TokenService {
         ],
       },
     });
-    if (TOKEN && TOKEN.validity) return true;
+    if (OTP && OTP.validity) return true;
     return false;
   }
 
-  async findOne(tokenWhereInput: Prisma.TokenWhereInput): Promise<Token> {
+  async findOne(otpWhereInput: Prisma.OtpWhereInput): Promise<Otp> {
     return await this.prismaService.token.findFirst({
-      where: tokenWhereInput,
+      where: otpWhereInput,
     });
   }
 }

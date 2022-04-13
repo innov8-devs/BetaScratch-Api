@@ -3,12 +3,15 @@ import { WalletService } from './wallet.service';
 import {
   CashBackTransactionInput,
   DeductUserBalanceInput,
+  WithdrawalRequestPaginationInput,
 } from './dto/request.dto';
 import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
 import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { Auth } from 'modules/auth/decorators/auth.decorator';
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
+import { WithdrawalRequestCreateInput } from '@generated/prisma-nestjs-graphql/withdrawal-request/withdrawal-request-create.input';
+import { WithdrawalRequest } from '@generated/prisma-nestjs-graphql/withdrawal-request/withdrawal-request.model';
 
 @Resolver(() => Wallet)
 export class WalletResolver {
@@ -36,5 +39,45 @@ export class WalletResolver {
     @CurrentUser() user: User,
   ) {
     return this.walletService.cashBack(input, user.id);
+  }
+
+  @Auth([ROLE.USER])
+  @Mutation(() => Boolean)
+  async sendWithdrawalOtp(@Args('userId') userId: string) {
+    return await this.walletService.sendWithDrawalOtp(Number(userId));
+  }
+
+  @Auth([ROLE.USER])
+  @Mutation(() => WithdrawalRequest)
+  async recordWithdrawalRequest(
+    @Args('input') input: WithdrawalRequestCreateInput,
+    @Args('otp') otp: number,
+    @Args('userId') userId: number,
+  ) {
+    return await this.walletService.recordWithdrawalRequest(
+      input,
+      otp.toString(),
+      userId,
+    );
+  }
+
+  @Query(() => [WithdrawalRequest])
+  async getAllWithdrawalRequests(
+    @Args('pagination', { nullable: true })
+    pagination?: WithdrawalRequestPaginationInput,
+  ) {
+    return await this.walletService.getAllWithdrawalRequest(pagination);
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => Number)
+  async getTotalWalletBalance() {
+    return await this.walletService.getTotalWalletBalance();
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => Number)
+  async getTotalBonusBalance() {
+    return await this.walletService.getTotalBonusBalance();
   }
 }

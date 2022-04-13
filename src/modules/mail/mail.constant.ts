@@ -2,6 +2,7 @@ export const MAIL_SUBJECT = {
   VERIFY_ACCOUNT: 'Verify your account',
   REGISTER: 'Welcome to BetaScratch',
   FORGOT_PASSWORD: 'Reset your password',
+  REQUEST_WITHDRAWAL: 'Withdrawal Request',
 };
 
 export const MAIL_MESSAGE = {
@@ -13,4 +14,7 @@ export const MAIL_MESSAGE = {
 
   VERIFY_ACCOUNT: (token: string) =>
     `Kindly use the link ${token} to verify your account, expires in 15 minutes`,
+
+  REQUEST_WITHDRAWAL: (otp: string) =>
+    `Your otp code is ${otp}. Do not share this code with anyone, expires in 15 minutes`,
 };

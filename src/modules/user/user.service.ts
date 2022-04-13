@@ -13,6 +13,7 @@ import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { CURRENCY } from '@generated/prisma-nestjs-graphql/prisma/currency.enum';
 import {
   AdminLoginInput,
+  UserPaginationInput,
   ValidateFormOneInput,
   ValidateFormTwoInput,
 } from './dto/user.request';
@@ -20,7 +21,6 @@ import { MailService } from 'modules/mail/mail.service';
 import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
 import { TokenService } from 'modules/token/token.service';
 import { AUTH_TYPE } from 'types/constants/enum';
-import { AuthService } from 'modules/auth/auth.service';
 
 @Injectable()
 export class UserService {
@@ -29,7 +29,6 @@ export class UserService {
     private readonly walletService: WalletService,
     private readonly prismaService: PrismaService,
     private readonly tokenService: TokenService,
-    private readonly authService: AuthService,
   ) {}
 
   // Get current logged in user
@@ -69,7 +68,7 @@ export class UserService {
       currency: CURRENCY.NGN,
     });
 
-    const token = await this.tokenService.createAuthOtp(
+    const token = await this.tokenService.createAuthToken(
       user,
       AUTH_TYPE.CONFIRM_USER_PREFIX,
     );
@@ -229,7 +228,7 @@ export class UserService {
   }
 
   // confirm account
-  async confirmAcount(token: string) {
+  async confirmAccount(token: string) {
     const currToken = await this.tokenService.findOne({ code: token });
     const user = await this.findUnique({ id: currToken.userId });
     if (!user) return null;
@@ -253,13 +252,14 @@ export class UserService {
       },
     });
 
-    await this.tokenService.validateOtp({
+    await this.tokenService.validateToken({
       mobileNumber: user.mobileNumber,
       token,
     });
 
     // log user in when password change is successful
-    return await this.authService.login(user);
+    // return await this.authService.login(user);
+    return true;
   }
 
   // request token
@@ -267,7 +267,7 @@ export class UserService {
     const user = await this.findUnique({ email });
     if (!user) return true;
 
-    const token = await this.tokenService.createAuthOtp(
+    const token = await this.tokenService.createAuthToken(
       user,
       AUTH_TYPE.REQUEST_NEW_TOKEN,
     );
@@ -306,5 +306,40 @@ export class UserService {
     if (password.length <= 6) errMessage.push(MESSAGES.AUTH.SHORT_PASSWORD);
     if (errMessage.length) throw new BadRequestException(errMessage);
     return true;
+  }
+
+  async getAllRegisteredUser() {
+    return await this.prismaService.user.findMany({
+      where: { role: ROLE.USER },
+    });
+  }
+
+  async findAllUsers(input?: UserPaginationInput) {
+    const { skip, take } = input;
+    return await this.prismaService.user.findMany({
+      skip,
+      take,
+      select: {
+        id: true,
+        wallet: true,
+        firstName: true,
+        lastName: true,
+        email: true,
+        dateOfBirth: true,
+        mobileNumber: true,
+        role: true,
+        username: true,
+        gender: true,
+        createdAt: true,
+        state: true,
+        password: true,
+        confirmed: true,
+        updatedAt: true,
+      },
+      where: { role: ROLE.USER },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
   }
 }

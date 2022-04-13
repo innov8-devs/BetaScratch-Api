@@ -3,9 +3,13 @@ import { UserService } from './user.service';
 import { UserCreateInput } from '../../@generated/prisma-nestjs-graphql/user/user-create.input';
 import { User } from '../../@generated/prisma-nestjs-graphql/user/user.model';
 import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
-import { ValidateFormOneInput, ValidateFormTwoInput } from './dto/user.request';
-import { AuthResponse } from 'modules/auth/dto/auth.response.dto';
+import {
+  UserPaginationInput,
+  ValidateFormOneInput,
+  ValidateFormTwoInput,
+} from './dto/user.request';
 import { Auth } from 'modules/auth/decorators/auth.decorator';
+import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -39,10 +43,9 @@ export class UserResolver {
   //   return this.userService.logout(user.id, res);
   // }
 
-  @Mutation(() => AuthResponse)
-  async confirmAccount(@Args('token') token: string): Promise<AuthResponse> {
-    const { auth } = await this.userService.confirmAcount(token);
-    return auth;
+  @Mutation(() => Boolean)
+  async confirmAccount(@Args('token') token: string): Promise<Boolean> {
+    return await this.userService.confirmAccount(token);
   }
 
   // @Mutation(() => Boolean)
@@ -85,8 +88,21 @@ export class UserResolver {
     return this.userService.me(user);
   }
 
+  @Auth([ROLE.ADMIN])
+  @Query(() => [User], { nullable: true })
+  async getAllRegisteredUsers(): Promise<User[]> {
+    return this.userService.getAllRegisteredUser();
+  }
+
   @Mutation(() => Boolean)
   async queryRefetchHelper() {
     return true;
+  }
+
+  @Query(() => [User], { nullable: true })
+  async findAllUsers(
+    @Args('pagination', { nullable: true }) pagination?: UserPaginationInput,
+  ): Promise<User[]> {
+    return this.userService.findAllUsers(pagination);
   }
 }

@@ -1,6 +1,6 @@
 import { CURRENCY } from '@generated/prisma-nestjs-graphql/prisma/currency.enum';
 import { Field, InputType } from '@nestjs/graphql';
-import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { WALLET_TYPE } from 'types/constants/enum';
 
 @InputType()
@@ -28,4 +28,15 @@ export class CashBackTransactionInput {
   @Field(() => String, { nullable: false })
   @IsEnum(CURRENCY, { each: true })
   currency!: CURRENCY | string;
+}
+
+@InputType()
+export class WithdrawalRequestPaginationInput {
+  @Field(() => Number, { nullable: true })
+  @IsNumber()
+  skip?: number;
+
+  @Field(() => Number, { nullable: true })
+  @IsNumber()
+  take?: number;
 }

@@ -1,19 +1,44 @@
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { LoginInput } from 'modules/user/dto/user.request';
+import { MyContext } from 'types/constants/types';
 import { AuthService } from './auth.service';
+import { Auth } from './decorators/auth.decorator';
 import { CurrentUser } from './decorators/current-user.decorator';
-import { AuthResponse } from './dto/auth.response.dto';
+// import { AuthResponse } from './dto/auth.response.dto';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 
 @Resolver()
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
+  @Auth()
+  @Query(() => String)
+  async generateAccessToken(@CurrentUser() user: User) {
+    const payload = { sub: user.id };
+    return await this.authService.generateAccessToken(payload);
+  }
+
+  @Auth()
+  @Query(() => String)
+  async generateRefreshToken(@CurrentUser() user: User) {
+    const payload = { sub: user.id };
+    return await this.authService.generateRefreshToken(payload);
+  }
+
   @UseGuards(LocalAuthGuard)
-  @Mutation(() => AuthResponse)
-  async login(@Args('input') _input: LoginInput, @CurrentUser() user: User) {
+  @Mutation(() => User)
+  async login(
+    @Args('input') _input: LoginInput,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ) {
+    const payload = { sub: user.id };
+    const accessToken = await this.authService.generateAccessToken(payload);
+    const refreshToken = await this.authService.generateRefreshToken(payload);
+    res.set('access_token', accessToken);
+    res.set('refresh_token', refreshToken);
     const { auth } = await this.authService.login(user);
     return auth;
   }
