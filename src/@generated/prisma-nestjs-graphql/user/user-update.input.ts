@@ -8,6 +8,8 @@ import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-oper
 import { WalletUpdateOneWithoutUserInput } from '../wallet/wallet-update-one-without-user.input';
 import { TransactionUpdateManyWithoutUserInput } from '../transaction/transaction-update-many-without-user.input';
 import { TokenUpdateManyWithoutUserInput } from '../token/token-update-many-without-user.input';
+import { OtpUpdateManyWithoutUserInput } from '../otp/otp-update-many-without-user.input';
+import { WithdrawalRequestUpdateManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-update-many-without-user.input';
 
 @InputType()
 export class UserUpdateInput {
@@ -59,4 +61,10 @@ export class UserUpdateInput {
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;
+
+    @Field(() => OtpUpdateManyWithoutUserInput, {nullable:true})
+    Otp?: OtpUpdateManyWithoutUserInput;
+
+    @Field(() => WithdrawalRequestUpdateManyWithoutUserInput, {nullable:true})
+    WithdrawalRequest?: WithdrawalRequestUpdateManyWithoutUserInput;
 }

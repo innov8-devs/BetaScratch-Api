@@ -6,6 +6,8 @@ import { GENDER } from '../prisma/gender.enum';
 import { Wallet } from '../wallet/wallet.model';
 import { Transaction } from '../transaction/transaction.model';
 import { Token } from '../token/token.model';
+import { Otp } from '../otp/otp.model';
+import { WithdrawalRequest } from '../withdrawal-request/withdrawal-request.model';
 import { UserCount } from './user-count.output';
 
 @ObjectType()
@@ -61,6 +63,12 @@ export class User {
 
     @Field(() => Date, {nullable:false})
     updatedAt!: Date;
+
+    @Field(() => [Otp], {nullable:true})
+    Otp?: Array<Otp>;
+
+    @Field(() => [WithdrawalRequest], {nullable:true})
+    WithdrawalRequest?: Array<WithdrawalRequest>;
 
     @Field(() => UserCount, {nullable:false})
     _count?: UserCount;

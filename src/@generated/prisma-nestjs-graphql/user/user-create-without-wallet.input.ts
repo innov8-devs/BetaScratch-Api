@@ -5,6 +5,8 @@ import { ROLE } from '../prisma/role.enum';
 import { GENDER } from '../prisma/gender.enum';
 import { TransactionCreateNestedManyWithoutUserInput } from '../transaction/transaction-create-nested-many-without-user.input';
 import { TokenCreateNestedManyWithoutUserInput } from '../token/token-create-nested-many-without-user.input';
+import { OtpCreateNestedManyWithoutUserInput } from '../otp/otp-create-nested-many-without-user.input';
+import { WithdrawalRequestCreateNestedManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-create-nested-many-without-user.input';
 
 @InputType()
 export class UserCreateWithoutWalletInput {
@@ -64,4 +66,10 @@ export class UserCreateWithoutWalletInput {
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
+
+    @Field(() => OtpCreateNestedManyWithoutUserInput, {nullable:true})
+    Otp?: OtpCreateNestedManyWithoutUserInput;
+
+    @Field(() => WithdrawalRequestCreateNestedManyWithoutUserInput, {nullable:true})
+    WithdrawalRequest?: WithdrawalRequestCreateNestedManyWithoutUserInput;
 }

@@ -1,7 +1,9 @@
-import { ApolloDriverConfig } from '@nestjs/apollo';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Injectable } from '@nestjs/common';
 import { GqlOptionsFactory } from '@nestjs/graphql';
+import { GraphQLError } from 'graphql';
 
+type Context = { req: Request; res: Response };
 @Injectable()
 export class GqlConfigService implements GqlOptionsFactory {
   createGqlOptions(): ApolloDriverConfig {
@@ -9,11 +11,19 @@ export class GqlConfigService implements GqlOptionsFactory {
       debug: false,
       playground: true,
       introspection: true,
+      driver: ApolloDriver,
       autoSchemaFile: true,
       cors: {
         credentials: true,
       },
-      context: ({ req, res }) => ({ req, res }),
+      context: ({ req, res }: Context) => ({ req, res }),
+
+      formatError: (error: GraphQLError) => ({
+        error: error.originalError,
+        code: error.extensions?.exception?.code,
+        name: error.name || error.originalError?.name,
+        message: error.message || error.originalError.message,
+      }),
     };
   }
 }

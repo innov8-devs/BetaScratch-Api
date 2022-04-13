@@ -37,3 +37,7 @@ export enum AUTH_TYPE {
   CONFIRM_USER_PREFIX = 'confirm user',
   REQUEST_NEW_TOKEN = 'request new token',
 }
+
+export enum TRANSACTION {
+  REQUEST_WITHDRAWAL = 'REQUEST WITHDRAWAL'
+}

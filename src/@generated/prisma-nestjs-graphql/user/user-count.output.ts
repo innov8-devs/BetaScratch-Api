@@ -10,4 +10,10 @@ export class UserCount {
 
     @Field(() => Int, {nullable:false})
     tokens?: number;
+
+    @Field(() => Int, {nullable:false})
+    Otp?: number;
+
+    @Field(() => Int, {nullable:false})
+    WithdrawalRequest?: number;
 }

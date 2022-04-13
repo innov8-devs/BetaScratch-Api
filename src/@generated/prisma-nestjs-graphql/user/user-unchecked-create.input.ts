@@ -7,6 +7,8 @@ import { GENDER } from '../prisma/gender.enum';
 import { WalletUncheckedCreateNestedOneWithoutUserInput } from '../wallet/wallet-unchecked-create-nested-one-without-user.input';
 import { TransactionUncheckedCreateNestedManyWithoutUserInput } from '../transaction/transaction-unchecked-create-nested-many-without-user.input';
 import { TokenUncheckedCreateNestedManyWithoutUserInput } from '../token/token-unchecked-create-nested-many-without-user.input';
+import { OtpUncheckedCreateNestedManyWithoutUserInput } from '../otp/otp-unchecked-create-nested-many-without-user.input';
+import { WithdrawalRequestUncheckedCreateNestedManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-unchecked-create-nested-many-without-user.input';
 
 @InputType()
 export class UserUncheckedCreateInput {
@@ -72,4 +74,10 @@ export class UserUncheckedCreateInput {
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
+
+    @Field(() => OtpUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
+    Otp?: OtpUncheckedCreateNestedManyWithoutUserInput;
+
+    @Field(() => WithdrawalRequestUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
+    WithdrawalRequest?: WithdrawalRequestUncheckedCreateNestedManyWithoutUserInput;
 }

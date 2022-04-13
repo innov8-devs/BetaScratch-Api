@@ -4,6 +4,8 @@ import { SortOrder } from '../prisma/sort-order.enum';
 import { WalletOrderByWithRelationInput } from '../wallet/wallet-order-by-with-relation.input';
 import { TransactionOrderByRelationAggregateInput } from '../transaction/transaction-order-by-relation-aggregate.input';
 import { TokenOrderByRelationAggregateInput } from '../token/token-order-by-relation-aggregate.input';
+import { OtpOrderByRelationAggregateInput } from '../otp/otp-order-by-relation-aggregate.input';
+import { WithdrawalRequestOrderByRelationAggregateInput } from '../withdrawal-request/withdrawal-request-order-by-relation-aggregate.input';
 
 @InputType()
 export class UserOrderByWithRelationInput {
@@ -58,4 +60,10 @@ export class UserOrderByWithRelationInput {
 
     @Field(() => SortOrder, {nullable:true})
     updatedAt?: keyof typeof SortOrder;
+
+    @Field(() => OtpOrderByRelationAggregateInput, {nullable:true})
+    Otp?: OtpOrderByRelationAggregateInput;
+
+    @Field(() => WithdrawalRequestOrderByRelationAggregateInput, {nullable:true})
+    WithdrawalRequest?: WithdrawalRequestOrderByRelationAggregateInput;
 }

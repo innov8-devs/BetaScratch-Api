@@ -8,6 +8,8 @@ import { EnumGENDERFieldUpdateOperationsInput } from '../prisma/enum-gender-fiel
 import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-operations.input';
 import { WalletUncheckedUpdateOneWithoutUserInput } from '../wallet/wallet-unchecked-update-one-without-user.input';
 import { TokenUncheckedUpdateManyWithoutUserInput } from '../token/token-unchecked-update-many-without-user.input';
+import { OtpUncheckedUpdateManyWithoutUserInput } from '../otp/otp-unchecked-update-many-without-user.input';
+import { WithdrawalRequestUncheckedUpdateManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-unchecked-update-many-without-user.input';
 
 @InputType()
 export class UserUncheckedUpdateWithoutTransactionsInput {
@@ -59,4 +61,10 @@ export class UserUncheckedUpdateWithoutTransactionsInput {
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;
+
+    @Field(() => OtpUncheckedUpdateManyWithoutUserInput, {nullable:true})
+    Otp?: OtpUncheckedUpdateManyWithoutUserInput;
+
+    @Field(() => WithdrawalRequestUncheckedUpdateManyWithoutUserInput, {nullable:true})
+    WithdrawalRequest?: WithdrawalRequestUncheckedUpdateManyWithoutUserInput;
 }

@@ -18,41 +18,43 @@ datasource db {
 }
 
 model User {
-  id           Int           @id @default(autoincrement())
+  id                Int                 @id @default(autoincrement())
   /// @Validator.IsEmail()
-  email        String        @unique
+  email             String              @unique
   /// @Validator.MinLength(2)
   /// @Validator.IsString()
-  username     String        @unique
+  username          String              @unique
   /// @Validator.IsString()
   /// @Validator.MinLength(2)
-  firstName    String
+  firstName         String
   /// @Validator.IsString()
   /// @Validator.MinLength(2)
-  lastName     String
+  lastName          String
   /// @Validator.IsDate()
-  dateOfBirth  DateTime
+  dateOfBirth       DateTime
   // @Validator.IsEnum(ROLE, { each: true })
-  role         ROLE          @default(USER)
+  role              ROLE                @default(USER)
   // @Validator.IsEnum(GENDER, { each: true })
-  gender       GENDER
+  gender            GENDER
   ///@Validator.IsPhoneNumber()
-  mobileNumber String        @unique
+  mobileNumber      String              @unique
   /// @Validator.IsString()
-  state        String
+  state             String
   /// @Validaror.IsBoolean()
   /// @Validation.IsOptional()
-  confirmed    Boolean       @default(false)
+  confirmed         Boolean             @default(false)
   /// @Validator.IsString()
   /// @Validation.HideField({output: true})
-  password     String
-  wallet       Wallet?
+  password          String
+  wallet            Wallet?
   // TODO this is a comment not validator
   // cart         Cart?
-  transactions Transaction[]
-  tokens       Token[]
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  transactions      Transaction[]
+  tokens            Token[]
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  Otp               Otp[]
+  WithdrawalRequest WithdrawalRequest[]
 }
 
 model Wallet {
@@ -128,7 +130,38 @@ model Game {
 //   games     CartGames[]
 // }
 
+model WithdrawalRequest {
+  id                Int     @id @default(autoincrement())
+  User              User?   @relation(fields: [userId], references: [id])
+  userId            Int?
+  bank              String?
+  accountNumber     Int?
+  accountName       String?
+  amount            Int?
+  status            String
+  paypal            String?
+  btcWalletAdderess String?
+}
+
 model Token {
+  id           Int      @id @default(autoincrement())
+  /// @Validator.IsString()
+  subject      String
+  /// @Validarot.IsDate()
+  expire       DateTime
+  /// @Validator.IsBoolean()
+  validity     Boolean
+  /// @Validator.IsString()
+  mobileNumber String
+  /// @Validator.IsString()
+  code         String
+  user         User     @relation(fields: [userId], references: [id])
+  userId       Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Otp {
   id           Int      @id @default(autoincrement())
   /// @Validator.IsString()
   subject      String

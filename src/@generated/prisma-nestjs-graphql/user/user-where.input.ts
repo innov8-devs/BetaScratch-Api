@@ -9,6 +9,8 @@ import { BoolFilter } from '../prisma/bool-filter.input';
 import { WalletRelationFilter } from '../wallet/wallet-relation-filter.input';
 import { TransactionListRelationFilter } from '../transaction/transaction-list-relation-filter.input';
 import { TokenListRelationFilter } from '../token/token-list-relation-filter.input';
+import { OtpListRelationFilter } from '../otp/otp-list-relation-filter.input';
+import { WithdrawalRequestListRelationFilter } from '../withdrawal-request/withdrawal-request-list-relation-filter.input';
 
 @InputType()
 export class UserWhereInput {
@@ -72,4 +74,10 @@ export class UserWhereInput {
 
     @Field(() => DateTimeFilter, {nullable:true})
     updatedAt?: DateTimeFilter;
+
+    @Field(() => OtpListRelationFilter, {nullable:true})
+    Otp?: OtpListRelationFilter;
+
+    @Field(() => WithdrawalRequestListRelationFilter, {nullable:true})
+    WithdrawalRequest?: WithdrawalRequestListRelationFilter;
 }
