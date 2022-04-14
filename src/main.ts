@@ -10,8 +10,15 @@ dotenv.config();
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService)
-  app.use(cors({credentials: true, origin: "http://localhost:3000"}))
+  // app.use(cors({credentials: true, origin: "http://localhost:3000"}))
   // app.enableCors({ maxAge: configService.get('maxAge') });
+
+  app.enableCors({
+    origin: process.env.CORS_ORIGIN,
+    methods: "GET,HEAD,PUT,PATCH,DELETE",
+    allowedHeaders: "Content-Type, Accept",
+    credentials: true,
+  });
 
   app.useGlobalPipes(
     new ValidationPipe({

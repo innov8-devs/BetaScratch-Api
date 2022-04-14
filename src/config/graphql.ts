@@ -19,7 +19,6 @@ export class GqlConfigService implements GqlOptionsFactory {
       cors: {
         credentials: true,
         origin: process.env.CORS_ORIGIN,
-        maxAge: 86400
       },
       context: ({ req, res }: Context) => ({ req, res }),
 
