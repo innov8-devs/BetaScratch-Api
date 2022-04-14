@@ -2,6 +2,9 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Injectable } from '@nestjs/common';
 import { GqlOptionsFactory } from '@nestjs/graphql';
 import { GraphQLError } from 'graphql';
+import * as dotenv from "dotenv"
+
+dotenv.config()
 
 type Context = { req: Request; res: Response };
 @Injectable()
@@ -15,6 +18,7 @@ export class GqlConfigService implements GqlOptionsFactory {
       autoSchemaFile: true,
       cors: {
         credentials: true,
+        origin: process.env.CORS_ORIGIN 
       },
       context: ({ req, res }: Context) => ({ req, res }),
 
