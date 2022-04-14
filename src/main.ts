@@ -9,6 +9,7 @@ dotenv.config();
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService)
+  app.enableCors({ maxAge: configService.get('maxAge') });
 
   app.useGlobalPipes(
     new ValidationPipe({
