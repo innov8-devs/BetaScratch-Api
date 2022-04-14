@@ -13,7 +13,7 @@ export class OtpService {
   constructor(private readonly prismaService: PrismaService) {}
 
   public async createAuthOtp(user: User, subject: string) {
-    return await this.prismaService.token.create({
+    return await this.prismaService.otp.create({
       data: {
         code: generateOtp(),
         expire: addMinutes(new Date(), 15),
@@ -26,7 +26,7 @@ export class OtpService {
   }
 
   public async validateOtp(input: ValidateOtpInput) {
-    const otp = await this.prismaService.token.findFirst({
+    const otp = await this.prismaService.otp.findFirst({
       where: {
         AND: [
           {
@@ -43,13 +43,13 @@ export class OtpService {
       },
     });
     if (!otp) throw new UnauthorizedException(MESSAGES.AUTH.INVALID_OTP);
-    const expired = new Date() > otp.expire;
-    const valid = otp.validity;
+    // const expired = new Date() > otp.expire;
+    // const valid = otp.validity;
 
-    if (!valid || expired)
-      throw new UnauthorizedException(MESSAGES.AUTH.INVALID_OTP);
+    // if (!valid || expired)
+    //   throw new UnauthorizedException(MESSAGES.AUTH.INVALID_OTP);
 
-    await this.prismaService.token.update({
+    await this.prismaService.otp.update({
       where: {
         id: otp.id,
       },
@@ -62,7 +62,7 @@ export class OtpService {
 
   async checkOtpValidity(input: OtpValidityInput): Promise<Boolean> {
     const { mobileNumber, otp } = input;
-    const OTP = await this.prismaService.token.findFirst({
+    const OTP = await this.prismaService.otp.findFirst({
       where: {
         AND: [
           {
@@ -83,7 +83,7 @@ export class OtpService {
   }
 
   async findOne(otpWhereInput: Prisma.OtpWhereInput): Promise<Otp> {
-    return await this.prismaService.token.findFirst({
+    return await this.prismaService.otp.findFirst({
       where: otpWhereInput,
     });
   }

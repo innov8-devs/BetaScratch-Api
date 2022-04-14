@@ -44,8 +44,8 @@ export class UserResolver {
   // }
 
   @Mutation(() => Boolean)
-  async confirmAccount(@Args('token') token: string): Promise<Boolean> {
-    return await this.userService.confirmAccount(token);
+  async confirmAccount(@Args('otp') otp: string): Promise<Boolean> {
+    return await this.userService.confirmAccount(otp);
   }
 
   // @Mutation(() => Boolean)

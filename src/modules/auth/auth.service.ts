@@ -23,7 +23,7 @@ export class AuthService {
     const userPass = user.password;
 
     if (!userPass || user.confirmed === false)
-      throw new UnauthorizedException(MESSAGES.AUTH.CONFIRM_ACCOUNT);
+      throw new UnauthorizedException({ name: "confirm", message: MESSAGES.AUTH.CONFIRM_ACCOUNT});
 
     if (await argon2.verify(userPass, password)) return user;
     return null;

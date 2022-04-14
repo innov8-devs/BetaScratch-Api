@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Injectable,
   UnauthorizedException,
+
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as argon2 from 'argon2';
@@ -21,6 +22,7 @@ import { MailService } from 'modules/mail/mail.service';
 import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
 import { TokenService } from 'modules/token/token.service';
 import { AUTH_TYPE } from 'types/constants/enum';
+import { OtpService } from 'modules/otp/otp.service';
 
 @Injectable()
 export class UserService {
@@ -29,6 +31,7 @@ export class UserService {
     private readonly walletService: WalletService,
     private readonly prismaService: PrismaService,
     private readonly tokenService: TokenService,
+    private readonly otpService: OtpService,
   ) {}
 
   // Get current logged in user
@@ -68,16 +71,14 @@ export class UserService {
       currency: CURRENCY.NGN,
     });
 
-    const token = await this.tokenService.createAuthToken(
+    const otp = await this.otpService.createAuthOtp(
       user,
       AUTH_TYPE.CONFIRM_USER_PREFIX,
     );
 
     await this.mailService.sendMail({
       subject: MAIL_SUBJECT.REGISTER,
-      html: MAIL_MESSAGE.REGISTER(
-        `<a href="${process.env.CORS_ORIGIN}/user/confirm-account/${token.code}">confirm account</a>`,
-      ),
+      html: MAIL_MESSAGE.REGISTER(otp.code),
       to: user.email,
     });
 
@@ -228,17 +229,25 @@ export class UserService {
   }
 
   // confirm account
-  async confirmAccount(token: string) {
-    const currToken = await this.tokenService.findOne({ code: token });
-    const user = await this.findUnique({ id: currToken.userId });
+  async confirmAccount(otp: string) {
+    const currOtp = await this.otpService.findOne({ code: otp});
+    const user = await this.findUnique({ id: currOtp.userId });
     if (!user) return null;
-    const tokenValidity = await this.tokenService.checkTokenValidity({
+
+    console.log(currOtp)
+
+    const otpValidity = await this.otpService.checkOtpValidity({
       mobileNumber: user.mobileNumber,
-      token,
+      otp,
     });
 
-    if (!tokenValidity)
-      throw new UnauthorizedException(MESSAGES.AUTH.INVALID_TOKEN);
+    if (!otpValidity)
+      throw new UnauthorizedException(MESSAGES.AUTH.INVALID_OTP);
+
+    await this.otpService.validateOtp({
+      mobileNumber: user.mobileNumber,
+      otp,
+    });
 
     user.confirmed = true;
     user.updatedAt = new Date();
@@ -252,9 +261,9 @@ export class UserService {
       },
     });
 
-    await this.tokenService.validateToken({
+    await this.otpService.validateOtp({
       mobileNumber: user.mobileNumber,
-      token,
+      otp,
     });
 
     // log user in when password change is successful
@@ -285,26 +294,21 @@ export class UserService {
 
   // Multistep form validation
   async validateRegistrationFormOne(input: ValidateFormOneInput) {
-    const errMessage = [];
     const { email, mobileNumber } = input;
     const emailUsed = await this.findUnique({ email });
     const mobileNumberUsed = await this.findUnique({
       mobileNumber: mobileNumber,
     });
-    if (emailUsed) errMessage.push(MESSAGES.AUTH.EMAIL_CONFLICT);
-    if (mobileNumberUsed) errMessage.push(MESSAGES.AUTH.MOBILE_NUMBER_CONFLICT);
-
-    if (errMessage.length) throw new BadRequestException(errMessage);
+    if (emailUsed) throw new BadRequestException({name: "email", message: MESSAGES.AUTH.EMAIL_CONFLICT});
+    if (mobileNumberUsed) throw new BadRequestException({name: "mobile", message: MESSAGES.AUTH.MOBILE_NUMBER_CONFLICT});
     return true;
   }
 
   async validateRegistrationFormTwo(input: ValidateFormTwoInput) {
-    const errMessage = [];
     const { username, password } = input;
     const usernameUsed = await this.findUnique({ username });
-    if (usernameUsed) errMessage.push(MESSAGES.AUTH.USERNAME_CONFLICT);
-    if (password.length <= 6) errMessage.push(MESSAGES.AUTH.SHORT_PASSWORD);
-    if (errMessage.length) throw new BadRequestException(errMessage);
+    if (usernameUsed) throw new BadRequestException({name: "username", message: MESSAGES.AUTH.USERNAME_CONFLICT});
+    if (password.length <= 6) throw new BadRequestException({name: "password", message: MESSAGES.AUTH.SHORT_PASSWORD});
     return true;
   }
 
