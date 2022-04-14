@@ -18,7 +18,7 @@ export class GqlConfigService implements GqlOptionsFactory {
       autoSchemaFile: true,
       cors: {
         credentials: true,
-        origin: process.env.CORS_ORIGIN,
+        origin: true
       },
       context: ({ req, res }: Context) => ({ req, res }),
 
