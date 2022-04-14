@@ -15,7 +15,7 @@ async function bootstrap() {
   // app.enableCors({ maxAge: configService.get('maxAge') });
 
   app.enableCors({
-    origin: true,
+    origin: process.env.CORS_ORIGIN, 
     methods: "GET,HEAD,PUT,PATCH,DELETE",
     allowedHeaders: "Content-Type, Accept",
     credentials: true,
