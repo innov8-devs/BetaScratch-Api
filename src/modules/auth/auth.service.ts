@@ -15,9 +15,22 @@ export class AuthService {
     private configService: ConfigService,
   ) {}
 
-  async validateUser(username: string, password: string): Promise<User> {
-    const user = await this.prismaService.user.findUnique({
-      where: { username },
+  async validateUser(phoneNumberOrEmail: string, password: string): Promise<User> {
+    const user = await this.prismaService.user.findFirst({
+      where: { 
+        OR: [
+          {
+            email: {
+              equals: phoneNumberOrEmail
+            }
+          },
+          {
+            mobileNumber: {
+              equals: phoneNumberOrEmail
+            }
+          }
+        ] 
+      },
     });
     if (!user) return null;
     const userPass = user.password;
