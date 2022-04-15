@@ -23,7 +23,7 @@ async function bootstrap() {
     preflightContinue: true,
   });
 
-  // app.set("trust proxy", 1);
+  app.set('trust proxy', 1);
 
   app.useGlobalPipes(
     new ValidationPipe({
