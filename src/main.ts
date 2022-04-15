@@ -15,7 +15,7 @@ async function bootstrap() {
   // app.enableCors({ maxAge: configService.get('maxAge') });
 
   app.enableCors({
-    origin: 'https://betascratch.herokuapp.com',
+    origin: ['https://betascratch.herokuapp.com', 'http://localhost:3000'],
     methods: 'GET,HEAD,PUT,PATCH,DELETE',
     allowedHeaders:
       'Content-Type,Accept,Authorization,Access-Control-Allow-Origin',
