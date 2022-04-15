@@ -9,11 +9,10 @@ export const MAIL_MESSAGE = {
   REGISTER: (token: string) =>
     `Welcome to BetaScratch, Click the link to confirm your account ${token}. Do not share this link with anyone, expires in 15 minutes`,
 
-  FORGOT_PASSWORD: (token: string) =>
-    `Kindly use the link ${token} to reset your password`,
+  FORGOT_PASSWORD: (otp: string) => `Use the otp ${otp} to reset your password`,
 
-  VERIFY_ACCOUNT: (token: string) =>
-    `Kindly use the link ${token} to verify your account, expires in 15 minutes`,
+  VERIFY_ACCOUNT: (otp: string) =>
+    `Your otp code is ${otp}. to verify your account, expires in 15 minutes`,
 
   REQUEST_WITHDRAWAL: (otp: string) =>
     `Your otp code is ${otp}. Do not share this code with anyone, expires in 15 minutes`,

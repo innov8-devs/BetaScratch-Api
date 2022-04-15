@@ -108,6 +108,7 @@ CREATE TABLE "Otp" (
     "expire" TIMESTAMP(3) NOT NULL,
     "validity" BOOLEAN NOT NULL,
     "mobileNumber" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
     "code" TEXT NOT NULL,
     "userId" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

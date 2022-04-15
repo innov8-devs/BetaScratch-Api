@@ -21,6 +21,9 @@ export class OtpUpdateInput {
     mobileNumber?: StringFieldUpdateOperationsInput;
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    email?: StringFieldUpdateOperationsInput;
+
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     code?: StringFieldUpdateOperationsInput;
 
     @Field(() => UserUpdateOneRequiredWithoutOtpInput, {nullable:true})

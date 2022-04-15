@@ -33,6 +33,9 @@ export class OtpScalarWhereInput {
     mobileNumber?: StringFilter;
 
     @Field(() => StringFilter, {nullable:true})
+    email?: StringFilter;
+
+    @Field(() => StringFilter, {nullable:true})
     code?: StringFilter;
 
     @Field(() => IntFilter, {nullable:true})

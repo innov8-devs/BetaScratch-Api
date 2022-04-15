@@ -21,6 +21,9 @@ export class OtpMinOrderByAggregateInput {
     mobileNumber?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    email?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     code?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

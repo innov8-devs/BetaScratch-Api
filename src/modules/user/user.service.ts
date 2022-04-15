@@ -19,7 +19,6 @@ import {
 } from './dto/user.request';
 import { MailService } from 'modules/mail/mail.service';
 import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
-import { TokenService } from 'modules/token/token.service';
 import { AUTH_TYPE } from 'types/constants/enum';
 import { OtpService } from 'modules/otp/otp.service';
 
@@ -29,7 +28,6 @@ export class UserService {
     private readonly mailService: MailService,
     private readonly walletService: WalletService,
     private readonly prismaService: PrismaService,
-    private readonly tokenService: TokenService,
     private readonly otpService: OtpService,
   ) {}
 
@@ -240,12 +238,27 @@ export class UserService {
   }
 
   // confirm account
-  async confirmAccount(otp: string) {
+  async confirmAccount(otp: string, phoneNumberOrEmail: string) {
     const currOtp = await this.otpService.findOne({ code: otp });
-    const user = await this.findUnique({ id: currOtp.userId });
-    if (!user) return null;
+    if (!currOtp) throw new UnauthorizedException(MESSAGES.AUTH.INVALID_OTP);
 
-    console.log(currOtp);
+    const user = await this.prismaService.user.findFirst({
+      where: {
+        OR: [
+          {
+            email: { equals: phoneNumberOrEmail.toLowerCase() },
+          },
+          {
+            mobileNumber: { equals: phoneNumberOrEmail },
+          },
+        ],
+        AND: {
+          id: currOtp.userId,
+        },
+      },
+    });
+
+    if (!user) return null;
 
     const otpValidity = await this.otpService.checkOtpValidity({
       mobileNumber: user.mobileNumber,
@@ -277,27 +290,113 @@ export class UserService {
       otp,
     });
 
-    // log user in when password change is successful
-    // return await this.authService.login(user);
     return true;
   }
 
   // request token
-  async requestNewToken(email: string) {
-    const user = await this.findUnique({ email });
+  async requestNewOtp(email: string) {
+    const user = await this.findUnique({ email: email.toLowerCase() });
     if (!user) return true;
 
-    const token = await this.tokenService.createAuthToken(
+    const otp = await this.otpService.createAuthOtp(
       user,
       AUTH_TYPE.REQUEST_NEW_TOKEN,
     );
 
     await this.mailService.sendMail({
-      subject: MAIL_SUBJECT.VERIFY_ACCOUNT,
-      html: MAIL_MESSAGE.VERIFY_ACCOUNT(
-        `<a href="${process.env.CORS_ORIGIN}/user/confirm-account/${token.code}">confirm account</a>`,
-      ),
+      subject: MAIL_SUBJECT.REGISTER,
+      html: MAIL_MESSAGE.REGISTER(otp.code),
       to: user.email,
+    });
+
+    return true;
+  }
+
+  // request token
+  async forgotPassword(email: string) {
+    const user = await this.findUnique({ email: email.toLowerCase() });
+    if (!user) return true;
+
+    const otp = await this.otpService.createAuthOtp(
+      user,
+      AUTH_TYPE.FORGOT_PASSWORD,
+    );
+
+    await this.mailService.sendMail({
+      subject: MAIL_SUBJECT.FORGOT_PASSWORD,
+      html: MAIL_MESSAGE.FORGOT_PASSWORD(otp.code),
+      to: user.email,
+    });
+
+    return true;
+  }
+
+  async forgotPasswordOtp(otp: string, email: string) {
+    const currOtp = await this.otpService.findOne({
+      AND: [
+        { code: { equals: otp } },
+        { email: { equals: email.toLowerCase() } },
+      ],
+    });
+
+    if (!currOtp) throw new UnauthorizedException(MESSAGES.AUTH.INVALID_OTP);
+
+    const user = await this.findUnique({ id: currOtp.userId });
+    if (!user) return null;
+
+    const otpValidity = await this.otpService.checkOtpValidity({
+      mobileNumber: user.mobileNumber,
+      otp,
+    });
+
+    if (!otpValidity)
+      throw new UnauthorizedException(MESSAGES.AUTH.INVALID_OTP);
+
+    return true;
+  }
+
+  // forgot password otp verification
+  async newPassword(otp: string, email: string, password: string) {
+    const currOtp = await this.otpService.findOne({
+      AND: [
+        { code: { equals: otp } },
+        { email: { equals: email.toLowerCase() } },
+      ],
+    });
+
+    const user = await this.findUnique({ id: currOtp.userId });
+    if (!user) return null;
+
+    const otpValidity = await this.otpService.checkOtpValidity({
+      mobileNumber: user.mobileNumber,
+      otp,
+    });
+
+    if (!otpValidity)
+      throw new UnauthorizedException(MESSAGES.AUTH.INVALID_OTP);
+
+    await this.otpService.validateOtp({
+      mobileNumber: user.mobileNumber,
+      otp,
+    });
+
+    const hashedPassword = await argon2.hash(password);
+
+    user.password = hashedPassword;
+    user.updatedAt = new Date();
+
+    await this.prismaService.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        password: hashedPassword,
+      },
+    });
+
+    await this.otpService.validateOtp({
+      mobileNumber: user.mobileNumber,
+      otp,
     });
 
     return true;

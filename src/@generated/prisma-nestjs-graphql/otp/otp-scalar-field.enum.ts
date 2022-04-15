@@ -6,6 +6,7 @@ export enum OtpScalarFieldEnum {
     expire = "expire",
     validity = "validity",
     mobileNumber = "mobileNumber",
+    email = "email",
     code = "code",
     userId = "userId",
     createdAt = "createdAt",

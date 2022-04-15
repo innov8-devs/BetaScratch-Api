@@ -26,6 +26,9 @@ export class OtpGroupBy {
     mobileNumber!: string;
 
     @Field(() => String, {nullable:false})
+    email!: string;
+
+    @Field(() => String, {nullable:false})
     code!: string;
 
     @Field(() => Int, {nullable:false})

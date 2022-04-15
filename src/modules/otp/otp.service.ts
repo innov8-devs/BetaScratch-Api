@@ -15,6 +15,7 @@ export class OtpService {
   public async createAuthOtp(user: User, subject: string) {
     return await this.prismaService.otp.create({
       data: {
+        email: user.email,
         code: generateOtp(),
         expire: addMinutes(new Date(), 15),
         mobileNumber: user.mobileNumber,

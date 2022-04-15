@@ -20,6 +20,9 @@ export class OtpMaxAggregateInput {
     mobileNumber?: true;
 
     @Field(() => Boolean, {nullable:true})
+    email?: true;
+
+    @Field(() => Boolean, {nullable:true})
     code?: true;
 
     @Field(() => Boolean, {nullable:true})

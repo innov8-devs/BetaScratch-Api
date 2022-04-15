@@ -44,8 +44,11 @@ export class UserResolver {
   // }
 
   @Mutation(() => Boolean)
-  async confirmAccount(@Args('otp') otp: string): Promise<Boolean> {
-    return await this.userService.confirmAccount(otp);
+  async confirmAccount(
+    @Args('otp') otp: string,
+    @Args('phoneNumberOrEmail') phoneNumberOrEmail: string,
+  ): Promise<Boolean> {
+    return await this.userService.confirmAccount(otp, phoneNumberOrEmail);
   }
 
   // @Mutation(() => Boolean)
@@ -65,8 +68,30 @@ export class UserResolver {
   // }
 
   @Mutation(() => Boolean)
-  async requestNewToken(@Args('email') email: string): Promise<Boolean> {
-    return await this.userService.requestNewToken(email);
+  async requestNewOtp(@Args('email') email: string): Promise<Boolean> {
+    return await this.userService.requestNewOtp(email);
+  }
+
+  @Mutation(() => Boolean)
+  async forgotPassword(@Args('email') email: string): Promise<Boolean> {
+    return await this.userService.forgotPassword(email);
+  }
+
+  @Mutation(() => Boolean)
+  async forgotPasswordOtp(
+    @Args('email') email: string,
+    @Args('otp') otp: string,
+  ): Promise<Boolean> {
+    return await this.userService.forgotPasswordOtp(otp, email);
+  }
+
+  @Mutation(() => Boolean)
+  async newPassword(
+    @Args('otp') otp: string,
+    @Args('email') email: string,
+    @Args('password') password: string,
+  ): Promise<Boolean> {
+    return await this.userService.newPassword(otp, email, password);
   }
 
   @Mutation(() => Boolean)

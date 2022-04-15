@@ -21,6 +21,9 @@ export class OtpCountAggregate {
     mobileNumber!: number;
 
     @Field(() => Int, {nullable:false})
+    email!: number;
+
+    @Field(() => Int, {nullable:false})
     code!: number;
 
     @Field(() => Int, {nullable:false})

@@ -3,7 +3,6 @@ import { AppModule } from './app.module';
 import * as dotenv from 'dotenv';
 import { ConfigService } from '@nestjs/config';
 import { ValidationPipe } from '@nestjs/common';
-// import cors from 'cors';
 import { NestExpressApplication } from '@nestjs/platform-express';
 
 dotenv.config();
@@ -11,8 +10,6 @@ dotenv.config();
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const configService = app.get(ConfigService);
-  // app.use(cors());
-  // app.enableCors({ maxAge: configService.get('maxAge') });
 
   app.enableCors({
     origin: ['https://betascratch.herokuapp.com', 'http://localhost:3000'],
@@ -22,8 +19,6 @@ async function bootstrap() {
     credentials: true,
     preflightContinue: true,
   });
-
-  // app.set('trust proxy', 1);
 
   app.useGlobalPipes(
     new ValidationPipe({

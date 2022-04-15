@@ -23,6 +23,9 @@ export class Otp {
     mobileNumber!: string;
 
     @Field(() => String, {nullable:false})
+    email!: string;
+
+    @Field(() => String, {nullable:false})
     code!: string;
 
     @Field(() => User, {nullable:false})

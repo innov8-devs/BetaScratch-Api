@@ -36,8 +36,9 @@ export enum WALLET_TYPE {
 export enum AUTH_TYPE {
   CONFIRM_USER_PREFIX = 'confirm user',
   REQUEST_NEW_TOKEN = 'request new token',
+  FORGOT_PASSWORD = 'forgot password',
 }
 
 export enum TRANSACTION {
-  REQUEST_WITHDRAWAL = 'REQUEST WITHDRAWAL'
+  REQUEST_WITHDRAWAL = 'REQUEST WITHDRAWAL',
 }

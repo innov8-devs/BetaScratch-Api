@@ -173,6 +173,8 @@ model Otp {
   validity     Boolean
   /// @Validator.IsString()
   mobileNumber String
+  /// @Validator.IsEmail()
+  email        String
   /// @Validator.IsString()
   code         String
   user         User     @relation(fields: [userId], references: [id])
