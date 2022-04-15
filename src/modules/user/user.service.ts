@@ -363,6 +363,7 @@ export class UserService {
         gender: true,
         createdAt: true,
         state: true,
+        country: true,
         password: true,
         confirmed: true,
         updatedAt: true,
