@@ -10,15 +10,16 @@ dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  const configService = app.get(ConfigService)
-  // app.use(cors({credentials: true, origin: "http://localhost:3000"}))
+  const configService = app.get(ConfigService);
+  // app.use(cors());
   // app.enableCors({ maxAge: configService.get('maxAge') });
 
   app.enableCors({
-    origin: process.env.CORS_ORIGIN, 
-    methods: "GET,HEAD,PUT,PATCH,DELETE",
-    allowedHeaders: "Content-Type, Accept",
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,DELETE',
+    allowedHeaders: 'Content-Type, Accept',
     credentials: true,
+    preflightContinue: true,
   });
 
   // app.set("trust proxy", 1);
