@@ -15,7 +15,7 @@ async function bootstrap() {
   // app.enableCors({ maxAge: configService.get('maxAge') });
 
   app.enableCors({
-    origin: true,
+    origin: 'https://betascratch.herokuapp.com',
     methods: 'GET,HEAD,PUT,PATCH,DELETE',
     allowedHeaders:
       'Content-Type,Accept,Authorization,Access-Control-Allow-Origin',
@@ -23,7 +23,7 @@ async function bootstrap() {
     preflightContinue: true,
   });
 
-  app.set('trust proxy', 1);
+  // app.set('trust proxy', 1);
 
   app.useGlobalPipes(
     new ValidationPipe({
