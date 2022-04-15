@@ -71,6 +71,21 @@ CREATE TABLE "Game" (
 );
 
 -- CreateTable
+CREATE TABLE "WithdrawalRequest" (
+    "id" SERIAL NOT NULL,
+    "userId" INTEGER,
+    "bank" TEXT,
+    "accountNumber" INTEGER,
+    "accountName" TEXT,
+    "amount" INTEGER,
+    "status" TEXT NOT NULL,
+    "paypal" TEXT,
+    "btcWalletAdderess" TEXT,
+
+    CONSTRAINT "WithdrawalRequest_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Token" (
     "id" SERIAL NOT NULL,
     "subject" TEXT NOT NULL,
@@ -83,6 +98,21 @@ CREATE TABLE "Token" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Token_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Otp" (
+    "id" SERIAL NOT NULL,
+    "subject" TEXT NOT NULL,
+    "expire" TIMESTAMP(3) NOT NULL,
+    "validity" BOOLEAN NOT NULL,
+    "mobileNumber" TEXT NOT NULL,
+    "code" TEXT NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Otp_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -107,4 +137,10 @@ ALTER TABLE "Wallet" ADD CONSTRAINT "Wallet_userId_fkey" FOREIGN KEY ("userId") 
 ALTER TABLE "Transaction" ADD CONSTRAINT "Transaction_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "WithdrawalRequest" ADD CONSTRAINT "WithdrawalRequest_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Token" ADD CONSTRAINT "Token_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Otp" ADD CONSTRAINT "Otp_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

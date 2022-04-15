@@ -1,7 +1,7 @@
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import * as argon2 from 'argon2';
-// import { AuthResponse } from './dto/auth.response.dto';
+import { AuthResponse } from './dto/auth.response.dto';
 import { MESSAGES } from 'core/messages';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
@@ -65,7 +65,15 @@ export class AuthService {
     return { auth };
   }
 
-  // private static jwtPayload(user: User) {
-  //   return { sub: user.id };
-  // }
+ async adminLogin(user: User) {
+    const auth: AuthResponse = user;
+    const payload = AuthService.jwtPayload(user);
+    auth.token = await this.generateAccessToken(payload);
+    const refreshToken = await this.generateRefreshToken(payload);
+    return { auth, refreshToken };
+  }
+
+  private static jwtPayload(user: User) {
+    return { sub: user.id };
+  }
 }

@@ -47,12 +47,10 @@ export class UserService {
     const mobileNumberUsed = await this.findUnique({
       mobileNumber: input.mobileNumber,
     });
-    if (emailUsed) errMessage.push(MESSAGES.AUTH.EMAIL_CONFLICT);
-    if (usernameUsed) errMessage.push(MESSAGES.AUTH.USERNAME_CONFLICT);
-    if (mobileNumberUsed) errMessage.push(MESSAGES.AUTH.MOBILE_NUMBER_CONFLICT);
-    if (input.password.length <= 6)
-      errMessage.push(MESSAGES.AUTH.SHORT_PASSWORD);
-    if (errMessage.length) throw new BadRequestException(errMessage);
+    if (emailUsed) errMessage.push({ name:"email", message: MESSAGES.AUTH.EMAIL_CONFLICT});
+    if (usernameUsed) errMessage.push({ name: "username", message: MESSAGES.AUTH.USERNAME_CONFLICT});
+    if (mobileNumberUsed) errMessage.push({ name: "mobileNumber", message: MESSAGES.AUTH.MOBILE_NUMBER_CONFLICT});
+    if (input.password.length <= 6) throw new BadRequestException({name: "password", message: MESSAGES.AUTH.SHORT_PASSWORD});
     const hashedPassword = await argon2.hash(input.password);
     const user = await this.prismaService.user.create({
       data: {

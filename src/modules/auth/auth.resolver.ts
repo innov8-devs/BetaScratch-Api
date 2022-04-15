@@ -6,7 +6,7 @@ import { MyContext } from 'types/constants/types';
 import { AuthService } from './auth.service';
 import { Auth } from './decorators/auth.decorator';
 import { CurrentUser } from './decorators/current-user.decorator';
-// import { AuthResponse } from './dto/auth.response.dto';
+import { AuthResponse } from './dto/auth.response.dto';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 
 @Resolver()
@@ -40,6 +40,16 @@ export class AuthResolver {
     res.set('access_token', accessToken);
     res.set('refresh_token', refreshToken);
     const { auth } = await this.authService.login(user);
+    return auth;
+  }
+
+  @UseGuards(LocalAuthGuard)
+  @Mutation(() => AuthResponse)
+  async adminLogin(
+    @Args('input') _input: LoginInput,
+    @CurrentUser() user: User,
+  ) {
+    const { auth } = await this.authService.adminLogin(user);
     return auth;
   }
 }
