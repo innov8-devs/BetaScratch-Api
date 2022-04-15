@@ -49,6 +49,9 @@ export class UserScalarWhereWithAggregatesInput {
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     state?: StringWithAggregatesFilter;
 
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    country?: StringWithAggregatesFilter;
+
     @Field(() => BoolWithAggregatesFilter, {nullable:true})
     confirmed?: BoolWithAggregatesFilter;
 

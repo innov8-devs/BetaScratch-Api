@@ -43,6 +43,9 @@ export class User {
     @Field(() => String, {nullable:false})
     state!: string;
 
+    @Field(() => String, {nullable:false})
+    country!: string;
+
     @Field(() => Boolean, {nullable:false,defaultValue:false})
     confirmed!: boolean;
 

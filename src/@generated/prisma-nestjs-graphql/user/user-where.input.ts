@@ -54,6 +54,9 @@ export class UserWhereInput {
     @Field(() => StringFilter, {nullable:true})
     state?: StringFilter;
 
+    @Field(() => StringFilter, {nullable:true})
+    country?: StringFilter;
+
     @Field(() => BoolFilter, {nullable:true})
     confirmed?: BoolFilter;
 

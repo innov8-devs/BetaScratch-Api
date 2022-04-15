@@ -40,6 +40,8 @@ model User {
   mobileNumber      String              @unique
   /// @Validator.IsString()
   state             String
+  /// @Validator.IsString()
+  country           String
   /// @Validaror.IsBoolean()
   /// @Validation.IsOptional()
   confirmed         Boolean             @default(false)

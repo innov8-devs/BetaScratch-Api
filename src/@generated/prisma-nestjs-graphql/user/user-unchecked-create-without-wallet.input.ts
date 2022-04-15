@@ -52,6 +52,10 @@ export class UserUncheckedCreateWithoutWalletInput {
     @Validator.IsString()
     state!: string;
 
+    @Field(() => String, {nullable:false})
+    @Validator.IsString()
+    country!: string;
+
     @Field(() => Boolean, {nullable:true})
     confirmed?: boolean;
 

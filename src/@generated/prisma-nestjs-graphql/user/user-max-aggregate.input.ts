@@ -35,6 +35,9 @@ export class UserMaxAggregateInput {
     state?: true;
 
     @Field(() => Boolean, {nullable:true})
+    country?: true;
+
+    @Field(() => Boolean, {nullable:true})
     confirmed?: true;
 
     @Field(() => Boolean, {nullable:true})

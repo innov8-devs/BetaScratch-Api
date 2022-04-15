@@ -37,6 +37,9 @@ export class UserMaxAggregate {
     @Field(() => String, {nullable:true})
     state?: string;
 
+    @Field(() => String, {nullable:true})
+    country?: string;
+
     @Field(() => Boolean, {nullable:true})
     confirmed?: boolean;
 

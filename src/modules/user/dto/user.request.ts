@@ -73,6 +73,11 @@ export class ValidateFormTwoInput {
   state!: string;
 
   @Field(() => String, { nullable: false })
+  @IsNotEmpty()
+  @IsString()
+  country!: string;
+
+  @Field(() => String, { nullable: false })
   password!: string;
 }
 

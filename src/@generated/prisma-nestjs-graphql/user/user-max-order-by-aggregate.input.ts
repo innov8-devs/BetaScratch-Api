@@ -36,6 +36,9 @@ export class UserMaxOrderByAggregateInput {
     state?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    country?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     confirmed?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

@@ -21,7 +21,7 @@ export class AuthService {
         OR: [
           {
             email: {
-              equals: phoneNumberOrEmail
+              equals: phoneNumberOrEmail.toLowerCase()
             }
           },
           {

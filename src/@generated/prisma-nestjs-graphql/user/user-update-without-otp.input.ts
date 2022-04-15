@@ -40,6 +40,9 @@ export class UserUpdateWithoutOtpInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     state?: StringFieldUpdateOperationsInput;
 
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    country?: StringFieldUpdateOperationsInput;
+
     @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
     confirmed?: BoolFieldUpdateOperationsInput;
 

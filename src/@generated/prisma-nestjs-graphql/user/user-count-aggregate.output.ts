@@ -36,6 +36,9 @@ export class UserCountAggregate {
     state!: number;
 
     @Field(() => Int, {nullable:false})
+    country!: number;
+
+    @Field(() => Int, {nullable:false})
     confirmed!: number;
 
     @Field(() => Int, {nullable:false})

@@ -2,7 +2,6 @@ import {
   BadRequestException,
   Injectable,
   UnauthorizedException,
-
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as argon2 from 'argon2';
@@ -47,14 +46,28 @@ export class UserService {
     const mobileNumberUsed = await this.findUnique({
       mobileNumber: input.mobileNumber,
     });
-    if (emailUsed) errMessage.push({ name:"email", message: MESSAGES.AUTH.EMAIL_CONFLICT});
-    if (usernameUsed) errMessage.push({ name: "username", message: MESSAGES.AUTH.USERNAME_CONFLICT});
-    if (mobileNumberUsed) errMessage.push({ name: "mobileNumber", message: MESSAGES.AUTH.MOBILE_NUMBER_CONFLICT});
-    if (input.password.length <= 6) throw new BadRequestException({name: "password", message: MESSAGES.AUTH.SHORT_PASSWORD});
+    if (emailUsed)
+      errMessage.push({ name: 'email', message: MESSAGES.AUTH.EMAIL_CONFLICT });
+    if (usernameUsed)
+      errMessage.push({
+        name: 'username',
+        message: MESSAGES.AUTH.USERNAME_CONFLICT,
+      });
+    if (mobileNumberUsed)
+      errMessage.push({
+        name: 'mobileNumber',
+        message: MESSAGES.AUTH.MOBILE_NUMBER_CONFLICT,
+      });
+    if (input.password.length <= 6)
+      throw new BadRequestException({
+        name: 'password',
+        message: MESSAGES.AUTH.SHORT_PASSWORD,
+      });
     const hashedPassword = await argon2.hash(input.password);
     const user = await this.prismaService.user.create({
       data: {
         ...input,
+        email: input.email.toLowerCase(),
         password: hashedPassword,
         role: ROLE.USER,
       },
@@ -228,11 +241,11 @@ export class UserService {
 
   // confirm account
   async confirmAccount(otp: string) {
-    const currOtp = await this.otpService.findOne({ code: otp});
+    const currOtp = await this.otpService.findOne({ code: otp });
     const user = await this.findUnique({ id: currOtp.userId });
     if (!user) return null;
 
-    console.log(currOtp)
+    console.log(currOtp);
 
     const otpValidity = await this.otpService.checkOtpValidity({
       mobileNumber: user.mobileNumber,
@@ -293,20 +306,36 @@ export class UserService {
   // Multistep form validation
   async validateRegistrationFormOne(input: ValidateFormOneInput) {
     const { email, mobileNumber } = input;
-    const emailUsed = await this.findUnique({ email });
+    const emailUsed = await this.findUnique({ email: email.toLowerCase() });
     const mobileNumberUsed = await this.findUnique({
       mobileNumber: mobileNumber,
     });
-    if (emailUsed) throw new BadRequestException({name: "email", message: MESSAGES.AUTH.EMAIL_CONFLICT});
-    if (mobileNumberUsed) throw new BadRequestException({name: "mobile", message: MESSAGES.AUTH.MOBILE_NUMBER_CONFLICT});
+    if (emailUsed)
+      throw new BadRequestException({
+        name: 'email',
+        message: MESSAGES.AUTH.EMAIL_CONFLICT,
+      });
+    if (mobileNumberUsed)
+      throw new BadRequestException({
+        name: 'mobile',
+        message: MESSAGES.AUTH.MOBILE_NUMBER_CONFLICT,
+      });
     return true;
   }
 
   async validateRegistrationFormTwo(input: ValidateFormTwoInput) {
     const { username, password } = input;
     const usernameUsed = await this.findUnique({ username });
-    if (usernameUsed) throw new BadRequestException({name: "username", message: MESSAGES.AUTH.USERNAME_CONFLICT});
-    if (password.length <= 6) throw new BadRequestException({name: "password", message: MESSAGES.AUTH.SHORT_PASSWORD});
+    if (usernameUsed)
+      throw new BadRequestException({
+        name: 'username',
+        message: MESSAGES.AUTH.USERNAME_CONFLICT,
+      });
+    if (password.length <= 6)
+      throw new BadRequestException({
+        name: 'password',
+        message: MESSAGES.AUTH.SHORT_PASSWORD,
+      });
     return true;
   }
 

@@ -19,6 +19,7 @@ CREATE TABLE "User" (
     "gender" "GENDER" NOT NULL,
     "mobileNumber" TEXT NOT NULL,
     "state" TEXT NOT NULL,
+    "country" TEXT NOT NULL,
     "confirmed" BOOLEAN NOT NULL DEFAULT false,
     "password" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

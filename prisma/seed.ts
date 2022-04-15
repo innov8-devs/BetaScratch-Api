@@ -17,6 +17,7 @@ export const seedDb = async () => {
       mobileNumber: '+234081590886130',
       password: hashedPassword,
       state: 'Lagos',
+      country: 'Nigeria',
       username: 'betadmin',
       confirmed: true,
       role: ROLE.ADMIN,
