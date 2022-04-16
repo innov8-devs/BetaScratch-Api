@@ -294,8 +294,16 @@ export class UserService {
   }
 
   // request token
-  async requestNewOtp(email: string) {
-    const user = await this.findUnique({ email: email.toLowerCase() });
+  async requestNewOtp(phoneNumberOrEmail: string) {
+    const user = await this.prismaService.user.findFirst({
+      where: {
+        OR: [
+          { email: { equals: phoneNumberOrEmail.toLowerCase() } },
+          { mobileNumber: { equals: phoneNumberOrEmail } },
+        ],
+      },
+    });
+
     if (!user) return true;
 
     const otp = await this.otpService.createAuthOtp(
