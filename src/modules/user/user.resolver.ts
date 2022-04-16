@@ -75,25 +75,27 @@ export class UserResolver {
   }
 
   @Mutation(() => Boolean)
-  async forgotPassword(@Args('email') email: string): Promise<Boolean> {
-    return await this.userService.forgotPassword(email);
+  async forgotPassword(
+    @Args('phoneNumberOrEmail') phoneNumerOrEmail: string,
+  ): Promise<Boolean> {
+    return await this.userService.forgotPassword(phoneNumerOrEmail);
   }
 
   @Mutation(() => Boolean)
   async forgotPasswordOtp(
-    @Args('email') email: string,
+    @Args('phoneNumberOrEmail') phoneNumerOrEmail: string,
     @Args('otp') otp: string,
   ): Promise<Boolean> {
-    return await this.userService.forgotPasswordOtp(otp, email);
+    return await this.userService.forgotPasswordOtp(otp, phoneNumerOrEmail);
   }
 
   @Mutation(() => Boolean)
   async newPassword(
     @Args('otp') otp: string,
-    @Args('email') email: string,
+    @Args('phoneNumberOrEmail') phoneNumerOrEmail: string,
     @Args('password') password: string,
   ): Promise<Boolean> {
-    return await this.userService.newPassword(otp, email, password);
+    return await this.userService.newPassword(otp, phoneNumerOrEmail, password);
   }
 
   @Mutation(() => Boolean)

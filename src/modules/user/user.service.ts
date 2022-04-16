@@ -321,8 +321,15 @@ export class UserService {
   }
 
   // request token
-  async forgotPassword(email: string) {
-    const user = await this.findUnique({ email: email.toLowerCase() });
+  async forgotPassword(phoneNumberOrEmail: string) {
+    const user = await this.prismaService.user.findFirst({
+      where: {
+        OR: [
+          { email: { equals: phoneNumberOrEmail.toLowerCase() } },
+          { mobileNumber: { equals: phoneNumberOrEmail } },
+        ],
+      },
+    });
     if (!user) return true;
 
     const otp = await this.otpService.createAuthOtp(
@@ -339,12 +346,13 @@ export class UserService {
     return true;
   }
 
-  async forgotPasswordOtp(otp: string, email: string) {
+  async forgotPasswordOtp(otp: string, phoneNumberOrEmail: string) {
     const currOtp = await this.otpService.findOne({
-      AND: [
-        { code: { equals: otp } },
-        { email: { equals: email.toLowerCase() } },
+      OR: [
+        { email: { equals: phoneNumberOrEmail.toLowerCase() } },
+        { mobileNumber: { equals: phoneNumberOrEmail } },
       ],
+      AND: { code: { endsWith: otp } },
     });
 
     if (!currOtp) throw new UnauthorizedException(MESSAGES.AUTH.INVALID_OTP);
@@ -364,12 +372,13 @@ export class UserService {
   }
 
   // forgot password otp verification
-  async newPassword(otp: string, email: string, password: string) {
+  async newPassword(otp: string, phoneNumberOrEmail: string, password: string) {
     const currOtp = await this.otpService.findOne({
-      AND: [
-        { code: { equals: otp } },
-        { email: { equals: email.toLowerCase() } },
+      OR: [
+        { email: { equals: phoneNumberOrEmail.toLowerCase() } },
+        { mobileNumber: { equals: phoneNumberOrEmail } },
       ],
+      AND: { code: { endsWith: otp } },
     });
 
     const user = await this.findUnique({ id: currOtp.userId });
