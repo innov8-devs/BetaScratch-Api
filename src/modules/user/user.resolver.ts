@@ -68,8 +68,10 @@ export class UserResolver {
   // }
 
   @Mutation(() => Boolean)
-  async requestNewOtp(@Args('email') email: string): Promise<Boolean> {
-    return await this.userService.requestNewOtp(email);
+  async requestNewOtp(
+    @Args('phoneNumberOrEmail') phoneNumberOrEmail: string,
+  ): Promise<Boolean> {
+    return await this.userService.requestNewOtp(phoneNumberOrEmail);
   }
 
   @Mutation(() => Boolean)
