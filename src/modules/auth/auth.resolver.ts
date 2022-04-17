@@ -40,12 +40,12 @@ export class AuthResolver {
     res.cookie('access_token', accessToken, {
       sameSite: 'none',
       httpOnly: true,
-      secure: false,
+      secure: true,
     });
     res.cookie('refresh_token', refreshToken, {
       sameSite: 'none',
       httpOnly: true,
-      secure: false,
+      secure: true,
     });
     const { auth } = await this.authService.login(user);
     return auth;
