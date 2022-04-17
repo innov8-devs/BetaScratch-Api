@@ -10,6 +10,7 @@ import {
 } from './dto/user.request';
 import { Auth } from 'modules/auth/decorators/auth.decorator';
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
+import { TotalUserCount } from './dto/user.response';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -133,5 +134,10 @@ export class UserResolver {
     @Args('pagination', { nullable: true }) pagination?: UserPaginationInput,
   ): Promise<User[]> {
     return this.userService.findAllUsers(pagination);
+  }
+
+  @Query(() => TotalUserCount)
+  async totalUserCount() {
+    return await this.userService.totalUserCount();
   }
 }

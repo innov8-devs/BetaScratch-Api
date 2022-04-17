@@ -490,4 +490,10 @@ export class UserService {
       },
     });
   }
+
+  async totalUserCount() {
+    return await this.prismaService.user.aggregate({
+      _count: true,
+    });
+  }
 }
