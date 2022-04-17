@@ -12,7 +12,11 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
 
   app.enableCors({
-    origin: ['https://betascratch.herokuapp.com', 'http://localhost:3000'],
+    origin: [
+      'https://betascratch.herokuapp.com',
+      'http://localhost:3000',
+      'http://127.0.0.1:3000',
+    ],
     methods: 'GET,HEAD,PUT,PATCH,DELETE',
     allowedHeaders:
       'Content-Type,Accept,Authorization,Access-Control-Allow-Origin',

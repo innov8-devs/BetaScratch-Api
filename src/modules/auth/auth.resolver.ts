@@ -37,8 +37,16 @@ export class AuthResolver {
     const payload = { sub: user.id };
     const accessToken = await this.authService.generateAccessToken(payload);
     const refreshToken = await this.authService.generateRefreshToken(payload);
-    res.cookie('access_token', accessToken, { sameSite: 'none' });
-    res.cookie('refresh_token', refreshToken, { sameSite: 'none' });
+    res.cookie('access_token', accessToken, {
+      sameSite: 'none',
+      httpOnly: true,
+      secure: true,
+    });
+    res.cookie('refresh_token', refreshToken, {
+      sameSite: 'none',
+      httpOnly: true,
+      secure: true,
+    });
     const { auth } = await this.authService.login(user);
     return auth;
   }

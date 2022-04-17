@@ -17,7 +17,11 @@ export class GqlConfigService implements GqlOptionsFactory {
       driver: ApolloDriver,
       autoSchemaFile: true,
       cors: {
-        origin: ['https://betascratch.herokuapp.com', 'http://localhost:3000'],
+        origin: [
+          'https://betascratch.herokuapp.com',
+          'http://localhost:3000',
+          'http://127.0.0.1:3000',
+        ],
         credentials: true,
       },
       context: ({ req, res }: Context) => ({ req, res }),
