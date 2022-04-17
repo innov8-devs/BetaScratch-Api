@@ -41,13 +41,11 @@ export class AuthResolver {
       sameSite: 'none',
       httpOnly: true,
       secure: false,
-      domain: 'https://betascratch.herokuapp.com',
     });
     res.cookie('refresh_token', refreshToken, {
       sameSite: 'none',
       httpOnly: true,
       secure: false,
-      domain: 'https://betascratch.herokuapp.com',
     });
     const { auth } = await this.authService.login(user);
     return auth;
