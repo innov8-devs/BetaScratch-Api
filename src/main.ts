@@ -11,6 +11,8 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const configService = app.get(ConfigService);
 
+  app.set('trust proxy', 1);
+
   app.enableCors({
     origin: [
       'https://betascratch.herokuapp.com',
@@ -18,10 +20,10 @@ async function bootstrap() {
       'http://127.0.0.1:3000',
     ],
     methods: 'GET,HEAD,PUT,PATCH,DELETE',
-    allowedHeaders:
-      'Content-Type,Accept,Authorization,Access-Control-Allow-Origin',
+    // allowedHeaders:
+    // 'Content-Type,Accept,Authorization,Access-Control-Allow-Origin',
     credentials: true,
-    preflightContinue: true,
+    // preflightContinue: true,
   });
 
   app.useGlobalPipes(
