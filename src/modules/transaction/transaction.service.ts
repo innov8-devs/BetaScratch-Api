@@ -138,7 +138,7 @@ export class TransactionService {
     return status;
   }
 
-  async checkTotalAmountSpent(userId: any) {
+  async checkTotalAmountSpent(userId: string) {
     if (!userId) return null;
     let totalAmountSpent: number = 0;
 
@@ -146,7 +146,7 @@ export class TransactionService {
       where: {
         AND: [
           {
-            userId: { equals: userId },
+            userId: { equals: Number(userId) },
           },
           {
             status: { equals: PAYMENT_STATUS.SUCCESSFUL },

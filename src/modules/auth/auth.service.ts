@@ -6,6 +6,7 @@ import { MESSAGES } from 'core/messages';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { PrismaService } from 'modules/prisma.service';
+import { Response } from 'express';
 
 @Injectable()
 export class AuthService {
@@ -15,28 +16,34 @@ export class AuthService {
     private configService: ConfigService,
   ) {}
 
-  async validateUser(phoneNumberOrEmail: string, password: string): Promise<User> {
+  async validateUser(
+    phoneNumberOrEmail: string,
+    password: string,
+  ): Promise<User> {
     const user = await this.prismaService.user.findFirst({
-      where: { 
+      where: {
         OR: [
           {
             email: {
-              equals: phoneNumberOrEmail.toLowerCase()
-            }
+              equals: phoneNumberOrEmail.toLowerCase(),
+            },
           },
           {
             mobileNumber: {
-              equals: phoneNumberOrEmail
-            }
-          }
-        ] 
+              equals: phoneNumberOrEmail,
+            },
+          },
+        ],
       },
     });
     if (!user) return null;
     const userPass = user.password;
 
     if (!userPass || user.confirmed === false)
-      throw new UnauthorizedException({ name: "confirm", message: MESSAGES.AUTH.CONFIRM_ACCOUNT});
+      throw new UnauthorizedException({
+        name: 'confirm',
+        message: MESSAGES.AUTH.CONFIRM_ACCOUNT,
+      });
 
     if (await argon2.verify(userPass, password)) return user;
     return null;
@@ -57,15 +64,35 @@ export class AuthService {
   }
 
   async login(user: User) {
-    // const auth: AuthResponse = user;
     const auth: User = user;
-    // const payload = AuthService.jwtPayload(user);
-    // auth.token = await this.generateAccessToken(payload);
-    // const refreshToken = await this.generateRefreshToken(payload);
     return { auth };
   }
 
- async adminLogin(user: User) {
+  async setAccessTokenHeaderCredentials(user: User, res: Response) {
+    const payload = { sub: user.id };
+    const accessToken = await this.generateAccessToken(payload);
+    res.append('Access-Control-Expose-Headers', ['access_token']);
+    res.append('access_token', accessToken);
+    res.cookie('access_token', accessToken, {
+      sameSite: 'none',
+      httpOnly: true,
+      secure: true,
+    });
+  }
+
+  async setRefreshTokenHeaderCredentials(user: User, res: Response) {
+    const payload = { sub: user.id };
+    const refreshToken = await this.generateRefreshToken(payload);
+    res.append('Access-Control-Expose-Headers', ['refresh_token']);
+    res.append('refresh_token', refreshToken);
+    res.cookie('refresh_token', refreshToken, {
+      sameSite: 'none',
+      httpOnly: true,
+      secure: true,
+    });
+  }
+
+  async adminLogin(user: User) {
     const auth: AuthResponse = user;
     const payload = AuthService.jwtPayload(user);
     auth.token = await this.generateAccessToken(payload);

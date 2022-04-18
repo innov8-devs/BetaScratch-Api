@@ -34,30 +34,8 @@ export class AuthResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    const payload = { sub: user.id };
-    const accessToken = await this.authService.generateAccessToken(payload);
-    const refreshToken = await this.authService.generateRefreshToken(payload);
-    res.append('Access-Control-Expose-Headers', [
-      'access_token',
-      'refresh_token',
-    ]);
-    res.append('access_token', accessToken);
-    res.append('refresh_token', refreshToken);
-    res.cookie('refresh_token', refreshToken, {
-      sameSite: 'none',
-      httpOnly: true,
-      secure: true,
-    });
-    res.cookie('access_token', accessToken, {
-      sameSite: 'none',
-      httpOnly: true,
-      secure: true,
-    });
-    res.cookie('refresh_token', refreshToken, {
-      sameSite: 'none',
-      httpOnly: true,
-      secure: true,
-    });
+    await this.authService.setAccessTokenHeaderCredentials(user, res);
+    await this.authService.setRefreshTokenHeaderCredentials(user, res);
     const { auth } = await this.authService.login(user);
     return auth;
   }

@@ -109,126 +109,6 @@ export class UserService {
     return user;
   }
 
-  // logout
-  // async logout(req: any, res: any): Promise<Boolean> {
-  //   return new Promise((resolve) =>
-  //     req.session.destroy((err: any) => {
-  //       res.clearCookie(COOKIE_NAME);
-  //       if (err) {
-  //         resolve(false);
-  //         return;
-  //       }
-  //       resolve(true);
-  //     }),
-  //   );
-  // }
-
-  // forgot password
-  // async forgotPassword(email: string, redis: any) {
-  //   const user = await this.findUnique({ email });
-  //   if (!user) return true;
-
-  //   const token = v4();
-
-  //   await redis.set(
-  //     FORGET_PASSWORD_PREFIX + token,
-  //     user.id as any,
-  //     'ex',
-  //     60 * 60,
-  //   ); // 1 hr
-
-  //   await this.mailService.sendMail({
-  //     subject: MAIL_SUBJECT.FORGOT_PASSWORD,
-  //     html: MAIL_MESSAGE.FORGOT_PASSWORD(
-  //       `<a href="${process.env.CORS_ORIGIN}/user/reset-password/${token}">reset password</a>`,
-  //     ),
-  //     to: user.email,
-  //   });
-
-  //   return true;
-  // }
-
-  //change password
-  // async resetPassword(input: ChangePasswordInput, redis: any, req: any) {
-  //   const errMessage = [];
-  //   const { newPassword, token } = input;
-  //   if (newPassword.length < 6) errMessage.push(MESSAGES.AUTH.SHORT_PASSWORD);
-  //   if (errMessage.length) throw new BadRequestException(errMessage);
-  //   const key = FORGET_PASSWORD_PREFIX + token;
-  //   const userId = await redis.get(key);
-  //   if (!userId) errMessage.push(MESSAGES.AUTH.INVALID_TOKEN);
-  //   if (errMessage.length) throw new BadRequestException(errMessage);
-  //   const user = await this.findUnique({ id: Number(userId) });
-  //   if (!user) errMessage.push(MESSAGES.AUTH.INVALID_TOKEN);
-  //   if (errMessage.length) throw new BadRequestException(errMessage);
-  //   let newResetPassword = await argon2.hash(newPassword);
-  //   await this.prisma.user.update({
-  //     where: {
-  //       id: Number(userId),
-  //     },
-  //     data: {
-  //       password: newResetPassword,
-  //       updatedAt: new Date(),
-  //     },
-  //   });
-  //   await redis.del(key);
-  //   // log user in when password change is successful
-  //   req.session.userId = user.id;
-  //   return true;
-  // }
-
-  // confirm account
-  // async confirmAcount(token: string, redis: any, req: any): Promise<Boolean> {
-  //   const errMessage = [];
-  //   const key = CONFIRM_USER_PREFIX + token;
-  //   const userId = await redis.get(key);
-
-  //   if (!userId) errMessage.push(MESSAGES.AUTH.INVALID_TOKEN);
-  //   const user = await this.findUnique({ id: Number(userId) });
-
-  //   if (errMessage.length) throw new BadRequestException(errMessage);
-
-  //   user.confirmed = true;
-  //   user.updatedAt = new Date();
-
-  //   await this.prisma.user.update({
-  //     where: {
-  //       id: user.id,
-  //     },
-  //     data: {
-  //       confirmed: true,
-  //     },
-  //   });
-
-  //   await redis.del(key);
-
-  //   // log user in when password change is successful
-  //   req.session.userId = user.id;
-
-  //   return true;
-  // }
-
-  // request token
-  // async requestNewToken(email: string, redis: any) {
-  //   const user = await this.findUnique({ email });
-
-  //   if (!user) return true;
-
-  //   const token = v4();
-
-  //   await redis.set(CONFIRM_USER_PREFIX + token, user.id as any, 'ex', 60 * 60); // 1 hour
-
-  //   await this.mailService.sendMail({
-  //     subject: MAIL_SUBJECT.VERIFY_ACCOUNT,
-  //     html: MAIL_MESSAGE.VERIFY_ACCOUNT(
-  //       `<a href="${process.env.CORS_ORIGIN}/user/confirm-account/${token}">confirm account</a>`,
-  //     ),
-  //     to: user.email,
-  //   });
-
-  //   return true;
-  // }
-
   async findUnique(
     userWhereUniqueInput: Prisma.UserWhereUniqueInput,
   ): Promise<User> {
@@ -495,5 +375,25 @@ export class UserService {
     return await this.prismaService.user.aggregate({
       _count: true,
     });
+  }
+
+  async toggleUserConfirmationFromAdmin(userId: number) {
+    const user = await this.prismaService.user.findUnique({
+      where: { id: userId },
+    });
+
+    const confimation = user.confirmed ? false : true;
+
+    await this.prismaService.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        confirmed: confimation,
+        updatedAt: new Date(),
+      },
+    });
+
+    return true;
   }
 }

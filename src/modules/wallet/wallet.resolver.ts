@@ -17,10 +17,9 @@ import { WithdrawalRequest } from '@generated/prisma-nestjs-graphql/withdrawal-r
 export class WalletResolver {
   constructor(private readonly walletService: WalletService) {}
 
-  @Auth([ROLE.USER])
   @Query(() => Wallet, { nullable: true })
-  async getUserBalance(@CurrentUser() user: User) {
-    return await this.walletService.getUserBalance(user.id);
+  async getUserBalance(@Args('userId') userId: string) {
+    return await this.walletService.getUserBalance(userId);
   }
 
   @Auth([ROLE.USER])

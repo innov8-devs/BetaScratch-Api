@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { UserCreateInput } from '../../@generated/prisma-nestjs-graphql/user/user-create.input';
 import { User } from '../../@generated/prisma-nestjs-graphql/user/user.model';
@@ -11,15 +11,24 @@ import {
 import { Auth } from 'modules/auth/decorators/auth.decorator';
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { TotalUserCount } from './dto/user.response';
+import { AuthService } from 'modules/auth/auth.service';
+import { MyContext } from 'types/constants/types';
 
 @Resolver(() => User)
 export class UserResolver {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly authService: AuthService,
+  ) {}
 
   // Get logged in user
   @Auth()
   @Query(() => User, { nullable: true })
-  async me(@CurrentUser() user: User): Promise<User> {
+  async me(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ): Promise<User> {
+    await this.authService.setAccessTokenHeaderCredentials(user, res);
     return this.userService.me(user);
   }
 
@@ -28,22 +37,6 @@ export class UserResolver {
     return await this.userService.register(input);
   }
 
-  // @Mutation(() => User)
-  // async adminLogin(
-  //   @Args('input') input: AdminLoginInput,
-  //   @CurrentUser() user: User,
-  // ): Promise<User> {
-  //   return await this.userService.adminLogin(input, user.id);
-  // }
-
-  // Logout a user
-  // @Mutation(() => Boolean)
-  // async logout(
-  //   @CurrentUser() user: User
-  //   ): Promise<Boolean> {
-  //   return this.userService.logout(user.id, res);
-  // }
-
   @Mutation(() => Boolean)
   async confirmAccount(
     @Args('otp') otp: string,
@@ -51,22 +44,6 @@ export class UserResolver {
   ): Promise<Boolean> {
     return await this.userService.confirmAccount(otp, phoneNumberOrEmail);
   }
-
-  // @Mutation(() => Boolean)
-  // async forgotPassword(
-  //   @Args('email') email: string,
-  //   @Context() { redis }: MyContext,
-  // ): Promise<Boolean> {
-  //   return await this.userService.forgotPassword(email, redis);
-  // }
-
-  // @Mutation(() => Boolean)
-  // async resetPassword(
-  //   @Args('input') input: ChangePasswordInput,
-  //   @Context() { redis, req }: MyContext,
-  // ): Promise<Boolean> {
-  //   return await this.userService.resetPassword(input, redis, req);
-  // }
 
   @Mutation(() => Boolean)
   async requestNewOtp(
@@ -139,5 +116,15 @@ export class UserResolver {
   @Query(() => TotalUserCount)
   async totalUserCount() {
     return await this.userService.totalUserCount();
+  }
+
+  @Query(() => User)
+  async findOneUser(@Args('userId') userId: string) {
+    return await this.userService.findUnique({ id: Number(userId) });
+  }
+
+  @Mutation(() => Boolean)
+  async toggleUserConfirmationFromAdmin(@Args('userId') userId: number) {
+    return await this.userService.toggleUserConfirmationFromAdmin(userId);
   }
 }
