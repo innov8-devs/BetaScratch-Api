@@ -102,6 +102,17 @@ export class UserResolver {
     return await this.userService.editAccount(user.id, input);
   }
 
+  @Auth([ROLE.USER])
+  @Mutation(() => User)
+  async resetAccountPassword(
+    @Args('password') password: string,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ): Promise<User> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    return await this.userService.resetAccountPassword(user.id, password);
+  }
+
   @Query(() => User, { nullable: true })
   async logout(@CurrentUser() user: User): Promise<User> {
     return this.userService.me(user);

@@ -335,6 +335,18 @@ export class UserService {
     return true;
   }
 
+  async resetAccountPassword(userId: number, password: string) {
+    const hashedPassword = await argon2.hash(password);
+    return await this.prismaService.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        password: hashedPassword,
+      },
+    });
+  }
+
   async editAccount(userId: number, input: Prisma.UserUpdateInput) {
     return await this.prismaService.user.update({
       where: {
