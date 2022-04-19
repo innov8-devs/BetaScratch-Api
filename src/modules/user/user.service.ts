@@ -336,7 +336,7 @@ export class UserService {
   }
 
   async editAccount(userId: number, input: Prisma.UserUpdateInput) {
-    await this.prismaService.user.update({
+    return await this.prismaService.user.update({
       where: {
         id: userId,
       },
@@ -344,7 +344,6 @@ export class UserService {
         ...input,
       },
     });
-    return true;
   }
 
   async getAllRegisteredUser() {
