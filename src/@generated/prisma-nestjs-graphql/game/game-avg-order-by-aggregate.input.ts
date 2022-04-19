@@ -9,8 +9,5 @@ export class GameAvgOrderByAggregateInput {
     id?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
-    price?: keyof typeof SortOrder;
-
-    @Field(() => SortOrder, {nullable:true})
     availability?: keyof typeof SortOrder;
 }

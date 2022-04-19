@@ -9,8 +9,5 @@ export class GameSumAggregate {
     id?: number;
 
     @Field(() => Int, {nullable:true})
-    price?: number;
-
-    @Field(() => Int, {nullable:true})
     availability?: number;
 }

@@ -104,3 +104,19 @@ export class UserPaginationInput {
   @IsNumber()
   take?: number;
 }
+
+@InputType()
+export class UpdateUserInput {
+  @Field(() => String, { nullable: true })
+  firstName?: string;
+  @Field(() => String, { nullable: true })
+  lastName?: string;
+  @Field(() => String, { nullable: true })
+  dateOfBirth?: Date | string;
+  @Field(() => GENDER, { nullable: true })
+  gender?: GENDER;
+  @Field(() => String, { nullable: true })
+  state?: string;
+  @Field(() => String, { nullable: true })
+  country?: string;
+}

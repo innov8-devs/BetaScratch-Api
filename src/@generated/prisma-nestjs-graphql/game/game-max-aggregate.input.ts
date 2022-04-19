@@ -20,9 +20,6 @@ export class GameMaxAggregateInput {
     gameId?: true;
 
     @Field(() => Boolean, {nullable:true})
-    price?: true;
-
-    @Field(() => Boolean, {nullable:true})
     defaultCurrrency?: true;
 
     @Field(() => Boolean, {nullable:true})

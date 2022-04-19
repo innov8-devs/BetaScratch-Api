@@ -68,8 +68,8 @@ export class AuthService {
     return { auth };
   }
 
-  async setAccessTokenHeaderCredentials(user: User, res: Response) {
-    const payload = { sub: user.id };
+  async setAccessTokenHeaderCredentials(userId: number, res: Response) {
+    const payload = { sub: userId };
     const accessToken = await this.generateAccessToken(payload);
     res.append('Access-Control-Expose-Headers', ['access_token']);
     res.append('access_token', accessToken);
@@ -80,8 +80,8 @@ export class AuthService {
     });
   }
 
-  async setRefreshTokenHeaderCredentials(user: User, res: Response) {
-    const payload = { sub: user.id };
+  async setRefreshTokenHeaderCredentials(userId: number, res: Response) {
+    const payload = { sub: userId };
     const refreshToken = await this.generateRefreshToken(payload);
     res.append('Access-Control-Expose-Headers', ['refresh_token']);
     res.append('refresh_token', refreshToken);

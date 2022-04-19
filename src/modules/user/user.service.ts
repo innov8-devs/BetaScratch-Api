@@ -335,6 +335,18 @@ export class UserService {
     return true;
   }
 
+  async editAccount(userId: number, input: Prisma.UserUpdateInput) {
+    await this.prismaService.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        ...input,
+      },
+    });
+    return true;
+  }
+
   async getAllRegisteredUser() {
     return await this.prismaService.user.findMany({
       where: { role: ROLE.USER },

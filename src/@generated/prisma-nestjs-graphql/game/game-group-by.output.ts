@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ObjectType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
+import { GraphQLJSON } from 'graphql-type-json';
 import { CURRENCY } from '../prisma/currency.enum';
 import { GameCountAggregate } from './game-count-aggregate.output';
 import { GameAvgAggregate } from './game-avg-aggregate.output';
@@ -26,8 +27,8 @@ export class GameGroupBy {
     @Field(() => String, {nullable:false})
     gameId!: string;
 
-    @Field(() => Int, {nullable:false})
-    price!: number;
+    @Field(() => GraphQLJSON, {nullable:false})
+    price!: any;
 
     @Field(() => CURRENCY, {nullable:false})
     defaultCurrrency!: keyof typeof CURRENCY;

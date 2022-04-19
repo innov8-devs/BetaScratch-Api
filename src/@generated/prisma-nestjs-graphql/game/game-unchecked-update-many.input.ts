@@ -2,6 +2,8 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operations.input';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
+import { GraphQLJSON } from 'graphql-type-json';
+import * as Validator from 'class-validator';
 import { EnumCURRENCYFieldUpdateOperationsInput } from '../prisma/enum-currency-field-update-operations.input';
 
 @InputType()
@@ -22,8 +24,9 @@ export class GameUncheckedUpdateManyInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     gameId?: StringFieldUpdateOperationsInput;
 
-    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
-    price?: IntFieldUpdateOperationsInput;
+    @Field(() => GraphQLJSON, {nullable:true})
+    @Validator.IsNumber()
+    price?: any;
 
     @Field(() => EnumCURRENCYFieldUpdateOperationsInput, {nullable:true})
     defaultCurrrency?: EnumCURRENCYFieldUpdateOperationsInput;

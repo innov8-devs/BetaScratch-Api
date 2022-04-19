@@ -21,9 +21,6 @@ export class GameMinOrderByAggregateInput {
     gameId?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
-    price?: keyof typeof SortOrder;
-
-    @Field(() => SortOrder, {nullable:true})
     defaultCurrrency?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

@@ -104,7 +104,7 @@ model Game {
   /// @Validator.IsNumber()
   gameId           String   @unique
   /// @Validator.IsNumber()
-  price            Int
+  price            Json
   defaultCurrrency CURRENCY @default(USD)
   /// @Validator.IsNumber()
   availability     Int

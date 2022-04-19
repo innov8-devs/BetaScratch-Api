@@ -8,8 +8,5 @@ export class GameSumAggregateInput {
     id?: true;
 
     @Field(() => Boolean, {nullable:true})
-    price?: true;
-
-    @Field(() => Boolean, {nullable:true})
     availability?: true;
 }

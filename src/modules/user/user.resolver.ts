@@ -4,6 +4,7 @@ import { UserCreateInput } from '../../@generated/prisma-nestjs-graphql/user/use
 import { User } from '../../@generated/prisma-nestjs-graphql/user/user.model';
 import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
 import {
+  UpdateUserInput,
   UserPaginationInput,
   ValidateFormOneInput,
   ValidateFormTwoInput,
@@ -28,7 +29,7 @@ export class UserResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ): Promise<User> {
-    await this.authService.setAccessTokenHeaderCredentials(user, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
     return this.userService.me(user);
   }
 
@@ -88,6 +89,16 @@ export class UserResolver {
     @Args('input') input: ValidateFormTwoInput,
   ): Promise<Boolean> {
     return await this.userService.validateRegistrationFormTwo(input);
+  }
+
+  @Mutation(() => Boolean)
+  async editAccount(
+    @Args('userId') userId: number,
+    @Args('input') input: UpdateUserInput,
+    @Context() { res }: MyContext,
+  ): Promise<Boolean> {
+    await this.authService.setAccessTokenHeaderCredentials(userId, res);
+    return await this.userService.editAccount(userId, input);
   }
 
   @Query(() => User, { nullable: true })

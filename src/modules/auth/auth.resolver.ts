@@ -14,17 +14,14 @@ export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
   @Auth()
-  @Query(() => String)
-  async generateAccessToken(@CurrentUser() user: User) {
-    const payload = { sub: user.id };
-    return await this.authService.generateAccessToken(payload);
-  }
-
-  @Auth()
-  @Query(() => String)
-  async generateRefreshToken(@CurrentUser() user: User) {
-    const payload = { sub: user.id };
-    return await this.authService.generateRefreshToken(payload);
+  @Query(() => Boolean)
+  async generateAccessToken(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setRefreshTokenHeaderCredentials(user.id, res);
+    return true;
   }
 
   @UseGuards(LocalAuthGuard)
@@ -34,8 +31,8 @@ export class AuthResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user, res);
-    await this.authService.setRefreshTokenHeaderCredentials(user, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setRefreshTokenHeaderCredentials(user.id, res);
     const { auth } = await this.authService.login(user);
     return auth;
   }

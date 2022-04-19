@@ -21,9 +21,6 @@ export class GameMaxAggregate {
     @Field(() => String, {nullable:true})
     gameId?: string;
 
-    @Field(() => Int, {nullable:true})
-    price?: number;
-
     @Field(() => CURRENCY, {nullable:true})
     defaultCurrrency?: keyof typeof CURRENCY;
 
