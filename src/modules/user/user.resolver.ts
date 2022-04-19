@@ -91,6 +91,7 @@ export class UserResolver {
     return await this.userService.validateRegistrationFormTwo(input);
   }
 
+  @Auth([ROLE.USER])
   @Mutation(() => Boolean)
   async editAccount(
     @Args('userId') userId: number,
