@@ -23,9 +23,6 @@ export class GameCountAggregateInput {
     price?: true;
 
     @Field(() => Boolean, {nullable:true})
-    defaultCurrrency?: true;
-
-    @Field(() => Boolean, {nullable:true})
     availability?: true;
 
     @Field(() => Boolean, {nullable:true})

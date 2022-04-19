@@ -3,7 +3,6 @@ import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import * as Validator from 'class-validator';
 import { GraphQLJSON } from 'graphql-type-json';
-import { CURRENCY } from '../prisma/currency.enum';
 
 @InputType()
 export class GameCreateManyInput {
@@ -24,15 +23,11 @@ export class GameCreateManyInput {
     description!: string;
 
     @Field(() => String, {nullable:false})
-    @Validator.IsNumber()
+    @Validator.IsString()
     gameId!: string;
 
     @Field(() => GraphQLJSON, {nullable:false})
-    @Validator.IsNumber()
     price!: any;
-
-    @Field(() => CURRENCY, {nullable:true})
-    defaultCurrrency?: keyof typeof CURRENCY;
 
     @Field(() => Int, {nullable:false})
     @Validator.IsNumber()

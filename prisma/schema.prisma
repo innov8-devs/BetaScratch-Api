@@ -94,22 +94,18 @@ model Transaction {
 }
 
 model Game {
-  id               Int      @id @default(autoincrement())
+  id           Int    @id @default(autoincrement())
   /// @Validator.IsString()
-  name             String
+  name         String
   /// @Validator.IsString()
-  imageUrl         String
+  imageUrl     String
   /// @Validator.IsString()
-  description      String
+  description  String
+  /// @Validator.IsString()
+  gameId       String @unique
+  price        Json
   /// @Validator.IsNumber()
-  gameId           String   @unique
-  /// @Validator.IsNumber()
-  price            Json     @db.JsonB
-  defaultCurrrency CURRENCY @default(USD)
-  /// @Validator.IsNumber()
-  availability     Int
-  // TODO this is a comment not validator
-  // carts            CartGames[]
+  availability Int
 }
 
 // model CartGames {

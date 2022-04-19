@@ -20,8 +20,5 @@ export class GameMaxAggregateInput {
     gameId?: true;
 
     @Field(() => Boolean, {nullable:true})
-    defaultCurrrency?: true;
-
-    @Field(() => Boolean, {nullable:true})
     availability?: true;
 }

@@ -94,12 +94,12 @@ export class UserResolver {
   @Auth([ROLE.USER])
   @Mutation(() => User)
   async editAccount(
-    @Args('userId') userId: number,
     @Args('input') input: UpdateUserInput,
+    @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ): Promise<User> {
-    await this.authService.setAccessTokenHeaderCredentials(userId, res);
-    return await this.userService.editAccount(userId, input);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    return await this.userService.editAccount(user.id, input);
   }
 
   @Query(() => User, { nullable: true })

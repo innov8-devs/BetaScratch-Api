@@ -3,7 +3,6 @@ import { InputType } from '@nestjs/graphql';
 import { IntFilter } from '../prisma/int-filter.input';
 import { StringFilter } from '../prisma/string-filter.input';
 import { JsonFilter } from '../prisma/json-filter.input';
-import { EnumCURRENCYFilter } from '../prisma/enum-currency-filter.input';
 
 @InputType()
 export class GameWhereInput {
@@ -34,9 +33,6 @@ export class GameWhereInput {
 
     @Field(() => JsonFilter, {nullable:true})
     price?: JsonFilter;
-
-    @Field(() => EnumCURRENCYFilter, {nullable:true})
-    defaultCurrrency?: EnumCURRENCYFilter;
 
     @Field(() => IntFilter, {nullable:true})
     availability?: IntFilter;

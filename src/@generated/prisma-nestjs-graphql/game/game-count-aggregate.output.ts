@@ -24,9 +24,6 @@ export class GameCountAggregate {
     price!: number;
 
     @Field(() => Int, {nullable:false})
-    defaultCurrrency!: number;
-
-    @Field(() => Int, {nullable:false})
     availability!: number;
 
     @Field(() => Int, {nullable:false})

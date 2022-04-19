@@ -3,7 +3,6 @@ import { InputType } from '@nestjs/graphql';
 import { IntWithAggregatesFilter } from '../prisma/int-with-aggregates-filter.input';
 import { StringWithAggregatesFilter } from '../prisma/string-with-aggregates-filter.input';
 import { JsonWithAggregatesFilter } from '../prisma/json-with-aggregates-filter.input';
-import { EnumCURRENCYWithAggregatesFilter } from '../prisma/enum-currency-with-aggregates-filter.input';
 
 @InputType()
 export class GameScalarWhereWithAggregatesInput {
@@ -34,9 +33,6 @@ export class GameScalarWhereWithAggregatesInput {
 
     @Field(() => JsonWithAggregatesFilter, {nullable:true})
     price?: JsonWithAggregatesFilter;
-
-    @Field(() => EnumCURRENCYWithAggregatesFilter, {nullable:true})
-    defaultCurrrency?: EnumCURRENCYWithAggregatesFilter;
 
     @Field(() => IntWithAggregatesFilter, {nullable:true})
     availability?: IntWithAggregatesFilter;

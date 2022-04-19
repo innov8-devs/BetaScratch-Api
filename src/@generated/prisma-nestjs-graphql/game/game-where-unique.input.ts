@@ -10,6 +10,6 @@ export class GameWhereUniqueInput {
     id?: number;
 
     @Field(() => String, {nullable:true})
-    @Validator.IsNumber()
+    @Validator.IsString()
     gameId?: string;
 }
