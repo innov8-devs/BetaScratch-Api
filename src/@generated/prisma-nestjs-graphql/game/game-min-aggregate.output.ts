@@ -20,6 +20,15 @@ export class GameMinAggregate {
     @Field(() => String, {nullable:true})
     gameId?: string;
 
+    @Field(() => String, {nullable:true})
+    category?: string;
+
     @Field(() => Int, {nullable:true})
     availability?: number;
+
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
+
+    @Field(() => Date, {nullable:true})
+    updatedAt?: Date | string;
 }

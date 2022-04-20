@@ -21,5 +21,14 @@ export class GameMaxOrderByAggregateInput {
     gameId?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    category?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     availability?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    createdAt?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    updatedAt?: keyof typeof SortOrder;
 }

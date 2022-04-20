@@ -19,6 +19,8 @@ export class AuthResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
+    // const i = parseCookies(req);
+    // console.log(i);
     await this.authService.setAccessTokenHeaderCredentials(user.id, res);
     await this.authService.setRefreshTokenHeaderCredentials(user.id, res);
     return true;

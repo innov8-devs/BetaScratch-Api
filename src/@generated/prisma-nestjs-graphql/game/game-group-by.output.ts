@@ -29,8 +29,17 @@ export class GameGroupBy {
     @Field(() => GraphQLJSON, {nullable:false})
     price!: any;
 
+    @Field(() => String, {nullable:false})
+    category!: string;
+
     @Field(() => Int, {nullable:false})
     availability!: number;
+
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date | string;
+
+    @Field(() => Date, {nullable:false})
+    updatedAt!: Date | string;
 
     @Field(() => GameCountAggregate, {nullable:true})
     _count?: GameCountAggregate;

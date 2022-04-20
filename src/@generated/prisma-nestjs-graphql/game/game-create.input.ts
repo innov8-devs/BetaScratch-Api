@@ -26,7 +26,16 @@ export class GameCreateInput {
     @Field(() => GraphQLJSON, {nullable:false})
     price!: any;
 
+    @Field(() => String, {nullable:false})
+    category!: string;
+
     @Field(() => Int, {nullable:false})
     @Validator.IsNumber()
     availability!: number;
+
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
+
+    @Field(() => Date, {nullable:true})
+    updatedAt?: Date | string;
 }

@@ -35,9 +35,11 @@ export const seedDb = async () => {
         imageUrl:
           'https://files.selar.co/product-images/2021/products/Scratch9ja/seasons-greetings-selar.co-61c6e6f8880bf.png',
         name: 'Seasons Greetings',
-        price: 15,
+        price: { eur: '300', gbp: '400', ngn: '100', usd: '200' },
+        category: 'test',
       },
       {
+        category: 'test',
         availability: 11,
         description:
           'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
@@ -45,9 +47,10 @@ export const seedDb = async () => {
         imageUrl:
           'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
         name: 'Beta Gift Card',
-        price: 10,
+        price: { eur: '300', gbp: '400', ngn: '100', usd: '200' },
       },
       {
+        category: 'test',
         availability: 12,
         description:
           'Scratch 4 gifts, win the matched gifts. You can win a TRIP ABROAD, $1,000 Cash, 100k Shopping Voucher, Celebrity Hangout, Weekend Getaway, Events Ticket for 2 and lots more.',
@@ -55,9 +58,10 @@ export const seedDb = async () => {
         imageUrl:
           'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
         name: 'DETTY DECEMBER',
-        price: 20,
+        price: { eur: '300', gbp: '400', ngn: '100', usd: '200' },
       },
       {
+        category: 'test',
         availability: 13,
         description:
           'Scratch Only One Coin, Win Any Amount You Find In The Coin. *All coins have money inside and you can win 3M INSTANTLY, if you scratch the box with 3M inside. Every Card Has 3M inside, Aim to find it and win it instantly.',
@@ -65,9 +69,10 @@ export const seedDb = async () => {
         imageUrl:
           'https://files.selar.co/product-images/2021/products/Scratch9ja/millionaires-club-selar.co-61c300a2670b6.JPG',
         name: 'Millionaires Club',
-        price: 50,
+        price: { eur: '300', gbp: '400', ngn: '100', usd: '200' },
       },
       {
+        category: 'test',
         availability: 14,
         description:
           "Scratch all the trophies to reveal all the winning numbers. Scratch only four(4) players' faces to reveal your numbers. if all your numbers match all the winning numbers you win #1,000,000! If you find three(3) you win #50,000. If you find two(2) you win #5,000.",
@@ -75,9 +80,10 @@ export const seedDb = async () => {
         imageUrl:
           'https://files.selar.co/product-images/2021/products/Scratch9ja/sure-banker-selar.co-61c6e78c611ef.png',
         name: 'Millionaires Club',
-        price: 10,
+        price: { eur: '300', gbp: '400', ngn: '100', usd: '200' },
       },
       {
+        category: 'test',
         availability: 15,
         description:
           'Scratch only TWO (2) box to reveal the ball, if you find the ball you win #50,000 instantly!',
@@ -85,9 +91,10 @@ export const seedDb = async () => {
         imageUrl:
           'https://files.selar.co/product-images/2021/products/Scratch9ja/find-the-ball-selar.co-61c6e6c48ae82.png',
         name: 'Find The Ball',
-        price: 20,
+        price: { eur: '300', gbp: '400', ngn: '100', usd: '200' },
       },
       {
+        category: 'test',
         availability: 16,
         description:
           'Scratch only 4 circles to match the jackpot number, If they match you win #500,000 instantly! If you find any of the jackpot numbers you win the amount attached.',
@@ -95,9 +102,10 @@ export const seedDb = async () => {
         imageUrl:
           'https://files.selar.co/product-images/2021/products/Scratch9ja/jackpot-selar.co-61c6e682cea57.png',
         name: 'Jackpot',
-        price: 20,
+        price: { eur: '300', gbp: '400', ngn: '100', usd: '200' },
       },
       {
+        category: 'test',
         availability: 17,
         description:
           'Scratch only 4 cards, if you match 4 identical cards you win #50,000, If you match 3 identical cards you win #5,000, If you find a jackpot card you win #5,000,000 instantly!',
@@ -105,9 +113,10 @@ export const seedDb = async () => {
         imageUrl:
           'https://files.selar.co/product-images/2021/products/Scratch9ja/golden-jackpot-selar.co-61c6e7e18442a.png',
         name: 'Golden Jackpot',
-        price: 10,
+        price: { eur: '300', gbp: '400', ngn: '100', usd: '200' },
       },
       {
+        category: 'test',
         availability: 18,
         description:
           'Scratch only Five(5) circles to reveal gadgets, If you have four matching gadgets you win the gadget! You Can Win An Iphone, Laptop, Television, Airpods, Game.',
@@ -115,9 +124,10 @@ export const seedDb = async () => {
         imageUrl:
           'https://files.selar.co/product-images/2021/products/Scratch9ja/gadget-hunt-selar.co-61c6e815c6eaa.png',
         name: 'Gadget Hunt',
-        price: 15,
+        price: { eur: '300', gbp: '400', ngn: '100', usd: '200' },
       },
       {
+        category: 'test',
         availability: 19,
         description:
           'Scratch only 3 balls to reveal the football clubs. If the 3 matches, win 100k! If 2 matches, you win 5k!',
@@ -125,7 +135,7 @@ export const seedDb = async () => {
         imageUrl:
           'https://files.selar.co/product-images/2021/products/Scratch9ja/football-club-search-selar.co-61c6e85feb225.png',
         name: 'Football Club Search',
-        price: { usd: '100' },
+        price: { eur: '300', gbp: '400', ngn: '100', usd: '200' },
       },
     ],
   });

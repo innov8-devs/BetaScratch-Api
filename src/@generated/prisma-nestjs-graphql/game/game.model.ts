@@ -25,6 +25,15 @@ export class Game {
     @Field(() => GraphQLJSON, {nullable:false})
     price!: any;
 
+    @Field(() => String, {nullable:false})
+    category!: string;
+
     @Field(() => Int, {nullable:false})
     availability!: number;
+
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date;
+
+    @Field(() => Date, {nullable:false})
+    updatedAt!: Date;
 }

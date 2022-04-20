@@ -20,5 +20,14 @@ export class GameMaxAggregateInput {
     gameId?: true;
 
     @Field(() => Boolean, {nullable:true})
+    category?: true;
+
+    @Field(() => Boolean, {nullable:true})
     availability?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    createdAt?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    updatedAt?: true;
 }

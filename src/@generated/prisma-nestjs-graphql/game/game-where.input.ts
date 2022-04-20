@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import { IntFilter } from '../prisma/int-filter.input';
 import { StringFilter } from '../prisma/string-filter.input';
 import { JsonFilter } from '../prisma/json-filter.input';
+import { DateTimeFilter } from '../prisma/date-time-filter.input';
 
 @InputType()
 export class GameWhereInput {
@@ -34,6 +35,15 @@ export class GameWhereInput {
     @Field(() => JsonFilter, {nullable:true})
     price?: JsonFilter;
 
+    @Field(() => StringFilter, {nullable:true})
+    category?: StringFilter;
+
     @Field(() => IntFilter, {nullable:true})
     availability?: IntFilter;
+
+    @Field(() => DateTimeFilter, {nullable:true})
+    createdAt?: DateTimeFilter;
+
+    @Field(() => DateTimeFilter, {nullable:true})
+    updatedAt?: DateTimeFilter;
 }
