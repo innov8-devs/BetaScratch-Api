@@ -335,11 +335,19 @@ export class UserService {
     return true;
   }
 
-  async resetAccountPassword(userId: number, password: string) {
-    const hashedPassword = await argon2.hash(password);
+  async resetAccountPassword(
+    user: User,
+    oldPassword: string,
+    newPassword: string,
+  ) {
+    if (!(await argon2.verify(user.password, oldPassword)))
+      throw new BadRequestException({
+        password: MESSAGES.AUTH.INVALID_PASSWORD,
+      });
+    const hashedPassword = await argon2.hash(newPassword);
     return await this.prismaService.user.update({
       where: {
-        id: userId,
+        id: user.id,
       },
       data: {
         password: hashedPassword,

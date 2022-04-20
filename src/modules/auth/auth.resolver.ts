@@ -1,28 +1,29 @@
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { parseCookies } from 'helpers/parseCookie';
 import { LoginInput } from 'modules/user/dto/user.request';
 import { MyContext } from 'types/constants/types';
 import { AuthService } from './auth.service';
-import { Auth } from './decorators/auth.decorator';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { AuthResponse } from './dto/auth.response.dto';
 import { LocalAuthGuard } from './guards/local-auth.guard';
+import jwt_decode from 'jwt-decode';
 
 @Resolver()
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
-  @Auth()
   @Query(() => Boolean)
-  async generateAccessToken(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-  ) {
-    // const i = parseCookies(req);
-    // console.log(i);
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
-    await this.authService.setRefreshTokenHeaderCredentials(user.id, res);
+  async generateAccessToken(@Context() { req, res }: MyContext) {
+    const cookieObject = parseCookies(req);
+    if (!cookieObject.refresh_token) return false;
+    let decoded: { sub: number; iat: number; exp: number } = jwt_decode(
+      cookieObject.refresh_token,
+    );
+    if (Date.now() >= decoded.exp * 1000) return false;
+    await this.authService.setAccessTokenHeaderCredentials(decoded.sub, res);
+    await this.authService.setRefreshTokenHeaderCredentials(decoded.sub, res);
     return true;
   }
 
