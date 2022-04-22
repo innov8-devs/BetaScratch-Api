@@ -33,7 +33,10 @@ export class UserService {
 
   // Get current logged in user
   async me(user: User): Promise<User> {
-    return user;
+    return await this.prismaService.user.findUnique({
+      where: { id: user.id },
+      include: { wallet: true },
+    });
   }
 
   // register
