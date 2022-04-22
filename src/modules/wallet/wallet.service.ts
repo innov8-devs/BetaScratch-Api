@@ -38,10 +38,10 @@ export class WalletService {
     });
   }
 
-  async getUserBalance(userId: string) {
+  async getUserBalance(userId: number) {
     return await this.prismaService.wallet.findUnique({
       where: {
-        userId: Number(userId),
+        userId: userId,
       },
     });
   }
@@ -52,7 +52,7 @@ export class WalletService {
   ): Promise<Boolean> {
     const { amount, currency, wallet } = input;
     const errMessage = [];
-    const userBalance = await this.getUserBalance(userId.toString());
+    const userBalance = await this.getUserBalance(userId);
     if (
       wallet === WALLET_TYPE.WITHDRAWABLE &&
       Number(amount) > userBalance.withdrawable

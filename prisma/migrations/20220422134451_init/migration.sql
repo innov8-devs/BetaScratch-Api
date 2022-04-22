@@ -74,6 +74,15 @@ CREATE TABLE "Game" (
 );
 
 -- CreateTable
+CREATE TABLE "GameCategory" (
+    "id" SERIAL NOT NULL,
+    "categoryName" TEXT NOT NULL,
+    "categoryLabel" TEXT NOT NULL,
+
+    CONSTRAINT "GameCategory_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "WithdrawalRequest" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER,

@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 import { WalletService } from './wallet.service';
 import {
   CashBackTransactionInput,
@@ -12,14 +12,24 @@ import { Auth } from 'modules/auth/decorators/auth.decorator';
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { WithdrawalRequestCreateInput } from '@generated/prisma-nestjs-graphql/withdrawal-request/withdrawal-request-create.input';
 import { WithdrawalRequest } from '@generated/prisma-nestjs-graphql/withdrawal-request/withdrawal-request.model';
+import { MyContext } from 'types/constants/types';
+import { AuthService } from 'modules/auth/auth.service';
 
 @Resolver(() => Wallet)
 export class WalletResolver {
-  constructor(private readonly walletService: WalletService) {}
+  constructor(
+    private readonly walletService: WalletService,
+    private readonly authService: AuthService,
+  ) {}
 
+  @Auth([ROLE.USER])
   @Query(() => Wallet, { nullable: true })
-  async getUserBalance(@Args('userId') userId: string) {
-    return await this.walletService.getUserBalance(userId);
+  async getUserBalance(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    return await this.walletService.getUserBalance(user.id);
   }
 
   @Auth([ROLE.USER])
