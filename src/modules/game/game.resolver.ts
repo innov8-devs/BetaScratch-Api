@@ -67,4 +67,3 @@ export class GameResolver {
     return await this.gameService.totalGameCount();
   }
 }
-// '{"query":"mutation UploadGamePicture($picture: Upload!){\n\tuploadGamePicture(picture: $picture)\n}"}'

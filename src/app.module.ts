@@ -14,7 +14,8 @@ import { TransactionModule } from 'modules/transaction/transaction.module';
 import { MailModule } from 'modules/mail/mail.module';
 import { TokenModule } from 'modules/token/token.module';
 import { OtpModule } from 'modules/otp/otp.module';
-
+import { TesstModule } from './tesst/tesst.module';
+import { MulterModule } from '@nestjs/platform-express';
 @Module({
   imports: [
     AuthModule,
@@ -27,10 +28,12 @@ import { OtpModule } from 'modules/otp/otp.module';
     OtpModule,
     TransactionModule,
     ConfigModule.forRoot({ load: [config], isGlobal: true }),
+    MulterModule.register({ dest: '../uploads' }),
     GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,
       useClass: GqlConfigService,
     }),
+    TesstModule,
   ],
   controllers: [AppController],
   providers: [AppService],
