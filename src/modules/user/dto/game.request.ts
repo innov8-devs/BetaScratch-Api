@@ -17,4 +17,12 @@ export class GameCateogorySearch {
   @Field(() => [String], { nullable: true })
   @IsArray()
   categories?: string[];
+
+  @Field(() => Number)
+  @IsNumber()
+  page: number;
+
+  @Field(() => Number)
+  @IsNumber()
+  size: number;
 }

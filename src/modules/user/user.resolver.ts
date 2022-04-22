@@ -129,11 +129,6 @@ export class UserResolver {
     return this.userService.getAllRegisteredUser();
   }
 
-  @Mutation(() => Boolean)
-  async queryRefetchHelper() {
-    return true;
-  }
-
   @Query(() => [User], { nullable: true })
   async findAllUsers(
     @Args('pagination', { nullable: true }) pagination?: UserPaginationInput,

@@ -11,21 +11,38 @@ import { PrismaService } from '../prisma.service';
 export class GameService {
   constructor(private readonly prismaService: PrismaService) {}
 
+  async findOneGame(input: Prisma.GameWhereUniqueInput): Promise<Game> {
+    return await this.prismaService.game.findUnique({
+      where: input,
+    });
+  }
+
+  async editGame(gameId: number, input: Prisma.GameUpdateInput) {
+    await this.prismaService.game.update({
+      where: {
+        id: gameId,
+      },
+      data: {
+        ...input,
+      },
+    });
+    return true;
+  }
+
   async findAllGames(): Promise<Game[]> {
     return await this.prismaService.game.findMany();
   }
 
   async findAllGamesByCategories(input: GameCateogorySearch) {
-    let games: Game[] = [];
-    for (let category of input.categories) {
-      let currGames = await this.prismaService.game.findMany({
-        where: {
-          category: { equals: category },
+    return await this.prismaService.game.findMany({
+      skip: input.page,
+      take: input.size,
+      where: {
+        category: {
+          in: input.categories,
         },
-      });
-      games = [...games, ...currGames];
-    }
-    return games;
+      },
+    });
   }
 
   async createGame(input: Prisma.GameCreateInput) {
@@ -63,5 +80,17 @@ export class GameService {
         createdAt: 'desc',
       },
     });
+  }
+
+  async createGameCategory(input: Prisma.GameCategoryCreateInput) {
+    return await this.prismaService.gameCategory.create({
+      data: {
+        ...input,
+      },
+    });
+  }
+
+  async findAllGameCategories() {
+    return await this.prismaService.gameCategory.findMany();
   }
 }
