@@ -12,5 +12,8 @@ export class TransactionAvgAggregate {
     amount?: number;
 
     @Field(() => Float, {nullable:true})
+    transactionId?: number;
+
+    @Field(() => Float, {nullable:true})
     userId?: number;
 }

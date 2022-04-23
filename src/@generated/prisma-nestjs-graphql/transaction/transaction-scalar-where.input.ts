@@ -23,8 +23,8 @@ export class TransactionScalarWhereInput {
     @Field(() => IntFilter, {nullable:true})
     amount?: IntFilter;
 
-    @Field(() => StringFilter, {nullable:true})
-    transactionId?: StringFilter;
+    @Field(() => IntFilter, {nullable:true})
+    transactionId?: IntFilter;
 
     @Field(() => StringFilter, {nullable:true})
     currency?: StringFilter;

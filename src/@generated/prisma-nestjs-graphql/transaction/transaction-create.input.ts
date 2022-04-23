@@ -11,9 +11,9 @@ export class TransactionCreateInput {
     @Validator.IsNumber()
     amount!: number;
 
-    @Field(() => String, {nullable:false})
+    @Field(() => Int, {nullable:false})
     @Validator.IsString()
-    transactionId!: string;
+    transactionId!: number;
 
     @Field(() => String, {nullable:false})
     @Validator.IsString()

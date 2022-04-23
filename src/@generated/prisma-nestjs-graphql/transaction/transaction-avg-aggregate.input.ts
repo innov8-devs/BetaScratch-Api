@@ -11,5 +11,8 @@ export class TransactionAvgAggregateInput {
     amount?: true;
 
     @Field(() => Boolean, {nullable:true})
+    transactionId?: true;
+
+    @Field(() => Boolean, {nullable:true})
     userId?: true;
 }

@@ -13,8 +13,8 @@ export class Transaction {
     @Field(() => Int, {nullable:false})
     amount!: number;
 
-    @Field(() => String, {nullable:false})
-    transactionId!: string;
+    @Field(() => Int, {nullable:false})
+    transactionId!: number;
 
     @Field(() => String, {nullable:false})
     currency!: string;

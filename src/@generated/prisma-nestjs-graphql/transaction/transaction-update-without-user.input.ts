@@ -10,8 +10,8 @@ export class TransactionUpdateWithoutUserInput {
     @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
     amount?: IntFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    transactionId?: StringFieldUpdateOperationsInput;
+    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
+    transactionId?: IntFieldUpdateOperationsInput;
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     currency?: StringFieldUpdateOperationsInput;

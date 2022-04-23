@@ -1,3 +1,4 @@
+import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
 import {
   BadRequestException,
   Injectable,
@@ -7,6 +8,7 @@ import { Prisma } from '@prisma/client';
 import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
 import { MailService } from 'modules/mail/mail.service';
 import { OtpService } from 'modules/otp/otp.service';
+import { TransactionService } from 'modules/transaction/transaction.service';
 import {
   PAYMENT_PURPOSE,
   PAYMENT_STATUS,
@@ -28,13 +30,21 @@ export class WalletService {
     private readonly prismaService: PrismaService,
     private readonly otpService: OtpService,
     private readonly mailService: MailService,
+    private readonly transactionService: TransactionService,
   ) {}
 
   async createWallet(input: Prisma.WalletCreateInput) {
+    console.log(this.transactionService);
     return await this.prismaService.wallet.create({
       data: {
         ...input,
       },
+    });
+  }
+
+  async findUnique(input: Prisma.WalletWhereUniqueInput): Promise<Wallet> {
+    return await this.prismaService.wallet.findUnique({
+      where: input,
     });
   }
 
@@ -93,7 +103,7 @@ export class WalletService {
               ? PAYMENT_PURPOSE.DEDUCT_WITHDRAWAL_BALANCE
               : PAYMENT_PURPOSE.DEDUCT_BONUS_BALANCE,
           status: PAYMENT_STATUS.SUCCESSFUL,
-          transactionId: generateRandomString(),
+          transactionId: Number(generateRandomString()),
           transactionRef: generateRandomString(),
           User: { connect: { id: userId } },
         },
@@ -109,7 +119,7 @@ export class WalletService {
               ? PAYMENT_PURPOSE.DEDUCT_WITHDRAWAL_BALANCE
               : PAYMENT_PURPOSE.DEDUCT_BONUS_BALANCE,
           status: PAYMENT_STATUS.FAILED,
-          transactionId: generateRandomString(),
+          transactionId: Number(generateRandomString()),
           transactionRef: generateRandomString(),
           User: { connect: { id: userId } },
         },
@@ -142,7 +152,7 @@ export class WalletService {
         currency,
         purpose: PAYMENT_PURPOSE.CASH_BACK,
         status: PAYMENT_STATUS.SUCCESSFUL,
-        transactionId: generateRandomString(),
+        transactionId: Number(generateRandomString()),
         transactionRef: generateRandomString(),
         User: { connect: { id: userId } },
       },
@@ -224,5 +234,36 @@ export class WalletService {
       total += val.bonus;
     }
     return total;
+  }
+
+  async deposit(
+    transaction_id: number,
+    transaction_type: PAYMENT_PURPOSE,
+    userId: number,
+  ) {
+    const { amount } =
+      await this.transactionService.verifyFlutterWaveTransaction(
+        transaction_id,
+        transaction_type,
+        userId,
+      );
+
+    const userWallet = await this.findUnique({ userId });
+
+    await this.prismaService.wallet.update({
+      where: {
+        userId,
+      },
+      data: {
+        withdrawable: userWallet.withdrawable + amount,
+      },
+    });
+
+    return await this.prismaService.user.findUnique({
+      where: { id: userId },
+      include: {
+        wallet: true,
+      },
+    });
   }
 }

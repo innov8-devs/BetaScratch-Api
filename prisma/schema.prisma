@@ -78,7 +78,7 @@ model Transaction {
   /// @Validator.IsNumber()
   amount         Int
   /// @Validator.IsString()
-  transactionId  String
+  transactionId  Int
   /// @Validator.IsString()
   currency       String
   /// @Validator.IsString()

@@ -11,8 +11,8 @@ export class TransactionMaxAggregate {
     @Field(() => Int, {nullable:true})
     amount?: number;
 
-    @Field(() => String, {nullable:true})
-    transactionId?: string;
+    @Field(() => Int, {nullable:true})
+    transactionId?: number;
 
     @Field(() => String, {nullable:true})
     currency?: string;

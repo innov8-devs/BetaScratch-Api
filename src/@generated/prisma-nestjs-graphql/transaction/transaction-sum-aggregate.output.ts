@@ -12,5 +12,8 @@ export class TransactionSumAggregate {
     amount?: number;
 
     @Field(() => Int, {nullable:true})
+    transactionId?: number;
+
+    @Field(() => Int, {nullable:true})
     userId?: number;
 }
