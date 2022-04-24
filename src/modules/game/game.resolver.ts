@@ -2,18 +2,28 @@ import { GameCategoryCreateInput } from '@generated/prisma-nestjs-graphql/game-c
 import { GameCategory } from '@generated/prisma-nestjs-graphql/game-category/game-category.model';
 import { GameCreateInput } from '@generated/prisma-nestjs-graphql/game/game-create.input';
 import { Game } from '@generated/prisma-nestjs-graphql/game/game.model';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
+import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
+import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { AuthService } from 'modules/auth/auth.service';
+import { Auth } from 'modules/auth/decorators/auth.decorator';
+import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
 import {
+  CartDetailInput,
   GameCateogorySearch,
   GamePaginationInput,
 } from 'modules/user/dto/game.request';
+import { MyContext } from 'types/constants/types';
 import { UpdateGameInput } from './dto/game.request';
 import { TotalGameCount } from './dto/game.response';
 import { GameService } from './game.service';
 
 @Resolver(() => Game)
 export class GameResolver {
-  constructor(private readonly gameService: GameService) {}
+  constructor(
+    private readonly gameService: GameService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Mutation(() => Game)
   async createGame(@Args('input') input: GameCreateInput): Promise<Game> {
@@ -65,5 +75,16 @@ export class GameResolver {
   @Query(() => TotalGameCount)
   async totalGameCount() {
     return await this.gameService.totalGameCount();
+  }
+
+  @Auth([ROLE.USER])
+  @Query(() => [Game])
+  async getAllCartDetails(
+    @Args('input') input: CartDetailInput,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    return await this.gameService.getAllCartDetails(input);
   }
 }

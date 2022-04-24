@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import {
+  CartDetailInput,
   GameCateogorySearch,
   GamePaginationInput,
 } from 'modules/user/dto/game.request';
@@ -34,15 +35,22 @@ export class GameService {
   }
 
   async findAllGamesByCategories(input: GameCateogorySearch) {
-    return await this.prismaService.game.findMany({
-      skip: input.page,
-      take: input.size,
-      where: {
-        category: {
-          in: input.categories,
+    const { page, size } = input;
+    let skipValue = Number(page + '0');
+    let gamesData: Game[] = [];
+    for (let category of input.categories) {
+      let games = await this.prismaService.game.findMany({
+        where: {
+          category: {
+            equals: category,
+          },
         },
-      },
-    });
+        take: size,
+        skip: skipValue,
+      });
+      gamesData = [...gamesData, ...games];
+    }
+    return gamesData;
   }
 
   async createGame(input: Prisma.GameCreateInput) {
@@ -92,5 +100,13 @@ export class GameService {
 
   async findAllGameCategories() {
     return await this.prismaService.gameCategory.findMany();
+  }
+
+  async getAllCartDetails(input: CartDetailInput) {
+    return await this.prismaService.game.findMany({
+      where: {
+        id: { in: input.gameIds },
+      },
+    });
   }
 }

@@ -14,9 +14,7 @@ import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 
 @Injectable()
 export class TransactionService {
-  constructor(
-    private readonly prisma: PrismaService, // private readonly walletService: WalletService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   async createTransaction(input: Prisma.TransactionCreateInput) {
     return await this.prisma.transaction.create({
@@ -75,63 +73,6 @@ export class TransactionService {
       if (err) return null;
     }
   }
-
-  // async verifyTransaction(
-  //   input: VerifyTransactionInput,
-  //   userId: number,
-  // ): Promise<String> {
-  //   const { tx_ref, status, tx_id } = input;
-  //   const transactionId = tx_id ? tx_id : 'null';
-  //   await this.prisma.transaction.updateMany({
-  //     data: {
-  //       transactionId,
-  //       status: status.toUpperCase(),
-  //       transactionRef: tx_ref,
-  //     },
-  //     where: {
-  //       status: PAYMENT_STATUS.PENDING,
-  //       transactionId: 'null',
-  //       userId,
-  //     },
-  //   });
-  //   if (status.toUpperCase() === PAYMENT_STATUS.SUCCESSFUL) {
-  //     const transaction = await this.prisma.transaction.findFirst({
-  //       where: {
-  //         status: PAYMENT_STATUS.SUCCESSFUL,
-  //         transactionRef: tx_ref,
-  //         transactionId,
-  //         userId,
-  //       },
-  //     });
-  //     if (
-  //       transaction.purpose.toUpperCase() === PAYMENT_PURPOSE.DEPOSIT &&
-  //       transaction.status.toLocaleUpperCase() === PAYMENT_STATUS.SUCCESSFUL
-  //     ) {
-  //       // TODO move code to waller service
-  //       const wallet = await this.prisma.wallet.findUnique({
-  //         where: { userId },
-  //       });
-  //       await this.prisma.wallet.update({
-  //         data: {
-  //           withdrawable: wallet.withdrawable + transaction.amount,
-  //         },
-  //         where: {
-  //           userId,
-  //         },
-  //       });
-  //     } else if (
-  //       transaction.purpose.toUpperCase() === PAYMENT_PURPOSE.PURCHASE &&
-  //       transaction.status.toLocaleUpperCase() === PAYMENT_STATUS.SUCCESSFUL
-  //     ) {
-  //       let cashBackAmount = calculateCashback(transaction.amount);
-  //       await this.walletService.cashBack(
-  //         { cashBackAmount, currency: transaction.currency },
-  //         userId,
-  //       );
-  //     }
-  //   }
-  //   return status;
-  // }
 
   async checkTotalAmountSpent(userId: string) {
     if (!userId) return null;

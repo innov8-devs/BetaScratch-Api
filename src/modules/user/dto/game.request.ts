@@ -26,3 +26,10 @@ export class GameCateogorySearch {
   @IsNumber()
   size: number;
 }
+
+@InputType()
+export class CartDetailInput {
+  @Field(() => [Number])
+  @IsArray()
+  gameIds?: number[];
+}
