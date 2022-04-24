@@ -15,7 +15,7 @@ import {
 } from 'modules/user/dto/game.request';
 import { MyContext } from 'types/constants/types';
 import { UpdateGameInput } from './dto/game.request';
-import { TotalGameCount } from './dto/game.response';
+import { GameCategoryReturnType, TotalGameCount } from './dto/game.response';
 import { GameService } from './game.service';
 
 @Resolver(() => Game)
@@ -62,7 +62,7 @@ export class GameResolver {
     return this.gameService.findOneGame({ id: Number(gameId) });
   }
 
-  @Query(() => [Game], { nullable: true })
+  @Query(() => [GameCategoryReturnType], { nullable: true })
   findAllGamesByCategories(@Args('input') input: GameCateogorySearch) {
     return this.gameService.findAllGamesByCategories(input);
   }

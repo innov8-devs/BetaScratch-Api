@@ -7,6 +7,7 @@ import {
 } from 'modules/user/dto/game.request';
 import { Game } from '../../@generated/prisma-nestjs-graphql/game/game.model';
 import { PrismaService } from '../prisma.service';
+import { GameCategoryReturnType } from './dto/game.response';
 
 @Injectable()
 export class GameService {
@@ -37,7 +38,7 @@ export class GameService {
   async findAllGamesByCategories(input: GameCateogorySearch) {
     const { page, size } = input;
     let skipValue = Number(page + '0');
-    let gamesData: Game[] = [];
+    let gamesData: GameCategoryReturnType[] = [];
     for (let category of input.categories) {
       let games = await this.prismaService.game.findMany({
         where: {
@@ -48,7 +49,8 @@ export class GameService {
         take: size,
         skip: skipValue,
       });
-      gamesData = [...gamesData, ...games];
+      let singleGame = { name: category, games: [...games] };
+      gamesData = [...gamesData, singleGame];
     }
     return gamesData;
   }
