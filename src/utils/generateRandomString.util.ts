@@ -1,16 +1,6 @@
-// export const generateRandomString = (numberOfStrings: number) => {
-//   let randomString = '';
-//   let characters =
-//     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-----';
-
-//   for (let i = 0; i < numberOfStrings; i++) {
-//     randomString += characters.charAt(
-//       Math.floor(Math.random() * characters.length),
-//     );
-//   }
-//   return randomString;
-
-// };
+export const generateRandomNumbers = () => {
+  return Math.floor(1000 + Math.random() * 9000);
+};
 
 import { v4 } from 'uuid';
 

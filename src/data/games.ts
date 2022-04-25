@@ -180,6 +180,2950 @@ export const gamesData = [
     availability: 11,
     description:
       'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '080ef077-9aef-4e6d-908f-b7afebd9d810',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'a2c4677a-9b20-42b9-94d0-c7b4a44fadc0',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '348f4e4f-436e-434c-9826-cab1697ebafb',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '6e4ac069-f4ed-47d2-9ec6-5a36524d0e20',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'd61e15a9-08ef-4cf2-a033-a88abb022566',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '3afdaa46-e186-4006-b442-b77f8078bcf9',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '01a19af4-06cf-4a0f-bf6f-5b8b9589893c',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '688fd021-ae18-4fc4-a109-032cd838bea3',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'c9b63276-2f42-4434-b993-91589a97b87b',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'b4573bb3-d49d-4c6f-a38b-76f1224afdb4',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '45f751ae-dd4a-4cd0-a696-d19547605cc1',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '6bc8e30e-c977-475d-ae56-e9ef2890f7e0',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '3a8a06f7-4ccf-4ef2-854f-514fb458e1ab',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '87648842-f0d2-43a3-aca7-409dd9173c78',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '773852f9-509c-425f-b290-0fe899927edf',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '1f516d06-70c6-47ea-93fe-a5a72ad9c129',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '6696172d-aa36-412d-85aa-f9a70cba131b',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '993da94f-767b-4a62-91e0-29d1fb1a1604',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '05631a1c-83dd-4841-ad70-ef832cca0b6d',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'd0f354a3-9f74-4948-9180-231933f9f0a5',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'c3b23e6a-e1e8-4985-b4a0-ba7bace22bfc',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '9b76c641-f7c8-4b80-aa23-aec3eda0378c',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '5f6ad8c4-11fa-41fa-9e96-462049153653',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '2a1d1a39-8e27-4490-9217-ab7c68934857',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '03729b90-c364-4c2a-88cc-a5b7bf41ea23',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '03d41eb9-f113-47dd-af73-f1d0f3bff88e',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '2669558d-aec0-4bd8-8c5e-c4c6703e0df6',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'e59065fd-d586-408c-b1b5-70320e88c79d',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'd9af4df7-07df-4a26-9cc8-e7bf60b1b876',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '53642352-c688-4214-bd83-551bab8b91a4',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '6449e961-b938-4c27-a644-ad760177c4ee',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'f03d66ab-d9cf-478c-86e7-4bcf9b432d80',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '010eb577-aaa8-456b-aebd-864c79e92f94',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'dabfb93e-1fce-4a94-b7bf-abdd28c0b5b8',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'b9872320-e30d-4dba-864d-02f05cdbec56',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '25e2352e-0597-4a0f-9cdc-9febabbbf3f6',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '40ba6e0a-3f38-4136-bb08-bda054799d5a',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'af06d845-9ba5-4a6e-b102-304dbcc58ddf',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '5ba5076f-ddaa-4ff3-b226-6224649da03d',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '9c806bb9-417a-4537-99c9-2e91f2fdb51b',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '56ed3f89-0f3e-43ac-bce7-e5f2aea8cf6e',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '87a44c14-2698-4019-9c61-5fec4cd23551',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '8006f7ba-8854-4bd2-a2ba-a49e3252f9a4',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '0b634917-2345-4a35-ad99-616c39380eb8',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '3d78f937-a6f9-4081-9e50-ae831affe4b3',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'c20d1a0a-1601-40bf-a5b4-5e4554381ac2',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'c2f0d633-d17f-49a3-aee3-91995edf8348',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '7dea47a9-be61-4c63-8438-010bc0895a64',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'afcf3fb4-56ba-4aa9-9c67-1eacd97b494a',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'd3a56663-0338-4069-aba4-fd8249ecc3c5',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '5d1ca0e6-9e00-41ad-9363-da143104836f',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'f06d85f9-6861-4c8e-bdfd-aed6bbacf09e',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '76b478df-47d4-40aa-aad0-2357475781d7',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '749961d7-97e1-4d71-bc8a-301fed58c2ef',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '465b53b8-9b97-4dc4-96d3-da08a3504666',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '6a30f4b5-c575-4555-965e-1406fc19cb5d',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '0dc4c8af-3078-4528-abeb-57d96205a926',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '474dfb84-beb7-4aef-8746-3e710116ebf8',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '5d888640-0a81-4f94-aaf5-12d202a714f8',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'c4029fa6-46c6-45c7-81b5-854b91c1d684',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'd6b1b379-e227-4d84-b6cf-8347fb6c17d1',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'b578fda8-966f-48cf-b0c0-d3476a96d956',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '509f400e-e335-4dc6-af7a-9d79520f382f',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '8f549ee0-8c74-4057-83f1-8a54d9b48d1d',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '804d861b-f8e7-4354-ba6d-6e91d8cdabbd',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '68ac8398-dc7b-4dbd-93e4-9687c5dad094',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'eb050dba-0a53-42fc-8f51-7aaea280633e',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '694a4915-0a10-4360-b12b-7fdc710b8b73',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '5f42dfc1-17a6-4a5a-a134-a367e7dccf02',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '1270def6-dd44-4dde-8c81-eacf5793d9d3',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'b7588570-c322-493c-adae-9f327488a257',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'aead69bc-0c04-42ca-9f9c-d9bc6a0cf5fa',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '7ffb317c-0c22-4103-9032-8dc200bca577',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'df861f30-bddc-4da4-914a-75f21aad3939',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '29e2f51b-eb74-4b8a-b9ad-9499423b9696',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'bb3a4fdc-4445-416b-97de-7d858ea7d8aa',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'd2aa7ee2-2e7f-44db-8eed-ee3b09a39a69',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '906fc8fb-7939-4b2a-b16a-8ce7ba0f3ac7',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '0f879c4e-d9c8-49c5-9355-de07ce10d21d',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '49258634-c998-4802-993c-049d093d3149',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'cbd522e1-2983-45e6-93bd-a079a97b9af0',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '7c865bb5-2353-4ca7-a487-d2ee80d3a8ee',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '15510637-0628-4b33-a161-e24a2245c078',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '74480b44-a0cd-4074-8b33-a3361be6efbe',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '2177e6ac-ad4e-4615-a13f-5c128f451ed8',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '4b81d789-3ea2-4ffc-a8c1-26d26a238483',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '4ebd1508-fcf0-422f-8559-d075d89a94c7',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '28165cf3-264c-4109-a2de-9e6a60389f40',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '1d7e234b-a667-4eb8-a980-1a255a09c178',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'fb9e4fd0-b65b-4ac3-a747-2c0f45850761',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '27d18108-7f42-43dd-8f9c-966b02a1cd07',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '779bbc76-0a37-45d2-a742-c172200e7503',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '6b3ebdfc-006d-430d-8192-e07ac547c46d',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '4c69079b-2ca7-4eaf-b24b-b1f4af561947',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'fc0753e5-7ad3-4f1d-8563-ddcd8dd1338c',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '8ace63f7-64c7-4618-be76-cb4f529b0d56',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '505a1dab-3da6-4f00-a763-ceb786cc4710',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '4d1098f4-2dab-4fc4-a2fd-13e5f8fd9736',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '2ae5d2f4-8ecc-4b4b-89d0-758148231712',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '4a7c1bb9-d66a-4561-a8ae-c43000fa54db',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'bd3874ba-f980-44fa-a99e-a77313b4d578',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'b3c1fb19-9005-41a3-800f-bc7454ac2452',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'a2fb050b-d74c-4022-af1f-71865415042d',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '1c94280d-86e3-4c59-8f04-685f0400762c',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '14f23012-011b-4ae9-a8d0-4eaf593e7028',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'c9251632-39d0-447c-8aa6-5c1baca79ad9',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'e2982875-a0bc-49b2-af25-6bfb5d91dc22',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '8a30c7bd-b9c4-4e04-9e7e-a89143a0269e',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '62c3f7fb-f7de-45fd-bc9a-c1f4bbd153a1',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '19ccbf07-d3ac-4ea9-ad1b-8b0538e6d7d2',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '5433aa90-b26d-4965-ac41-d96ac00fcdc9',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '2c164d0b-742a-46d4-8c86-655695f11434',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '86e0f667-7721-452d-8921-680da4cf49ea',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'c7604e3d-8629-44ba-92be-d766ca5a195b',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '23e27630-687b-4771-bd04-3e69538d8435',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '6584c65f-6a03-4369-b15b-2fe3e16ef2f8',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'afc90dd9-0c50-4aaf-90c5-1af4a6f6ff62',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '694f7e79-9daa-4347-a09e-9588a856b419',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '2acaece2-5810-41f3-85ca-f6e92986343e',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'a8279ce5-ea81-4a1e-9202-0c4f4bf02256',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '274a5ecd-acbd-4687-96f9-b6f9fe2216a5',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '72194f17-31b9-49e1-a922-251da05c8340',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'f8704982-3a44-40c8-b6f9-7dd6ef1c80f0',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'd9a64e1d-0d21-48c1-9db9-e132f8049e00',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '4ec9f937-6013-485c-b197-7c87255c46dc',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '86987370-4cc6-4d63-8439-c170655ed014',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'ea14c0ae-8c34-42d8-bedd-06b8f6835364',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '5aa449bd-29c6-4c97-9019-e6ddc63dc04a',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '2c41b30e-3cde-45e3-bf31-0ac4e0a4f879',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '501a71bd-ad15-48b1-8dc7-9aa678c26647',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '90b4a559-303d-48f1-b90b-94f7fea2eaa9',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '89c2d6b8-d501-490e-901e-8ead130ae463',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'bdb3d5c8-3c61-48d4-ac06-56aca20fcdf1',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'ecd30d22-0147-450f-a026-534c13dac967',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '5a702ac0-a80f-4e6a-8276-a42e46f844c2',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '5a2b2321-d801-447d-a1ef-79c1cb31350e',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '239c5011-5703-4a07-88e5-999a112b6863',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '36beecea-353e-470f-91c2-71c541a5e1de',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'bad184bf-715c-4108-a42c-3614f9ac9ef9',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '8b32e5a6-63c5-4a32-969d-00258a532458',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '992601e7-1903-4c06-a959-8f6eea304df3',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '9b928d1a-cd22-45e0-ab66-2a450f8164f9',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'ca8c5273-4d8e-424e-84af-8d10fad9b73b',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '01f530ff-d4ec-4f97-9a8e-128ca7cfbf66',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '19bb0e3a-fcfe-4a53-b01f-41e82257caf4',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '06cf3bd5-fc93-4b42-a184-eb0b3285706c',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '938e9007-f6b5-486e-afd7-e0b7eb62235f',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'd685c7b5-7e0f-4300-92aa-49ea681b1824',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '2e89a01b-1869-4a12-b9e2-4b1514314c3b',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '3ce87599-8276-447e-8659-72c09591bda1',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'd79a4148-4890-4e76-a495-4af7cc77dc6a',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '52b74037-1a88-402a-ad76-21e03b1cfbab',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '1a1435bf-b363-4c7b-a4c4-165c2e6baac6',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '15e6dffe-1feb-489f-a0b1-5119d4f252d4',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'fb4c5450-8676-4ab0-ad2f-7376cee5b48f',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'e36cb9d6-8231-455c-8dcb-02c902afd8c8',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '578475aa-1303-454e-9a60-c76a1cfa994d',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '4bbbd0cf-b96f-4450-a428-dcc04cabb815',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '4ef5fe93-88f1-48dd-9355-a228759564c5',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '18ebf05c-539e-4a2b-8ba0-69dff0758a6c',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'c05e235a-0486-40a0-a574-6ec547e1f557',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '329b081a-fb51-4bf7-b9f8-371b3494c468',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'e4554fc9-1e85-456d-a87b-f04e1460a0db',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'bbfb6638-1c99-43dc-a356-c237fbffa549',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'e3490789-5ff4-4cd0-b231-e1bba6cc2975',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '75b16fe3-15b8-4995-b9a7-74a94bf744d6',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'c17a8958-7e17-4213-a58a-d037a2691ae4',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '05e6f152-3df7-476d-a74a-219eed864ed3',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '805b5ad9-d377-4b43-82b2-ba848efc7ee8',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'a29d4b81-1bcc-449d-be79-9fe4e6d8aa28',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '8f85c66f-5729-4af1-8a14-6ed08086205a',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '7658235f-8264-4a63-bc65-f6126059079c',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '27cfa09a-bc94-44e2-a78b-fd7b758389fa',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '512de3b0-d8a3-4e83-9fe6-41da258dde3e',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '71e092c1-61b9-4b6e-9b84-c0486389a8c8',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '7f5daba0-9ff2-45f4-ac74-56c6f38d6993',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'd59ef050-912c-4e75-bdde-3c1869badb18',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '11cacfff-6a2b-4137-ac5a-e40a928d96e1',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '35ef88f4-7b24-4fc2-84ef-a97872c4f75a',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: 'cab40509-9818-44da-8026-c7b85499e997',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '177e99e2-3640-4d77-a558-5f2769f350a6',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '2b0f5486-2276-4a35-9ae9-bfb9b4aef4c4',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '3fffe9fe-3ec6-45da-9193-66ff366cab7e',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
+    gameId: '25c1b3c0-0419-4d1c-99e0-b227b3ed3456',
+    imageUrl:
+      'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',
+    name: 'Beta Gift Card',
+    price: {
+      eur: 300,
+      gbp: 400,
+      ngn: 100,
+      usd: 200,
+    },
+  },
+  {
+    category: 'Trending',
+    availability: 11,
+    description:
+      'Gift Yourself The latest Phone, 100K shopping voucher, dinner dates, holiday getaways, airtime and lots more experiences. Scratch 5 and if 4 gifts match YOU WIN YOURSELF THAT SPECIAL GIFT.',
     gameId: '94aefb28-8136-43e5-92c2-5f97954df446',
     imageUrl:
       'https://files.selar.co/product-images/2022/products/Betascratch/beta-gift-card-selar.co-620fb8ae91556.jpg',

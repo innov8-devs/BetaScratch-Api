@@ -84,7 +84,7 @@ export class GameResolver {
   }
 
   @Auth([ROLE.USER])
-  @Mutation(() => [Game])
+  @Mutation(() => User)
   async checkout(
     @Args('input') input: CartCheckoutInput,
     @CurrentUser() user: User,

@@ -35,6 +35,7 @@ export class AuthService {
           },
         ],
       },
+      include: { wallet: true },
     });
     if (!user) return null;
     const userPass = user.password;

@@ -53,10 +53,6 @@ export class CartDetailInput {
 }
 @InputType()
 export class CartItems {
-  @Field(() => Number)
-  @IsNumber()
-  id: number;
-
   @Field(() => String)
   @IsString()
   name: string;
@@ -80,17 +76,18 @@ export class CartItems {
 @InputType()
 export class CartCheckoutInput {
   @Field(() => Number, { nullable: true })
-  @IsArray()
+  @IsNumber()
   transaction_id?: number;
 
   @Field(() => Number, { nullable: false })
-  @IsArray()
+  @IsNumber()
   subtotal!: number;
 
   @Field(() => String, { nullable: false })
   @IsEnum(TRANSACTION, { each: true })
-  transaction_type!: TRANSACTION;
+  transaction_type!: TRANSACTION | string;
 
   @Field(() => [CartItems], { nullable: false })
+  @IsArray()
   cart: CartItems[];
 }

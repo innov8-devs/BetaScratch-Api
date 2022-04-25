@@ -4,7 +4,10 @@ import { Prisma } from '@prisma/client';
 import { MESSAGES } from 'core/messages';
 import { TransactionService } from 'modules/transaction/transaction.service';
 import { PAYMENT_STATUS, TRANSACTION } from 'types/constants/enum';
-import { generateRandomString } from 'utils/generateRandomString.util';
+import {
+  generateRandomNumbers,
+  generateRandomString,
+} from 'utils/generateRandomString.util';
 import { Game } from '../../@generated/prisma-nestjs-graphql/game/game.model';
 import { PrismaService } from '../prisma.service';
 import {
@@ -133,6 +136,7 @@ export class GameService {
         message: MESSAGES.USER.INSUFFICIENT_WALLET_FUND,
       });
     }
+
     await this.prismaService.wallet.update({
       where: { userId },
       data: {
@@ -144,7 +148,7 @@ export class GameService {
 
   async cartCheckout(userId: number, input: CartCheckoutInput) {
     const userWallet = await this.prismaService.wallet.findUnique({
-      where: { id: userId },
+      where: { userId },
     });
     const cartDetail = [];
 
@@ -165,6 +169,7 @@ export class GameService {
         input.subtotal,
         userWallet,
       );
+      console.log(2);
       if (response === true) {
         await this.prismaService.cart.createMany({
           data: cartDetail,
@@ -174,7 +179,7 @@ export class GameService {
           currency: userWallet.currency,
           purpose: input.transaction_type,
           status: PAYMENT_STATUS.SUCCESSFUL,
-          transactionId: Number(generateRandomString()),
+          transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
           User: { connect: { id: userId } },
         });
@@ -184,7 +189,7 @@ export class GameService {
           currency: userWallet.currency,
           purpose: input.transaction_type,
           status: PAYMENT_STATUS.FAILED,
-          transactionId: Number(generateRandomString()),
+          transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
           User: { connect: { id: userId } },
         });
