@@ -57,6 +57,7 @@ model User {
   updatedAt         DateTime            @updatedAt
   Otp               Otp[]
   WithdrawalRequest WithdrawalRequest[]
+  Cart              Cart[]
 }
 
 model Wallet {
@@ -119,25 +120,23 @@ model GameCategory {
   categoryLabel String
 }
 
-// model CartGames {
-//   id     Int  @default(autoincrement())
-//   game   Game @relation(fields: [gameId], references: [id])
-//   gameId Int
-//   cart   Cart @relation(fields: [cartId], references: [id])
-//   cartId Int
-
-//   @@id([gameId, cartId])
-// }
-
-// model Cart {
-//   id        Int         @id @default(autoincrement())
-//   quantity  String
-//   user      User        @relation(fields: [userId], references: [id])
-//   userId    Int         @unique
-//   createdAt DateTime    @default(now())
-//   updatedAt DateTime    @updatedAt
-//   games     CartGames[]
-// }
+model Cart {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int      @unique
+  /// @Validator.IsString()
+  name      String
+  /// @Validator.IsString()
+  category  String
+  /// @Validator.IsNumber()
+  price     Int
+  /// @Validator.IsNumber()
+  quantity  Int
+  /// @Validator.IsString()
+  imageUrl  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
 model WithdrawalRequest {
   id                Int     @id @default(autoincrement())

@@ -11,6 +11,7 @@ import { TransactionListRelationFilter } from '../transaction/transaction-list-r
 import { TokenListRelationFilter } from '../token/token-list-relation-filter.input';
 import { OtpListRelationFilter } from '../otp/otp-list-relation-filter.input';
 import { WithdrawalRequestListRelationFilter } from '../withdrawal-request/withdrawal-request-list-relation-filter.input';
+import { CartListRelationFilter } from '../cart/cart-list-relation-filter.input';
 
 @InputType()
 export class UserWhereInput {
@@ -83,4 +84,7 @@ export class UserWhereInput {
 
     @Field(() => WithdrawalRequestListRelationFilter, {nullable:true})
     WithdrawalRequest?: WithdrawalRequestListRelationFilter;
+
+    @Field(() => CartListRelationFilter, {nullable:true})
+    Cart?: CartListRelationFilter;
 }

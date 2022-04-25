@@ -9,6 +9,7 @@ import { WalletUpdateOneWithoutUserInput } from '../wallet/wallet-update-one-wit
 import { TransactionUpdateManyWithoutUserInput } from '../transaction/transaction-update-many-without-user.input';
 import { TokenUpdateManyWithoutUserInput } from '../token/token-update-many-without-user.input';
 import { OtpUpdateManyWithoutUserInput } from '../otp/otp-update-many-without-user.input';
+import { CartUpdateManyWithoutUserInput } from '../cart/cart-update-many-without-user.input';
 
 @InputType()
 export class UserUpdateWithoutWithdrawalRequestInput {
@@ -66,4 +67,7 @@ export class UserUpdateWithoutWithdrawalRequestInput {
 
     @Field(() => OtpUpdateManyWithoutUserInput, {nullable:true})
     Otp?: OtpUpdateManyWithoutUserInput;
+
+    @Field(() => CartUpdateManyWithoutUserInput, {nullable:true})
+    Cart?: CartUpdateManyWithoutUserInput;
 }

@@ -6,6 +6,7 @@ import { TransactionOrderByRelationAggregateInput } from '../transaction/transac
 import { TokenOrderByRelationAggregateInput } from '../token/token-order-by-relation-aggregate.input';
 import { OtpOrderByRelationAggregateInput } from '../otp/otp-order-by-relation-aggregate.input';
 import { WithdrawalRequestOrderByRelationAggregateInput } from '../withdrawal-request/withdrawal-request-order-by-relation-aggregate.input';
+import { CartOrderByRelationAggregateInput } from '../cart/cart-order-by-relation-aggregate.input';
 
 @InputType()
 export class UserOrderByWithRelationInput {
@@ -69,4 +70,7 @@ export class UserOrderByWithRelationInput {
 
     @Field(() => WithdrawalRequestOrderByRelationAggregateInput, {nullable:true})
     WithdrawalRequest?: WithdrawalRequestOrderByRelationAggregateInput;
+
+    @Field(() => CartOrderByRelationAggregateInput, {nullable:true})
+    Cart?: CartOrderByRelationAggregateInput;
 }

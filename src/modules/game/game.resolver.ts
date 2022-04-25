@@ -8,13 +8,14 @@ import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AuthService } from 'modules/auth/auth.service';
 import { Auth } from 'modules/auth/decorators/auth.decorator';
 import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
+import { MyContext } from 'types/constants/types';
 import {
+  CartCheckoutInput,
   CartDetailInput,
   GameCateogorySearch,
   GamePaginationInput,
-} from 'modules/user/dto/game.request';
-import { MyContext } from 'types/constants/types';
-import { UpdateGameInput } from './dto/game.request';
+  UpdateGameInput,
+} from './dto/game.request';
 import { GameCategoryReturnType, TotalGameCount } from './dto/game.response';
 import { GameService } from './game.service';
 
@@ -77,14 +78,19 @@ export class GameResolver {
     return await this.gameService.totalGameCount();
   }
 
-  @Auth([ROLE.USER])
   @Query(() => [Game])
-  async getAllCartDetails(
-    @Args('input') input: CartDetailInput,
+  async getAllCartDetails(@Args('input') input: CartDetailInput) {
+    return await this.gameService.getAllCartDetails(input);
+  }
+
+  @Auth([ROLE.USER])
+  @Mutation(() => [Game])
+  async checkout(
+    @Args('input') input: CartCheckoutInput,
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res);
-    return await this.gameService.getAllCartDetails(input);
+    return await this.gameService.cartCheckout(user.id, input);
   }
 }

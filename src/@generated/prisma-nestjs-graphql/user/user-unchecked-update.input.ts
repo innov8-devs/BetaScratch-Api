@@ -11,6 +11,7 @@ import { TransactionUncheckedUpdateManyWithoutUserInput } from '../transaction/t
 import { TokenUncheckedUpdateManyWithoutUserInput } from '../token/token-unchecked-update-many-without-user.input';
 import { OtpUncheckedUpdateManyWithoutUserInput } from '../otp/otp-unchecked-update-many-without-user.input';
 import { WithdrawalRequestUncheckedUpdateManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-unchecked-update-many-without-user.input';
+import { CartUncheckedUpdateManyWithoutUserInput } from '../cart/cart-unchecked-update-many-without-user.input';
 
 @InputType()
 export class UserUncheckedUpdateInput {
@@ -74,4 +75,7 @@ export class UserUncheckedUpdateInput {
 
     @Field(() => WithdrawalRequestUncheckedUpdateManyWithoutUserInput, {nullable:true})
     WithdrawalRequest?: WithdrawalRequestUncheckedUpdateManyWithoutUserInput;
+
+    @Field(() => CartUncheckedUpdateManyWithoutUserInput, {nullable:true})
+    Cart?: CartUncheckedUpdateManyWithoutUserInput;
 }

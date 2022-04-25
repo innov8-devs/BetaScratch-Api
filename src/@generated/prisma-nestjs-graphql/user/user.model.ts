@@ -8,6 +8,7 @@ import { Transaction } from '../transaction/transaction.model';
 import { Token } from '../token/token.model';
 import { Otp } from '../otp/otp.model';
 import { WithdrawalRequest } from '../withdrawal-request/withdrawal-request.model';
+import { Cart } from '../cart/cart.model';
 import { UserCount } from './user-count.output';
 
 @ObjectType()
@@ -72,6 +73,9 @@ export class User {
 
     @Field(() => [WithdrawalRequest], {nullable:true})
     WithdrawalRequest?: Array<WithdrawalRequest>;
+
+    @Field(() => [Cart], {nullable:true})
+    Cart?: Array<Cart>;
 
     @Field(() => UserCount, {nullable:false})
     _count?: UserCount;

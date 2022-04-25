@@ -16,4 +16,7 @@ export class UserCount {
 
     @Field(() => Int, {nullable:false})
     WithdrawalRequest?: number;
+
+    @Field(() => Int, {nullable:false})
+    Cart?: number;
 }

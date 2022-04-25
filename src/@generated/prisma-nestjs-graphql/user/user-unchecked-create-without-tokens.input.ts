@@ -8,6 +8,7 @@ import { WalletUncheckedCreateNestedOneWithoutUserInput } from '../wallet/wallet
 import { TransactionUncheckedCreateNestedManyWithoutUserInput } from '../transaction/transaction-unchecked-create-nested-many-without-user.input';
 import { OtpUncheckedCreateNestedManyWithoutUserInput } from '../otp/otp-unchecked-create-nested-many-without-user.input';
 import { WithdrawalRequestUncheckedCreateNestedManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-unchecked-create-nested-many-without-user.input';
+import { CartUncheckedCreateNestedManyWithoutUserInput } from '../cart/cart-unchecked-create-nested-many-without-user.input';
 
 @InputType()
 export class UserUncheckedCreateWithoutTokensInput {
@@ -80,4 +81,7 @@ export class UserUncheckedCreateWithoutTokensInput {
 
     @Field(() => WithdrawalRequestUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
     WithdrawalRequest?: WithdrawalRequestUncheckedCreateNestedManyWithoutUserInput;
+
+    @Field(() => CartUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
+    Cart?: CartUncheckedCreateNestedManyWithoutUserInput;
 }

@@ -7,6 +7,7 @@ import { TransactionCreateNestedManyWithoutUserInput } from '../transaction/tran
 import { TokenCreateNestedManyWithoutUserInput } from '../token/token-create-nested-many-without-user.input';
 import { OtpCreateNestedManyWithoutUserInput } from '../otp/otp-create-nested-many-without-user.input';
 import { WithdrawalRequestCreateNestedManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-create-nested-many-without-user.input';
+import { CartCreateNestedManyWithoutUserInput } from '../cart/cart-create-nested-many-without-user.input';
 
 @InputType()
 export class UserCreateWithoutWalletInput {
@@ -76,4 +77,7 @@ export class UserCreateWithoutWalletInput {
 
     @Field(() => WithdrawalRequestCreateNestedManyWithoutUserInput, {nullable:true})
     WithdrawalRequest?: WithdrawalRequestCreateNestedManyWithoutUserInput;
+
+    @Field(() => CartCreateNestedManyWithoutUserInput, {nullable:true})
+    Cart?: CartCreateNestedManyWithoutUserInput;
 }
