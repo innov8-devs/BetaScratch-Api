@@ -37,7 +37,8 @@ export class GameService {
 
   async findAllGamesByCategories(input: GameCateogorySearch) {
     const { page, size } = input;
-    let skipValue = Number(page + '0');
+    // let skipValue = Number(page + '0');
+    let skipValue = page * size - size;
     let gamesData: GameCategoryReturnType[] = [];
     for (let category of input.categories) {
       let games = await this.prismaService.game.findMany({

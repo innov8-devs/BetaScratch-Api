@@ -14,7 +14,6 @@ import { TransactionModule } from 'modules/transaction/transaction.module';
 import { MailModule } from 'modules/mail/mail.module';
 import { TokenModule } from 'modules/token/token.module';
 import { OtpModule } from 'modules/otp/otp.module';
-import { TesstModule } from './tesst/tesst.module';
 import { MulterModule } from '@nestjs/platform-express';
 @Module({
   imports: [
@@ -33,7 +32,6 @@ import { MulterModule } from '@nestjs/platform-express';
       driver: ApolloDriver,
       useClass: GqlConfigService,
     }),
-    TesstModule,
   ],
   controllers: [AppController],
   providers: [AppService],
