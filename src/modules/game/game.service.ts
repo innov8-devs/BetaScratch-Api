@@ -2,6 +2,7 @@ import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { MESSAGES } from 'core/messages';
+import { calculateCashback } from 'helpers/calculateCashback';
 import { TransactionService } from 'modules/transaction/transaction.service';
 import { PAYMENT_STATUS, TRANSACTION } from 'types/constants/enum';
 import {
@@ -146,6 +147,23 @@ export class GameService {
     return true;
   }
 
+  async checkoutWithBonus(userId: number, amount: number, userWallet: Wallet) {
+    if (amount > userWallet.bonus) {
+      throw new BadRequestException({
+        name: 'bonus',
+        message: MESSAGES.USER.INSUFFICIENT_WALLET_FUND,
+      });
+    }
+
+    await this.prismaService.wallet.update({
+      where: { userId },
+      data: {
+        bonus: userWallet.bonus - amount,
+      },
+    });
+    return true;
+  }
+
   async cartCheckout(userId: number, input: CartCheckoutInput) {
     const userWallet = await this.prismaService.wallet.findUnique({
       where: { userId },
@@ -169,7 +187,45 @@ export class GameService {
         input.subtotal,
         userWallet,
       );
-      console.log(2);
+      if (response === true) {
+        await this.prismaService.cart.createMany({
+          data: cartDetail,
+        });
+        const cashBackAmount = calculateCashback(input.subtotal);
+
+        await this.prismaService.wallet.update({
+          where: { userId },
+          data: {
+            bonus: userWallet.bonus + cashBackAmount,
+          },
+        });
+
+        await this.transactionService.createTransaction({
+          amount: input.subtotal,
+          currency: userWallet.currency,
+          purpose: input.transaction_type,
+          status: PAYMENT_STATUS.SUCCESSFUL,
+          transactionId: generateRandomNumbers(),
+          transactionRef: generateRandomString(),
+          User: { connect: { id: userId } },
+        });
+      } else {
+        await this.transactionService.createTransaction({
+          amount: input.subtotal,
+          currency: userWallet.currency,
+          purpose: input.transaction_type,
+          status: PAYMENT_STATUS.FAILED,
+          transactionId: generateRandomNumbers(),
+          transactionRef: generateRandomString(),
+          User: { connect: { id: userId } },
+        });
+      }
+    } else if (input.transaction_type === TRANSACTION.BONUS) {
+      const response = await this.checkoutWithBonus(
+        userId,
+        input.subtotal,
+        userWallet,
+      );
       if (response === true) {
         await this.prismaService.cart.createMany({
           data: cartDetail,
@@ -194,11 +250,17 @@ export class GameService {
           User: { connect: { id: userId } },
         });
       }
-
-      return await this.prismaService.user.findUnique({
-        where: { id: userId },
-        include: { wallet: true },
+    } else if (input.transaction_type === TRANSACTION.FLUTTERWAVE) {
+    } else {
+      throw new BadRequestException({
+        name: 'checkout',
+        message: 'Invalid payment method',
       });
     }
+
+    return await this.prismaService.user.findUnique({
+      where: { id: userId },
+      include: { wallet: true },
+    });
   }
 }
