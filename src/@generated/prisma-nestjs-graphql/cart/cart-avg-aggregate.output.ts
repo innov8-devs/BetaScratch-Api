@@ -12,8 +12,5 @@ export class CartAvgAggregate {
     userId?: number;
 
     @Field(() => Float, {nullable:true})
-    price?: number;
-
-    @Field(() => Float, {nullable:true})
     quantity?: number;
 }

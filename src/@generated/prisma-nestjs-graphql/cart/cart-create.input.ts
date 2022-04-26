@@ -2,6 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { UserCreateNestedOneWithoutCartInput } from '../user/user-create-nested-one-without-cart.input';
 import * as Validator from 'class-validator';
+import { GraphQLJSON } from 'graphql-type-json';
 import { Int } from '@nestjs/graphql';
 
 @InputType()
@@ -18,9 +19,8 @@ export class CartCreateInput {
     @Validator.IsString()
     category!: string;
 
-    @Field(() => Int, {nullable:false})
-    @Validator.IsNumber()
-    price!: number;
+    @Field(() => GraphQLJSON, {nullable:false})
+    price!: any;
 
     @Field(() => Int, {nullable:false})
     @Validator.IsNumber()

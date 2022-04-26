@@ -17,9 +17,6 @@ export class CartMaxAggregateInput {
     category?: true;
 
     @Field(() => Boolean, {nullable:true})
-    price?: true;
-
-    @Field(() => Boolean, {nullable:true})
     quantity?: true;
 
     @Field(() => Boolean, {nullable:true})

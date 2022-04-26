@@ -18,9 +18,6 @@ export class CartMaxAggregate {
     category?: string;
 
     @Field(() => Int, {nullable:true})
-    price?: number;
-
-    @Field(() => Int, {nullable:true})
     quantity?: number;
 
     @Field(() => String, {nullable:true})

@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import { IntFilter } from '../prisma/int-filter.input';
 import { UserRelationFilter } from '../user/user-relation-filter.input';
 import { StringFilter } from '../prisma/string-filter.input';
+import { JsonFilter } from '../prisma/json-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 
 @InputType()
@@ -32,8 +33,8 @@ export class CartWhereInput {
     @Field(() => StringFilter, {nullable:true})
     category?: StringFilter;
 
-    @Field(() => IntFilter, {nullable:true})
-    price?: IntFilter;
+    @Field(() => JsonFilter, {nullable:true})
+    price?: JsonFilter;
 
     @Field(() => IntFilter, {nullable:true})
     quantity?: IntFilter;

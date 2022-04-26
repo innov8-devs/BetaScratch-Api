@@ -4,7 +4,11 @@ import { Prisma } from '@prisma/client';
 import { MESSAGES } from 'core/messages';
 import { calculateCashback } from 'helpers/calculateCashback';
 import { TransactionService } from 'modules/transaction/transaction.service';
-import { PAYMENT_STATUS, TRANSACTION } from 'types/constants/enum';
+import {
+  PAYMENT_PURPOSE,
+  PAYMENT_STATUS,
+  TRANSACTION,
+} from 'types/constants/enum';
 import {
   generateRandomNumbers,
   generateRandomString,
@@ -175,7 +179,12 @@ export class GameService {
         category: item.category,
         imageUrl: item.imageUrl,
         name: item.name,
-        price: item.price,
+        price: {
+          eur: item.price.eur,
+          usd: item.price.usd,
+          ngn: item.price.ngn,
+          gbp: item.price.gbp,
+        },
         quantity: item.quantity,
         userId: userId,
       });
@@ -251,6 +260,18 @@ export class GameService {
         });
       }
     } else if (input.transaction_type === TRANSACTION.FLUTTERWAVE) {
+      const { status } =
+        await this.transactionService.verifyFlutterWaveTransaction(
+          input.transaction_id,
+          PAYMENT_PURPOSE.FLUTTERWAVE,
+          userId,
+        );
+      if (status === 'failed') {
+        throw new BadRequestException({
+          name: 'payment',
+          message: 'payment failed',
+        });
+      }
     } else {
       throw new BadRequestException({
         name: 'checkout',

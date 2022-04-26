@@ -3,6 +3,7 @@ import { ObjectType } from '@nestjs/graphql';
 import { ID } from '@nestjs/graphql';
 import { User } from '../user/user.model';
 import { Int } from '@nestjs/graphql';
+import { GraphQLJSON } from 'graphql-type-json';
 
 @ObjectType()
 export class Cart {
@@ -22,8 +23,8 @@ export class Cart {
     @Field(() => String, {nullable:false})
     category!: string;
 
-    @Field(() => Int, {nullable:false})
-    price!: number;
+    @Field(() => GraphQLJSON, {nullable:false})
+    price!: any;
 
     @Field(() => Int, {nullable:false})
     quantity!: number;

@@ -2,6 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import * as Validator from 'class-validator';
+import { GraphQLJSON } from 'graphql-type-json';
 
 @InputType()
 export class CartUncheckedCreateInput {
@@ -20,9 +21,8 @@ export class CartUncheckedCreateInput {
     @Validator.IsString()
     category!: string;
 
-    @Field(() => Int, {nullable:false})
-    @Validator.IsNumber()
-    price!: number;
+    @Field(() => GraphQLJSON, {nullable:false})
+    price!: any;
 
     @Field(() => Int, {nullable:false})
     @Validator.IsNumber()

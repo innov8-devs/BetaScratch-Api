@@ -2,6 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { IntWithAggregatesFilter } from '../prisma/int-with-aggregates-filter.input';
 import { StringWithAggregatesFilter } from '../prisma/string-with-aggregates-filter.input';
+import { JsonWithAggregatesFilter } from '../prisma/json-with-aggregates-filter.input';
 import { DateTimeWithAggregatesFilter } from '../prisma/date-time-with-aggregates-filter.input';
 
 @InputType()
@@ -28,8 +29,8 @@ export class CartScalarWhereWithAggregatesInput {
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     category?: StringWithAggregatesFilter;
 
-    @Field(() => IntWithAggregatesFilter, {nullable:true})
-    price?: IntWithAggregatesFilter;
+    @Field(() => JsonWithAggregatesFilter, {nullable:true})
+    price?: JsonWithAggregatesFilter;
 
     @Field(() => IntWithAggregatesFilter, {nullable:true})
     quantity?: IntWithAggregatesFilter;

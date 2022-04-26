@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ObjectType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
+import { GraphQLJSON } from 'graphql-type-json';
 import { CartCountAggregate } from './cart-count-aggregate.output';
 import { CartAvgAggregate } from './cart-avg-aggregate.output';
 import { CartSumAggregate } from './cart-sum-aggregate.output';
@@ -22,8 +23,8 @@ export class CartGroupBy {
     @Field(() => String, {nullable:false})
     category!: string;
 
-    @Field(() => Int, {nullable:false})
-    price!: number;
+    @Field(() => GraphQLJSON, {nullable:false})
+    price!: any;
 
     @Field(() => Int, {nullable:false})
     quantity!: number;

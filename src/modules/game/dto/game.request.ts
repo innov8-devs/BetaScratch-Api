@@ -51,19 +51,44 @@ export class CartDetailInput {
   @IsArray()
   gameIds?: number[];
 }
+
+// @InputType()
+// export class CartGamePrice {
+//   @Field(() => Number)
+//   @IsNumber()
+//   eur: number;
+
+//   @Field(() => Number)
+//   @IsNumber()
+//   ngn: number;
+
+//   @Field(() => Number)
+//   @IsNumber()
+//   usd: number;
+
+//   @Field(() => Number)
+//   @IsNumber()
+//   gbp: number;
+// }
+
 @InputType()
-export class CartItems {
+class CartItems {
   @Field(() => String)
   @IsString()
   name: string;
+
+  @Field(() => String, { nullable: true })
+  gameId: string;
+
+  @Field(() => String, { nullable: true })
+  id: string;
 
   @Field(() => String)
   @IsString()
   category: string;
 
-  @Field(() => Number)
-  @IsNumber()
-  price: number;
+  @Field(() => GraphQLJSON, { nullable: false })
+  price!: any;
 
   @Field(() => Number)
   @IsNumber()
@@ -76,7 +101,6 @@ export class CartItems {
 @InputType()
 export class CartCheckoutInput {
   @Field(() => Number, { nullable: true })
-  @IsNumber()
   transaction_id?: number;
 
   @Field(() => Number, { nullable: false })

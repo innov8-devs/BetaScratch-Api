@@ -128,8 +128,7 @@ model Cart {
   name      String
   /// @Validator.IsString()
   category  String
-  /// @Validator.IsNumber()
-  price     Int
+  price     Json
   /// @Validator.IsNumber()
   quantity  Int
   /// @Validator.IsString()

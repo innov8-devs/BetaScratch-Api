@@ -18,9 +18,6 @@ export class CartMaxOrderByAggregateInput {
     category?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
-    price?: keyof typeof SortOrder;
-
-    @Field(() => SortOrder, {nullable:true})
     quantity?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

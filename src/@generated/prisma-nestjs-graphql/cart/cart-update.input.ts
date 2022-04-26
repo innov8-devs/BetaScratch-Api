@@ -2,6 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { UserUpdateOneRequiredWithoutCartInput } from '../user/user-update-one-required-without-cart.input';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
+import { GraphQLJSON } from 'graphql-type-json';
 import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 
@@ -17,8 +18,8 @@ export class CartUpdateInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     category?: StringFieldUpdateOperationsInput;
 
-    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
-    price?: IntFieldUpdateOperationsInput;
+    @Field(() => GraphQLJSON, {nullable:true})
+    price?: any;
 
     @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
     quantity?: IntFieldUpdateOperationsInput;
