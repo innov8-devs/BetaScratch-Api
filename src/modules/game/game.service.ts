@@ -2,7 +2,6 @@ import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { MESSAGES } from 'core/messages';
-import { calculateCashback } from 'helpers/calculateCashback';
 import { TransactionService } from 'modules/transaction/transaction.service';
 import {
   PAYMENT_PURPOSE,
@@ -200,15 +199,7 @@ export class GameService {
         await this.prismaService.cart.createMany({
           data: cartDetail,
         });
-        const cashBackAmount = calculateCashback(input.subtotal);
-
-        await this.prismaService.wallet.update({
-          where: { userId },
-          data: {
-            bonus: userWallet.bonus + cashBackAmount,
-          },
-        });
-
+        await this.transactionService.cashback(userId, input.subtotal);
         await this.transactionService.createTransaction({
           amount: input.subtotal,
           currency: userWallet.currency,
@@ -266,6 +257,9 @@ export class GameService {
           PAYMENT_PURPOSE.FLUTTERWAVE,
           userId,
         );
+      if (status === 'successful') {
+        await this.transactionService.cashback(userId, input.subtotal);
+      }
       if (status === 'failed') {
         throw new BadRequestException({
           name: 'payment',

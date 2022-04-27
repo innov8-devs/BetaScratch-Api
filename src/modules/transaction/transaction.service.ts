@@ -11,13 +11,14 @@ import {
   PAYMENT_STATUS,
 } from 'types/constants/enum';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
+import { calculateCashback } from 'helpers/calculateCashback';
 
 @Injectable()
 export class TransactionService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   async createTransaction(input: Prisma.TransactionCreateInput) {
-    return await this.prisma.transaction.create({
+    return await this.prismaService.transaction.create({
       data: {
         ...input,
       },
@@ -78,7 +79,7 @@ export class TransactionService {
     if (!userId) return null;
     let totalAmountSpent: number = 0;
 
-    const userSpentTransaction = await this.prisma.transaction.findMany({
+    const userSpentTransaction = await this.prismaService.transaction.findMany({
       where: {
         AND: [
           {
@@ -137,5 +138,20 @@ export class TransactionService {
       status: data.status,
       amount: data.amount,
     };
+  }
+
+  async cashback(userId: number, subtotal: number) {
+    const cashBackAmount = calculateCashback(subtotal);
+
+    const userWallet = await this.prismaService.wallet.findUnique({
+      where: { userId },
+    });
+
+    await this.prismaService.wallet.update({
+      where: { userId },
+      data: {
+        bonus: userWallet.bonus + cashBackAmount,
+      },
+    });
   }
 }
