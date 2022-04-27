@@ -34,7 +34,6 @@ export class WalletService {
   ) {}
 
   async createWallet(input: Prisma.WalletCreateInput) {
-    console.log(this.transactionService);
     return await this.prismaService.wallet.create({
       data: {
         ...input,

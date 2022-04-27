@@ -45,7 +45,7 @@ CREATE TABLE "Wallet" (
 CREATE TABLE "Transaction" (
     "id" SERIAL NOT NULL,
     "amount" INTEGER NOT NULL,
-    "transactionId" TEXT NOT NULL,
+    "transactionId" INTEGER NOT NULL,
     "currency" TEXT NOT NULL,
     "transactionRef" TEXT NOT NULL,
     "status" TEXT NOT NULL,
@@ -80,6 +80,21 @@ CREATE TABLE "GameCategory" (
     "categoryLabel" TEXT NOT NULL,
 
     CONSTRAINT "GameCategory_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Cart" (
+    "id" SERIAL NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "name" TEXT NOT NULL,
+    "category" TEXT NOT NULL,
+    "price" JSONB NOT NULL,
+    "quantity" INTEGER NOT NULL,
+    "imageUrl" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Cart_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -148,6 +163,9 @@ ALTER TABLE "Wallet" ADD CONSTRAINT "Wallet_userId_fkey" FOREIGN KEY ("userId") 
 
 -- AddForeignKey
 ALTER TABLE "Transaction" ADD CONSTRAINT "Transaction_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Cart" ADD CONSTRAINT "Cart_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "WithdrawalRequest" ADD CONSTRAINT "WithdrawalRequest_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
