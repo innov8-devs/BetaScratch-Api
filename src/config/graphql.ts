@@ -21,6 +21,7 @@ export class GqlConfigService implements GqlOptionsFactory {
           'https://betascratch.herokuapp.com',
           'http://localhost:3000',
           'http://127.0.0.1:3000',
+          'https://beta-admin.vercel.app',
         ],
         credentials: true,
       },
