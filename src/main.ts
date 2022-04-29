@@ -8,7 +8,9 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 dotenv.config();
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    cors: true,
+  });
   const configService = app.get(ConfigService);
 
   app.set('trust proxy', 1);
@@ -20,7 +22,7 @@ async function bootstrap() {
       'http://127.0.0.1:3000',
       'https://beta-admin.vercel.app',
     ],
-    methods: 'GET,HEAD,PUT,PATCH,DELETE',
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'DELETE'],
     // allowedHeaders:
     // 'Content-Type,Accept,Authorization,Access-Control-Allow-Origin',
     credentials: true,

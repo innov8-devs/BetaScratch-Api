@@ -196,13 +196,14 @@ export class WalletService {
     //   otp,
     // });
 
-    return await this.prismaService.withdrawalRequest.create({
+    await this.prismaService.withdrawalRequest.create({
       data: {
         ...input,
         status: 'Pending',
         User: { connect: { id: userId } },
       },
     });
+    return true;
   }
 
   async getAllWithdrawalRequest(input?: WithdrawalRequestPaginationInput) {
