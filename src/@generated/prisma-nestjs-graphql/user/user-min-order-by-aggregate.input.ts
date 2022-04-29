@@ -45,6 +45,15 @@ export class UserMinOrderByAggregateInput {
     password?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    licenseFrontImage?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    licenseBackImage?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    verificationStatus?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

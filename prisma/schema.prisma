@@ -18,46 +18,51 @@ datasource db {
 }
 
 model User {
-  id                Int                 @id @default(autoincrement())
+  id                 Int                 @id @default(autoincrement())
   /// @Validator.IsEmail()
-  email             String              @unique
+  email              String              @unique
   /// @Validator.MinLength(2)
   /// @Validator.IsString()
-  username          String              @unique
+  username           String              @unique
   /// @Validator.IsString()
   /// @Validator.MinLength(2)
-  firstName         String
+  firstName          String
   /// @Validator.IsString()
   /// @Validator.MinLength(2)
-  lastName          String
+  lastName           String
   /// @Validator.IsDate()
-  dateOfBirth       DateTime
+  dateOfBirth        DateTime
   // @Validator.IsEnum(ROLE, { each: true })
-  role              ROLE                @default(USER)
+  role               ROLE                @default(USER)
   // @Validator.IsEnum(GENDER, { each: true })
-  gender            GENDER
+  gender             GENDER
   ///@Validator.IsPhoneNumber()
-  mobileNumber      String              @unique
+  mobileNumber       String              @unique
   /// @Validator.IsString()
-  state             String
+  state              String
   /// @Validator.IsString()
-  country           String
+  country            String
   /// @Validaror.IsBoolean()
   /// @Validation.IsOptional()
-  confirmed         Boolean             @default(false)
+  confirmed          Boolean             @default(false)
   /// @Validator.IsString()
   /// @Validation.HideField({output: true})
-  password          String
-  wallet            Wallet?
+  password           String
+  /// @Validator.IsString()
+  licenseFrontImage  String?
+  /// @Validator.IsString()
+  licenseBackImage   String?
+  verificationStatus String              @default("inactive")
+  wallet             Wallet?
   // TODO this is a comment not validator
   // cart         Cart?
-  transactions      Transaction[]
-  tokens            Token[]
-  createdAt         DateTime            @default(now())
-  updatedAt         DateTime            @updatedAt
-  Otp               Otp[]
-  WithdrawalRequest WithdrawalRequest[]
-  Cart              Cart[]
+  transactions       Transaction[]
+  tokens             Token[]
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  Otp                Otp[]
+  WithdrawalRequest  WithdrawalRequest[]
+  Cart               Cart[]
 }
 
 model Wallet {
@@ -142,12 +147,14 @@ model WithdrawalRequest {
   User              User?   @relation(fields: [userId], references: [id])
   userId            Int?
   bank              String?
-  accountNumber     Int?
+  accountNumber     String?
   accountName       String?
-  amount            Int?
-  status            String
+  amount            String
+  status            String?
   paypal            String?
   btcWalletAdderess String?
+  licenseNumber     String?
+  licenseType       String?
 }
 
 model Token {

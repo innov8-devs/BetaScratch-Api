@@ -60,6 +60,17 @@ export class UserCreateWithoutWithdrawalRequestInput {
     @Validator.IsString()
     password!: string;
 
+    @Field(() => String, {nullable:true})
+    @Validator.IsString()
+    licenseFrontImage?: string;
+
+    @Field(() => String, {nullable:true})
+    @Validator.IsString()
+    licenseBackImage?: string;
+
+    @Field(() => String, {nullable:true})
+    verificationStatus?: string;
+
     @Field(() => WalletCreateNestedOneWithoutUserInput, {nullable:true})
     wallet?: WalletCreateNestedOneWithoutUserInput;
 

@@ -44,6 +44,15 @@ export class UserMinAggregateInput {
     password?: true;
 
     @Field(() => Boolean, {nullable:true})
+    licenseFrontImage?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    licenseBackImage?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    verificationStatus?: true;
+
+    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})

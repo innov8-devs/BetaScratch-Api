@@ -6,6 +6,7 @@ import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-up
 import { EnumROLEFieldUpdateOperationsInput } from '../prisma/enum-role-field-update-operations.input';
 import { EnumGENDERFieldUpdateOperationsInput } from '../prisma/enum-gender-field-update-operations.input';
 import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-operations.input';
+import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-string-field-update-operations.input';
 import { WalletUncheckedUpdateOneWithoutUserInput } from '../wallet/wallet-unchecked-update-one-without-user.input';
 import { TransactionUncheckedUpdateManyWithoutUserInput } from '../transaction/transaction-unchecked-update-many-without-user.input';
 import { TokenUncheckedUpdateManyWithoutUserInput } from '../token/token-unchecked-update-many-without-user.input';
@@ -53,6 +54,15 @@ export class UserUncheckedUpdateWithoutCartInput {
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     password?: StringFieldUpdateOperationsInput;
+
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    licenseFrontImage?: NullableStringFieldUpdateOperationsInput;
+
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    licenseBackImage?: NullableStringFieldUpdateOperationsInput;
+
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    verificationStatus?: StringFieldUpdateOperationsInput;
 
     @Field(() => WalletUncheckedUpdateOneWithoutUserInput, {nullable:true})
     wallet?: WalletUncheckedUpdateOneWithoutUserInput;

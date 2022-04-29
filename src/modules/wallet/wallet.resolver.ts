@@ -61,13 +61,15 @@ export class WalletResolver {
   @Mutation(() => WithdrawalRequest)
   async recordWithdrawalRequest(
     @Args('input') input: WithdrawalRequestCreateInput,
-    @Args('otp') otp: number,
-    @Args('userId') userId: number,
+    // @Args('otp') otp: number,
+    @Context() { res }: MyContext,
+    @CurrentUser() user: User,
   ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
     return await this.walletService.recordWithdrawalRequest(
       input,
-      otp.toString(),
-      userId,
+      // otp.toString(),
+      user.id,
     );
   }
 

@@ -10,10 +10,4 @@ export class WithdrawalRequestSumAggregate {
 
     @Field(() => Int, {nullable:true})
     userId?: number;
-
-    @Field(() => Int, {nullable:true})
-    accountNumber?: number;
-
-    @Field(() => Int, {nullable:true})
-    amount?: number;
 }

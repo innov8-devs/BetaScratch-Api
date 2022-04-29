@@ -6,6 +6,7 @@ import { DateTimeWithAggregatesFilter } from '../prisma/date-time-with-aggregate
 import { EnumROLEWithAggregatesFilter } from '../prisma/enum-role-with-aggregates-filter.input';
 import { EnumGENDERWithAggregatesFilter } from '../prisma/enum-gender-with-aggregates-filter.input';
 import { BoolWithAggregatesFilter } from '../prisma/bool-with-aggregates-filter.input';
+import { StringNullableWithAggregatesFilter } from '../prisma/string-nullable-with-aggregates-filter.input';
 
 @InputType()
 export class UserScalarWhereWithAggregatesInput {
@@ -57,6 +58,15 @@ export class UserScalarWhereWithAggregatesInput {
 
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     password?: StringWithAggregatesFilter;
+
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    licenseFrontImage?: StringNullableWithAggregatesFilter;
+
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    licenseBackImage?: StringNullableWithAggregatesFilter;
+
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    verificationStatus?: StringWithAggregatesFilter;
 
     @Field(() => DateTimeWithAggregatesFilter, {nullable:true})
     createdAt?: DateTimeWithAggregatesFilter;

@@ -2,7 +2,6 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operations.input';
 import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-string-field-update-operations.input';
-import { NullableIntFieldUpdateOperationsInput } from '../prisma/nullable-int-field-update-operations.input';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
 
 @InputType()
@@ -14,21 +13,27 @@ export class WithdrawalRequestUncheckedUpdateWithoutUserInput {
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     bank?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableIntFieldUpdateOperationsInput, {nullable:true})
-    accountNumber?: NullableIntFieldUpdateOperationsInput;
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    accountNumber?: NullableStringFieldUpdateOperationsInput;
 
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     accountName?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableIntFieldUpdateOperationsInput, {nullable:true})
-    amount?: NullableIntFieldUpdateOperationsInput;
-
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    status?: StringFieldUpdateOperationsInput;
+    amount?: StringFieldUpdateOperationsInput;
+
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    status?: NullableStringFieldUpdateOperationsInput;
 
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     paypal?: NullableStringFieldUpdateOperationsInput;
 
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     btcWalletAdderess?: NullableStringFieldUpdateOperationsInput;
+
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    licenseNumber?: NullableStringFieldUpdateOperationsInput;
+
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    licenseType?: NullableStringFieldUpdateOperationsInput;
 }

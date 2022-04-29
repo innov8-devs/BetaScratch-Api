@@ -9,9 +9,11 @@ import { AuthService } from 'modules/auth/auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { OtpModule } from 'modules/otp/otp.module';
 import { OtpService } from 'modules/otp/otp.service';
+import { UserController } from './user.controller';
 
 @Module({
   imports: [WalletModule, AuthModule, JwtModule.register({}), OtpModule],
+  controllers: [UserController],
   providers: [
     UserResolver,
     UserService,

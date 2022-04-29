@@ -50,6 +50,15 @@ export class UserOrderByWithRelationInput {
     @Field(() => SortOrder, {nullable:true})
     password?: keyof typeof SortOrder;
 
+    @Field(() => SortOrder, {nullable:true})
+    licenseFrontImage?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    licenseBackImage?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    verificationStatus?: keyof typeof SortOrder;
+
     @Field(() => WalletOrderByWithRelationInput, {nullable:true})
     wallet?: WalletOrderByWithRelationInput;
 

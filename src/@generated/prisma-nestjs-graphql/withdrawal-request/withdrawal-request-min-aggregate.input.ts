@@ -30,4 +30,10 @@ export class WithdrawalRequestMinAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     btcWalletAdderess?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    licenseNumber?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    licenseType?: true;
 }

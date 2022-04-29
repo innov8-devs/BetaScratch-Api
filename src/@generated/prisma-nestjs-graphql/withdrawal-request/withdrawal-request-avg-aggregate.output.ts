@@ -10,10 +10,4 @@ export class WithdrawalRequestAvgAggregate {
 
     @Field(() => Float, {nullable:true})
     userId?: number;
-
-    @Field(() => Float, {nullable:true})
-    accountNumber?: number;
-
-    @Field(() => Float, {nullable:true})
-    amount?: number;
 }

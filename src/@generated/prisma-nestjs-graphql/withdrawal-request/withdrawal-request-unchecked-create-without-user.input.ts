@@ -11,21 +11,27 @@ export class WithdrawalRequestUncheckedCreateWithoutUserInput {
     @Field(() => String, {nullable:true})
     bank?: string;
 
-    @Field(() => Int, {nullable:true})
-    accountNumber?: number;
+    @Field(() => String, {nullable:true})
+    accountNumber?: string;
 
     @Field(() => String, {nullable:true})
     accountName?: string;
 
-    @Field(() => Int, {nullable:true})
-    amount?: number;
-
     @Field(() => String, {nullable:false})
-    status!: string;
+    amount!: string;
+
+    @Field(() => String, {nullable:true})
+    status?: string;
 
     @Field(() => String, {nullable:true})
     paypal?: string;
 
     @Field(() => String, {nullable:true})
     btcWalletAdderess?: string;
+
+    @Field(() => String, {nullable:true})
+    licenseNumber?: string;
+
+    @Field(() => String, {nullable:true})
+    licenseType?: string;
 }

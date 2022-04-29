@@ -120,3 +120,7 @@ export class UpdateUserInput {
   @Field(() => String, { nullable: true })
   country?: string;
 }
+
+export class UploadImageDto {
+  imageFor: string;
+}

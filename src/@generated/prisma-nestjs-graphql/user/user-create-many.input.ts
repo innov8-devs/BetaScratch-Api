@@ -59,6 +59,17 @@ export class UserCreateManyInput {
     @Validator.IsString()
     password!: string;
 
+    @Field(() => String, {nullable:true})
+    @Validator.IsString()
+    licenseFrontImage?: string;
+
+    @Field(() => String, {nullable:true})
+    @Validator.IsString()
+    licenseBackImage?: string;
+
+    @Field(() => String, {nullable:true})
+    verificationStatus?: string;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

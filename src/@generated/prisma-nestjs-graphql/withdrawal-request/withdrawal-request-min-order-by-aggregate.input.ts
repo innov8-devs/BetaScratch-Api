@@ -31,4 +31,10 @@ export class WithdrawalRequestMinOrderByAggregateInput {
 
     @Field(() => SortOrder, {nullable:true})
     btcWalletAdderess?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    licenseNumber?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    licenseType?: keyof typeof SortOrder;
 }

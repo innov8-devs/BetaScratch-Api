@@ -33,5 +33,11 @@ export class WithdrawalRequestCountAggregate {
     btcWalletAdderess!: number;
 
     @Field(() => Int, {nullable:false})
+    licenseNumber!: number;
+
+    @Field(() => Int, {nullable:false})
+    licenseType!: number;
+
+    @Field(() => Int, {nullable:false})
     _all!: number;
 }

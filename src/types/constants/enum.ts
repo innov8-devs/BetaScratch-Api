@@ -47,3 +47,8 @@ export enum TRANSACTION {
   FLUTTERWAVE = 'FLUTTERWAVE',
   ACCOUNT = 'ACCOUNT',
 }
+
+export enum VERIFICATION {
+  LICENSE_BACK_IMAGE = "license_back_image",
+  LICENSE_FRONT_IMAGE = "license_front_image"
+}

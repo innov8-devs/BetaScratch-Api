@@ -17,21 +17,27 @@ export class WithdrawalRequestUncheckedUpdateInput {
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     bank?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableIntFieldUpdateOperationsInput, {nullable:true})
-    accountNumber?: NullableIntFieldUpdateOperationsInput;
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    accountNumber?: NullableStringFieldUpdateOperationsInput;
 
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     accountName?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableIntFieldUpdateOperationsInput, {nullable:true})
-    amount?: NullableIntFieldUpdateOperationsInput;
-
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    status?: StringFieldUpdateOperationsInput;
+    amount?: StringFieldUpdateOperationsInput;
+
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    status?: NullableStringFieldUpdateOperationsInput;
 
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     paypal?: NullableStringFieldUpdateOperationsInput;
 
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     btcWalletAdderess?: NullableStringFieldUpdateOperationsInput;
+
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    licenseNumber?: NullableStringFieldUpdateOperationsInput;
+
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    licenseType?: NullableStringFieldUpdateOperationsInput;
 }

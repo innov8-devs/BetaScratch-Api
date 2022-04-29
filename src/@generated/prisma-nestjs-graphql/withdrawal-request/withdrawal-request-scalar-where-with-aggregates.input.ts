@@ -26,21 +26,27 @@ export class WithdrawalRequestScalarWhereWithAggregatesInput {
     @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
     bank?: StringNullableWithAggregatesFilter;
 
-    @Field(() => IntNullableWithAggregatesFilter, {nullable:true})
-    accountNumber?: IntNullableWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    accountNumber?: StringNullableWithAggregatesFilter;
 
     @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
     accountName?: StringNullableWithAggregatesFilter;
 
-    @Field(() => IntNullableWithAggregatesFilter, {nullable:true})
-    amount?: IntNullableWithAggregatesFilter;
-
     @Field(() => StringWithAggregatesFilter, {nullable:true})
-    status?: StringWithAggregatesFilter;
+    amount?: StringWithAggregatesFilter;
+
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    status?: StringNullableWithAggregatesFilter;
 
     @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
     paypal?: StringNullableWithAggregatesFilter;
 
     @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
     btcWalletAdderess?: StringNullableWithAggregatesFilter;
+
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    licenseNumber?: StringNullableWithAggregatesFilter;
+
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    licenseType?: StringNullableWithAggregatesFilter;
 }

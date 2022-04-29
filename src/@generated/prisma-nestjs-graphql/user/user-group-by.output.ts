@@ -51,6 +51,15 @@ export class UserGroupBy {
     @Field(() => String, {nullable:false})
     password!: string;
 
+    @Field(() => String, {nullable:true})
+    licenseFrontImage?: string;
+
+    @Field(() => String, {nullable:true})
+    licenseBackImage?: string;
+
+    @Field(() => String, {nullable:false})
+    verificationStatus!: string;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;
 

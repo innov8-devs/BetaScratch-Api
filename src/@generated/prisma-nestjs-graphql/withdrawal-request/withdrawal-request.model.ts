@@ -19,21 +19,27 @@ export class WithdrawalRequest {
     @Field(() => String, {nullable:true})
     bank!: string | null;
 
-    @Field(() => Int, {nullable:true})
-    accountNumber!: number | null;
+    @Field(() => String, {nullable:true})
+    accountNumber!: string | null;
 
     @Field(() => String, {nullable:true})
     accountName!: string | null;
 
-    @Field(() => Int, {nullable:true})
-    amount!: number | null;
-
     @Field(() => String, {nullable:false})
-    status!: string;
+    amount!: string;
+
+    @Field(() => String, {nullable:true})
+    status!: string | null;
 
     @Field(() => String, {nullable:true})
     paypal!: string | null;
 
     @Field(() => String, {nullable:true})
     btcWalletAdderess!: string | null;
+
+    @Field(() => String, {nullable:true})
+    licenseNumber!: string | null;
+
+    @Field(() => String, {nullable:true})
+    licenseType!: string | null;
 }

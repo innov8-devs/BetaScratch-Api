@@ -46,6 +46,15 @@ export class UserMaxAggregate {
     @Field(() => String, {nullable:true})
     password?: string;
 
+    @Field(() => String, {nullable:true})
+    licenseFrontImage?: string;
+
+    @Field(() => String, {nullable:true})
+    licenseBackImage?: string;
+
+    @Field(() => String, {nullable:true})
+    verificationStatus?: string;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

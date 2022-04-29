@@ -10,10 +10,4 @@ export class WithdrawalRequestSumOrderByAggregateInput {
 
     @Field(() => SortOrder, {nullable:true})
     userId?: keyof typeof SortOrder;
-
-    @Field(() => SortOrder, {nullable:true})
-    accountNumber?: keyof typeof SortOrder;
-
-    @Field(() => SortOrder, {nullable:true})
-    amount?: keyof typeof SortOrder;
 }

@@ -6,6 +6,7 @@ import { DateTimeFilter } from '../prisma/date-time-filter.input';
 import { EnumROLEFilter } from '../prisma/enum-role-filter.input';
 import { EnumGENDERFilter } from '../prisma/enum-gender-filter.input';
 import { BoolFilter } from '../prisma/bool-filter.input';
+import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
 import { WalletRelationFilter } from '../wallet/wallet-relation-filter.input';
 import { TransactionListRelationFilter } from '../transaction/transaction-list-relation-filter.input';
 import { TokenListRelationFilter } from '../token/token-list-relation-filter.input';
@@ -63,6 +64,15 @@ export class UserWhereInput {
 
     @Field(() => StringFilter, {nullable:true})
     password?: StringFilter;
+
+    @Field(() => StringNullableFilter, {nullable:true})
+    licenseFrontImage?: StringNullableFilter;
+
+    @Field(() => StringNullableFilter, {nullable:true})
+    licenseBackImage?: StringNullableFilter;
+
+    @Field(() => StringFilter, {nullable:true})
+    verificationStatus?: StringFilter;
 
     @Field(() => WalletRelationFilter, {nullable:true})
     wallet?: WalletRelationFilter;

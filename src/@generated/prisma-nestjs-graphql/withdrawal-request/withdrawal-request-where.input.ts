@@ -30,21 +30,27 @@ export class WithdrawalRequestWhereInput {
     @Field(() => StringNullableFilter, {nullable:true})
     bank?: StringNullableFilter;
 
-    @Field(() => IntNullableFilter, {nullable:true})
-    accountNumber?: IntNullableFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    accountNumber?: StringNullableFilter;
 
     @Field(() => StringNullableFilter, {nullable:true})
     accountName?: StringNullableFilter;
 
-    @Field(() => IntNullableFilter, {nullable:true})
-    amount?: IntNullableFilter;
-
     @Field(() => StringFilter, {nullable:true})
-    status?: StringFilter;
+    amount?: StringFilter;
+
+    @Field(() => StringNullableFilter, {nullable:true})
+    status?: StringNullableFilter;
 
     @Field(() => StringNullableFilter, {nullable:true})
     paypal?: StringNullableFilter;
 
     @Field(() => StringNullableFilter, {nullable:true})
     btcWalletAdderess?: StringNullableFilter;
+
+    @Field(() => StringNullableFilter, {nullable:true})
+    licenseNumber?: StringNullableFilter;
+
+    @Field(() => StringNullableFilter, {nullable:true})
+    licenseType?: StringNullableFilter;
 }

@@ -14,6 +14,9 @@ export enum UserScalarFieldEnum {
     country = "country",
     confirmed = "confirmed",
     password = "password",
+    licenseFrontImage = "licenseFrontImage",
+    licenseBackImage = "licenseBackImage",
+    verificationStatus = "verificationStatus",
     createdAt = "createdAt",
     updatedAt = "updatedAt"
 }

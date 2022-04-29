@@ -9,10 +9,4 @@ export class WithdrawalRequestSumAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     userId?: true;
-
-    @Field(() => Boolean, {nullable:true})
-    accountNumber?: true;
-
-    @Field(() => Boolean, {nullable:true})
-    amount?: true;
 }

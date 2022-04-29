@@ -65,6 +65,17 @@ export class UserUncheckedCreateInput {
     @Validator.IsString()
     password!: string;
 
+    @Field(() => String, {nullable:true})
+    @Validator.IsString()
+    licenseFrontImage?: string;
+
+    @Field(() => String, {nullable:true})
+    @Validator.IsString()
+    licenseBackImage?: string;
+
+    @Field(() => String, {nullable:true})
+    verificationStatus?: string;
+
     @Field(() => WalletUncheckedCreateNestedOneWithoutUserInput, {nullable:true})
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput;
 

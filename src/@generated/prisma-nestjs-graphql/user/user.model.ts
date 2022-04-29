@@ -53,6 +53,15 @@ export class User {
     @Field(() => String, {nullable:false})
     password!: string;
 
+    @Field(() => String, {nullable:true})
+    licenseFrontImage!: string | null;
+
+    @Field(() => String, {nullable:true})
+    licenseBackImage!: string | null;
+
+    @Field(() => String, {nullable:false,defaultValue:'inactive'})
+    verificationStatus!: string;
+
     @Field(() => Wallet, {nullable:true})
     wallet?: Wallet | null;
 
