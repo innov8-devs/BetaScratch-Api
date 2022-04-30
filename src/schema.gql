@@ -1,0 +1,314 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Wallet {
+  id: ID!
+  user: User!
+  userId: Int!
+  withdrawable: Float!
+  bonus: Float!
+  currency: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Transaction {
+  id: ID!
+  amount: Int!
+  transactionId: String!
+  currency: String!
+  transactionRef: String!
+  status: String!
+  purpose: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  User: User
+  userId: Int
+}
+
+type Token {
+  id: ID!
+  subject: String!
+  expire: DateTime!
+  validity: Boolean!
+  mobileNumber: String!
+  code: String!
+  user: User!
+  userId: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type UserCount {
+  transactions: Int!
+  tokens: Int!
+}
+
+type User {
+  id: ID!
+  email: String!
+  username: String!
+  firstName: String!
+  lastName: String!
+  dateOfBirth: DateTime!
+  role: ROLE!
+  gender: GENDER!
+  mobileNumber: String!
+  state: String!
+  confirmed: Boolean!
+  password: String!
+  wallet: Wallet
+  transactions: [Transaction!]
+  tokens: [Token!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  _count: UserCount!
+}
+
+enum ROLE {
+  USER
+  ADMIN
+}
+
+enum GENDER {
+  MALE
+  FEMALE
+  OTHER
+}
+
+type AuthResponse {
+  id: ID!
+  email: String!
+  username: String!
+  firstName: String!
+  lastName: String!
+  dateOfBirth: DateTime!
+  role: ROLE!
+  gender: GENDER!
+  mobileNumber: String!
+  state: String!
+  confirmed: Boolean!
+  password: String!
+  wallet: Wallet
+  transactions: [Transaction!]
+  tokens: [Token!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  _count: UserCount!
+  token: String!
+}
+
+type Game {
+  id: ID!
+  name: String!
+  imageUrl: String!
+  description: String!
+  gameId: String!
+  price: Int!
+  defaultCurrrency: CURRENCY!
+  availability: Int!
+}
+
+enum CURRENCY {
+  USD
+  NGN
+}
+
+type Query {
+  findAllGames: [Game!]!
+  me: User
+  logout: User
+  getUserBalance: Wallet
+}
+
+type Mutation {
+  login(input: LoginInput!): AuthResponse!
+  register(input: UserCreateInput!): User!
+  confirmAccount(token: String!): AuthResponse!
+  requestNewToken(email: String!): Boolean!
+  validateRegistrationFormOne(input: ValidateFormOneInput!): Boolean!
+  validateRegistrationFormTwo(input: ValidateFormTwoInput!): Boolean!
+  queryRefetchHelper: Boolean!
+  deductUserBalance(input: DeductUserBalanceInput!): Boolean!
+  cashBack(input: CashBackTransactionInput!): Boolean!
+  initiatePayment(input: InitiatePaymentInput!): String!
+  verifyTransaction(input: VerifyTransactionInput!): String!
+}
+
+input LoginInput {
+  password: String!
+  username: String!
+}
+
+input UserCreateInput {
+  email: String!
+  username: String!
+  firstName: String!
+  lastName: String!
+  dateOfBirth: DateTime!
+  role: ROLE
+  gender: GENDER!
+  mobileNumber: String!
+  state: String!
+  confirmed: Boolean
+  password: String!
+  wallet: WalletCreateNestedOneWithoutUserInput
+  transactions: TransactionCreateNestedManyWithoutUserInput
+  tokens: TokenCreateNestedManyWithoutUserInput
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input WalletCreateNestedOneWithoutUserInput {
+  create: WalletCreateWithoutUserInput
+  connectOrCreate: WalletCreateOrConnectWithoutUserInput
+  connect: WalletWhereUniqueInput
+}
+
+input WalletCreateWithoutUserInput {
+  withdrawable: Float!
+  bonus: Float!
+  currency: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input WalletCreateOrConnectWithoutUserInput {
+  where: WalletWhereUniqueInput!
+  create: WalletCreateWithoutUserInput!
+}
+
+input WalletWhereUniqueInput {
+  id: Int
+  userId: Int
+}
+
+input TransactionCreateNestedManyWithoutUserInput {
+  create: [TransactionCreateWithoutUserInput!]
+  connectOrCreate: [TransactionCreateOrConnectWithoutUserInput!]
+  createMany: TransactionCreateManyUserInputEnvelope
+  connect: [TransactionWhereUniqueInput!]
+}
+
+input TransactionCreateWithoutUserInput {
+  amount: Int!
+  transactionId: String!
+  currency: String!
+  transactionRef: String!
+  status: String!
+  purpose: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input TransactionCreateOrConnectWithoutUserInput {
+  where: TransactionWhereUniqueInput!
+  create: TransactionCreateWithoutUserInput!
+}
+
+input TransactionWhereUniqueInput {
+  id: Int
+}
+
+input TransactionCreateManyUserInputEnvelope {
+  data: [TransactionCreateManyUserInput!]!
+  skipDuplicates: Boolean
+}
+
+input TransactionCreateManyUserInput {
+  id: Int
+  amount: Int!
+  transactionId: String!
+  currency: String!
+  transactionRef: String!
+  status: String!
+  purpose: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input TokenCreateNestedManyWithoutUserInput {
+  create: [TokenCreateWithoutUserInput!]
+  connectOrCreate: [TokenCreateOrConnectWithoutUserInput!]
+  createMany: TokenCreateManyUserInputEnvelope
+  connect: [TokenWhereUniqueInput!]
+}
+
+input TokenCreateWithoutUserInput {
+  subject: String!
+  expire: DateTime!
+  validity: Boolean!
+  mobileNumber: String!
+  code: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input TokenCreateOrConnectWithoutUserInput {
+  where: TokenWhereUniqueInput!
+  create: TokenCreateWithoutUserInput!
+}
+
+input TokenWhereUniqueInput {
+  id: Int
+}
+
+input TokenCreateManyUserInputEnvelope {
+  data: [TokenCreateManyUserInput!]!
+  skipDuplicates: Boolean
+}
+
+input TokenCreateManyUserInput {
+  id: Int
+  subject: String!
+  expire: DateTime!
+  validity: Boolean!
+  mobileNumber: String!
+  code: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ValidateFormOneInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  mobileNumber: String!
+}
+
+input ValidateFormTwoInput {
+  username: String!
+  dateOfBirth: DateTime!
+  gender: GENDER!
+  state: String!
+  password: String!
+}
+
+input DeductUserBalanceInput {
+  amount: String!
+  currency: String!
+  wallet: String!
+}
+
+input CashBackTransactionInput {
+  cashBackAmount: Float!
+  currency: String!
+}
+
+input InitiatePaymentInput {
+  amount: String!
+  currency: String!
+  purpose: String!
+}
+
+input VerifyTransactionInput {
+  status: String!
+  tx_ref: String!
+  tx_id: String
+}
