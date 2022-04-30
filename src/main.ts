@@ -21,6 +21,8 @@ async function bootstrap() {
       'http://localhost:3000',
       'http://127.0.0.1:3000',
       'https://beta-admin.vercel.app',
+      'https://betascratch.com',
+      'https://www.betascratch.com',
     ],
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'DELETE'],
     // allowedHeaders:
