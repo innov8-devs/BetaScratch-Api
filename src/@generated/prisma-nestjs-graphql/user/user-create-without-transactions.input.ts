@@ -61,11 +61,9 @@ export class UserCreateWithoutTransactionsInput {
     password!: string;
 
     @Field(() => String, {nullable:true})
-    @Validator.IsString()
     licenseFrontImage?: string;
 
     @Field(() => String, {nullable:true})
-    @Validator.IsString()
     licenseBackImage?: string;
 
     @Field(() => String, {nullable:true})

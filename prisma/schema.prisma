@@ -48,9 +48,7 @@ model User {
   /// @Validator.IsString()
   /// @Validation.HideField({output: true})
   password           String
-  /// @Validator.IsString()
   licenseFrontImage  String?
-  /// @Validator.IsString()
   licenseBackImage   String?
   verificationStatus String              @default("inactive")
   wallet             Wallet?

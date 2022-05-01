@@ -22,6 +22,9 @@ CREATE TABLE "User" (
     "country" TEXT NOT NULL,
     "confirmed" BOOLEAN NOT NULL DEFAULT false,
     "password" TEXT NOT NULL,
+    "licenseFrontImage" TEXT,
+    "licenseBackImage" TEXT,
+    "verificationStatus" TEXT NOT NULL DEFAULT E'inactive',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -102,12 +105,14 @@ CREATE TABLE "WithdrawalRequest" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER,
     "bank" TEXT,
-    "accountNumber" INTEGER,
+    "accountNumber" TEXT,
     "accountName" TEXT,
-    "amount" INTEGER,
-    "status" TEXT NOT NULL,
+    "amount" TEXT NOT NULL,
+    "status" TEXT,
     "paypal" TEXT,
     "btcWalletAdderess" TEXT,
+    "licenseNumber" TEXT,
+    "licenseType" TEXT,
 
     CONSTRAINT "WithdrawalRequest_pkey" PRIMARY KEY ("id")
 );
