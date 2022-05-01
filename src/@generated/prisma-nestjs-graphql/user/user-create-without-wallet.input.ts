@@ -61,17 +61,9 @@ export class UserCreateWithoutWalletInput {
     password!: string;
 
     @Field(() => String, {nullable:true})
-<<<<<<< HEAD
     licenseFrontImage?: string;
 
     @Field(() => String, {nullable:true})
-=======
-    @Validator.IsString()
-    licenseFrontImage?: string;
-
-    @Field(() => String, {nullable:true})
-    @Validator.IsString()
->>>>>>> 2370a3a97f2ea7a2ca9f44c48c21a1a4bd07f69a
     licenseBackImage?: string;
 
     @Field(() => String, {nullable:true})

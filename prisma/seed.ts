@@ -32,11 +32,11 @@ export const seedDb = async () => {
   // });
 };
 
-seedDb()
-  .catch((err) => {
-    console.log(err);
-    process.exit(1);
-  })
-  .finally(() => {
-    prisma.$disconnect();
-  });
+// seedDb()
+//   .catch((err) => {
+//     console.log(err);
+//     process.exit(1);
+//   })
+//   .finally(() => {
+//     prisma.$disconnect();
+//   });
