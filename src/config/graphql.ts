@@ -20,7 +20,10 @@ export class GqlConfigService implements GqlOptionsFactory {
         origin: [
           'https://betascratch.herokuapp.com',
           'http://localhost:3000',
+<<<<<<< HEAD
           'http://127.0.0.1:3000',
+=======
+>>>>>>> 2370a3a97f2ea7a2ca9f44c48c21a1a4bd07f69a
           'https://beta-admin.vercel.app',
           'https://betascratch.com',
           'https://www.betascratch.com',
