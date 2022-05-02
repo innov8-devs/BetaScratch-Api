@@ -4,6 +4,7 @@ import * as dotenv from 'dotenv';
 import { ConfigService } from '@nestjs/config';
 import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { NextFunction, Request, Response } from 'express';
 
 dotenv.config();
 
@@ -12,6 +13,8 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
 
   app.set('trust proxy', 1);
+
+  const origin = [ 'http://localhost:3000']
 
 const corsOptions = {
     allowedHeaders: [
@@ -25,13 +28,19 @@ const corsOptions = {
       'Access-Control-Allow-Headers'
     ],
     credentials: true,
-    methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-    origin: 'http://localhost:3000',
+    methods: ['GET', 'HEAD', 'PUT', 'POST', 'PATCH', 'DELETE'],
+    origin,
     preflightContinue: false,
   };
 
   app.enableCors(corsOptions)
 
+  app.use((req: Request, res: Response, next: NextFunction)=> {
+    if(origin.includes(req.headers.origin)){
+      res.header('Access-Control-Allow-Origin', req.headers.origin)
+    }
+    next()
+  })
 
   // app.enableCors({
   //   origin: [
