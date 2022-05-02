@@ -434,16 +434,20 @@ export class UserService {
     return true;
   }
 
-  async updateVerificaionStatusToPending(userId: number, licenseFrontImage?: string, licenseBackImage?: string){
+  async updateVerificaionStatusToPending(
+    userId: number,
+    licenseFrontImage?: string,
+    licenseBackImage?: string,
+  ) {
     await this.prismaService.user.update({
       data: {
-        verificationStatus: "Pending",
+        verificationStatus: 'pending',
         licenseFrontImage,
         licenseBackImage: licenseBackImage ? licenseBackImage : null,
       },
       where: {
-        id: userId 
-      } 
-    })
+        id: userId,
+      },
+    });
   }
 }
