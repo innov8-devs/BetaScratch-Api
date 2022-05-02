@@ -16,17 +16,17 @@ export class GqlConfigService implements GqlOptionsFactory {
       introspection: true,
       driver: ApolloDriver,
       autoSchemaFile: true,
-      // cors: {
-      //   origin: [
-      //     'https://betascratch.herokuapp.com',
-      //     'http://localhost:3000',
-      //     'http://127.0.0.1:3000',
-      //     'https://beta-admin.vercel.app',
-      //     'https://betascratch.com',
-      //     'https://www.betascratch.com',
-      //   ],
-      //   credentials: true,
-      // },
+      cors: {
+        origin: [
+          'https://betascratch.herokuapp.com',
+          'http://localhost:3000',
+          'http://127.0.0.1:3000',
+          'https://beta-admin.vercel.app',
+          'https://betascratch.com',
+          'https://www.betascratch.com',
+        ],
+        credentials: true,
+      },
       context: ({ req, res }: Context) => ({ req, res }),
 
       formatError: (error: GraphQLError) => ({
