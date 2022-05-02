@@ -46,6 +46,9 @@ async function bootstrap() {
       res.header('Access-Control-Allow-Origin', req.headers.origin)
     }
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS,HEAD,PATCH');
+    res.setHeader('Access-Control-Allow-Headers',
+          'Origin, X-Requested-With,Content-Type,Accept,X-Access-Token,Authorization,Access-Control-Allow-Origin,Access-Control-Allow-Headers'
+    )
     if(req.method === 'OPTIONS'){
       return res.status(200).end()
     }
