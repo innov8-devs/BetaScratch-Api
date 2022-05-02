@@ -5,6 +5,7 @@ import {
   Body,
   Controller,
   Get,
+  Header,
   Param,
   Post,
   Res,
@@ -28,6 +29,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Auth([ROLE.USER])
+  @Header('Access-Control-Allow-Origin', '*')
   @Post('upload')
   @UseInterceptors(
     FileInterceptor('image', {
