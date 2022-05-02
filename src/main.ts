@@ -36,7 +36,7 @@ async function bootstrap() {
       'Access-Control-Allow-Headers',
     ],
     credentials: true,
-    methods: ['GET', 'HEAD', 'PUT', 'POST', 'PATCH', 'DELETE'],
+    methods: ['GET', 'HEAD', 'PUT', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     origin,
     preflightContinue: true,
   })
@@ -45,7 +45,11 @@ async function bootstrap() {
     if(origin.includes(req.headers.origin)){
       res.header('Access-Control-Allow-Origin', req.headers.origin)
     }
-    next()
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS,HEAD,PATCH');
+    if(req.method === 'OPTIONS'){
+      return res.status(200).end()
+    }
+    return next()
   })
 
   // app.enableCors({
