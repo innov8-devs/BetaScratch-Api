@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as dotenv from 'dotenv';
+import * as cors from "cors"
 import { ConfigService } from '@nestjs/config';
 import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
@@ -13,22 +14,40 @@ async function bootstrap() {
 
   app.set('trust proxy', 1);
 
-  app.enableCors({
-    origin: [
-      'https://betascratch.herokuapp.com',
-      'http://localhost:3000',
-      'http://127.0.0.1:3000',
-      'https://beta-admin.vercel.app',
-      'https://betascratch.com',
-      'https://www.betascratch.com',
+const corsOptions = {
+    allowedHeaders: [
+      'Origin',
+      'X-Requested-With',
+      'Content-Type',
+      'Accept',
+      'X-Access-Token',
+      'Authorization',
     ],
-    methods: ['GET', 'HEAD', 'PUT', 'POST', 'PATCH', 'DELETE'],
-
-    allowedHeaders:
-    'Content-Type,Accept,Authorization,Access-Control-Allow-Origin',
     credentials: true,
-    // preflightContinue: true,
-  });
+    methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
+    origin: '*',
+    preflightContinue: false,
+  };
+
+  app.enableCors(corsOptions)
+
+
+  // app.enableCors({
+  //   origin: [
+  //     'https://betascratch.herokuapp.com',
+  //     'http://localhost:3000',
+  //     'http://127.0.0.1:3000',
+  //     'https://beta-admin.vercel.app',
+  //     'https://betascratch.com',
+  //     'https://www.betascratch.com',
+  //   ],
+  //   methods: ['GET', 'HEAD', 'PUT', 'POST', 'PATCH', 'DELETE'],
+
+  //   allowedHeaders:
+  //   'Content-Type,Accept,Authorization,Access-Control-Allow-Origin',
+  //   credentials: true,
+  //   // preflightContinue: true,
+  // });
 
   app.useGlobalPipes(
     new ValidationPipe({
