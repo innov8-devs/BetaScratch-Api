@@ -22,6 +22,8 @@ import * as dotenv from 'dotenv';
 import { UserService } from './user.service';
 import { VERIFICATION } from 'types/constants/enum';
 import { UploadImageDto } from './dto/user.request';
+import { Context } from '@nestjs/graphql';
+import { MyContext } from 'types/constants/types';
 dotenv.config();
 
 @Controller('api/user')
@@ -29,7 +31,6 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Auth([ROLE.USER])
-  @Header('Access-Control-Allow-Origin', '*')
   @Post('upload')
   @UseInterceptors(
     FileInterceptor('image', {
@@ -48,8 +49,10 @@ export class UserController {
   async uploadImage(
     @UploadedFile() file: Express.Multer.File,
     @CurrentUser() user: User,
+    @Context() { res }: MyContext,
     @Body() input: UploadImageDto,
   ) {
+    res.setHeader('Access-Control-Allow-Origin', '*')
     const image = `${process.env.SERVER_UPLOAD_ORIGIN}/${file.filename}`;
     if (input.imageFor === VERIFICATION.LICENSE_FRONT_IMAGE) {
       await this.userService.updateVerificaionStatusToPending(
