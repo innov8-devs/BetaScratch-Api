@@ -25,8 +25,8 @@ async function bootstrap() {
       'https://www.betascratch.com',
     ],
     methods: ['GET', 'HEAD', 'PUT', 'POST', 'PATCH', 'DELETE'],
-    // allowedHeaders:
-    // 'Content-Type,Accept,Authorization,Access-Control-Allow-Origin',
+    allowedHeaders:
+    'Content-Type,Accept,Authorization,Access-Control-Allow-Origin',
     credentials: true,
     // preflightContinue: true,
   });
