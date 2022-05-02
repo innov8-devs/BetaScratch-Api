@@ -21,11 +21,12 @@ const corsOptions = {
       'Accept',
       'X-Access-Token',
       'Authorization',
-      'Access-Control-Allow-Origin'
+      'Access-Control-Allow-Origin',
+      'Access-Control-Allow-Headers'
     ],
     credentials: true,
     methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-    origin: '*',
+    origin: 'http://localhost:3000',
     preflightContinue: false,
   };
 
