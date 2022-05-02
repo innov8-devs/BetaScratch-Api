@@ -14,7 +14,14 @@ async function bootstrap() {
 
   app.set('trust proxy', 1);
 
-  const origin = [ 'http://localhost:3000']
+    const origin = [
+      'https://betascratch.herokuapp.com',
+      'http://localhost:3000',
+      'http://127.0.0.1:3000',
+      'https://beta-admin.vercel.app',
+      'https://betascratch.com',
+      'https://www.betascratch.com',
+    ]
 
 const corsOptions = {
     allowedHeaders: [
@@ -30,7 +37,7 @@ const corsOptions = {
     credentials: true,
     methods: ['GET', 'HEAD', 'PUT', 'POST', 'PATCH', 'DELETE'],
     origin,
-    preflightContinue: false,
+    preflightContinue: true,
   };
 
   app.enableCors(corsOptions)
