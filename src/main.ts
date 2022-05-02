@@ -8,9 +8,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 dotenv.config();
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-    cors: true,
-  });
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const configService = app.get(ConfigService);
 
   app.set('trust proxy', 1);
@@ -25,6 +23,7 @@ async function bootstrap() {
       'https://www.betascratch.com',
     ],
     methods: ['GET', 'HEAD', 'PUT', 'POST', 'PATCH', 'DELETE'],
+
     allowedHeaders:
     'Content-Type,Accept,Authorization,Access-Control-Allow-Origin',
     credentials: true,
