@@ -23,7 +23,8 @@ async function bootstrap() {
       'https://www.betascratch.com',
     ]
 
-const corsOptions = {
+
+  app.enableCors({
     allowedHeaders: [
       'Origin',
       'X-Requested-With',
@@ -32,15 +33,13 @@ const corsOptions = {
       'X-Access-Token',
       'Authorization',
       'Access-Control-Allow-Origin',
-      'Access-Control-Allow-Headers'
+      'Access-Control-Allow-Headers',
     ],
     credentials: true,
     methods: ['GET', 'HEAD', 'PUT', 'POST', 'PATCH', 'DELETE'],
     origin,
     preflightContinue: true,
-  };
-
-  app.enableCors(corsOptions)
+  })
 
   app.use((req: Request, res: Response, next: NextFunction)=> {
     if(origin.includes(req.headers.origin)){
