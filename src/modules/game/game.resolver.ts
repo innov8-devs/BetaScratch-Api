@@ -1,3 +1,4 @@
+import { Cart } from '@generated/prisma-nestjs-graphql/cart/cart.model';
 import { GameCategoryCreateInput } from '@generated/prisma-nestjs-graphql/game-category/game-category-create.input';
 import { GameCategory } from '@generated/prisma-nestjs-graphql/game-category/game-category.model';
 import { GameCreateInput } from '@generated/prisma-nestjs-graphql/game/game-create.input';
@@ -96,7 +97,7 @@ export class GameResolver {
   }
 
   @Auth([ROLE.USER])
-  @Mutation(() => User)
+  @Mutation(() => Cart)
   async purchaseHistory(
     @Args('input') input: PurchaseSearch,
     @CurrentUser() user: User,
