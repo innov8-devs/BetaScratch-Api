@@ -289,6 +289,9 @@ export class GameService {
       },
       take: size,
       skip: skipValue,
+      orderBy: {
+        id: 'desc',
+      },
     });
   }
 }
