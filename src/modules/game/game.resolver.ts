@@ -14,6 +14,7 @@ import {
   CartDetailInput,
   GameCateogorySearch,
   GamePaginationInput,
+  PurchaseSearch,
   UpdateGameInput,
 } from './dto/game.request';
 import { GameCategoryReturnType, TotalGameCount } from './dto/game.response';
@@ -92,5 +93,16 @@ export class GameResolver {
   ) {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res);
     return await this.gameService.cartCheckout(user.id, input);
+  }
+
+  @Auth([ROLE.USER])
+  @Mutation(() => User)
+  async purchaseHistory(
+    @Args('input') input: PurchaseSearch,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    return await this.gameService.purchaseHistory(user.id, input);
   }
 }

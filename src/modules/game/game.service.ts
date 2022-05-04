@@ -19,6 +19,7 @@ import {
   CartDetailInput,
   GameCateogorySearch,
   GamePaginationInput,
+  PurchaseSearch,
 } from './dto/game.request';
 import { GameCategoryReturnType } from './dto/game.response';
 
@@ -276,6 +277,18 @@ export class GameService {
     return await this.prismaService.user.findUnique({
       where: { id: userId },
       include: { wallet: true },
+    });
+  }
+
+  async purchaseHistory(userId: number, input: PurchaseSearch) {
+    const { page, size } = input;
+    let skipValue = page * size - size;
+    return await this.prismaService.cart.findMany({
+      where: {
+        userId,
+      },
+      take: size,
+      skip: skipValue,
     });
   }
 }

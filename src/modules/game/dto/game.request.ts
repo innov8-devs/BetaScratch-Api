@@ -46,6 +46,17 @@ export class GameCateogorySearch {
 }
 
 @InputType()
+export class PurchaseSearch {
+  @Field(() => Number)
+  @IsNumber()
+  page: number;
+
+  @Field(() => Number)
+  @IsNumber()
+  size: number;
+}
+
+@InputType()
 export class CartDetailInput {
   @Field(() => [Number])
   @IsArray()
