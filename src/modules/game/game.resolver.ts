@@ -97,7 +97,7 @@ export class GameResolver {
   }
 
   @Auth([ROLE.USER])
-  @Mutation(() => Cart)
+  @Mutation(() => [Cart])
   async purchaseHistory(
     @Args('input') input: PurchaseSearch,
     @CurrentUser() user: User,
