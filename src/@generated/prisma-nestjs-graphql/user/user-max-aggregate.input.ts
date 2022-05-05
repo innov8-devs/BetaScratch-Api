@@ -53,6 +53,9 @@ export class UserMaxAggregateInput {
     verificationStatus?: true;
 
     @Field(() => Boolean, {nullable:true})
+    vipStatus?: true;
+
+    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})

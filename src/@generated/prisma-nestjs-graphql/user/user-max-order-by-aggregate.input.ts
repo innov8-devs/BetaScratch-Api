@@ -54,6 +54,9 @@ export class UserMaxOrderByAggregateInput {
     verificationStatus?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    vipStatus?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

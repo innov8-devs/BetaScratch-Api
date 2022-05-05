@@ -55,6 +55,9 @@ export class UserMaxAggregate {
     @Field(() => String, {nullable:true})
     verificationStatus?: string;
 
+    @Field(() => String, {nullable:true})
+    vipStatus?: string;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

@@ -60,6 +60,9 @@ export class UserGroupBy {
     @Field(() => String, {nullable:false})
     verificationStatus!: string;
 
+    @Field(() => String, {nullable:false})
+    vipStatus!: string;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;
 

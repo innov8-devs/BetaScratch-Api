@@ -60,6 +60,9 @@ export class UserUpdateWithoutWalletInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     verificationStatus?: StringFieldUpdateOperationsInput;
 
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    vipStatus?: StringFieldUpdateOperationsInput;
+
     @Field(() => TransactionUpdateManyWithoutUserInput, {nullable:true})
     transactions?: TransactionUpdateManyWithoutUserInput;
 

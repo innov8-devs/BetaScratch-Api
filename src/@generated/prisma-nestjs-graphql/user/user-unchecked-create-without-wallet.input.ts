@@ -73,6 +73,9 @@ export class UserUncheckedCreateWithoutWalletInput {
     @Field(() => String, {nullable:true})
     verificationStatus?: string;
 
+    @Field(() => String, {nullable:true})
+    vipStatus?: string;
+
     @Field(() => TransactionUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
     transactions?: TransactionUncheckedCreateNestedManyWithoutUserInput;
 

@@ -2,7 +2,10 @@ import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { Prisma } from '@prisma/client';
 import * as Flutterwave from 'flutterwave-node-v3';
-import { InitiatePaymentInput } from './dto/request.dto';
+import {
+  InitiatePaymentInput,
+  TransactionHistoryInput,
+} from './dto/request.dto';
 import { PrismaService } from '../prisma.service';
 import { generateRandomString } from 'utils/generateRandomString.util';
 import {
@@ -151,6 +154,21 @@ export class TransactionService {
       where: { userId },
       data: {
         bonus: userWallet.bonus + cashBackAmount,
+      },
+    });
+  }
+
+  async transactionHistory(userId: number, input: TransactionHistoryInput) {
+    const { page, size } = input;
+    let skipValue = page * size - size;
+    return await this.prismaService.transaction.findMany({
+      where: {
+        userId,
+      },
+      take: size,
+      skip: skipValue,
+      orderBy: {
+        id: 'desc',
       },
     });
   }

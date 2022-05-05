@@ -391,6 +391,7 @@ export class UserService {
         role: true,
         username: true,
         gender: true,
+        vipStatus: true,
         createdAt: true,
         state: true,
         country: true,

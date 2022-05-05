@@ -62,6 +62,9 @@ export class User {
     @Field(() => String, {nullable:false,defaultValue:'inactive'})
     verificationStatus!: string;
 
+    @Field(() => String, {nullable:false,defaultValue:'None'})
+    vipStatus!: string;
+
     @Field(() => Wallet, {nullable:true})
     wallet?: Wallet | null;
 

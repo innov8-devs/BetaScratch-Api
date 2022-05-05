@@ -54,6 +54,9 @@ export class UserCountAggregate {
     verificationStatus!: number;
 
     @Field(() => Int, {nullable:false})
+    vipStatus!: number;
+
+    @Field(() => Int, {nullable:false})
     createdAt!: number;
 
     @Field(() => Int, {nullable:false})

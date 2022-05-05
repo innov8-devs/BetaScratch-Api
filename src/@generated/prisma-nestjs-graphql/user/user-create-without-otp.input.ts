@@ -69,6 +69,9 @@ export class UserCreateWithoutOtpInput {
     @Field(() => String, {nullable:true})
     verificationStatus?: string;
 
+    @Field(() => String, {nullable:true})
+    vipStatus?: string;
+
     @Field(() => WalletCreateNestedOneWithoutUserInput, {nullable:true})
     wallet?: WalletCreateNestedOneWithoutUserInput;
 

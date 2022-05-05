@@ -1,5 +1,5 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { IsString, IsNotEmpty, IsEnum } from 'class-validator';
+import { IsString, IsNotEmpty, IsEnum, IsNumber } from 'class-validator';
 import { PAYMENT_PURPOSE } from 'types/constants/enum';
 
 @InputType()
@@ -19,4 +19,15 @@ export class InitiatePaymentInput {
   @Field(() => String, { nullable: false })
   @IsEnum(PAYMENT_PURPOSE, { each: true })
   purpose!: PAYMENT_PURPOSE;
+}
+
+@InputType()
+export class TransactionHistoryInput {
+  @Field(() => Number)
+  @IsNumber()
+  page: number;
+
+  @Field(() => Number)
+  @IsNumber()
+  size: number;
 }
