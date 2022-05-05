@@ -143,6 +143,21 @@ export class TransactionService {
     };
   }
 
+  async transactionHistory(userId: number, input: TransactionHistoryInput) {
+    const { page, size } = input;
+    let skipValue = page * size - size;
+    return await this.prismaService.transaction.findMany({
+      where: {
+        userId,
+      },
+      take: size,
+      skip: skipValue,
+      orderBy: {
+        id: 'desc',
+      },
+    });
+  }
+
   async cashback(userId: number, subtotal: number) {
     const cashBackAmount = calculateCashback(subtotal);
 
@@ -158,18 +173,5 @@ export class TransactionService {
     });
   }
 
-  async transactionHistory(userId: number, input: TransactionHistoryInput) {
-    const { page, size } = input;
-    let skipValue = page * size - size;
-    return await this.prismaService.transaction.findMany({
-      where: {
-        userId,
-      },
-      take: size,
-      skip: skipValue,
-      orderBy: {
-        id: 'desc',
-      },
-    });
-  }
+
 }
