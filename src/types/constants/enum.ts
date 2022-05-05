@@ -24,7 +24,7 @@ export enum PAYMENT_PURPOSE {
   DEPOSIT = 'DEPOSIT',
   PURCHASE = 'PURCHASE',
   FLUTTERWAVE = 'FLUTTERWAVE',
-  CARD = 'CART',
+  CART = 'CART',
   DEDUCT_WITHDRAWAL_BALANCE = 'DEDUCT WITHDRAWAL BALANCE',
   CASH_BACK = 'CASH BACK',
   DEDUCT_BONUS_BALANCE = 'DEDUCT BONUS BALANCE',
@@ -49,6 +49,6 @@ export enum TRANSACTION {
 }
 
 export enum VERIFICATION {
-  LICENSE_BACK_IMAGE = "license_back_image",
-  LICENSE_FRONT_IMAGE = "license_front_image"
+  LICENSE_BACK_IMAGE = 'license_back_image',
+  LICENSE_FRONT_IMAGE = 'license_front_image',
 }

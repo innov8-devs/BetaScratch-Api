@@ -204,7 +204,7 @@ export class GameService {
         await this.transactionService.createTransaction({
           amount: input.subtotal,
           currency: userWallet.currency,
-          purpose: input.transaction_type,
+          purpose: PAYMENT_PURPOSE.CART,
           status: PAYMENT_STATUS.SUCCESSFUL,
           transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
@@ -214,7 +214,7 @@ export class GameService {
         await this.transactionService.createTransaction({
           amount: input.subtotal,
           currency: userWallet.currency,
-          purpose: input.transaction_type,
+          purpose: PAYMENT_PURPOSE.CART,
           status: PAYMENT_STATUS.FAILED,
           transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
@@ -255,7 +255,7 @@ export class GameService {
       const { status } =
         await this.transactionService.verifyFlutterWaveTransaction(
           input.transaction_id,
-          PAYMENT_PURPOSE.FLUTTERWAVE,
+          PAYMENT_PURPOSE.CART,
           userId,
         );
       if (status === 'successful') {
