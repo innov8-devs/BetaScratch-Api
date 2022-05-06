@@ -316,7 +316,7 @@ export class UserService {
       });
     if (mobileNumberUsed)
       throw new BadRequestException({
-        name: 'mobile number',
+        name: 'mobile',
         message: MESSAGES.AUTH.MOBILE_NUMBER_CONFLICT,
       });
     return true;

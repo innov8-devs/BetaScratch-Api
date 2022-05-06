@@ -7,7 +7,7 @@ export enum ERROR_FIELD {
 const AUTH = {
   EMAIL_CONFLICT: 'email address is already registered',
   USERNAME_CONFLICT: 'username is taken',
-  MOBILE_NUMBER_CONFLICT: 'mobileNumber has been taken',
+  MOBILE_NUMBER_CONFLICT: 'mobile number has been taken',
   SHORT_PASSWORD: 'password must be greater than 6 letters',
   INVALID_TOKEN: 'invalid token',
   USER_NOT_FOUND: 'user not found',
