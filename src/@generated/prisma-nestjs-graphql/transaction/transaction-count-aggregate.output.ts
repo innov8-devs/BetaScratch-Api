@@ -27,6 +27,9 @@ export class TransactionCountAggregate {
     purpose!: number;
 
     @Field(() => Int, {nullable:false})
+    type!: number;
+
+    @Field(() => Int, {nullable:false})
     createdAt!: number;
 
     @Field(() => Int, {nullable:false})

@@ -33,6 +33,10 @@ export class TransactionCreateManyUserInput {
     @Validator.IsString()
     purpose!: string;
 
+    @Field(() => String, {nullable:true})
+    @Validator.IsString()
+    type?: string;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

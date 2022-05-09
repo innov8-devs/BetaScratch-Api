@@ -28,9 +28,14 @@ export class TransactionResolver {
     return await this.transactionService.initiatePayment(input, user);
   }
 
-  @Query(() => String)
-  async checkTotalAmountSpent(@Args('userId') userId: string): Promise<Number> {
-    return await this.transactionService.checkTotalAmountSpent(userId);
+  @Auth([ROLE.USER])
+  @Query(() => Number)
+  async checkTotalAmountSpent(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ): Promise<Number> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    return await this.transactionService.checkTotalAmountSpent(user.id);
   }
 
   @Auth([ROLE.USER])

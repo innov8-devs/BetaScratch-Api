@@ -8,6 +8,7 @@ export enum TransactionScalarFieldEnum {
     transactionRef = "transactionRef",
     status = "status",
     purpose = "purpose",
+    type = "type",
     createdAt = "createdAt",
     updatedAt = "updatedAt",
     userId = "userId"

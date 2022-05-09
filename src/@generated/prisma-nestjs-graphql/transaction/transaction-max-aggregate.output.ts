@@ -26,6 +26,9 @@ export class TransactionMaxAggregate {
     @Field(() => String, {nullable:true})
     purpose?: string;
 
+    @Field(() => String, {nullable:true})
+    type?: string;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

@@ -92,6 +92,8 @@ model Transaction {
   status         String
   /// @Validator.IsString()
   purpose        String
+  /// @Validator.IsString()
+  type           String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   User           User?    @relation(fields: [userId], references: [id])

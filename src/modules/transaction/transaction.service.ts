@@ -12,6 +12,7 @@ import {
   CURRENCY,
   PAYMENT_PURPOSE,
   PAYMENT_STATUS,
+  TRANSACTION,
 } from 'types/constants/enum';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { calculateCashback } from 'helpers/calculateCashback';
@@ -78,7 +79,7 @@ export class TransactionService {
     }
   }
 
-  async checkTotalAmountSpent(userId: string) {
+  async checkTotalAmountSpent(userId: number) {
     if (!userId) return null;
     let totalAmountSpent: number = 0;
 
@@ -86,13 +87,22 @@ export class TransactionService {
       where: {
         AND: [
           {
-            userId: { equals: Number(userId) },
+            userId: { equals: userId },
           },
           {
             status: { equals: PAYMENT_STATUS.SUCCESSFUL },
           },
           {
-            purpose: { equals: PAYMENT_PURPOSE.PURCHASE },
+            purpose: { equals: PAYMENT_PURPOSE.CART },
+          },
+        ],
+
+        OR: [
+          {
+            type: { equals: TRANSACTION.FLUTTERWAVE },
+          },
+          {
+            type: { equals: TRANSACTION.ACCOUNT },
           },
         ],
       },
@@ -122,6 +132,7 @@ export class TransactionService {
         currency: data.currency,
         purpose: transaction_type,
         status: PAYMENT_STATUS.SUCCESSFUL,
+        type: TRANSACTION.FLUTTERWAVE,
         transactionId: transaction_id,
         transactionRef: data.tx_ref,
         User: { connect: { id: userId } },
@@ -132,6 +143,7 @@ export class TransactionService {
         currency: data.currency,
         purpose: transaction_type,
         status: PAYMENT_STATUS.FAILED,
+        type: TRANSACTION.FLUTTERWAVE,
         transactionId: transaction_id,
         transactionRef: data.tx_ref,
         User: { connect: { id: userId } },
@@ -172,6 +184,4 @@ export class TransactionService {
       },
     });
   }
-
-
 }

@@ -26,6 +26,9 @@ export class TransactionMinAggregateInput {
     purpose?: true;
 
     @Field(() => Boolean, {nullable:true})
+    type?: true;
+
+    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})

@@ -28,6 +28,9 @@ export class Transaction {
     @Field(() => String, {nullable:false})
     purpose!: string;
 
+    @Field(() => String, {nullable:true})
+    type!: string | null;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date;
 

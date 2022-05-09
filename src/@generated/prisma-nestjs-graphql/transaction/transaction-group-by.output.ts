@@ -31,6 +31,9 @@ export class TransactionGroupBy {
     @Field(() => String, {nullable:false})
     purpose!: string;
 
+    @Field(() => String, {nullable:true})
+    type?: string;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;
 

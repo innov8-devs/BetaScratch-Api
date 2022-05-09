@@ -2,6 +2,7 @@ import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { MESSAGES } from 'core/messages';
+import { calculateVipStatus } from 'helpers/calculateVipStatus';
 import { TransactionService } from 'modules/transaction/transaction.service';
 import {
   PAYMENT_PURPOSE,
@@ -130,6 +131,16 @@ export class GameService {
     });
   }
 
+  async calculateVipProgress(userId: number) {
+    const totalAmountSpent =
+      await this.transactionService.checkTotalAmountSpent(userId);
+    const vipStatus = calculateVipStatus(totalAmountSpent);
+    await this.prismaService.user.update({
+      where: { id: userId },
+      data: { vipStatus },
+    });
+  }
+
   async checkoutWithAccount(
     userId: number,
     amount: number,
@@ -200,6 +211,7 @@ export class GameService {
         await this.prismaService.cart.createMany({
           data: cartDetail,
         });
+        await this.calculateVipProgress(userId);
         await this.transactionService.cashback(userId, input.subtotal);
         await this.transactionService.createTransaction({
           amount: input.subtotal,
@@ -208,6 +220,7 @@ export class GameService {
           status: PAYMENT_STATUS.SUCCESSFUL,
           transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
+          type: TRANSACTION.ACCOUNT,
           User: { connect: { id: userId } },
         });
       } else {
@@ -218,6 +231,7 @@ export class GameService {
           status: PAYMENT_STATUS.FAILED,
           transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
+          type: TRANSACTION.ACCOUNT,
           User: { connect: { id: userId } },
         });
       }
@@ -236,6 +250,7 @@ export class GameService {
           currency: userWallet.currency,
           purpose: input.transaction_type,
           status: PAYMENT_STATUS.SUCCESSFUL,
+          type: TRANSACTION.BONUS,
           transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
           User: { connect: { id: userId } },
@@ -246,6 +261,7 @@ export class GameService {
           currency: userWallet.currency,
           purpose: input.transaction_type,
           status: PAYMENT_STATUS.FAILED,
+          type: TRANSACTION.BONUS,
           transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
           User: { connect: { id: userId } },
@@ -259,6 +275,7 @@ export class GameService {
           userId,
         );
       if (status === 'successful') {
+        await this.calculateVipProgress(userId);
         await this.transactionService.cashback(userId, input.subtotal);
       }
       if (status === 'failed') {
