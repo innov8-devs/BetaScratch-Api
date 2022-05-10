@@ -31,7 +31,7 @@ export enum PAYMENT_PURPOSE {
 }
 
 export enum WALLET_TYPE {
-  WITHDRAWABLE = 'WITHDRAWABLE',
+  ACCOUNT = 'ACCOUNT',
   BONUS = 'BONUS',
 }
 

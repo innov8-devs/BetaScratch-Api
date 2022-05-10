@@ -10,6 +10,10 @@ export class DeductUserBalanceInput {
   @IsNotEmpty()
   amount!: string;
 
+  @Field(() => Number, { nullable: false })
+  @IsNotEmpty()
+  userId!: number;
+
   @Field(() => String, { nullable: false })
   @IsEnum(CURRENCY, { each: true })
   currency!: CURRENCY;

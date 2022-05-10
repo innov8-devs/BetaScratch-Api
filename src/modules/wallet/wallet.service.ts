@@ -1,5 +1,5 @@
 import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
 import { MailService } from 'modules/mail/mail.service';
@@ -11,7 +11,10 @@ import {
   TRANSACTION,
   WALLET_TYPE,
 } from 'types/constants/enum';
-import { generateRandomString } from 'utils/generateRandomString.util';
+import {
+  generateRandomNumbers,
+  generateRandomString,
+} from 'utils/generateRandomString.util';
 import { MESSAGES } from '../../core/messages';
 import { PrismaService } from '../prisma.service';
 import {
@@ -51,15 +54,12 @@ export class WalletService {
     });
   }
 
-  async deductUserBalance(
-    input: DeductUserBalanceInput,
-    userId: number,
-  ): Promise<Boolean> {
-    const { amount, currency, wallet } = input;
+  async deductUserBalance(input: DeductUserBalanceInput): Promise<Boolean> {
+    const { amount, currency, wallet, userId } = input;
     const errMessage = [];
     const userBalance = await this.getUserBalance(userId);
     if (
-      wallet === WALLET_TYPE.WITHDRAWABLE &&
+      wallet === WALLET_TYPE.ACCOUNT &&
       Number(amount) > userBalance.withdrawable
     ) {
       errMessage.push(MESSAGES.USER.INSUFFICIENT_WALLET_FUND);
@@ -67,9 +67,9 @@ export class WalletService {
     if (wallet === WALLET_TYPE.BONUS && Number(amount) > userBalance.bonus) {
       errMessage.push(MESSAGES.USER.INSUFFICIENT_WALLET_FUND);
     }
-    if (errMessage.length) throw new BadRequestException(errMessage);
+    if (errMessage.length) return false;
     try {
-      if (wallet === WALLET_TYPE.WITHDRAWABLE) {
+      if (wallet === WALLET_TYPE.ACCOUNT) {
         await this.prismaService.wallet.update({
           data: {
             withdrawable: Number(userBalance.withdrawable) - Number(amount),
@@ -77,6 +77,17 @@ export class WalletService {
           where: {
             userId: userId,
           },
+        });
+        const withdrawalRequest =
+          await this.prismaService.withdrawalRequest.findFirst({
+            where: {
+              userId,
+              amount,
+            },
+          });
+
+        await this.prismaService.withdrawalRequest.delete({
+          where: { id: withdrawalRequest.id },
         });
       } else if (wallet === WALLET_TYPE.BONUS) {
         await this.prismaService.wallet.update({
@@ -94,7 +105,7 @@ export class WalletService {
           amount: Number(amount),
           currency,
           purpose:
-            wallet === WALLET_TYPE.WITHDRAWABLE
+            wallet === WALLET_TYPE.ACCOUNT
               ? PAYMENT_PURPOSE.DEDUCT_WITHDRAWAL_BALANCE
               : PAYMENT_PURPOSE.DEDUCT_BONUS_BALANCE,
           status: PAYMENT_STATUS.SUCCESSFUL,
@@ -110,16 +121,15 @@ export class WalletService {
           amount: Number(amount),
           currency,
           purpose:
-            wallet === WALLET_TYPE.WITHDRAWABLE
+            wallet === WALLET_TYPE.ACCOUNT
               ? PAYMENT_PURPOSE.DEDUCT_WITHDRAWAL_BALANCE
               : PAYMENT_PURPOSE.DEDUCT_BONUS_BALANCE,
           status: PAYMENT_STATUS.FAILED,
-          transactionId: Number(generateRandomString()),
+          transactionId: Number(generateRandomNumbers()),
           transactionRef: generateRandomString(),
           User: { connect: { id: userId } },
         },
       });
-      return false;
     }
   }
 

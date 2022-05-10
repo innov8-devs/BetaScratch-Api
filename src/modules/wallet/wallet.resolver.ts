@@ -33,13 +33,11 @@ export class WalletResolver {
     return await this.walletService.getUserBalance(user.id);
   }
 
-  @Auth([ROLE.USER])
+  @Auth([ROLE.ADMIN])
   @Mutation(() => Boolean)
-  async deductUserBalance(
-    @Args('input') input: DeductUserBalanceInput,
-    @CurrentUser() user: User,
-  ) {
-    return this.walletService.deductUserBalance(input, user.id);
+  async deductUserBalance(@Args('input') input: DeductUserBalanceInput) {
+    await this.walletService.deductUserBalance(input);
+    return true;
   }
 
   @Auth([ROLE.USER])
