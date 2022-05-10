@@ -3,6 +3,7 @@ import { ObjectType } from '@nestjs/graphql';
 import { ID } from '@nestjs/graphql';
 import { ROLE } from '../prisma/role.enum';
 import { GENDER } from '../prisma/gender.enum';
+import { Int } from '@nestjs/graphql';
 import { Wallet } from '../wallet/wallet.model';
 import { Transaction } from '../transaction/transaction.model';
 import { Token } from '../token/token.model';
@@ -62,8 +63,8 @@ export class User {
     @Field(() => String, {nullable:false,defaultValue:'inactive'})
     verificationStatus!: string;
 
-    @Field(() => String, {nullable:false,defaultValue:'None'})
-    vipStatus!: string;
+    @Field(() => Int, {nullable:false,defaultValue:0})
+    vipStatus!: number;
 
     @Field(() => Wallet, {nullable:true})
     wallet?: Wallet | null;

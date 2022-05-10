@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import * as Validator from 'class-validator';
 import { ROLE } from '../prisma/role.enum';
 import { GENDER } from '../prisma/gender.enum';
+import { Int } from '@nestjs/graphql';
 import { WalletCreateNestedOneWithoutUserInput } from '../wallet/wallet-create-nested-one-without-user.input';
 import { TransactionCreateNestedManyWithoutUserInput } from '../transaction/transaction-create-nested-many-without-user.input';
 import { TokenCreateNestedManyWithoutUserInput } from '../token/token-create-nested-many-without-user.input';
@@ -70,8 +71,8 @@ export class UserCreateInput {
     @Field(() => String, {nullable:true})
     verificationStatus?: string;
 
-    @Field(() => String, {nullable:true})
-    vipStatus?: string;
+    @Field(() => Int, {nullable:true})
+    vipStatus?: number;
 
     @Field(() => WalletCreateNestedOneWithoutUserInput, {nullable:true})
     wallet?: WalletCreateNestedOneWithoutUserInput;

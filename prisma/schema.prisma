@@ -51,7 +51,7 @@ model User {
   licenseFrontImage  String?
   licenseBackImage   String?
   verificationStatus String              @default("inactive")
-  vipStatus          String              @default("None")
+  vipStatus          Int                 @default(0)
   wallet             Wallet?
   // TODO this is a comment not validator
   // cart         Cart?

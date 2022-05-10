@@ -74,8 +74,8 @@ export class UserWhereInput {
     @Field(() => StringFilter, {nullable:true})
     verificationStatus?: StringFilter;
 
-    @Field(() => StringFilter, {nullable:true})
-    vipStatus?: StringFilter;
+    @Field(() => IntFilter, {nullable:true})
+    vipStatus?: IntFilter;
 
     @Field(() => WalletRelationFilter, {nullable:true})
     wallet?: WalletRelationFilter;

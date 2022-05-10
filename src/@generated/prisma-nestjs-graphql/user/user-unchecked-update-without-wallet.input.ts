@@ -64,8 +64,8 @@ export class UserUncheckedUpdateWithoutWalletInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     verificationStatus?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    vipStatus?: StringFieldUpdateOperationsInput;
+    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
+    vipStatus?: IntFieldUpdateOperationsInput;
 
     @Field(() => TransactionUncheckedUpdateManyWithoutUserInput, {nullable:true})
     transactions?: TransactionUncheckedUpdateManyWithoutUserInput;
