@@ -18,8 +18,8 @@ export class MessageResolver {
   @Mutation(() => Boolean)
   async changeMessageToRead(
     @Args('messageId') messageId: number,
-    @CurrentUser() user: User,
     @Context() { res }: MyContext,
+    @CurrentUser() user: User,
   ): Promise<Boolean> {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res);
     return await this.messageService.changeMessageToRead(messageId);
