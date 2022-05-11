@@ -36,4 +36,10 @@ export class MessageService {
     });
     return true;
   }
+
+  public async getUserMessages(userId: number) {
+    return await this.prismaService.message.findMany({
+      where: { userId },
+    });
+  }
 }
