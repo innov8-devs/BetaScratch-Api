@@ -3,13 +3,13 @@ import { InputType } from '@nestjs/graphql';
 import * as Validator from 'class-validator';
 import { ROLE } from '../prisma/role.enum';
 import { GENDER } from '../prisma/gender.enum';
-import { Int } from '@nestjs/graphql';
+import { Float } from '@nestjs/graphql';
 import { WalletCreateNestedOneWithoutUserInput } from '../wallet/wallet-create-nested-one-without-user.input';
 import { TransactionCreateNestedManyWithoutUserInput } from '../transaction/transaction-create-nested-many-without-user.input';
-import { TokenCreateNestedManyWithoutUserInput } from '../token/token-create-nested-many-without-user.input';
 import { OtpCreateNestedManyWithoutUserInput } from '../otp/otp-create-nested-many-without-user.input';
 import { WithdrawalRequestCreateNestedManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-create-nested-many-without-user.input';
 import { CartCreateNestedManyWithoutUserInput } from '../cart/cart-create-nested-many-without-user.input';
+import { MessageCreateNestedManyWithoutUserInput } from '../message/message-create-nested-many-without-user.input';
 
 @InputType()
 export class UserCreateInput {
@@ -71,7 +71,7 @@ export class UserCreateInput {
     @Field(() => String, {nullable:true})
     verificationStatus?: string;
 
-    @Field(() => Int, {nullable:true})
+    @Field(() => Float, {nullable:true})
     vipStatus?: number;
 
     @Field(() => WalletCreateNestedOneWithoutUserInput, {nullable:true})
@@ -79,9 +79,6 @@ export class UserCreateInput {
 
     @Field(() => TransactionCreateNestedManyWithoutUserInput, {nullable:true})
     transactions?: TransactionCreateNestedManyWithoutUserInput;
-
-    @Field(() => TokenCreateNestedManyWithoutUserInput, {nullable:true})
-    tokens?: TokenCreateNestedManyWithoutUserInput;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
@@ -97,4 +94,7 @@ export class UserCreateInput {
 
     @Field(() => CartCreateNestedManyWithoutUserInput, {nullable:true})
     Cart?: CartCreateNestedManyWithoutUserInput;
+
+    @Field(() => MessageCreateNestedManyWithoutUserInput, {nullable:true})
+    Message?: MessageCreateNestedManyWithoutUserInput;
 }

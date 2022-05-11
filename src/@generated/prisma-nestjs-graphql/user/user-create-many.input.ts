@@ -4,6 +4,7 @@ import { Int } from '@nestjs/graphql';
 import * as Validator from 'class-validator';
 import { ROLE } from '../prisma/role.enum';
 import { GENDER } from '../prisma/gender.enum';
+import { Float } from '@nestjs/graphql';
 
 @InputType()
 export class UserCreateManyInput {
@@ -68,7 +69,7 @@ export class UserCreateManyInput {
     @Field(() => String, {nullable:true})
     verificationStatus?: string;
 
-    @Field(() => Int, {nullable:true})
+    @Field(() => Float, {nullable:true})
     vipStatus?: number;
 
     @Field(() => Date, {nullable:true})

@@ -6,12 +6,12 @@ import { EnumROLEFieldUpdateOperationsInput } from '../prisma/enum-role-field-up
 import { EnumGENDERFieldUpdateOperationsInput } from '../prisma/enum-gender-field-update-operations.input';
 import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-operations.input';
 import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-string-field-update-operations.input';
-import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operations.input';
+import { FloatFieldUpdateOperationsInput } from '../prisma/float-field-update-operations.input';
 import { WalletUpdateOneWithoutUserInput } from '../wallet/wallet-update-one-without-user.input';
 import { TransactionUpdateManyWithoutUserInput } from '../transaction/transaction-update-many-without-user.input';
-import { TokenUpdateManyWithoutUserInput } from '../token/token-update-many-without-user.input';
 import { OtpUpdateManyWithoutUserInput } from '../otp/otp-update-many-without-user.input';
 import { WithdrawalRequestUpdateManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-update-many-without-user.input';
+import { MessageUpdateManyWithoutUserInput } from '../message/message-update-many-without-user.input';
 
 @InputType()
 export class UserUpdateWithoutCartInput {
@@ -61,17 +61,14 @@ export class UserUpdateWithoutCartInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     verificationStatus?: StringFieldUpdateOperationsInput;
 
-    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
-    vipStatus?: IntFieldUpdateOperationsInput;
+    @Field(() => FloatFieldUpdateOperationsInput, {nullable:true})
+    vipStatus?: FloatFieldUpdateOperationsInput;
 
     @Field(() => WalletUpdateOneWithoutUserInput, {nullable:true})
     wallet?: WalletUpdateOneWithoutUserInput;
 
     @Field(() => TransactionUpdateManyWithoutUserInput, {nullable:true})
     transactions?: TransactionUpdateManyWithoutUserInput;
-
-    @Field(() => TokenUpdateManyWithoutUserInput, {nullable:true})
-    tokens?: TokenUpdateManyWithoutUserInput;
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;
@@ -84,4 +81,7 @@ export class UserUpdateWithoutCartInput {
 
     @Field(() => WithdrawalRequestUpdateManyWithoutUserInput, {nullable:true})
     WithdrawalRequest?: WithdrawalRequestUpdateManyWithoutUserInput;
+
+    @Field(() => MessageUpdateManyWithoutUserInput, {nullable:true})
+    Message?: MessageUpdateManyWithoutUserInput;
 }

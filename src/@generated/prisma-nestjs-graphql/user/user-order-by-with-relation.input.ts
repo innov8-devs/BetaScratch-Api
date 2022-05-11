@@ -3,10 +3,10 @@ import { InputType } from '@nestjs/graphql';
 import { SortOrder } from '../prisma/sort-order.enum';
 import { WalletOrderByWithRelationInput } from '../wallet/wallet-order-by-with-relation.input';
 import { TransactionOrderByRelationAggregateInput } from '../transaction/transaction-order-by-relation-aggregate.input';
-import { TokenOrderByRelationAggregateInput } from '../token/token-order-by-relation-aggregate.input';
 import { OtpOrderByRelationAggregateInput } from '../otp/otp-order-by-relation-aggregate.input';
 import { WithdrawalRequestOrderByRelationAggregateInput } from '../withdrawal-request/withdrawal-request-order-by-relation-aggregate.input';
 import { CartOrderByRelationAggregateInput } from '../cart/cart-order-by-relation-aggregate.input';
+import { MessageOrderByRelationAggregateInput } from '../message/message-order-by-relation-aggregate.input';
 
 @InputType()
 export class UserOrderByWithRelationInput {
@@ -68,9 +68,6 @@ export class UserOrderByWithRelationInput {
     @Field(() => TransactionOrderByRelationAggregateInput, {nullable:true})
     transactions?: TransactionOrderByRelationAggregateInput;
 
-    @Field(() => TokenOrderByRelationAggregateInput, {nullable:true})
-    tokens?: TokenOrderByRelationAggregateInput;
-
     @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;
 
@@ -85,4 +82,7 @@ export class UserOrderByWithRelationInput {
 
     @Field(() => CartOrderByRelationAggregateInput, {nullable:true})
     Cart?: CartOrderByRelationAggregateInput;
+
+    @Field(() => MessageOrderByRelationAggregateInput, {nullable:true})
+    Message?: MessageOrderByRelationAggregateInput;
 }

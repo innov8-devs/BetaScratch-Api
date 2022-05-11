@@ -52,3 +52,7 @@ export enum VERIFICATION {
   LICENSE_BACK_IMAGE = 'license_back_image',
   LICENSE_FRONT_IMAGE = 'license_front_image',
 }
+
+export enum MESSAGE_TYPE {
+  CART = 'CART',
+}

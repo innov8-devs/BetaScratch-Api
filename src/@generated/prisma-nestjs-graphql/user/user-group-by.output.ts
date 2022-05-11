@@ -3,6 +3,7 @@ import { ObjectType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import { ROLE } from '../prisma/role.enum';
 import { GENDER } from '../prisma/gender.enum';
+import { Float } from '@nestjs/graphql';
 import { UserCountAggregate } from './user-count-aggregate.output';
 import { UserAvgAggregate } from './user-avg-aggregate.output';
 import { UserSumAggregate } from './user-sum-aggregate.output';
@@ -60,7 +61,7 @@ export class UserGroupBy {
     @Field(() => String, {nullable:false})
     verificationStatus!: string;
 
-    @Field(() => Int, {nullable:false})
+    @Field(() => Float, {nullable:false})
     vipStatus!: number;
 
     @Field(() => Date, {nullable:false})

@@ -3,6 +3,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { MESSAGES } from 'core/messages';
 import { calculateVipStatus } from 'helpers/calculateVipStatus';
+import { MessageService } from 'modules/message/message.service';
 import { TransactionService } from 'modules/transaction/transaction.service';
 import {
   PAYMENT_PURPOSE,
@@ -29,6 +30,7 @@ export class GameService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly transactionService: TransactionService,
+    private readonly messageService: MessageService,
   ) {}
 
   async findOneGame(input: Prisma.GameWhereUniqueInput): Promise<Game> {
@@ -223,6 +225,7 @@ export class GameService {
           type: TRANSACTION.ACCOUNT,
           User: { connect: { id: userId } },
         });
+        await this.messageService.sendCheckoutMessage(userId);
       } else {
         await this.transactionService.createTransaction({
           amount: input.subtotal,
@@ -255,6 +258,7 @@ export class GameService {
           transactionRef: generateRandomString(),
           User: { connect: { id: userId } },
         });
+        await this.messageService.sendCheckoutMessage(userId);
       } else {
         await this.transactionService.createTransaction({
           amount: input.subtotal,
@@ -276,6 +280,7 @@ export class GameService {
         );
       if (status === 'successful') {
         await this.calculateVipProgress(userId);
+        await this.messageService.sendCheckoutMessage(userId);
         await this.transactionService.cashback(userId, input.subtotal);
       }
       if (status === 'failed') {

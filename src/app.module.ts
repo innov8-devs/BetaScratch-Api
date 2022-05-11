@@ -12,9 +12,9 @@ import { WalletModule } from './modules/wallet/wallet.module';
 import { GameModule } from './modules/game/game.module';
 import { TransactionModule } from 'modules/transaction/transaction.module';
 import { MailModule } from 'modules/mail/mail.module';
-import { TokenModule } from 'modules/token/token.module';
 import { OtpModule } from 'modules/otp/otp.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { MessageModule } from 'modules/message/message.module';
 @Module({
   imports: [
     AuthModule,
@@ -22,8 +22,8 @@ import { MulterModule } from '@nestjs/platform-express';
     GameModule,
     MailModule,
     UserModule,
-    TokenModule,
     WalletModule,
+    MessageModule,
     OtpModule,
     TransactionModule,
     ConfigModule.forRoot({ load: [config], isGlobal: true }),

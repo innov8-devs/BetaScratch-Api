@@ -9,9 +9,6 @@ export class UserCount {
     transactions?: number;
 
     @Field(() => Int, {nullable:false})
-    tokens?: number;
-
-    @Field(() => Int, {nullable:false})
     Otp?: number;
 
     @Field(() => Int, {nullable:false})
@@ -19,4 +16,7 @@ export class UserCount {
 
     @Field(() => Int, {nullable:false})
     Cart?: number;
+
+    @Field(() => Int, {nullable:false})
+    Message?: number;
 }

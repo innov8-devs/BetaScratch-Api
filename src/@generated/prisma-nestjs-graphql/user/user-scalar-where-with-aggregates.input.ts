@@ -7,6 +7,7 @@ import { EnumROLEWithAggregatesFilter } from '../prisma/enum-role-with-aggregate
 import { EnumGENDERWithAggregatesFilter } from '../prisma/enum-gender-with-aggregates-filter.input';
 import { BoolWithAggregatesFilter } from '../prisma/bool-with-aggregates-filter.input';
 import { StringNullableWithAggregatesFilter } from '../prisma/string-nullable-with-aggregates-filter.input';
+import { FloatWithAggregatesFilter } from '../prisma/float-with-aggregates-filter.input';
 
 @InputType()
 export class UserScalarWhereWithAggregatesInput {
@@ -68,8 +69,8 @@ export class UserScalarWhereWithAggregatesInput {
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     verificationStatus?: StringWithAggregatesFilter;
 
-    @Field(() => IntWithAggregatesFilter, {nullable:true})
-    vipStatus?: IntWithAggregatesFilter;
+    @Field(() => FloatWithAggregatesFilter, {nullable:true})
+    vipStatus?: FloatWithAggregatesFilter;
 
     @Field(() => DateTimeWithAggregatesFilter, {nullable:true})
     createdAt?: DateTimeWithAggregatesFilter;

@@ -51,17 +51,17 @@ model User {
   licenseFrontImage  String?
   licenseBackImage   String?
   verificationStatus String              @default("inactive")
-  vipStatus          Int                 @default(0)
+  vipStatus          Float               @default(0)
   wallet             Wallet?
   // TODO this is a comment not validator
   // cart         Cart?
   transactions       Transaction[]
-  tokens             Token[]
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
   Otp                Otp[]
   WithdrawalRequest  WithdrawalRequest[]
   Cart               Cart[]
+  Message            Message[]
 }
 
 model Wallet {
@@ -126,6 +126,24 @@ model GameCategory {
   categoryLabel String
 }
 
+model Message {
+  id          Int      @id @default(autoincrement())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
+  /// @Validator.IsString()
+  title       String
+  /// @Validator.IsString()
+  description String
+  /// @Validator.IsString()
+  link        String?
+  /// @Validator.IsNumber()
+  readStatus  Int
+  /// @Validator.IsString()
+  messageType String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
 model Cart {
   id        Int      @id @default(autoincrement())
   user      User     @relation(fields: [userId], references: [id])
@@ -156,24 +174,6 @@ model WithdrawalRequest {
   btcWalletAdderess String?
   licenseNumber     String?
   licenseType       String?
-}
-
-model Token {
-  id           Int      @id @default(autoincrement())
-  /// @Validator.IsString()
-  subject      String
-  /// @Validarot.IsDate()
-  expire       DateTime
-  /// @Validator.IsBoolean()
-  validity     Boolean
-  /// @Validator.IsString()
-  mobileNumber String
-  /// @Validator.IsString()
-  code         String
-  user         User     @relation(fields: [userId], references: [id])
-  userId       Int
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
 }
 
 model Otp {

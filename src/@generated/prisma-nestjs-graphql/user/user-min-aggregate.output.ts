@@ -3,6 +3,7 @@ import { ObjectType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import { ROLE } from '../prisma/role.enum';
 import { GENDER } from '../prisma/gender.enum';
+import { Float } from '@nestjs/graphql';
 
 @ObjectType()
 export class UserMinAggregate {
@@ -55,7 +56,7 @@ export class UserMinAggregate {
     @Field(() => String, {nullable:true})
     verificationStatus?: string;
 
-    @Field(() => Int, {nullable:true})
+    @Field(() => Float, {nullable:true})
     vipStatus?: number;
 
     @Field(() => Date, {nullable:true})

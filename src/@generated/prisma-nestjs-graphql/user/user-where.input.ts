@@ -7,12 +7,13 @@ import { EnumROLEFilter } from '../prisma/enum-role-filter.input';
 import { EnumGENDERFilter } from '../prisma/enum-gender-filter.input';
 import { BoolFilter } from '../prisma/bool-filter.input';
 import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
+import { FloatFilter } from '../prisma/float-filter.input';
 import { WalletRelationFilter } from '../wallet/wallet-relation-filter.input';
 import { TransactionListRelationFilter } from '../transaction/transaction-list-relation-filter.input';
-import { TokenListRelationFilter } from '../token/token-list-relation-filter.input';
 import { OtpListRelationFilter } from '../otp/otp-list-relation-filter.input';
 import { WithdrawalRequestListRelationFilter } from '../withdrawal-request/withdrawal-request-list-relation-filter.input';
 import { CartListRelationFilter } from '../cart/cart-list-relation-filter.input';
+import { MessageListRelationFilter } from '../message/message-list-relation-filter.input';
 
 @InputType()
 export class UserWhereInput {
@@ -74,17 +75,14 @@ export class UserWhereInput {
     @Field(() => StringFilter, {nullable:true})
     verificationStatus?: StringFilter;
 
-    @Field(() => IntFilter, {nullable:true})
-    vipStatus?: IntFilter;
+    @Field(() => FloatFilter, {nullable:true})
+    vipStatus?: FloatFilter;
 
     @Field(() => WalletRelationFilter, {nullable:true})
     wallet?: WalletRelationFilter;
 
     @Field(() => TransactionListRelationFilter, {nullable:true})
     transactions?: TransactionListRelationFilter;
-
-    @Field(() => TokenListRelationFilter, {nullable:true})
-    tokens?: TokenListRelationFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;
@@ -100,4 +98,7 @@ export class UserWhereInput {
 
     @Field(() => CartListRelationFilter, {nullable:true})
     Cart?: CartListRelationFilter;
+
+    @Field(() => MessageListRelationFilter, {nullable:true})
+    Message?: MessageListRelationFilter;
 }

@@ -7,12 +7,13 @@ import { EnumROLEFieldUpdateOperationsInput } from '../prisma/enum-role-field-up
 import { EnumGENDERFieldUpdateOperationsInput } from '../prisma/enum-gender-field-update-operations.input';
 import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-operations.input';
 import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-string-field-update-operations.input';
+import { FloatFieldUpdateOperationsInput } from '../prisma/float-field-update-operations.input';
 import { WalletUncheckedUpdateOneWithoutUserInput } from '../wallet/wallet-unchecked-update-one-without-user.input';
 import { TransactionUncheckedUpdateManyWithoutUserInput } from '../transaction/transaction-unchecked-update-many-without-user.input';
-import { TokenUncheckedUpdateManyWithoutUserInput } from '../token/token-unchecked-update-many-without-user.input';
 import { OtpUncheckedUpdateManyWithoutUserInput } from '../otp/otp-unchecked-update-many-without-user.input';
 import { WithdrawalRequestUncheckedUpdateManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-unchecked-update-many-without-user.input';
 import { CartUncheckedUpdateManyWithoutUserInput } from '../cart/cart-unchecked-update-many-without-user.input';
+import { MessageUncheckedUpdateManyWithoutUserInput } from '../message/message-unchecked-update-many-without-user.input';
 
 @InputType()
 export class UserUncheckedUpdateInput {
@@ -65,17 +66,14 @@ export class UserUncheckedUpdateInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     verificationStatus?: StringFieldUpdateOperationsInput;
 
-    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
-    vipStatus?: IntFieldUpdateOperationsInput;
+    @Field(() => FloatFieldUpdateOperationsInput, {nullable:true})
+    vipStatus?: FloatFieldUpdateOperationsInput;
 
     @Field(() => WalletUncheckedUpdateOneWithoutUserInput, {nullable:true})
     wallet?: WalletUncheckedUpdateOneWithoutUserInput;
 
     @Field(() => TransactionUncheckedUpdateManyWithoutUserInput, {nullable:true})
     transactions?: TransactionUncheckedUpdateManyWithoutUserInput;
-
-    @Field(() => TokenUncheckedUpdateManyWithoutUserInput, {nullable:true})
-    tokens?: TokenUncheckedUpdateManyWithoutUserInput;
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;
@@ -91,4 +89,7 @@ export class UserUncheckedUpdateInput {
 
     @Field(() => CartUncheckedUpdateManyWithoutUserInput, {nullable:true})
     Cart?: CartUncheckedUpdateManyWithoutUserInput;
+
+    @Field(() => MessageUncheckedUpdateManyWithoutUserInput, {nullable:true})
+    Message?: MessageUncheckedUpdateManyWithoutUserInput;
 }

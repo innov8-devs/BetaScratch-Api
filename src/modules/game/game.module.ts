@@ -8,6 +8,7 @@ import { AuthModule } from 'modules/auth/auth.module';
 import { AuthService } from 'modules/auth/auth.service';
 import { TransactionModule } from 'modules/transaction/transaction.module';
 import { TransactionService } from 'modules/transaction/transaction.service';
+import { MessageService } from 'modules/message/message.service';
 
 @Module({
   imports: [JwtModule.register({}), AuthModule, TransactionModule],
@@ -18,6 +19,7 @@ import { TransactionService } from 'modules/transaction/transaction.service';
     PrismaService,
     AuthService,
     TransactionService,
+    MessageService,
   ],
 })
 export class GameModule {}
