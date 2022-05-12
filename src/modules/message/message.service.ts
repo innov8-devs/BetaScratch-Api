@@ -38,8 +38,35 @@ export class MessageService {
   }
 
   public async getUserMessages(userId: number) {
-    return await this.prismaService.message.findMany({
-      where: { userId },
+    const unread = await this.prismaService.message.findMany({
+      where: {
+        AND: [
+          {
+            userId: { equals: userId },
+          },
+          {
+            readStatus: { equals: 0 },
+          },
+        ],
+      },
+      take: 10,
     });
+    const read = await this.prismaService.message.findMany({
+      where: {
+        AND: [
+          {
+            userId: { equals: userId },
+          },
+          {
+            readStatus: { equals: 1 },
+          },
+        ],
+      },
+      take: 5,
+    });
+    return {
+      unread,
+      read,
+    };
   }
 }

@@ -1,4 +1,3 @@
-import { Message } from '@generated/prisma-nestjs-graphql/message/message.model';
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
@@ -6,6 +5,7 @@ import { AuthService } from 'modules/auth/auth.service';
 import { Auth } from 'modules/auth/decorators/auth.decorator';
 import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
 import { MyContext } from 'types/constants/types';
+import { GetUserMessagesResponse } from './dto/message.response';
 import { MessageService } from './message.service';
 
 @Resolver()
@@ -27,11 +27,11 @@ export class MessageResolver {
   }
 
   @Auth([ROLE.USER])
-  @Mutation(() => [Message])
+  @Mutation(() => GetUserMessagesResponse)
   async getUserMessages(
     @Context() { res }: MyContext,
     @CurrentUser() user: User,
-  ): Promise<Message[]> {
+  ): Promise<GetUserMessagesResponse> {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res);
     return await this.messageService.getUserMessages(user.id);
   }
