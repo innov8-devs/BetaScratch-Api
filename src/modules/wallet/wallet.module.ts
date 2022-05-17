@@ -9,6 +9,7 @@ import { AuthService } from 'modules/auth/auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { TransactionModule } from 'modules/transaction/transaction.module';
 import { TransactionService } from 'modules/transaction/transaction.service';
+import { MessageModule } from 'modules/message/message.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { TransactionService } from 'modules/transaction/transaction.service';
     MailModule,
     AuthModule,
     TransactionModule,
+    MessageModule,
     JwtModule.register({}),
   ],
   providers: [

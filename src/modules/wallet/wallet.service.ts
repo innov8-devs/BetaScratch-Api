@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
 import { MailService } from 'modules/mail/mail.service';
+import { MessageService } from 'modules/message/message.service';
 import { OtpService } from 'modules/otp/otp.service';
 import { TransactionService } from 'modules/transaction/transaction.service';
 import {
@@ -29,6 +30,7 @@ export class WalletService {
     private readonly prismaService: PrismaService,
     private readonly otpService: OtpService,
     private readonly mailService: MailService,
+    private readonly messageService: MessageService,
     private readonly transactionService: TransactionService,
   ) {}
 
@@ -213,6 +215,7 @@ export class WalletService {
         User: { connect: { id: userId } },
       },
     });
+    await this.messageService.sendWithdrawalPending(userId);
     return true;
   }
 

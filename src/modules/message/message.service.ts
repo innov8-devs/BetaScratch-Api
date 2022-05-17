@@ -29,6 +29,17 @@ export class MessageService {
     });
   }
 
+  public async sendWithdrawalPending(userId: number) {
+    await this.createMessage(userId, {
+      title: 'Your Withdrawal request is pending',
+      description:
+        'You have initiated a withdrawal and it is currently peding, would get a message as soon as it has been approved',
+      messageType: MESSAGE_TYPE.WITHDRAWAL_PENDING,
+      readStatus: 0,
+      user: { connect: { id: userId } },
+    });
+  }
+
   public async changeMessageToRead(messageId: number) {
     await this.prismaService.message.update({
       where: { id: messageId },
