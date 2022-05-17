@@ -32,9 +32,18 @@ export class MessageService {
   public async sendWithdrawalPending(userId: number) {
     await this.createMessage(userId, {
       title: 'Your Withdrawal request is pending',
-      description:
-        'You have initiated a withdrawal and it is currently peding, would get a message as soon as it has been approved',
+      description: 'You would get a notification in 24 hours upon approval',
       messageType: MESSAGE_TYPE.WITHDRAWAL_PENDING,
+      readStatus: 0,
+      user: { connect: { id: userId } },
+    });
+  }
+
+  public async sendWithdrawalApproved(userId: number) {
+    await this.createMessage(userId, {
+      title: 'Your Withdrawal request is approved',
+      description: 'Your withdrawal request is successful',
+      messageType: MESSAGE_TYPE.WITHDRAWAL_APPROVED,
       readStatus: 0,
       user: { connect: { id: userId } },
     });

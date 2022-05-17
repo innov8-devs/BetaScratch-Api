@@ -1,5 +1,5 @@
 import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotAcceptableException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
 import { MailService } from 'modules/mail/mail.service';
@@ -188,26 +188,8 @@ export class WalletService {
 
   async recordWithdrawalRequest(
     input: Prisma.WithdrawalRequestCreateInput,
-    // otp: string,
     userId: number,
   ) {
-    // const user = await this.prismaService.user.findUnique({
-    //   where: { id: userId },
-    // });
-    // if (!user) return null;
-    // const otpValidity = await this.otpService.checkOtpValidity({
-    //   mobileNumber: user.mobileNumber,
-    //   otp,
-    // });
-
-    // if (!otpValidity)
-    //   throw new UnauthorizedException(MESSAGES.AUTH.INVALID_OTP);
-
-    // await this.otpService.validateOtp({
-    //   mobileNumber: user.mobileNumber,
-    //   otp,
-    // });
-
     await this.prismaService.withdrawalRequest.create({
       data: {
         ...input,
@@ -274,5 +256,34 @@ export class WalletService {
         wallet: true,
       },
     });
+  }
+
+  async approveWithdrawalRequest(userId: number, requestId: number) {
+    const withdrawalRequest =
+      await this.prismaService.withdrawalRequest.findUnique({
+        where: { id: requestId },
+      });
+    const requestedAmount = Number(withdrawalRequest.amount);
+    const userWallet = await this.findUnique({ userId });
+    if (requestedAmount > userWallet.withdrawable) {
+      throw new NotAcceptableException({
+        name: 'withdrawal',
+        message: MESSAGES.USER.INSUFFICIENT_WALLET_FUND,
+      });
+    }
+    const newBalance = userWallet.withdrawable - requestedAmount;
+
+    await this.prismaService.wallet.update({
+      where: { userId },
+      data: { withdrawable: newBalance },
+    });
+
+    await this.prismaService.withdrawalRequest.update({
+      where: { id: requestId },
+      data: { status: 'Successful' },
+    });
+
+    await this.messageService.sendWithdrawalApproved(userId);
+    return true;
   }
 }

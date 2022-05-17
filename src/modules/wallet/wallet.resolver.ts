@@ -59,16 +59,11 @@ export class WalletResolver {
   @Mutation(() => WithdrawalRequest)
   async recordWithdrawalRequest(
     @Args('input') input: WithdrawalRequestCreateInput,
-    // @Args('otp') otp: number,
     @Context() { res }: MyContext,
     @CurrentUser() user: User,
   ) {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res);
-    return await this.walletService.recordWithdrawalRequest(
-      input,
-      // otp.toString(),
-      user.id,
-    );
+    return await this.walletService.recordWithdrawalRequest(input, user.id);
   }
 
   @Query(() => [WithdrawalRequest])
@@ -89,6 +84,15 @@ export class WalletResolver {
   @Query(() => Number)
   async getTotalBonusBalance() {
     return await this.walletService.getTotalBonusBalance();
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Mutation(() => Boolean)
+  async approveWithdrawalRequest(
+    @Args('userId') userId: number,
+    @Args('requestId') requestId: number,
+  ) {
+    return await this.walletService.approveWithdrawalRequest(userId, requestId);
   }
 
   @Auth([ROLE.USER])
