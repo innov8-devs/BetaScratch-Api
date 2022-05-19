@@ -197,6 +197,19 @@ export class WalletService {
         User: { connect: { id: userId } },
       },
     });
+    const userWallet = await this.prismaService.wallet.findUnique({
+      where: { userId },
+    });
+    await this.transactionService.createTransaction({
+      amount: Number(input.amount),
+      currency: userWallet.currency,
+      purpose: TRANSACTION.WITHDRAWAL,
+      status: PAYMENT_STATUS.PENDING,
+      type: TRANSACTION.WITHDRAWAL,
+      transactionId: generateRandomNumbers(),
+      transactionRef: generateRandomString(),
+      User: { connect: { id: userId } },
+    });
     await this.messageService.sendWithdrawalPending(userId);
     return true;
   }
@@ -259,6 +272,9 @@ export class WalletService {
   }
 
   async approveWithdrawalRequest(userId: number, requestId: number) {
+    const user = await this.prismaService.user.findUnique({
+      where: { id: userId },
+    });
     const withdrawalRequest =
       await this.prismaService.withdrawalRequest.findUnique({
         where: { id: requestId },
@@ -281,6 +297,26 @@ export class WalletService {
     await this.prismaService.withdrawalRequest.update({
       where: { id: requestId },
       data: { status: 'Successful' },
+    });
+
+    await this.transactionService.createTransaction({
+      amount: Number(withdrawalRequest.amount),
+      currency: userWallet.currency,
+      purpose: TRANSACTION.WITHDRAWAL,
+      status: PAYMENT_STATUS.SUCCESSFUL,
+      type: TRANSACTION.WITHDRAWAL,
+      transactionId: generateRandomNumbers(),
+      transactionRef: generateRandomString(),
+      User: { connect: { id: userId } },
+    });
+
+    await this.mailService.sendMail({
+      subject: MAIL_SUBJECT.WITHDRAWAL_APPROAL,
+      html: MAIL_MESSAGE.WITHDRAWAL_APPROVAL(
+        withdrawalRequest.amount,
+        userWallet.currency,
+      ),
+      to: user.email,
     });
 
     await this.messageService.sendWithdrawalApproved(userId);

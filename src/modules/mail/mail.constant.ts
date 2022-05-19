@@ -3,6 +3,7 @@ export const MAIL_SUBJECT = {
   REGISTER: 'Welcome to BetaScratch',
   FORGOT_PASSWORD: 'Reset your password',
   REQUEST_WITHDRAWAL: 'Withdrawal Request',
+  WITHDRAWAL_APPROAL: 'Credit Alert',
 };
 
 export const MAIL_MESSAGE = {
@@ -157,4 +158,8 @@ export const MAIL_MESSAGE = {
   //? not used for now
   REQUEST_WITHDRAWAL: (otp: string) =>
     `Your otp code is ${otp}. Do not share this code with anyone, expires in 15 minutes`,
+
+  //? not used for now
+  WITHDRAWAL_APPROVAL: (amount: string, currency: string) =>
+    `Your account has been credited with ${currency}${amount}`,
 };
