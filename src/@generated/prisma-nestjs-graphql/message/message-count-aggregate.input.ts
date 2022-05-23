@@ -26,6 +26,9 @@ export class MessageCountAggregateInput {
     messageType?: true;
 
     @Field(() => Boolean, {nullable:true})
+    cards?: true;
+
+    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})

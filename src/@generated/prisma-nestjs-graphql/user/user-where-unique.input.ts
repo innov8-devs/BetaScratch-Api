@@ -21,4 +21,7 @@ export class UserWhereUniqueInput {
     @Field(() => String, {nullable:true})
     @Validator.IsPhoneNumber()
     mobileNumber?: string;
+
+    @Field(() => String, {nullable:true})
+    referralId?: string;
 }

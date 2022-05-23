@@ -12,6 +12,7 @@ import { TransactionUpdateManyWithoutUserInput } from '../transaction/transactio
 import { OtpUpdateManyWithoutUserInput } from '../otp/otp-update-many-without-user.input';
 import { WithdrawalRequestUpdateManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-update-many-without-user.input';
 import { MessageUpdateManyWithoutUserInput } from '../message/message-update-many-without-user.input';
+import { RefferalUpdateManyWithoutUserInput } from '../refferal/refferal-update-many-without-user.input';
 
 @InputType()
 export class UserUpdateWithoutCartInput {
@@ -64,6 +65,9 @@ export class UserUpdateWithoutCartInput {
     @Field(() => FloatFieldUpdateOperationsInput, {nullable:true})
     vipStatus?: FloatFieldUpdateOperationsInput;
 
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    referralId?: StringFieldUpdateOperationsInput;
+
     @Field(() => WalletUpdateOneWithoutUserInput, {nullable:true})
     wallet?: WalletUpdateOneWithoutUserInput;
 
@@ -84,4 +88,7 @@ export class UserUpdateWithoutCartInput {
 
     @Field(() => MessageUpdateManyWithoutUserInput, {nullable:true})
     Message?: MessageUpdateManyWithoutUserInput;
+
+    @Field(() => RefferalUpdateManyWithoutUserInput, {nullable:true})
+    Refferal?: RefferalUpdateManyWithoutUserInput;
 }

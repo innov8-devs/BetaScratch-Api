@@ -13,12 +13,18 @@ import { MyContext } from 'types/constants/types';
 import {
   CartCheckoutInput,
   CartDetailInput,
+  FlutterCheckoutOneInput,
+  FlutterCheckoutTwoInput,
   GameCateogorySearch,
   GamePaginationInput,
   PurchaseSearch,
   UpdateGameInput,
 } from './dto/game.request';
-import { GameCategoryReturnType, TotalGameCount } from './dto/game.response';
+import {
+  FlutterCheckoutOneReturnType,
+  GameCategoryReturnType,
+  TotalGameCount,
+} from './dto/game.response';
 import { GameService } from './game.service';
 
 @Resolver(() => Game)
@@ -105,5 +111,27 @@ export class GameResolver {
   ) {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res);
     return await this.gameService.purchaseHistory(user.id, input);
+  }
+
+  @Auth([ROLE.USER])
+  @Mutation(() => FlutterCheckoutOneReturnType)
+  async flutterCheckoutOne(
+    @Args('input') input: FlutterCheckoutOneInput,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    return await this.gameService.flutterCheckoutOne(user.id, input);
+  }
+
+  @Auth([ROLE.USER])
+  @Mutation(() => User)
+  async flutterCheckoutTwo(
+    @Args('input') input: FlutterCheckoutTwoInput,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    return await this.gameService.flutterCheckoutTwo(input, user.id);
   }
 }

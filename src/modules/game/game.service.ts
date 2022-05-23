@@ -3,6 +3,8 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { MESSAGES } from 'core/messages';
 import { calculateVipStatus } from 'helpers/calculateVipStatus';
+import { computeCart } from 'helpers/computeCartData';
+import { computeCheckoutMessageCards } from 'helpers/computeCheckoutMessageCards';
 import { MessageService } from 'modules/message/message.service';
 import { TransactionService } from 'modules/transaction/transaction.service';
 import {
@@ -19,11 +21,16 @@ import { PrismaService } from '../prisma.service';
 import {
   CartCheckoutInput,
   CartDetailInput,
+  FlutterCheckoutOneInput,
+  FlutterCheckoutTwoInput,
   GameCateogorySearch,
   GamePaginationInput,
   PurchaseSearch,
 } from './dto/game.request';
-import { GameCategoryReturnType } from './dto/game.response';
+import {
+  FlutterCheckoutOneReturnType,
+  GameCategoryReturnType,
+} from './dto/game.response';
 
 @Injectable()
 export class GameService {
@@ -185,23 +192,9 @@ export class GameService {
     const userWallet = await this.prismaService.wallet.findUnique({
       where: { userId },
     });
-    const cartDetail = [];
 
-    for (let item of input.cart) {
-      cartDetail.push({
-        category: item.category,
-        imageUrl: item.imageUrl,
-        name: item.name,
-        price: {
-          eur: item.price.eur,
-          usd: item.price.usd,
-          ngn: item.price.ngn,
-          gbp: item.price.gbp,
-        },
-        quantity: item.quantity,
-        userId: userId,
-      });
-    }
+    const cartDetail = computeCart(input.cart, userId);
+    const messageCards = computeCheckoutMessageCards(input.cart, userId);
 
     if (input.transaction_type === TRANSACTION.ACCOUNT) {
       const response = await this.checkoutWithAccount(
@@ -225,7 +218,7 @@ export class GameService {
           type: TRANSACTION.ACCOUNT,
           User: { connect: { id: userId } },
         });
-        await this.messageService.sendCheckoutMessage(userId);
+        await this.messageService.sendCheckoutMessage(userId, messageCards);
       } else {
         await this.transactionService.createTransaction({
           amount: input.subtotal,
@@ -258,7 +251,7 @@ export class GameService {
           transactionRef: generateRandomString(),
           User: { connect: { id: userId } },
         });
-        await this.messageService.sendCheckoutMessage(userId);
+        await this.messageService.sendCheckoutMessage(userId, messageCards);
       } else {
         await this.transactionService.createTransaction({
           amount: input.subtotal,
@@ -269,24 +262,6 @@ export class GameService {
           transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
           User: { connect: { id: userId } },
-        });
-      }
-    } else if (input.transaction_type === TRANSACTION.FLUTTERWAVE) {
-      const { status } =
-        await this.transactionService.verifyFlutterWaveTransaction(
-          input.transaction_id,
-          PAYMENT_PURPOSE.CART,
-          userId,
-        );
-      if (status === 'successful') {
-        await this.calculateVipProgress(userId);
-        await this.messageService.sendCheckoutMessage(userId);
-        await this.transactionService.cashback(userId, input.subtotal);
-      }
-      if (status === 'failed') {
-        throw new BadRequestException({
-          name: 'payment',
-          message: 'payment failed',
         });
       }
     } else {
@@ -314,6 +289,86 @@ export class GameService {
       orderBy: {
         id: 'desc',
       },
+    });
+  }
+
+  async flutterCheckoutOne(
+    userId: number,
+    input: FlutterCheckoutOneInput,
+  ): Promise<FlutterCheckoutOneReturnType> {
+    const userWallet = await this.prismaService.wallet.findUnique({
+      where: { userId },
+    });
+
+    const reference = generateRandomString();
+
+    const cartDetail = computeCart(input.cart, userId);
+    await this.prismaService.cart.createMany({
+      data: cartDetail,
+    });
+
+    await this.transactionService.createTransaction({
+      amount: input.subtotal,
+      currency: userWallet.currency,
+      purpose: PAYMENT_PURPOSE.CART,
+      status: PAYMENT_STATUS.PENDING,
+      type: TRANSACTION.FLUTTERWAVE,
+      transactionId: generateRandomNumbers(),
+      transactionRef: reference,
+      User: { connect: { id: userId } },
+    });
+
+    return {
+      transaction_reference: reference,
+    };
+  }
+
+  async flutterCheckoutTwo(input: FlutterCheckoutTwoInput, userId: number) {
+    const { status } =
+      await this.transactionService.verifyFlutterWaveTransaction(
+        input.transaction_id,
+      );
+    const transaction = await this.prismaService.transaction.findFirst({
+      where: {
+        transactionRef: input.transaction_reference,
+        userId,
+        status: PAYMENT_STATUS.PENDING,
+        type: TRANSACTION.FLUTTERWAVE,
+        purpose: PAYMENT_PURPOSE.CART,
+      },
+    });
+
+    if (status === 'successful') {
+      const messageCards = computeCheckoutMessageCards(input.cart, userId);
+
+      await this.calculateVipProgress(userId);
+      await this.messageService.sendCheckoutMessage(userId, messageCards);
+      await this.transactionService.cashback(userId, transaction.amount);
+      await this.prismaService.transaction.update({
+        where: { id: transaction.id },
+        data: {
+          status: PAYMENT_STATUS.SUCCESSFUL,
+          transactionId: input.transaction_id,
+        },
+      });
+    }
+    if (status === 'failed') {
+      await this.prismaService.transaction.update({
+        where: { id: transaction.id },
+        data: {
+          status: PAYMENT_STATUS.FAILED,
+          transactionId: input.transaction_id,
+        },
+      });
+      throw new BadRequestException({
+        name: 'payment',
+        message: 'payment failed',
+      });
+    }
+
+    return await this.prismaService.user.findUnique({
+      where: { id: userId },
+      include: { wallet: true },
     });
   }
 }

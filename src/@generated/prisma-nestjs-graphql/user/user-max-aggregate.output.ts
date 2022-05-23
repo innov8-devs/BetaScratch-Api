@@ -59,6 +59,9 @@ export class UserMaxAggregate {
     @Field(() => Float, {nullable:true})
     vipStatus?: number;
 
+    @Field(() => String, {nullable:true})
+    referralId?: string;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

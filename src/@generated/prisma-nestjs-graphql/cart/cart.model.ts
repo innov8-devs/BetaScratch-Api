@@ -32,6 +32,12 @@ export class Cart {
     @Field(() => String, {nullable:false})
     imageUrl!: string;
 
+    @Field(() => Boolean, {nullable:false,defaultValue:false})
+    played!: boolean;
+
+    @Field(() => String, {nullable:true})
+    reference!: string | null;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date;
 

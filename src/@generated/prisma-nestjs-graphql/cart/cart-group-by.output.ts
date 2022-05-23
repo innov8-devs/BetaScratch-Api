@@ -32,6 +32,12 @@ export class CartGroupBy {
     @Field(() => String, {nullable:false})
     imageUrl!: string;
 
+    @Field(() => Boolean, {nullable:false})
+    played!: boolean;
+
+    @Field(() => String, {nullable:true})
+    reference?: string;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;
 

@@ -14,6 +14,7 @@ import { OtpListRelationFilter } from '../otp/otp-list-relation-filter.input';
 import { WithdrawalRequestListRelationFilter } from '../withdrawal-request/withdrawal-request-list-relation-filter.input';
 import { CartListRelationFilter } from '../cart/cart-list-relation-filter.input';
 import { MessageListRelationFilter } from '../message/message-list-relation-filter.input';
+import { RefferalListRelationFilter } from '../refferal/refferal-list-relation-filter.input';
 
 @InputType()
 export class UserWhereInput {
@@ -78,6 +79,9 @@ export class UserWhereInput {
     @Field(() => FloatFilter, {nullable:true})
     vipStatus?: FloatFilter;
 
+    @Field(() => StringFilter, {nullable:true})
+    referralId?: StringFilter;
+
     @Field(() => WalletRelationFilter, {nullable:true})
     wallet?: WalletRelationFilter;
 
@@ -101,4 +105,7 @@ export class UserWhereInput {
 
     @Field(() => MessageListRelationFilter, {nullable:true})
     Message?: MessageListRelationFilter;
+
+    @Field(() => RefferalListRelationFilter, {nullable:true})
+    Refferal?: RefferalListRelationFilter;
 }

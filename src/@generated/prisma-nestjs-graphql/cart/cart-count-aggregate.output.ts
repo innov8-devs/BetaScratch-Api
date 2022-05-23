@@ -27,6 +27,12 @@ export class CartCountAggregate {
     imageUrl!: number;
 
     @Field(() => Int, {nullable:false})
+    played!: number;
+
+    @Field(() => Int, {nullable:false})
+    reference!: number;
+
+    @Field(() => Int, {nullable:false})
     createdAt!: number;
 
     @Field(() => Int, {nullable:false})

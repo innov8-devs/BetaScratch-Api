@@ -245,23 +245,43 @@ export class WalletService {
     transaction_type: PAYMENT_PURPOSE,
     userId: number,
   ) {
-    const { amount } =
+    const { amount, status, currency, tx_ref } =
       await this.transactionService.verifyFlutterWaveTransaction(
         transaction_id,
-        transaction_type,
-        userId,
       );
 
-    const userWallet = await this.findUnique({ userId });
+    if (status === 'successful') {
+      await this.transactionService.createTransaction({
+        amount: amount,
+        currency: currency,
+        purpose: transaction_type,
+        status: PAYMENT_STATUS.SUCCESSFUL,
+        type: TRANSACTION.FLUTTERWAVE,
+        transactionId: transaction_id,
+        transactionRef: tx_ref,
+        User: { connect: { id: userId } },
+      });
 
-    await this.prismaService.wallet.update({
-      where: {
-        userId,
-      },
-      data: {
-        withdrawable: userWallet.withdrawable + amount,
-      },
-    });
+      await this.prismaService.wallet.update({
+        where: {
+          userId,
+        },
+        data: {
+          withdrawable: { increment: amount },
+        },
+      });
+    } else {
+      await this.transactionService.createTransaction({
+        amount: amount,
+        currency: currency,
+        purpose: transaction_type,
+        status: PAYMENT_STATUS.FAILED,
+        type: TRANSACTION.FLUTTERWAVE,
+        transactionId: transaction_id,
+        transactionRef: tx_ref,
+        User: { connect: { id: userId } },
+      });
+    }
 
     return await this.prismaService.user.findUnique({
       where: { id: userId },

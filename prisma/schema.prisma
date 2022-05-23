@@ -52,6 +52,7 @@ model User {
   licenseBackImage   String?
   verificationStatus String              @default("inactive")
   vipStatus          Float               @default(0)
+  referralId         String              @unique @default(cuid())
   wallet             Wallet?
   // TODO this is a comment not validator
   // cart         Cart?
@@ -62,6 +63,7 @@ model User {
   WithdrawalRequest  WithdrawalRequest[]
   Cart               Cart[]
   Message            Message[]
+  Refferal           Refferal[]
 }
 
 model Wallet {
@@ -76,6 +78,15 @@ model Wallet {
   /// @Validator.IsString()
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+model Refferal {
+  id        Int      @id @default(autoincrement())
+  referrals String[]
+  User      User     @relation(fields: [userId], references: [id])
+  userId    Int      @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Transaction {
@@ -140,6 +151,7 @@ model Message {
   readStatus  Int
   /// @Validator.IsString()
   messageType String
+  cards       Json?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -157,6 +169,10 @@ model Cart {
   quantity  Int
   /// @Validator.IsString()
   imageUrl  String
+  /// @Validator.IsBoolean()
+  played    Boolean  @default(false)
+  /// @Validator.IsString()
+  reference String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

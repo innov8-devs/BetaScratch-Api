@@ -2,6 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import * as Validator from 'class-validator';
 import { Int } from '@nestjs/graphql';
+import { GraphQLJSON } from 'graphql-type-json';
 
 @InputType()
 export class MessageCreateWithoutUserInput {
@@ -25,6 +26,9 @@ export class MessageCreateWithoutUserInput {
     @Field(() => String, {nullable:false})
     @Validator.IsString()
     messageType!: string;
+
+    @Field(() => GraphQLJSON, {nullable:true})
+    cards?: any;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;

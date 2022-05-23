@@ -8,6 +8,7 @@ export enum MessageScalarFieldEnum {
     link = "link",
     readStatus = "readStatus",
     messageType = "messageType",
+    cards = "cards",
     createdAt = "createdAt",
     updatedAt = "updatedAt"
 }

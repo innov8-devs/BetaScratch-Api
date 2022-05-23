@@ -19,4 +19,7 @@ export class UserCount {
 
     @Field(() => Int, {nullable:false})
     Message?: number;
+
+    @Field(() => Int, {nullable:false})
+    Refferal?: number;
 }

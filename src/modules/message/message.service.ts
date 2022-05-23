@@ -17,14 +17,15 @@ export class MessageService {
     });
   }
 
-  public async sendCheckoutMessage(userId: number) {
+  public async sendCheckoutMessage(userId: number, cards: any) {
     await this.createMessage(userId, {
-      title: 'Your Payment is successful',
+      title: 'Your Payment was successful',
       link: WHATSAPP_URL,
       description:
         'To play this card, kindly click on the link here to play with our agent via the whatsapp video call',
       messageType: MESSAGE_TYPE.CART,
       readStatus: 0,
+      cards,
       user: { connect: { id: userId } },
     });
   }

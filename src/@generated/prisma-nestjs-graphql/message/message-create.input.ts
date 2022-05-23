@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import { UserCreateNestedOneWithoutMessageInput } from '../user/user-create-nested-one-without-message.input';
 import * as Validator from 'class-validator';
 import { Int } from '@nestjs/graphql';
+import { GraphQLJSON } from 'graphql-type-json';
 
 @InputType()
 export class MessageCreateInput {
@@ -29,6 +30,9 @@ export class MessageCreateInput {
     @Field(() => String, {nullable:false})
     @Validator.IsString()
     messageType!: string;
+
+    @Field(() => GraphQLJSON, {nullable:true})
+    cards?: any;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;

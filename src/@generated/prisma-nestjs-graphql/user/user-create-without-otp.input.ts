@@ -9,6 +9,7 @@ import { TransactionCreateNestedManyWithoutUserInput } from '../transaction/tran
 import { WithdrawalRequestCreateNestedManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-create-nested-many-without-user.input';
 import { CartCreateNestedManyWithoutUserInput } from '../cart/cart-create-nested-many-without-user.input';
 import { MessageCreateNestedManyWithoutUserInput } from '../message/message-create-nested-many-without-user.input';
+import { RefferalCreateNestedManyWithoutUserInput } from '../refferal/refferal-create-nested-many-without-user.input';
 
 @InputType()
 export class UserCreateWithoutOtpInput {
@@ -73,6 +74,9 @@ export class UserCreateWithoutOtpInput {
     @Field(() => Float, {nullable:true})
     vipStatus?: number;
 
+    @Field(() => String, {nullable:true})
+    referralId?: string;
+
     @Field(() => WalletCreateNestedOneWithoutUserInput, {nullable:true})
     wallet?: WalletCreateNestedOneWithoutUserInput;
 
@@ -93,4 +97,7 @@ export class UserCreateWithoutOtpInput {
 
     @Field(() => MessageCreateNestedManyWithoutUserInput, {nullable:true})
     Message?: MessageCreateNestedManyWithoutUserInput;
+
+    @Field(() => RefferalCreateNestedManyWithoutUserInput, {nullable:true})
+    Refferal?: RefferalCreateNestedManyWithoutUserInput;
 }

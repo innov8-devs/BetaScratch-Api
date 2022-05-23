@@ -22,3 +22,11 @@ export class GameCategoryReturnType {
   @IsNotEmpty()
   games: Game[];
 }
+
+@ObjectType()
+export class FlutterCheckoutOneReturnType {
+  @Field(() => String, { nullable: false })
+  @IsString()
+  @IsNotEmpty()
+  transaction_reference: string;
+}

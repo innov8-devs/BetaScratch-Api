@@ -3,6 +3,7 @@ import { ObjectType } from '@nestjs/graphql';
 import { ID } from '@nestjs/graphql';
 import { User } from '../user/user.model';
 import { Int } from '@nestjs/graphql';
+import { GraphQLJSON } from 'graphql-type-json';
 
 @ObjectType()
 export class Message {
@@ -30,6 +31,9 @@ export class Message {
 
     @Field(() => String, {nullable:false})
     messageType!: string;
+
+    @Field(() => GraphQLJSON, {nullable:true})
+    cards!: any | null;
 
     @Field(() => Date, {nullable:false})
     createdAt!: Date;

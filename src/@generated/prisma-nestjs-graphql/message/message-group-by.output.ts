@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ObjectType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
+import { GraphQLJSON } from 'graphql-type-json';
 import { MessageCountAggregate } from './message-count-aggregate.output';
 import { MessageAvgAggregate } from './message-avg-aggregate.output';
 import { MessageSumAggregate } from './message-sum-aggregate.output';
@@ -30,6 +31,9 @@ export class MessageGroupBy {
 
     @Field(() => String, {nullable:false})
     messageType!: string;
+
+    @Field(() => GraphQLJSON, {nullable:true})
+    cards?: any;
 
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;

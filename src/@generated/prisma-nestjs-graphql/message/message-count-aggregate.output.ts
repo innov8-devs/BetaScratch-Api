@@ -27,6 +27,9 @@ export class MessageCountAggregate {
     messageType!: number;
 
     @Field(() => Int, {nullable:false})
+    cards!: number;
+
+    @Field(() => Int, {nullable:false})
     createdAt!: number;
 
     @Field(() => Int, {nullable:false})

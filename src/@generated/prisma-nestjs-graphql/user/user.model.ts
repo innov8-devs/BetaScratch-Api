@@ -10,6 +10,7 @@ import { Otp } from '../otp/otp.model';
 import { WithdrawalRequest } from '../withdrawal-request/withdrawal-request.model';
 import { Cart } from '../cart/cart.model';
 import { Message } from '../message/message.model';
+import { Refferal } from '../refferal/refferal.model';
 import { UserCount } from './user-count.output';
 
 @ObjectType()
@@ -66,6 +67,9 @@ export class User {
     @Field(() => Float, {nullable:false,defaultValue:0})
     vipStatus!: number;
 
+    @Field(() => String, {nullable:false})
+    referralId!: string;
+
     @Field(() => Wallet, {nullable:true})
     wallet?: Wallet | null;
 
@@ -89,6 +93,9 @@ export class User {
 
     @Field(() => [Message], {nullable:true})
     Message?: Array<Message>;
+
+    @Field(() => [Refferal], {nullable:true})
+    Refferal?: Array<Refferal>;
 
     @Field(() => UserCount, {nullable:false})
     _count?: UserCount;

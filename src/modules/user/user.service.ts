@@ -399,6 +399,7 @@ export class UserService {
         licenseBackImage: true,
         licenseFrontImage: true,
         verificationStatus: true,
+        referralId: true,
         confirmed: true,
         updatedAt: true,
       },
@@ -451,4 +452,6 @@ export class UserService {
       },
     });
   }
+
+  async referUser() {}
 }

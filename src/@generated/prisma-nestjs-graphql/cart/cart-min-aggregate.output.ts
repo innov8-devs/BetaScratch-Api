@@ -23,6 +23,12 @@ export class CartMinAggregate {
     @Field(() => String, {nullable:true})
     imageUrl?: string;
 
+    @Field(() => Boolean, {nullable:true})
+    played?: boolean;
+
+    @Field(() => String, {nullable:true})
+    reference?: string;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

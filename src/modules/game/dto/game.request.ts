@@ -83,7 +83,7 @@ export class CartDetailInput {
 // }
 
 @InputType()
-class CartItems {
+export class CartItems {
   @Field(() => String)
   @IsString()
   name: string;
@@ -121,6 +121,34 @@ export class CartCheckoutInput {
   @Field(() => String, { nullable: false })
   @IsEnum(TRANSACTION, { each: true })
   transaction_type!: TRANSACTION | string;
+
+  @Field(() => [CartItems], { nullable: false })
+  @IsArray()
+  cart: any;
+}
+
+@InputType()
+export class FlutterCheckoutOneInput {
+  @Field(() => Number, { nullable: false })
+  @IsNumber()
+  subtotal!: number;
+
+  @Field(() => String, { nullable: false })
+  @IsEnum(TRANSACTION, { each: true })
+  transaction_type!: TRANSACTION | string;
+
+  @Field(() => [CartItems], { nullable: false })
+  @IsArray()
+  cart: CartItems[];
+}
+
+@InputType()
+export class FlutterCheckoutTwoInput {
+  @Field(() => String, { nullable: false })
+  transaction_reference!: string;
+
+  @Field(() => Number, { nullable: false })
+  transaction_id!: number;
 
   @Field(() => [CartItems], { nullable: false })
   @IsArray()

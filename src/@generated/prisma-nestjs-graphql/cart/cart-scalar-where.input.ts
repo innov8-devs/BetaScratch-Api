@@ -3,6 +3,8 @@ import { InputType } from '@nestjs/graphql';
 import { IntFilter } from '../prisma/int-filter.input';
 import { StringFilter } from '../prisma/string-filter.input';
 import { JsonFilter } from '../prisma/json-filter.input';
+import { BoolFilter } from '../prisma/bool-filter.input';
+import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 
 @InputType()
@@ -37,6 +39,12 @@ export class CartScalarWhereInput {
 
     @Field(() => StringFilter, {nullable:true})
     imageUrl?: StringFilter;
+
+    @Field(() => BoolFilter, {nullable:true})
+    played?: BoolFilter;
+
+    @Field(() => StringNullableFilter, {nullable:true})
+    reference?: StringNullableFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;

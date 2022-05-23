@@ -10,6 +10,7 @@ import { OtpUncheckedCreateNestedManyWithoutUserInput } from '../otp/otp-uncheck
 import { WithdrawalRequestUncheckedCreateNestedManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-unchecked-create-nested-many-without-user.input';
 import { CartUncheckedCreateNestedManyWithoutUserInput } from '../cart/cart-unchecked-create-nested-many-without-user.input';
 import { MessageUncheckedCreateNestedManyWithoutUserInput } from '../message/message-unchecked-create-nested-many-without-user.input';
+import { RefferalUncheckedCreateNestedManyWithoutUserInput } from '../refferal/refferal-unchecked-create-nested-many-without-user.input';
 
 @InputType()
 export class UserUncheckedCreateWithoutTransactionsInput {
@@ -77,6 +78,9 @@ export class UserUncheckedCreateWithoutTransactionsInput {
     @Field(() => Float, {nullable:true})
     vipStatus?: number;
 
+    @Field(() => String, {nullable:true})
+    referralId?: string;
+
     @Field(() => WalletUncheckedCreateNestedOneWithoutUserInput, {nullable:true})
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput;
 
@@ -97,4 +101,7 @@ export class UserUncheckedCreateWithoutTransactionsInput {
 
     @Field(() => MessageUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
     Message?: MessageUncheckedCreateNestedManyWithoutUserInput;
+
+    @Field(() => RefferalUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
+    Refferal?: RefferalUncheckedCreateNestedManyWithoutUserInput;
 }

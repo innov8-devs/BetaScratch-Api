@@ -26,6 +26,12 @@ export class CartCountAggregateInput {
     imageUrl?: true;
 
     @Field(() => Boolean, {nullable:true})
+    played?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    reference?: true;
+
+    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})

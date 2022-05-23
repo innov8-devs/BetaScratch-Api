@@ -24,6 +24,12 @@ export class CartMaxOrderByAggregateInput {
     imageUrl?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    played?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    reference?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

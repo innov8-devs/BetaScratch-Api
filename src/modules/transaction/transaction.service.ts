@@ -115,43 +115,41 @@ export class TransactionService {
     return totalAmountSpent;
   }
 
-  async verifyFlutterWaveTransaction(
-    transaction_id: number,
-    transaction_type: PAYMENT_PURPOSE,
-    userId: number,
-  ) {
+  async verifyFlutterWaveTransaction(transaction_id: number) {
     const flw = new Flutterwave(
       process.env.FLUTTERWAVE_PUBLIC_KEY,
       process.env.FLUTTERWAVE_SECRET_KEY,
     );
     const response = await flw.Transaction.verify({ id: transaction_id });
     const data = response.data;
-    if (data.status === 'successful') {
-      await this.createTransaction({
-        amount: data.amount,
-        currency: data.currency,
-        purpose: transaction_type,
-        status: PAYMENT_STATUS.SUCCESSFUL,
-        type: TRANSACTION.FLUTTERWAVE,
-        transactionId: transaction_id,
-        transactionRef: data.tx_ref,
-        User: { connect: { id: userId } },
-      });
-    } else {
-      await this.createTransaction({
-        amount: data.amount,
-        currency: data.currency,
-        purpose: transaction_type,
-        status: PAYMENT_STATUS.FAILED,
-        type: TRANSACTION.FLUTTERWAVE,
-        transactionId: transaction_id,
-        transactionRef: data.tx_ref,
-        User: { connect: { id: userId } },
-      });
-    }
+    // if (data.status === 'successful') {
+    //   await this.createTransaction({
+    //     amount: data.amount,
+    //     currency: data.currency,
+    //     purpose: transaction_type,
+    //     status: PAYMENT_STATUS.SUCCESSFUL,
+    //     type: TRANSACTION.FLUTTERWAVE,
+    //     transactionId: transaction_id,
+    //     transactionRef: data.tx_ref,
+    //     User: { connect: { id: userId } },
+    //   });
+    // } else {
+    //   await this.createTransaction({
+    //     amount: data.amount,
+    //     currency: data.currency,
+    //     purpose: transaction_type,
+    //     status: PAYMENT_STATUS.FAILED,
+    //     type: TRANSACTION.FLUTTERWAVE,
+    //     transactionId: transaction_id,
+    //     transactionRef: data.tx_ref,
+    //     User: { connect: { id: userId } },
+    //   });
+    // }
     return {
       status: data.status,
       amount: data.amount,
+      currency: data.currency,
+      tx_ref: data.tx_ref,
     };
   }
 

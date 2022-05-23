@@ -13,6 +13,7 @@ import { TransactionUncheckedUpdateManyWithoutUserInput } from '../transaction/t
 import { OtpUncheckedUpdateManyWithoutUserInput } from '../otp/otp-unchecked-update-many-without-user.input';
 import { WithdrawalRequestUncheckedUpdateManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-unchecked-update-many-without-user.input';
 import { MessageUncheckedUpdateManyWithoutUserInput } from '../message/message-unchecked-update-many-without-user.input';
+import { RefferalUncheckedUpdateManyWithoutUserInput } from '../refferal/refferal-unchecked-update-many-without-user.input';
 
 @InputType()
 export class UserUncheckedUpdateWithoutCartInput {
@@ -68,6 +69,9 @@ export class UserUncheckedUpdateWithoutCartInput {
     @Field(() => FloatFieldUpdateOperationsInput, {nullable:true})
     vipStatus?: FloatFieldUpdateOperationsInput;
 
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    referralId?: StringFieldUpdateOperationsInput;
+
     @Field(() => WalletUncheckedUpdateOneWithoutUserInput, {nullable:true})
     wallet?: WalletUncheckedUpdateOneWithoutUserInput;
 
@@ -88,4 +92,7 @@ export class UserUncheckedUpdateWithoutCartInput {
 
     @Field(() => MessageUncheckedUpdateManyWithoutUserInput, {nullable:true})
     Message?: MessageUncheckedUpdateManyWithoutUserInput;
+
+    @Field(() => RefferalUncheckedUpdateManyWithoutUserInput, {nullable:true})
+    Refferal?: RefferalUncheckedUpdateManyWithoutUserInput;
 }

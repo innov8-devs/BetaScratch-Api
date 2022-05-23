@@ -32,6 +32,14 @@ export class CartUncheckedCreateInput {
     @Validator.IsString()
     imageUrl!: string;
 
+    @Field(() => Boolean, {nullable:true})
+    @Validator.IsBoolean()
+    played?: boolean;
+
+    @Field(() => String, {nullable:true})
+    @Validator.IsString()
+    reference?: string;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

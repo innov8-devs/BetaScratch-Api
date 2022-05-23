@@ -27,6 +27,9 @@ export class MessageCountOrderByAggregateInput {
     messageType?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    cards?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
