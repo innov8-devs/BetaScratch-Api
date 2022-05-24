@@ -4,4 +4,9 @@ export const generateRandomNumbers = () => {
 
 import { v4 } from 'uuid';
 
-export const generateRandomString = (): string => v4();
+export const generateRandomString = (): string => {
+  let hexString = v4();
+  hexString = hexString.replace(/-/g, '');
+  let base64String = Buffer.from(hexString, 'hex').toString('base64');
+  return base64String;
+};

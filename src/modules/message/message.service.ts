@@ -19,7 +19,7 @@ export class MessageService {
 
   public async sendCheckoutMessage(userId: number, cards: any) {
     await this.createMessage(userId, {
-      title: 'Your Payment was successful',
+      title: 'Your payment was successful',
       link: WHATSAPP_URL,
       description:
         'To play this card, kindly click on the link here to play with our agent via the whatsapp video call',

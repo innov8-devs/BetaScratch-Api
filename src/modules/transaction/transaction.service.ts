@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { Prisma } from '@prisma/client';
 import * as Flutterwave from 'flutterwave-node-v3';
@@ -122,29 +122,6 @@ export class TransactionService {
     );
     const response = await flw.Transaction.verify({ id: transaction_id });
     const data = response.data;
-    // if (data.status === 'successful') {
-    //   await this.createTransaction({
-    //     amount: data.amount,
-    //     currency: data.currency,
-    //     purpose: transaction_type,
-    //     status: PAYMENT_STATUS.SUCCESSFUL,
-    //     type: TRANSACTION.FLUTTERWAVE,
-    //     transactionId: transaction_id,
-    //     transactionRef: data.tx_ref,
-    //     User: { connect: { id: userId } },
-    //   });
-    // } else {
-    //   await this.createTransaction({
-    //     amount: data.amount,
-    //     currency: data.currency,
-    //     purpose: transaction_type,
-    //     status: PAYMENT_STATUS.FAILED,
-    //     type: TRANSACTION.FLUTTERWAVE,
-    //     transactionId: transaction_id,
-    //     transactionRef: data.tx_ref,
-    //     User: { connect: { id: userId } },
-    //   });
-    // }
     return {
       status: data.status,
       amount: data.amount,
@@ -181,5 +158,74 @@ export class TransactionService {
         bonus: userWallet.bonus + cashBackAmount,
       },
     });
+  }
+
+  async fetchFlutterTransactions(from: string, to: string) {
+    const flw = new Flutterwave(
+      process.env.FLUTTERWAVE_PUBLIC_KEY,
+      process.env.FLUTTERWAVE_SECRET_KEY,
+    );
+    let result = [];
+    try {
+      const payload = {
+        from,
+        to,
+      };
+      const response = await flw.Transaction.fetch(payload);
+      for (let data of response.data) {
+        result.push({
+          id: data.id,
+          amount: data.amount,
+          currency: data.currency,
+          narration: data.narration,
+          status: data.status,
+          payment_type: data.payment_type,
+          createdAt: data.created_at,
+          card: data.card,
+          customer: data.customer,
+        });
+      }
+      return result;
+    } catch (error) {
+      throw new BadRequestException({
+        name: 'transaction',
+        message: 'cannot get transactions',
+      });
+    }
+  }
+
+  async fetchFlutterTransactionTimeline(transactionId: number) {
+    const flw = new Flutterwave(
+      process.env.FLUTTERWAVE_PUBLIC_KEY,
+      process.env.FLUTTERWAVE_SECRET_KEY,
+    );
+    let result = [];
+    try {
+      const betatransaction = await this.prismaService.transaction.findFirst({
+        where: { transactionId },
+      });
+      const payload = {
+        id: transactionId,
+      };
+      const response = await flw.Transaction.event(payload);
+      for (let trx of response.data) {
+        result.push({
+          note: trx.note,
+          createdAt: trx.created_at,
+          action: trx.action,
+        });
+      }
+      return {
+        status: response.status,
+        message: response.message,
+        data: result,
+        betatransaction,
+      };
+    } catch (error) {
+      throw new BadRequestException({
+        name: 'transaction',
+        message: 'cannot get transaction timeline',
+      });
+    }
   }
 }
