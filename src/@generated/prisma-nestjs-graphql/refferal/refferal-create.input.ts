@@ -10,7 +10,7 @@ export class RefferalCreateInput {
     referrals?: RefferalCreatereferralsInput;
 
     @Field(() => UserCreateNestedOneWithoutRefferalInput, {nullable:false})
-    User!: UserCreateNestedOneWithoutRefferalInput;
+    user!: UserCreateNestedOneWithoutRefferalInput;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;

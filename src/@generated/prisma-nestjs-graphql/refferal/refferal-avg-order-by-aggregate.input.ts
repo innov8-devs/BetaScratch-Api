@@ -9,5 +9,8 @@ export class RefferalAvgOrderByAggregateInput {
     id?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    referrals?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     userId?: keyof typeof SortOrder;
 }

@@ -162,6 +162,29 @@ export class GameService {
       });
     }
 
+    const checkCheckoutState = await this.prismaService.cart.findFirst({
+      where: { userId },
+    });
+
+    if (!checkCheckoutState) {
+      const referral = await this.prismaService.referral.findFirst({
+        where: { referrals: { has: userId } },
+      });
+      const referrerAmount = (3 * amount) / 100;
+
+      await this.prismaService.wallet.update({
+        where: { userId: referral.userId },
+        data: { withdrawable: { increment: referrerAmount } },
+      });
+
+      const refereeAmount = (5 * amount) / 100;
+
+      await this.prismaService.wallet.update({
+        where: { userId },
+        data: { withdrawable: { increment: refereeAmount } },
+      });
+    }
+
     await this.prismaService.wallet.update({
       where: { userId },
       data: {
@@ -185,6 +208,30 @@ export class GameService {
         bonus: userWallet.bonus - amount,
       },
     });
+
+    const checkCheckoutState = await this.prismaService.cart.findFirst({
+      where: { userId },
+    });
+
+    if (!checkCheckoutState) {
+      const referral = await this.prismaService.referral.findFirst({
+        where: { referrals: { has: userId } },
+      });
+      const referrerAmount = (3 * amount) / 100;
+
+      await this.prismaService.wallet.update({
+        where: { userId: referral.userId },
+        data: { withdrawable: { increment: referrerAmount } },
+      });
+
+      const refereeAmount = (5 * amount) / 100;
+
+      await this.prismaService.wallet.update({
+        where: { userId },
+        data: { withdrawable: { increment: refereeAmount } },
+      });
+    }
+
     return true;
   }
 
@@ -299,6 +346,29 @@ export class GameService {
     const userWallet = await this.prismaService.wallet.findUnique({
       where: { userId },
     });
+
+    const checkCheckoutState = await this.prismaService.cart.findFirst({
+      where: { userId },
+    });
+
+    if (!checkCheckoutState) {
+      const referral = await this.prismaService.referral.findFirst({
+        where: { referrals: { has: userId } },
+      });
+      const referrerAmount = (3 * input.subtotal) / 100;
+
+      await this.prismaService.wallet.update({
+        where: { userId: referral.userId },
+        data: { withdrawable: { increment: referrerAmount } },
+      });
+
+      const refereeAmount = (5 * input.subtotal) / 100;
+
+      await this.prismaService.wallet.update({
+        where: { userId },
+        data: { withdrawable: { increment: refereeAmount } },
+      });
+    }
 
     const reference = generateRandomString();
 

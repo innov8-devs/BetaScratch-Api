@@ -10,7 +10,7 @@ import { Otp } from '../otp/otp.model';
 import { WithdrawalRequest } from '../withdrawal-request/withdrawal-request.model';
 import { Cart } from '../cart/cart.model';
 import { Message } from '../message/message.model';
-import { Refferal } from '../refferal/refferal.model';
+import { Referral } from '../referral/referral.model';
 import { UserCount } from './user-count.output';
 
 @ObjectType()
@@ -91,8 +91,8 @@ export class User {
     @Field(() => [Message], {nullable:true})
     Message?: Array<Message>;
 
-    @Field(() => [Refferal], {nullable:true})
-    Refferal?: Array<Refferal>;
+    @Field(() => [Referral], {nullable:true})
+    Referral?: Array<Referral>;
 
     @Field(() => UserCount, {nullable:false})
     _count?: UserCount;

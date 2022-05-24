@@ -11,7 +11,7 @@ export class RefferalUpdateInput {
     referrals?: RefferalUpdatereferralsInput;
 
     @Field(() => UserUpdateOneRequiredWithoutRefferalInput, {nullable:true})
-    User?: UserUpdateOneRequiredWithoutRefferalInput;
+    user?: UserUpdateOneRequiredWithoutRefferalInput;
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;

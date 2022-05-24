@@ -21,5 +21,5 @@ export class UserCount {
     Message?: number;
 
     @Field(() => Int, {nullable:false})
-    Refferal?: number;
+    Referral?: number;
 }

@@ -9,7 +9,7 @@ import { TransactionCreateNestedManyWithoutUserInput } from '../transaction/tran
 import { OtpCreateNestedManyWithoutUserInput } from '../otp/otp-create-nested-many-without-user.input';
 import { WithdrawalRequestCreateNestedManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-create-nested-many-without-user.input';
 import { MessageCreateNestedManyWithoutUserInput } from '../message/message-create-nested-many-without-user.input';
-import { RefferalCreateNestedManyWithoutUserInput } from '../refferal/refferal-create-nested-many-without-user.input';
+import { ReferralCreateNestedManyWithoutUserInput } from '../referral/referral-create-nested-many-without-user.input';
 
 @InputType()
 export class UserCreateWithoutCartInput {
@@ -95,6 +95,6 @@ export class UserCreateWithoutCartInput {
     @Field(() => MessageCreateNestedManyWithoutUserInput, {nullable:true})
     Message?: MessageCreateNestedManyWithoutUserInput;
 
-    @Field(() => RefferalCreateNestedManyWithoutUserInput, {nullable:true})
-    Refferal?: RefferalCreateNestedManyWithoutUserInput;
+    @Field(() => ReferralCreateNestedManyWithoutUserInput, {nullable:true})
+    Referral?: ReferralCreateNestedManyWithoutUserInput;
 }

@@ -13,7 +13,7 @@ import { TransactionUncheckedUpdateManyWithoutUserInput } from '../transaction/t
 import { OtpUncheckedUpdateManyWithoutUserInput } from '../otp/otp-unchecked-update-many-without-user.input';
 import { WithdrawalRequestUncheckedUpdateManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-unchecked-update-many-without-user.input';
 import { MessageUncheckedUpdateManyWithoutUserInput } from '../message/message-unchecked-update-many-without-user.input';
-import { RefferalUncheckedUpdateManyWithoutUserInput } from '../refferal/refferal-unchecked-update-many-without-user.input';
+import { ReferralUncheckedUpdateManyWithoutUserInput } from '../referral/referral-unchecked-update-many-without-user.input';
 
 @InputType()
 export class UserUncheckedUpdateWithoutCartInput {
@@ -90,6 +90,6 @@ export class UserUncheckedUpdateWithoutCartInput {
     @Field(() => MessageUncheckedUpdateManyWithoutUserInput, {nullable:true})
     Message?: MessageUncheckedUpdateManyWithoutUserInput;
 
-    @Field(() => RefferalUncheckedUpdateManyWithoutUserInput, {nullable:true})
-    Refferal?: RefferalUncheckedUpdateManyWithoutUserInput;
+    @Field(() => ReferralUncheckedUpdateManyWithoutUserInput, {nullable:true})
+    Referral?: ReferralUncheckedUpdateManyWithoutUserInput;
 }

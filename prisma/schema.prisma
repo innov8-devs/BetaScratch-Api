@@ -62,7 +62,7 @@ model User {
   WithdrawalRequest  WithdrawalRequest[]
   Cart               Cart[]
   Message            Message[]
-  Refferal           Refferal[]
+  Referral           Referral[]
 }
 
 model Wallet {
@@ -79,10 +79,10 @@ model Wallet {
   updatedAt    DateTime @updatedAt
 }
 
-model Refferal {
+model Referral {
   id        Int      @id @default(autoincrement())
-  referrals String[]
-  User      User     @relation(fields: [userId], references: [id])
+  referrals Int[]
+  user      User     @relation(fields: [userId], references: [id])
   userId    Int      @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

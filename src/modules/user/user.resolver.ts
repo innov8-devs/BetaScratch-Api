@@ -1,9 +1,9 @@
 import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 import { UserService } from './user.service';
-import { UserCreateInput } from '../../@generated/prisma-nestjs-graphql/user/user-create.input';
 import { User } from '../../@generated/prisma-nestjs-graphql/user/user.model';
 import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
 import {
+  RegisterInput,
   UpdateUserInput,
   UserPaginationInput,
   ValidateFormOneInput,
@@ -14,6 +14,7 @@ import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { TotalUserCount } from './dto/user.response';
 import { AuthService } from 'modules/auth/auth.service';
 import { MyContext } from 'types/constants/types';
+import { Refferal } from '@generated/prisma-nestjs-graphql/refferal/refferal.model';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -34,7 +35,7 @@ export class UserResolver {
   }
 
   @Mutation(() => User)
-  async register(@Args('input') input: UserCreateInput): Promise<User> {
+  async register(@Args('input') input: RegisterInput): Promise<User> {
     return await this.userService.register(input);
   }
 
@@ -149,5 +150,11 @@ export class UserResolver {
   @Mutation(() => Boolean)
   async toggleUserConfirmationFromAdmin(@Args('userId') userId: number) {
     return await this.userService.toggleUserConfirmationFromAdmin(userId);
+  }
+
+  @Auth([ROLE.USER])
+  @Query(() => Refferal, { nullable: true })
+  async fetchUserReferrals(@CurrentUser() user: User) {
+    return await this.userService.fetchUserReferrals(user.id);
   }
 }

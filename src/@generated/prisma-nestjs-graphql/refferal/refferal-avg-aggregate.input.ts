@@ -8,5 +8,8 @@ export class RefferalAvgAggregateInput {
     id?: true;
 
     @Field(() => Boolean, {nullable:true})
+    referrals?: true;
+
+    @Field(() => Boolean, {nullable:true})
     userId?: true;
 }

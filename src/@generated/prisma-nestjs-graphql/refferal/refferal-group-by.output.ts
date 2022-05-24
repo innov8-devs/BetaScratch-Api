@@ -13,8 +13,8 @@ export class RefferalGroupBy {
     @Field(() => Int, {nullable:false})
     id!: number;
 
-    @Field(() => [String], {nullable:true})
-    referrals?: Array<string>;
+    @Field(() => [Int], {nullable:true})
+    referrals?: Array<number>;
 
     @Field(() => Int, {nullable:false})
     userId!: number;

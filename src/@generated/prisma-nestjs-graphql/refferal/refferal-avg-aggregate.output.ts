@@ -9,5 +9,8 @@ export class RefferalAvgAggregate {
     id?: number;
 
     @Field(() => Float, {nullable:true})
+    referrals?: number;
+
+    @Field(() => Float, {nullable:true})
     userId?: number;
 }

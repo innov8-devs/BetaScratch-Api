@@ -8,6 +8,9 @@ export class RefferalSumAggregate {
     @Field(() => Int, {nullable:true})
     id?: number;
 
+    @Field(() => [Int], {nullable:true})
+    referrals?: Array<number>;
+
     @Field(() => Int, {nullable:true})
     userId?: number;
 }

@@ -1,12 +1,13 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
+import { Int } from '@nestjs/graphql';
 
 @InputType()
 export class RefferalUpdatereferralsInput {
 
-    @Field(() => [String], {nullable:true})
-    set?: Array<string>;
+    @Field(() => [Int], {nullable:true})
+    set?: Array<number>;
 
-    @Field(() => [String], {nullable:true})
-    push?: Array<string>;
+    @Field(() => [Int], {nullable:true})
+    push?: Array<number>;
 }

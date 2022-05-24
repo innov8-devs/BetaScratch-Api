@@ -10,7 +10,7 @@ import { TransactionUncheckedCreateNestedManyWithoutUserInput } from '../transac
 import { OtpUncheckedCreateNestedManyWithoutUserInput } from '../otp/otp-unchecked-create-nested-many-without-user.input';
 import { WithdrawalRequestUncheckedCreateNestedManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-unchecked-create-nested-many-without-user.input';
 import { MessageUncheckedCreateNestedManyWithoutUserInput } from '../message/message-unchecked-create-nested-many-without-user.input';
-import { RefferalUncheckedCreateNestedManyWithoutUserInput } from '../refferal/refferal-unchecked-create-nested-many-without-user.input';
+import { ReferralUncheckedCreateNestedManyWithoutUserInput } from '../referral/referral-unchecked-create-nested-many-without-user.input';
 
 @InputType()
 export class UserUncheckedCreateWithoutCartInput {
@@ -99,6 +99,6 @@ export class UserUncheckedCreateWithoutCartInput {
     @Field(() => MessageUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
     Message?: MessageUncheckedCreateNestedManyWithoutUserInput;
 
-    @Field(() => RefferalUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
-    Refferal?: RefferalUncheckedCreateNestedManyWithoutUserInput;
+    @Field(() => ReferralUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
+    Referral?: ReferralUncheckedCreateNestedManyWithoutUserInput;
 }

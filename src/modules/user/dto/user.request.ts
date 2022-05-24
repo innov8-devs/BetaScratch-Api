@@ -10,6 +10,42 @@ import {
 } from 'class-validator';
 
 @InputType()
+export class RegisterInput {
+  @Field()
+  email: string;
+
+  @Field()
+  username: string;
+
+  @Field()
+  firstName: string;
+
+  @Field()
+  lastName: string;
+
+  @Field(() => Date)
+  dateOfBirth: Date | string;
+
+  @Field()
+  gender: GENDER;
+
+  @Field()
+  mobileNumber: string;
+
+  @Field()
+  state: string;
+
+  @Field()
+  country: string;
+
+  @Field()
+  password: string;
+
+  @Field({ nullable: true })
+  invite: string;
+}
+
+@InputType()
 export class LoginInput {
   @Field()
   password: string;
@@ -49,6 +85,9 @@ export class ValidateFormOneInput {
   @IsNotEmpty()
   @IsPhoneNumber()
   mobileNumber!: string;
+
+  @Field({ nullable: true })
+  invite: string;
 }
 
 @InputType()

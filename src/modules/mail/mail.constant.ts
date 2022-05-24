@@ -4,6 +4,7 @@ export const MAIL_SUBJECT = {
   FORGOT_PASSWORD: 'Reset your password',
   REQUEST_WITHDRAWAL: 'Withdrawal Request',
   WITHDRAWAL_APPROAL: 'Credit Alert',
+  REFERRAL: 'Referral',
 };
 
 export const MAIL_MESSAGE = {
@@ -154,6 +155,9 @@ export const MAIL_MESSAGE = {
     </div>
 </body>
 </html>`,
+
+  //? not used for now
+  REFRERRAL: (name: string) => `You have successfully referred ${name}`,
 
   //? not used for now
   REQUEST_WITHDRAWAL: (otp: string) =>

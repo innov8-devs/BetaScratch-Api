@@ -14,7 +14,7 @@ import { OtpListRelationFilter } from '../otp/otp-list-relation-filter.input';
 import { WithdrawalRequestListRelationFilter } from '../withdrawal-request/withdrawal-request-list-relation-filter.input';
 import { CartListRelationFilter } from '../cart/cart-list-relation-filter.input';
 import { MessageListRelationFilter } from '../message/message-list-relation-filter.input';
-import { RefferalListRelationFilter } from '../refferal/refferal-list-relation-filter.input';
+import { ReferralListRelationFilter } from '../referral/referral-list-relation-filter.input';
 
 @InputType()
 export class UserWhereInput {
@@ -103,6 +103,6 @@ export class UserWhereInput {
     @Field(() => MessageListRelationFilter, {nullable:true})
     Message?: MessageListRelationFilter;
 
-    @Field(() => RefferalListRelationFilter, {nullable:true})
-    Refferal?: RefferalListRelationFilter;
+    @Field(() => ReferralListRelationFilter, {nullable:true})
+    Referral?: ReferralListRelationFilter;
 }

@@ -7,7 +7,7 @@ import { OtpOrderByRelationAggregateInput } from '../otp/otp-order-by-relation-a
 import { WithdrawalRequestOrderByRelationAggregateInput } from '../withdrawal-request/withdrawal-request-order-by-relation-aggregate.input';
 import { CartOrderByRelationAggregateInput } from '../cart/cart-order-by-relation-aggregate.input';
 import { MessageOrderByRelationAggregateInput } from '../message/message-order-by-relation-aggregate.input';
-import { RefferalOrderByRelationAggregateInput } from '../refferal/refferal-order-by-relation-aggregate.input';
+import { ReferralOrderByRelationAggregateInput } from '../referral/referral-order-by-relation-aggregate.input';
 
 @InputType()
 export class UserOrderByWithRelationInput {
@@ -87,6 +87,6 @@ export class UserOrderByWithRelationInput {
     @Field(() => MessageOrderByRelationAggregateInput, {nullable:true})
     Message?: MessageOrderByRelationAggregateInput;
 
-    @Field(() => RefferalOrderByRelationAggregateInput, {nullable:true})
-    Refferal?: RefferalOrderByRelationAggregateInput;
+    @Field(() => ReferralOrderByRelationAggregateInput, {nullable:true})
+    Referral?: ReferralOrderByRelationAggregateInput;
 }

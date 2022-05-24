@@ -13,6 +13,7 @@ import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { CURRENCY } from '@generated/prisma-nestjs-graphql/prisma/currency.enum';
 import {
   AdminLoginInput,
+  RegisterInput,
   UserPaginationInput,
   ValidateFormOneInput,
   ValidateFormTwoInput,
@@ -40,7 +41,7 @@ export class UserService {
   }
 
   // register
-  async register(input: Prisma.UserCreateInput): Promise<User> {
+  async register(input: RegisterInput): Promise<User> {
     const errMessage = [];
     const emailUsed = await this.findUnique({ email: input.email });
     const usernameUsed = await this.findUnique({ username: input.username });
@@ -64,10 +65,11 @@ export class UserService {
         name: 'password',
         message: MESSAGES.AUTH.SHORT_PASSWORD,
       });
+    const { invite, ...rest } = input;
     const hashedPassword = await argon2.hash(input.password);
     const user = await this.prismaService.user.create({
       data: {
-        ...input,
+        ...rest,
         email: input.email.toLowerCase(),
         password: hashedPassword,
         role: ROLE.USER,
@@ -83,6 +85,19 @@ export class UserService {
       currency: CURRENCY.NGN,
     });
 
+    const refferer = await this.findUnique({ username: invite });
+
+    await this.prismaService.referral.upsert({
+      where: { userId: refferer.id },
+      update: {
+        referrals: { push: user.id },
+      },
+      create: {
+        user: { connect: { id: refferer.id } },
+        referrals: [user.id],
+      },
+    });
+
     const otp = await this.otpService.createAuthOtp(
       user,
       AUTH_TYPE.CONFIRM_USER_PREFIX,
@@ -92,6 +107,12 @@ export class UserService {
       subject: MAIL_SUBJECT.REGISTER,
       html: MAIL_MESSAGE.REGISTER(otp.code),
       to: user.email,
+    });
+
+    await this.mailService.sendMail({
+      subject: MAIL_SUBJECT.REFERRAL,
+      html: MAIL_MESSAGE.REFRERRAL(user.firstName),
+      to: refferer.email,
     });
 
     return user;
@@ -319,6 +340,17 @@ export class UserService {
         name: 'mobile',
         message: MESSAGES.AUTH.MOBILE_NUMBER_CONFLICT,
       });
+    if (input.invite) {
+      const referer = await this.prismaService.user.findUnique({
+        where: { username: input.invite },
+      });
+      if (!referer) {
+        throw new BadRequestException({
+          name: 'invite',
+          message: MESSAGES.AUTH.USER_NOT_FOUND,
+        });
+      }
+    }
     return true;
   }
 
@@ -452,5 +484,9 @@ export class UserService {
     });
   }
 
-  async referUser() {}
+  async fetchUserReferrals(userId: number) {
+    return await this.prismaService.referral.findUnique({
+      where: { userId },
+    });
+  }
 }
