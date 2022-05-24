@@ -52,7 +52,6 @@ model User {
   licenseBackImage   String?
   verificationStatus String              @default("inactive")
   vipStatus          Float               @default(0)
-  referralId         String              @unique @default(cuid())
   wallet             Wallet?
   // TODO this is a comment not validator
   // cart         Cart?

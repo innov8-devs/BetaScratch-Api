@@ -79,9 +79,6 @@ export class UserWhereInput {
     @Field(() => FloatFilter, {nullable:true})
     vipStatus?: FloatFilter;
 
-    @Field(() => StringFilter, {nullable:true})
-    referralId?: StringFilter;
-
     @Field(() => WalletRelationFilter, {nullable:true})
     wallet?: WalletRelationFilter;
 

@@ -56,9 +56,6 @@ export class UserMinAggregateInput {
     vipStatus?: true;
 
     @Field(() => Boolean, {nullable:true})
-    referralId?: true;
-
-    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})

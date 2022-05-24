@@ -18,7 +18,6 @@ export enum UserScalarFieldEnum {
     licenseBackImage = "licenseBackImage",
     verificationStatus = "verificationStatus",
     vipStatus = "vipStatus",
-    referralId = "referralId",
     createdAt = "createdAt",
     updatedAt = "updatedAt"
 }

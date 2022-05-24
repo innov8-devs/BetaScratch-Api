@@ -64,9 +64,6 @@ export class UserGroupBy {
     @Field(() => Float, {nullable:false})
     vipStatus!: number;
 
-    @Field(() => String, {nullable:false})
-    referralId!: string;
-
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;
 

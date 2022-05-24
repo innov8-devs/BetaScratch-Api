@@ -69,9 +69,6 @@ export class UserUncheckedUpdateWithoutTransactionsInput {
     @Field(() => FloatFieldUpdateOperationsInput, {nullable:true})
     vipStatus?: FloatFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    referralId?: StringFieldUpdateOperationsInput;
-
     @Field(() => WalletUncheckedUpdateOneWithoutUserInput, {nullable:true})
     wallet?: WalletUncheckedUpdateOneWithoutUserInput;
 

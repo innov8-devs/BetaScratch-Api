@@ -57,9 +57,6 @@ export class UserCountAggregate {
     vipStatus!: number;
 
     @Field(() => Int, {nullable:false})
-    referralId!: number;
-
-    @Field(() => Int, {nullable:false})
     createdAt!: number;
 
     @Field(() => Int, {nullable:false})

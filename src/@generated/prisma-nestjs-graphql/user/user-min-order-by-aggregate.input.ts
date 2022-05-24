@@ -57,9 +57,6 @@ export class UserMinOrderByAggregateInput {
     vipStatus?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
-    referralId?: keyof typeof SortOrder;
-
-    @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

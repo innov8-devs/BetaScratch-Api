@@ -63,9 +63,6 @@ export class UserOrderByWithRelationInput {
     @Field(() => SortOrder, {nullable:true})
     vipStatus?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    referralId?: keyof typeof SortOrder;
-
     @Field(() => WalletOrderByWithRelationInput, {nullable:true})
     wallet?: WalletOrderByWithRelationInput;
 

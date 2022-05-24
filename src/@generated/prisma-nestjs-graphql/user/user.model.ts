@@ -67,9 +67,6 @@ export class User {
     @Field(() => Float, {nullable:false,defaultValue:0})
     vipStatus!: number;
 
-    @Field(() => String, {nullable:false})
-    referralId!: string;
-
     @Field(() => Wallet, {nullable:true})
     wallet?: Wallet | null;
 

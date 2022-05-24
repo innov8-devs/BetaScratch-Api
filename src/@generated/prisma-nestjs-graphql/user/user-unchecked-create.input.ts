@@ -79,9 +79,6 @@ export class UserUncheckedCreateInput {
     @Field(() => Float, {nullable:true})
     vipStatus?: number;
 
-    @Field(() => String, {nullable:true})
-    referralId?: string;
-
     @Field(() => WalletUncheckedCreateNestedOneWithoutUserInput, {nullable:true})
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput;
 

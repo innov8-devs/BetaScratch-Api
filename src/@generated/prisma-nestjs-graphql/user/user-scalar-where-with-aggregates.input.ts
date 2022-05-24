@@ -72,9 +72,6 @@ export class UserScalarWhereWithAggregatesInput {
     @Field(() => FloatWithAggregatesFilter, {nullable:true})
     vipStatus?: FloatWithAggregatesFilter;
 
-    @Field(() => StringWithAggregatesFilter, {nullable:true})
-    referralId?: StringWithAggregatesFilter;
-
     @Field(() => DateTimeWithAggregatesFilter, {nullable:true})
     createdAt?: DateTimeWithAggregatesFilter;
 
