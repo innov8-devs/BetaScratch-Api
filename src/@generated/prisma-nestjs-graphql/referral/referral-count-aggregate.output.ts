@@ -15,6 +15,12 @@ export class ReferralCountAggregate {
     userId!: number;
 
     @Field(() => Int, {nullable:false})
+    invitesFunded!: number;
+
+    @Field(() => Int, {nullable:false})
+    totalEarned!: number;
+
+    @Field(() => Int, {nullable:false})
     createdAt!: number;
 
     @Field(() => Int, {nullable:false})

@@ -11,6 +11,12 @@ export class ReferralMaxAggregateInput {
     userId?: true;
 
     @Field(() => Boolean, {nullable:true})
+    invitesFunded?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    totalEarned?: true;
+
+    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})

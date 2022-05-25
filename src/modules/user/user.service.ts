@@ -490,11 +490,11 @@ export class UserService {
   async fetchUserReferrals(userId: number) {
     let users = [];
     let totalInvites = 0;
-    const refferals = await this.prismaService.referral.findUnique({
+    const referrals = await this.prismaService.referral.findUnique({
       where: { userId },
     });
 
-    for (let userId of refferals.referrals) {
+    for (let userId of referrals.referrals) {
       const user = await this.findUnique({ id: userId });
       users.push({
         name: `${user.firstName} ${user.lastName}`,
@@ -505,6 +505,8 @@ export class UserService {
     return {
       users,
       totalInvites,
+      invitesFunded: referrals.invitesFunded,
+      totalEarned: referrals.totalEarned,
     };
   }
 }

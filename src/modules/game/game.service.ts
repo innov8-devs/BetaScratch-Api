@@ -177,6 +177,14 @@ export class GameService {
         data: { withdrawable: { increment: referrerAmount } },
       });
 
+      await this.prismaService.referral.update({
+        where: { userId: referral.userId },
+        data: {
+          invitesFunded: { increment: 1 },
+          totalEarned: { increment: referrerAmount },
+        },
+      });
+
       const refereeAmount = (5 * amount) / 100;
 
       await this.prismaService.wallet.update({
@@ -222,6 +230,14 @@ export class GameService {
       await this.prismaService.wallet.update({
         where: { userId: referral.userId },
         data: { withdrawable: { increment: referrerAmount } },
+      });
+
+      await this.prismaService.referral.update({
+        where: { userId: referral.userId },
+        data: {
+          invitesFunded: { increment: 1 },
+          totalEarned: { increment: referrerAmount },
+        },
       });
 
       const refereeAmount = (5 * amount) / 100;
@@ -360,6 +376,14 @@ export class GameService {
       await this.prismaService.wallet.update({
         where: { userId: referral.userId },
         data: { withdrawable: { increment: referrerAmount } },
+      });
+
+      await this.prismaService.referral.update({
+        where: { userId: referral.userId },
+        data: {
+          invitesFunded: { increment: 1 },
+          totalEarned: { increment: referrerAmount },
+        },
       });
 
       const refereeAmount = (5 * input.subtotal) / 100;

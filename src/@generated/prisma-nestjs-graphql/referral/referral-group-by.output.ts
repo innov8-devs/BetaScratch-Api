@@ -19,6 +19,12 @@ export class ReferralGroupBy {
     @Field(() => Int, {nullable:false})
     userId!: number;
 
+    @Field(() => Int, {nullable:false})
+    invitesFunded!: number;
+
+    @Field(() => Int, {nullable:false})
+    totalEarned!: number;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;
 

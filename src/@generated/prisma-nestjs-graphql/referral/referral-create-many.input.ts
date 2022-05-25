@@ -15,6 +15,12 @@ export class ReferralCreateManyInput {
     @Field(() => Int, {nullable:false})
     userId!: number;
 
+    @Field(() => Int, {nullable:true})
+    invitesFunded?: number;
+
+    @Field(() => Int, {nullable:true})
+    totalEarned?: number;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

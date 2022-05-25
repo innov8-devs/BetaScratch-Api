@@ -13,6 +13,12 @@ export class ReferralUncheckedUpdateManyWithoutReferralInput {
     @Field(() => ReferralUpdatereferralsInput, {nullable:true})
     referrals?: ReferralUpdatereferralsInput;
 
+    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
+    invitesFunded?: IntFieldUpdateOperationsInput;
+
+    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
+    totalEarned?: IntFieldUpdateOperationsInput;
+
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;
 

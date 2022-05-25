@@ -11,6 +11,12 @@ export class ReferralMaxAggregate {
     @Field(() => Int, {nullable:true})
     userId?: number;
 
+    @Field(() => Int, {nullable:true})
+    invitesFunded?: number;
+
+    @Field(() => Int, {nullable:true})
+    totalEarned?: number;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

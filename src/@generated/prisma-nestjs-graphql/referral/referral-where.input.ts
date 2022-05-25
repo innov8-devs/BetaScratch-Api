@@ -29,6 +29,12 @@ export class ReferralWhereInput {
     @Field(() => IntFilter, {nullable:true})
     userId?: IntFilter;
 
+    @Field(() => IntFilter, {nullable:true})
+    invitesFunded?: IntFilter;
+
+    @Field(() => IntFilter, {nullable:true})
+    totalEarned?: IntFilter;
+
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;
 

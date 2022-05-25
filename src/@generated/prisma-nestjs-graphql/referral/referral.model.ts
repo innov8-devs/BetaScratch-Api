@@ -19,6 +19,12 @@ export class Referral {
     @Field(() => Int, {nullable:false})
     userId!: number;
 
+    @Field(() => Int, {nullable:false,defaultValue:0})
+    invitesFunded!: number;
+
+    @Field(() => Int, {nullable:false,defaultValue:0})
+    totalEarned!: number;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date;
 

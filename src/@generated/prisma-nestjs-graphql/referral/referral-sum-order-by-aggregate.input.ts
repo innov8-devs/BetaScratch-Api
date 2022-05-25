@@ -13,4 +13,10 @@ export class ReferralSumOrderByAggregateInput {
 
     @Field(() => SortOrder, {nullable:true})
     userId?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    invitesFunded?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    totalEarned?: keyof typeof SortOrder;
 }

@@ -4,6 +4,8 @@ export enum ReferralScalarFieldEnum {
     id = "id",
     referrals = "referrals",
     userId = "userId",
+    invitesFunded = "invitesFunded",
+    totalEarned = "totalEarned",
     createdAt = "createdAt",
     updatedAt = "updatedAt"
 }

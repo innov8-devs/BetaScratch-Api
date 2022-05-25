@@ -12,4 +12,10 @@ export class ReferralAvgAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     userId?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    invitesFunded?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    totalEarned?: true;
 }
