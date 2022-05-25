@@ -71,6 +71,7 @@ export class UserService {
       data: {
         ...rest,
         email: input.email.toLowerCase(),
+        username: input.username.toLowerCase(),
         password: hashedPassword,
         role: ROLE.USER,
       },
