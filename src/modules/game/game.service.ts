@@ -188,7 +188,7 @@ export class GameService {
     await this.prismaService.wallet.update({
       where: { userId },
       data: {
-        withdrawable: userWallet.withdrawable - amount,
+        withdrawable: { decrement: amount },
       },
     });
     return true;
