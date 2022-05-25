@@ -8,3 +8,11 @@ export class TotalUserCount {
   @IsNotEmpty()
   _count!: string;
 }
+
+@ObjectType()
+export class FetchUserReferralsResponse {
+  @Field()
+  name: string;
+  @Field(() => Date)
+  joined: Date | string;
+}

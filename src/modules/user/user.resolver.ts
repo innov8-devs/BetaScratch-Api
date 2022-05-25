@@ -11,10 +11,12 @@ import {
 } from './dto/user.request';
 import { Auth } from 'modules/auth/decorators/auth.decorator';
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
-import { TotalUserCount } from './dto/user.response';
+import {
+  FetchUserReferralsResponse,
+  TotalUserCount,
+} from './dto/user.response';
 import { AuthService } from 'modules/auth/auth.service';
 import { MyContext } from 'types/constants/types';
-import { Refferal } from '@generated/prisma-nestjs-graphql/refferal/refferal.model';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -153,7 +155,7 @@ export class UserResolver {
   }
 
   @Auth([ROLE.USER])
-  @Query(() => Refferal, { nullable: true })
+  @Query(() => [FetchUserReferralsResponse], { nullable: true })
   async fetchUserReferrals(@CurrentUser() user: User) {
     return await this.userService.fetchUserReferrals(user.id);
   }

@@ -486,8 +486,18 @@ export class UserService {
   }
 
   async fetchUserReferrals(userId: number) {
-    return await this.prismaService.referral.findUnique({
+    let result = [];
+    const refferals = await this.prismaService.referral.findUnique({
       where: { userId },
     });
+
+    for (let userId of refferals.referrals) {
+      const user = await this.findUnique({ id: userId });
+      result.push({
+        name: `${user.firstName} ${user.lastName}`,
+        joined: user.createdAt,
+      });
+    }
+    return result;
   }
 }
