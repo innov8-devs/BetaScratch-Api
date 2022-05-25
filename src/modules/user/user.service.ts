@@ -343,7 +343,7 @@ export class UserService {
       });
     if (input.invite) {
       const referer = await this.prismaService.user.findUnique({
-        where: { username: input.invite },
+        where: { username: input.invite.toLowerCase() },
       });
       if (!referer) {
         throw new BadRequestException({
