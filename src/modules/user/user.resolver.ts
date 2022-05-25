@@ -155,7 +155,7 @@ export class UserResolver {
   }
 
   @Auth([ROLE.USER])
-  @Query(() => [FetchUserReferralsResponse], { nullable: true })
+  @Query(() => FetchUserReferralsResponse, { nullable: true })
   async fetchUserReferrals(@CurrentUser() user: User) {
     return await this.userService.fetchUserReferrals(user.id);
   }

@@ -6,7 +6,7 @@ import { LoginInput } from 'modules/user/dto/user.request';
 import { MyContext } from 'types/constants/types';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
-import { AuthResponse } from './dto/auth.response.dto';
+// import { AuthResponse } from './dto/auth.response.dto';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import jwt_decode from 'jwt-decode';
 
@@ -41,12 +41,25 @@ export class AuthResolver {
   }
 
   @UseGuards(LocalAuthGuard)
-  @Mutation(() => AuthResponse)
+  @Mutation(() => User)
   async adminLogin(
     @Args('input') _input: LoginInput,
     @CurrentUser() user: User,
+    @Context() { res }: MyContext,
   ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setRefreshTokenHeaderCredentials(user.id, res);
     const { auth } = await this.authService.adminLogin(user);
     return auth;
   }
+
+  // @UseGuards(LocalAuthGuard)
+  // @Mutation(() => AuthResponse)
+  // async adminLogin(
+  //   @Args('input') _input: LoginInput,
+  //   @CurrentUser() user: User,
+  // ) {
+  //   const { auth } = await this.authService.adminLogin(user);
+  //   return auth;
+  // }
 }

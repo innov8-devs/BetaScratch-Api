@@ -86,18 +86,26 @@ export class UserService {
       currency: CURRENCY.NGN,
     });
 
-    const refferer = await this.findUnique({ username: invite });
+    if (invite) {
+      const refferer = await this.findUnique({ username: invite });
 
-    await this.prismaService.referral.upsert({
-      where: { userId: refferer.id },
-      update: {
-        referrals: { push: user.id },
-      },
-      create: {
-        user: { connect: { id: refferer.id } },
-        referrals: [user.id],
-      },
-    });
+      await this.prismaService.referral.upsert({
+        where: { userId: refferer.id },
+        update: {
+          referrals: { push: user.id },
+        },
+        create: {
+          user: { connect: { id: refferer.id } },
+          referrals: [user.id],
+        },
+      });
+
+      await this.mailService.sendMail({
+        subject: MAIL_SUBJECT.REFERRAL,
+        html: MAIL_MESSAGE.REFRERRAL(user.firstName),
+        to: refferer.email,
+      });
+    }
 
     const otp = await this.otpService.createAuthOtp(
       user,
@@ -108,12 +116,6 @@ export class UserService {
       subject: MAIL_SUBJECT.REGISTER,
       html: MAIL_MESSAGE.REGISTER(otp.code),
       to: user.email,
-    });
-
-    await this.mailService.sendMail({
-      subject: MAIL_SUBJECT.REFERRAL,
-      html: MAIL_MESSAGE.REFRERRAL(user.firstName),
-      to: refferer.email,
     });
 
     return user;
@@ -486,18 +488,23 @@ export class UserService {
   }
 
   async fetchUserReferrals(userId: number) {
-    let result = [];
+    let users = [];
+    let totalInvites = 0;
     const refferals = await this.prismaService.referral.findUnique({
       where: { userId },
     });
 
     for (let userId of refferals.referrals) {
       const user = await this.findUnique({ id: userId });
-      result.push({
+      users.push({
         name: `${user.firstName} ${user.lastName}`,
         joined: user.createdAt,
       });
+      totalInvites++;
     }
-    return result;
+    return {
+      users,
+      totalInvites,
+    };
   }
 }

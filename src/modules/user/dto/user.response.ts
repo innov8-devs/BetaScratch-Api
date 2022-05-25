@@ -10,9 +10,21 @@ export class TotalUserCount {
 }
 
 @ObjectType()
-export class FetchUserReferralsResponse {
-  @Field()
+export class Referees {
+  @Field({ nullable: true })
   name: string;
-  @Field(() => Date)
+  @Field(() => Date, { nullable: true })
   joined: Date | string;
+}
+
+@ObjectType()
+export class FetchUserReferralsResponse {
+  @Field(() => [Referees], { nullable: true })
+  users: Referees[];
+  @Field({ nullable: true })
+  totalInvites: number;
+  @Field({ nullable: true })
+  invitesFunded: number;
+  @Field({ nullable: true })
+  totalEarned: number;
 }

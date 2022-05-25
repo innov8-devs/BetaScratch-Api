@@ -7,17 +7,20 @@ import { AuthResolver } from './auth.resolver';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import * as dotenv from 'dotenv';
 import { PrismaService } from 'modules/prisma.service';
+import { OtpModule } from 'modules/otp/otp.module';
+import { OtpService } from 'modules/otp/otp.service';
 
 dotenv.config();
 
 @Module({
-  imports: [PassportModule, JwtModule.register({})],
+  imports: [PassportModule, JwtModule.register({}), OtpModule],
   providers: [
     AuthService,
     LocalStrategy,
     AuthResolver,
     JwtStrategy,
     PrismaService,
+    OtpService,
   ],
   exports: [AuthService],
 })
