@@ -156,7 +156,11 @@ export class UserResolver {
 
   @Auth([ROLE.USER])
   @Query(() => FetchUserReferralsResponse, { nullable: true })
-  async fetchUserReferrals(@CurrentUser() user: User) {
+  async fetchUserReferrals(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
     return await this.userService.fetchUserReferrals(user.id);
   }
 }
