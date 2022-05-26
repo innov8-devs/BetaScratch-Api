@@ -26,8 +26,8 @@ export class RegisterInput {
   @Field(() => Date)
   dateOfBirth: Date | string;
 
-  @Field()
-  gender: GENDER;
+  @Field(() => GENDER, { nullable: false })
+  gender!: keyof typeof GENDER;
 
   @Field()
   mobileNumber: string;
