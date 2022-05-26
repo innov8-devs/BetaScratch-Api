@@ -15,6 +15,7 @@ import { MailModule } from 'modules/mail/mail.module';
 import { OtpModule } from 'modules/otp/otp.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { MessageModule } from 'modules/message/message.module';
+import { AdminModule } from 'modules/admin/admin.module';
 @Module({
   imports: [
     AuthModule,
@@ -25,6 +26,7 @@ import { MessageModule } from 'modules/message/message.module';
     WalletModule,
     MessageModule,
     OtpModule,
+    AdminModule,
     TransactionModule,
     ConfigModule.forRoot({ load: [config], isGlobal: true }),
     MulterModule.register({ dest: '../uploads' }),
