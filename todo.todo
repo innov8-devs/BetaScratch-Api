@@ -1,5 +1,4 @@
-1. Remove admin login if you later work with normal login
-2. Delete AuthResponse if not used
+
 3.   //? not used for now
   REFRERRAL: (name: string) => `You have successfully referred ${name}`,
 
@@ -11,3 +10,4 @@
   WITHDRAWAL_APPROVAL: (amount: string, currency: string) =>
     `Your account has been credited with ${currency}${amount}`,
 Delete if not in use
+4. Add more admins in request admin otp when more admins come in

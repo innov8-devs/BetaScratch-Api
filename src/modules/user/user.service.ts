@@ -12,7 +12,6 @@ import { WalletService } from '../wallet/wallet.service';
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { CURRENCY } from '@generated/prisma-nestjs-graphql/prisma/currency.enum';
 import {
-  AdminLoginInput,
   RegisterInput,
   UserPaginationInput,
   ValidateFormOneInput,
@@ -118,21 +117,6 @@ export class UserService {
       to: user.email,
     });
 
-    return user;
-  }
-
-  // Admin Login
-  async adminLogin(input: AdminLoginInput, req: any) {
-    const { password, email } = input;
-    const errMessage = [];
-    const user = await this.findUnique({ email });
-    if (!user) errMessage.push(MESSAGES.AUTH.INVALID_CREDENTIALS);
-    if (errMessage.length) throw new BadRequestException(errMessage);
-    if (user.role !== ROLE.ADMIN) errMessage.push(MESSAGES.AUTH.UNAUTHORIZED);
-    const valid = await argon2.verify(user.password, password);
-    if (!valid) errMessage.push(MESSAGES.AUTH.INVALID_CREDENTIALS);
-    if (errMessage.length) throw new BadRequestException(errMessage);
-    req.session.userId = user.id;
     return user;
   }
 

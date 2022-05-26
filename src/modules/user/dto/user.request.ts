@@ -55,14 +55,6 @@ export class LoginInput {
 }
 
 @InputType()
-export class AdminLoginInput {
-  @Field()
-  email: string;
-  @Field()
-  password: string;
-}
-
-@InputType()
 export class ValidateFormOneInput {
   @Field(() => String, { nullable: false })
   @IsEmail()

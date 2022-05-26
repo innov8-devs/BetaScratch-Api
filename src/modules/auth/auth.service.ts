@@ -1,7 +1,10 @@
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import * as argon2 from 'argon2';
-// import { AuthResponse } from './dto/auth.response.dto';
 import { MESSAGES } from 'core/messages';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
@@ -12,6 +15,7 @@ import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { AUTH_TYPE } from 'types/constants/enum';
 import { MailService } from 'modules/mail/mail.service';
 import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
+import { LoginInput } from 'modules/user/dto/user.request';
 
 @Injectable()
 export class AuthService {
@@ -77,31 +81,63 @@ export class AuthService {
     return { auth };
   }
 
-  async adminLogin(user: User) {
-    if (user.role === ROLE.ADMIN) {
-      const otp = await this.otpService.createAuthOtp(
-        user,
-        AUTH_TYPE.CONFIRM_USER_PREFIX,
-      );
+  async requestAdminLoginOtp(input: LoginInput) {
+    const user = await this.validateUser(
+      input.phoneNumberOrEmail,
+      input.password,
+    );
 
-      await this.mailService.sendMail({
-        subject: MAIL_SUBJECT.ADMIN_LOGIN,
-        html: MAIL_MESSAGE.ADMIN_LOGIN(otp.code),
-        to: user.email,
+    if (user.role !== ROLE.ADMIN) {
+      throw new ForbiddenException({
+        name: 'login',
+        message: MESSAGES.AUTH.UNAUTHORIZED,
       });
     }
+
+    const otp = await this.otpService.createAuthOtp(
+      user,
+      AUTH_TYPE.ADMIN_LOGIN,
+    );
+
+    await this.mailService.sendMail({
+      subject: MAIL_SUBJECT.ADMIN_LOGIN,
+      html: MAIL_MESSAGE.ADMIN_LOGIN(otp.code),
+      to: user.email,
+    });
+
+    return true;
+  }
+
+  async adminLogin(user: User, otp: string) {
+    if (!user) {
+      throw new UnauthorizedException({
+        name: 'user',
+        message: MESSAGES.AUTH.USER_NOT_FOUND,
+      });
+    }
+
+    const currOtp = await this.otpService.findOne({ code: otp });
+
+    const isValid = await this.otpService.checkOtpValidity({
+      mobileNumber: user.mobileNumber,
+      otp,
+    });
+
+    if (!currOtp || !isValid) {
+      throw new UnauthorizedException({
+        name: 'otp',
+        message: MESSAGES.AUTH.INVALID_OTP,
+      });
+    }
+
+    await this.otpService.validateOtp({
+      mobileNumber: user.mobileNumber,
+      otp,
+    });
 
     const auth: User = user;
     return { auth };
   }
-
-  // async validateAdminLoginOtp(otp: string, user: User) {
-  //   const isValid = await this.otpService.checkOtpValidity({
-  //     mobileNumber: user.mobileNumber,
-  //     otp,
-  //   });
-  //   if(isVal)
-  // }
 
   async setAccessTokenHeaderCredentials(userId: number, res: Response) {
     const payload = { sub: userId };
@@ -126,16 +162,4 @@ export class AuthService {
       secure: true,
     });
   }
-
-  // async adminLogin(user: User) {
-  //   const auth: AuthResponse = user;
-  //   const payload = AuthService.jwtPayload(user);
-  //   auth.token = await this.generateAccessToken(payload);
-  //   const refreshToken = await this.generateRefreshToken(payload);
-  //   return { auth, refreshToken };
-  // }
-
-  // private static jwtPayload(user: User) {
-  //   return { sub: user.id };
-  // }
 }
