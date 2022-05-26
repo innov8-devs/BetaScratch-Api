@@ -71,6 +71,9 @@ export class MessageService {
         ],
       },
       take: 10,
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
     const read = await this.prismaService.message.findMany({
       where: {
@@ -84,6 +87,9 @@ export class MessageService {
         ],
       },
       take: 5,
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
     return {
       unread,

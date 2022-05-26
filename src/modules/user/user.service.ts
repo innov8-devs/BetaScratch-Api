@@ -477,7 +477,14 @@ export class UserService {
     const referrals = await this.prismaService.referral.findUnique({
       where: { userId },
     });
-    if (!referrals) return null;
+    if (!referrals) {
+      return {
+        users: null,
+        totalInvites: 0,
+        invitesFunded: 0,
+        totalEarned: 0,
+      };
+    }
 
     for (let userId of referrals.referrals) {
       const user = await this.findUnique({ id: userId });
