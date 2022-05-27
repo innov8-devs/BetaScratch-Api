@@ -170,7 +170,7 @@ export class GameService {
       const referral = await this.prismaService.referral.findFirst({
         where: { referrals: { has: userId } },
       });
-      const referrerAmount = (3 * amount) / 100;
+      const referrerAmount = (5 * amount) / 100;
 
       await this.prismaService.wallet.update({
         where: { userId: referral.userId },
@@ -185,7 +185,7 @@ export class GameService {
         },
       });
 
-      const refereeAmount = (5 * amount) / 100;
+      const refereeAmount = (3 * amount) / 100;
 
       await this.prismaService.wallet.update({
         where: { userId },
@@ -225,7 +225,7 @@ export class GameService {
       const referral = await this.prismaService.referral.findFirst({
         where: { referrals: { has: userId } },
       });
-      const referrerAmount = (3 * amount) / 100;
+      const referrerAmount = (5 * amount) / 100;
 
       await this.prismaService.wallet.update({
         where: { userId: referral.userId },
@@ -240,7 +240,7 @@ export class GameService {
         },
       });
 
-      const refereeAmount = (5 * amount) / 100;
+      const refereeAmount = (3 * amount) / 100;
 
       await this.prismaService.wallet.update({
         where: { userId },
@@ -371,7 +371,7 @@ export class GameService {
       const referral = await this.prismaService.referral.findFirst({
         where: { referrals: { has: userId } },
       });
-      const referrerAmount = (3 * input.subtotal) / 100;
+      const referrerAmount = (5 * input.subtotal) / 100;
 
       await this.prismaService.wallet.update({
         where: { userId: referral.userId },
@@ -386,7 +386,7 @@ export class GameService {
         },
       });
 
-      const refereeAmount = (5 * input.subtotal) / 100;
+      const refereeAmount = (3 * input.subtotal) / 100;
 
       await this.prismaService.wallet.update({
         where: { userId },
