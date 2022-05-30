@@ -1,4 +1,6 @@
+import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Auth } from 'modules/auth/decorators/auth.decorator';
 import { AdminService } from './admin.service';
 import { RegisterAdminInput } from './dto/admin.request';
 
@@ -11,6 +13,7 @@ export class AdminResolver {
     return await this.adminService.getDashboardData();
   }
 
+  @Auth([ROLE.ADMIN])
   @Mutation(() => Boolean)
   async createNewAdmin(@Args('input') input: RegisterAdminInput) {
     return await this.adminService.createNewAdmin(input);
