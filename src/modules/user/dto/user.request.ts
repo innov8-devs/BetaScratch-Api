@@ -51,7 +51,7 @@ export class LoginInput {
   password: string;
 
   @Field()
-  phoneNumberOrEmail: string;
+  email: string;
 }
 
 @InputType()

@@ -82,10 +82,7 @@ export class AuthService {
   }
 
   async requestAdminLoginOtp(input: LoginInput) {
-    const user = await this.validateUser(
-      input.phoneNumberOrEmail,
-      input.password,
-    );
+    const user = await this.validateUser(input.email, input.password);
 
     if (user.role !== ROLE.ADMIN) {
       throw new ForbiddenException({

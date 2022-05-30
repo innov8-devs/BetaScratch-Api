@@ -1,4 +1,3 @@
-import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AdminService } from './admin.service';
 import { RegisterAdminInput } from './dto/admin.request';
