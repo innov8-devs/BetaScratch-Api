@@ -11,6 +11,7 @@ import { WithdrawalRequest } from '../withdrawal-request/withdrawal-request.mode
 import { Cart } from '../cart/cart.model';
 import { Message } from '../message/message.model';
 import { Referral } from '../referral/referral.model';
+import { Token } from '../token/token.model';
 import { UserCount } from './user-count.output';
 
 @ObjectType()
@@ -93,6 +94,9 @@ export class User {
 
     @Field(() => [Referral], {nullable:true})
     Referral?: Array<Referral>;
+
+    @Field(() => [Token], {nullable:true})
+    Token?: Array<Token>;
 
     @Field(() => UserCount, {nullable:false})
     _count?: UserCount;

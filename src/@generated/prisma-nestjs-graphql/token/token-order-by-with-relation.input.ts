@@ -22,6 +22,9 @@ export class TokenOrderByWithRelationInput {
     mobileNumber?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    email?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     code?: keyof typeof SortOrder;
 
     @Field(() => UserOrderByWithRelationInput, {nullable:true})

@@ -13,6 +13,7 @@ import { OtpUpdateManyWithoutUserInput } from '../otp/otp-update-many-without-us
 import { WithdrawalRequestUpdateManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-update-many-without-user.input';
 import { CartUpdateManyWithoutUserInput } from '../cart/cart-update-many-without-user.input';
 import { MessageUpdateManyWithoutUserInput } from '../message/message-update-many-without-user.input';
+import { TokenUpdateManyWithoutUserInput } from '../token/token-update-many-without-user.input';
 
 @InputType()
 export class UserUpdateWithoutReferralInput {
@@ -88,4 +89,7 @@ export class UserUpdateWithoutReferralInput {
 
     @Field(() => MessageUpdateManyWithoutUserInput, {nullable:true})
     Message?: MessageUpdateManyWithoutUserInput;
+
+    @Field(() => TokenUpdateManyWithoutUserInput, {nullable:true})
+    Token?: TokenUpdateManyWithoutUserInput;
 }

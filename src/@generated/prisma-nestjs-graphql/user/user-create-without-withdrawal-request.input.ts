@@ -10,6 +10,7 @@ import { OtpCreateNestedManyWithoutUserInput } from '../otp/otp-create-nested-ma
 import { CartCreateNestedManyWithoutUserInput } from '../cart/cart-create-nested-many-without-user.input';
 import { MessageCreateNestedManyWithoutUserInput } from '../message/message-create-nested-many-without-user.input';
 import { ReferralCreateNestedManyWithoutUserInput } from '../referral/referral-create-nested-many-without-user.input';
+import { TokenCreateNestedManyWithoutUserInput } from '../token/token-create-nested-many-without-user.input';
 
 @InputType()
 export class UserCreateWithoutWithdrawalRequestInput {
@@ -97,4 +98,7 @@ export class UserCreateWithoutWithdrawalRequestInput {
 
     @Field(() => ReferralCreateNestedManyWithoutUserInput, {nullable:true})
     Referral?: ReferralCreateNestedManyWithoutUserInput;
+
+    @Field(() => TokenCreateNestedManyWithoutUserInput, {nullable:true})
+    Token?: TokenCreateNestedManyWithoutUserInput;
 }

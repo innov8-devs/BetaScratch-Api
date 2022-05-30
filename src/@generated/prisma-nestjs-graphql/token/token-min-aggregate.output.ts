@@ -21,6 +21,9 @@ export class TokenMinAggregate {
     mobileNumber?: string;
 
     @Field(() => String, {nullable:true})
+    email?: string;
+
+    @Field(() => String, {nullable:true})
     code?: string;
 
     @Field(() => Int, {nullable:true})

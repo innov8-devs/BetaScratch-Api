@@ -6,6 +6,7 @@ export const MAIL_SUBJECT = {
   WITHDRAWAL_APPROAL: 'Credit Alert',
   REFERRAL: 'Referral',
   ADMIN_LOGIN: 'Administrator Login',
+  ADMIN_NEW: 'Verify admin account',
 };
 
 export const MAIL_MESSAGE = {
@@ -160,8 +161,10 @@ export const MAIL_MESSAGE = {
   ADMIN_LOGIN: (otp: string) =>
     `Login as an administrator with this otp ${otp}`,
 
-  //? not used for now
   REFRERRAL: (name: string) => `You have successfully referred ${name}`,
+
+  ADMIN_NEW: (token: string) =>
+    `Kindly use click on the token <a href=${token}>${token}</a> to verify your admin account `,
 
   //? not used for now
   REQUEST_WITHDRAWAL: (otp: string) =>

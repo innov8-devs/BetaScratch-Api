@@ -1,14 +1,29 @@
-import { Injectable } from '@nestjs/common';
+import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { GENDER } from '@prisma/client';
+import { MESSAGES } from 'core/messages';
+import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
+import { MailService } from 'modules/mail/mail.service';
 import { PrismaService } from 'modules/prisma.service';
+import { TokenService } from 'modules/token/token.service';
 import {
+  COUNTRY,
   PAYMENT_PURPOSE,
   PAYMENT_STATUS,
   TRANSACTION,
 } from 'types/constants/enum';
+import { generateRandomString } from 'utils/generateRandomString.util';
+import * as argon2 from 'argon2';
+import { RegisterAdminInput } from './dto/admin.request';
+import { v4 } from 'uuid';
 
 @Injectable()
 export class AdminService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly mailService: MailService,
+    private readonly tokenService: TokenService,
+  ) {}
 
   public async getDashboardData() {
     let tabs = [];
@@ -120,6 +135,110 @@ export class AdminService {
     );
 
     console.log(tabs);
+
+    return true;
+  }
+
+  public async createNewAdmin(input: RegisterAdminInput) {
+    const emailUsed = await this.prismaService.user.findUnique({
+      where: { email: input.email.toLowerCase() },
+    });
+    const mobileNumberUsed = await this.prismaService.user.findUnique({
+      where: { mobileNumber: input.mobileNumber },
+    });
+    if (emailUsed) {
+      throw new BadRequestException({
+        name: 'email',
+        message: MESSAGES.AUTH.EMAIL_CONFLICT,
+      });
+    }
+    if (mobileNumberUsed) {
+      throw new BadRequestException({
+        name: 'mobile',
+        message: MESSAGES.AUTH.MOBILE_NUMBER_CONFLICT,
+      });
+    }
+    if (input.role === ROLE.USER || input.role === ROLE.ADMIN) {
+      throw new BadRequestException({
+        name: 'admin',
+        message: MESSAGES.AUTH.INVALID_ADMIN,
+      });
+    }
+
+    const dummyPass = await argon2.hash(v4());
+    const newAdmin = await this.prismaService.user.create({
+      data: {
+        ...input,
+        password: dummyPass,
+        country: COUNTRY.NIGERIA,
+        dateOfBirth: new Date(),
+        gender: GENDER.MALE,
+        state: 'Lagos',
+        username: generateRandomString(),
+        confirmed: true,
+      },
+    });
+
+    const adminToken = await this.tokenService.createAuthToken(
+      newAdmin,
+      'verify admin',
+    );
+
+    await this.mailService.sendMail({
+      subject: MAIL_SUBJECT.ADMIN_NEW,
+      html: MAIL_MESSAGE.ADMIN_NEW(
+        `${process.env.BETA_ADMIN}/register?token=${adminToken.code}&type=new_admin`,
+      ),
+      to: newAdmin.email,
+    });
+
+    return newAdmin;
+  }
+
+  public async confirmAdminToken(token: string) {
+    const adminToken = await this.tokenService.findOne({ code: token });
+    if (!adminToken) return false;
+    const tokenIsValid = await this.tokenService.checkTokenValidity({
+      token: adminToken.code,
+      mobileNumber: adminToken.mobileNumber,
+    });
+    if (!tokenIsValid) {
+      await this.prismaService.user.delete({
+        where: { email: adminToken.email },
+      });
+      return false;
+    }
+    return true;
+  }
+
+  public async resetNewAdminPassword(password: string, token: string) {
+    const adminToken = await this.tokenService.findOne({ code: token });
+    if (!adminToken) {
+      throw new BadRequestException({
+        name: 'token',
+        message: MESSAGES.AUTH.INVALID_TOKEN,
+      });
+    }
+    const tokenIsValid = await this.tokenService.checkTokenValidity({
+      token: adminToken.code,
+      mobileNumber: adminToken.mobileNumber,
+    });
+    if (!adminToken || !tokenIsValid) {
+      throw new BadRequestException({
+        name: 'token',
+        message: MESSAGES.AUTH.INVALID_TOKEN,
+      });
+    }
+    const hashedPassword = await argon2.hash(password);
+    const updatedAdmin = await this.prismaService.user.update({
+      where: { email: adminToken.email },
+      data: { password: hashedPassword },
+    });
+
+    await this.tokenService.validateToken({
+      mobileNumber: updatedAdmin.mobileNumber,
+      token: adminToken.code,
+    });
 
     return true;
   }

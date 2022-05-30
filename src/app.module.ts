@@ -16,6 +16,7 @@ import { OtpModule } from 'modules/otp/otp.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { MessageModule } from 'modules/message/message.module';
 import { AdminModule } from 'modules/admin/admin.module';
+import { TokenModule } from 'modules/token/token.module';
 @Module({
   imports: [
     AuthModule,
@@ -26,6 +27,7 @@ import { AdminModule } from 'modules/admin/admin.module';
     WalletModule,
     MessageModule,
     OtpModule,
+    TokenModule,
     AdminModule,
     TransactionModule,
     ConfigModule.forRoot({ load: [config], isGlobal: true }),

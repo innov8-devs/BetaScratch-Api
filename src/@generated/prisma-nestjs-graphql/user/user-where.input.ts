@@ -15,6 +15,7 @@ import { WithdrawalRequestListRelationFilter } from '../withdrawal-request/withd
 import { CartListRelationFilter } from '../cart/cart-list-relation-filter.input';
 import { MessageListRelationFilter } from '../message/message-list-relation-filter.input';
 import { ReferralListRelationFilter } from '../referral/referral-list-relation-filter.input';
+import { TokenListRelationFilter } from '../token/token-list-relation-filter.input';
 
 @InputType()
 export class UserWhereInput {
@@ -105,4 +106,7 @@ export class UserWhereInput {
 
     @Field(() => ReferralListRelationFilter, {nullable:true})
     Referral?: ReferralListRelationFilter;
+
+    @Field(() => TokenListRelationFilter, {nullable:true})
+    Token?: TokenListRelationFilter;
 }

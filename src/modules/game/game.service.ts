@@ -418,10 +418,11 @@ export class GameService {
   }
 
   async flutterCheckoutTwo(input: FlutterCheckoutTwoInput, userId: number) {
-    const { status } =
+    const { status, amount } =
       await this.transactionService.verifyFlutterWaveTransaction(
         input.transaction_id,
       );
+
     const transaction = await this.prismaService.transaction.findFirst({
       where: {
         transactionRef: input.transaction_reference,
@@ -429,6 +430,7 @@ export class GameService {
         status: PAYMENT_STATUS.PENDING,
         type: TRANSACTION.FLUTTERWAVE,
         purpose: PAYMENT_PURPOSE.CART,
+        amount,
       },
     });
 

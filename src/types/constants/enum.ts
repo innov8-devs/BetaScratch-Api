@@ -14,6 +14,10 @@ export enum CURRENCY {
   USD = 'USD',
 }
 
+export enum COUNTRY {
+  NIGERIA = 'Nigeria',
+}
+
 export enum PAYMENT_STATUS {
   PENDING = 'PENDING',
   SUCCESSFUL = 'SUCCESSFUL',

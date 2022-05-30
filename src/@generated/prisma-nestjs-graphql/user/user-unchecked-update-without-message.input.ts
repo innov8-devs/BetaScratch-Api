@@ -14,6 +14,7 @@ import { OtpUncheckedUpdateManyWithoutUserInput } from '../otp/otp-unchecked-upd
 import { WithdrawalRequestUncheckedUpdateManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-unchecked-update-many-without-user.input';
 import { CartUncheckedUpdateManyWithoutUserInput } from '../cart/cart-unchecked-update-many-without-user.input';
 import { ReferralUncheckedUpdateManyWithoutUserInput } from '../referral/referral-unchecked-update-many-without-user.input';
+import { TokenUncheckedUpdateManyWithoutUserInput } from '../token/token-unchecked-update-many-without-user.input';
 
 @InputType()
 export class UserUncheckedUpdateWithoutMessageInput {
@@ -92,4 +93,7 @@ export class UserUncheckedUpdateWithoutMessageInput {
 
     @Field(() => ReferralUncheckedUpdateManyWithoutUserInput, {nullable:true})
     Referral?: ReferralUncheckedUpdateManyWithoutUserInput;
+
+    @Field(() => TokenUncheckedUpdateManyWithoutUserInput, {nullable:true})
+    Token?: TokenUncheckedUpdateManyWithoutUserInput;
 }

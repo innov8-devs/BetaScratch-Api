@@ -34,6 +34,9 @@ export class TokenWhereInput {
     mobileNumber?: StringFilter;
 
     @Field(() => StringFilter, {nullable:true})
+    email?: StringFilter;
+
+    @Field(() => StringFilter, {nullable:true})
     code?: StringFilter;
 
     @Field(() => UserRelationFilter, {nullable:true})

@@ -10,6 +10,8 @@ const AUTH = {
   MOBILE_NUMBER_CONFLICT: 'mobile number has been taken',
   SHORT_PASSWORD: 'password must be greater than 6 letters',
   INVALID_TOKEN: 'invalid token',
+  INVALID_ADMIN: 'invalid admin type',
+  TOKEN_NOT_FOUND: 'token does not exist',
   USER_NOT_FOUND: 'user not found',
   UNAUTHORIZED: 'unauthorized user',
   CONFIRM_ACCOUNT: 'confirm account',

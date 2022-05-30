@@ -11,6 +11,7 @@ import { OtpUncheckedCreateNestedManyWithoutUserInput } from '../otp/otp-uncheck
 import { WithdrawalRequestUncheckedCreateNestedManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-unchecked-create-nested-many-without-user.input';
 import { CartUncheckedCreateNestedManyWithoutUserInput } from '../cart/cart-unchecked-create-nested-many-without-user.input';
 import { MessageUncheckedCreateNestedManyWithoutUserInput } from '../message/message-unchecked-create-nested-many-without-user.input';
+import { TokenUncheckedCreateNestedManyWithoutUserInput } from '../token/token-unchecked-create-nested-many-without-user.input';
 
 @InputType()
 export class UserUncheckedCreateWithoutReferralInput {
@@ -101,4 +102,7 @@ export class UserUncheckedCreateWithoutReferralInput {
 
     @Field(() => MessageUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
     Message?: MessageUncheckedCreateNestedManyWithoutUserInput;
+
+    @Field(() => TokenUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
+    Token?: TokenUncheckedCreateNestedManyWithoutUserInput;
 }

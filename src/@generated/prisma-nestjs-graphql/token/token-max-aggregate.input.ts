@@ -20,6 +20,9 @@ export class TokenMaxAggregateInput {
     mobileNumber?: true;
 
     @Field(() => Boolean, {nullable:true})
+    email?: true;
+
+    @Field(() => Boolean, {nullable:true})
     code?: true;
 
     @Field(() => Boolean, {nullable:true})

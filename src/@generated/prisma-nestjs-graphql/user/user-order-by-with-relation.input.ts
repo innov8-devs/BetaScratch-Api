@@ -8,6 +8,7 @@ import { WithdrawalRequestOrderByRelationAggregateInput } from '../withdrawal-re
 import { CartOrderByRelationAggregateInput } from '../cart/cart-order-by-relation-aggregate.input';
 import { MessageOrderByRelationAggregateInput } from '../message/message-order-by-relation-aggregate.input';
 import { ReferralOrderByRelationAggregateInput } from '../referral/referral-order-by-relation-aggregate.input';
+import { TokenOrderByRelationAggregateInput } from '../token/token-order-by-relation-aggregate.input';
 
 @InputType()
 export class UserOrderByWithRelationInput {
@@ -89,4 +90,7 @@ export class UserOrderByWithRelationInput {
 
     @Field(() => ReferralOrderByRelationAggregateInput, {nullable:true})
     Referral?: ReferralOrderByRelationAggregateInput;
+
+    @Field(() => TokenOrderByRelationAggregateInput, {nullable:true})
+    Token?: TokenOrderByRelationAggregateInput;
 }

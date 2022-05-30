@@ -22,4 +22,7 @@ export class UserCount {
 
     @Field(() => Int, {nullable:false})
     Referral?: number;
+
+    @Field(() => Int, {nullable:false})
+    Token?: number;
 }

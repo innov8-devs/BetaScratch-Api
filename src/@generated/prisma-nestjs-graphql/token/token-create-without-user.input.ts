@@ -21,6 +21,10 @@ export class TokenCreateWithoutUserInput {
     mobileNumber!: string;
 
     @Field(() => String, {nullable:false})
+    @Validator.IsEmail()
+    email!: string;
+
+    @Field(() => String, {nullable:false})
     @Validator.IsString()
     code!: string;
 

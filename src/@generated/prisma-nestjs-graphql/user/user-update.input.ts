@@ -14,6 +14,7 @@ import { WithdrawalRequestUpdateManyWithoutUserInput } from '../withdrawal-reque
 import { CartUpdateManyWithoutUserInput } from '../cart/cart-update-many-without-user.input';
 import { MessageUpdateManyWithoutUserInput } from '../message/message-update-many-without-user.input';
 import { ReferralUpdateManyWithoutUserInput } from '../referral/referral-update-many-without-user.input';
+import { TokenUpdateManyWithoutUserInput } from '../token/token-update-many-without-user.input';
 
 @InputType()
 export class UserUpdateInput {
@@ -92,4 +93,7 @@ export class UserUpdateInput {
 
     @Field(() => ReferralUpdateManyWithoutUserInput, {nullable:true})
     Referral?: ReferralUpdateManyWithoutUserInput;
+
+    @Field(() => TokenUpdateManyWithoutUserInput, {nullable:true})
+    Token?: TokenUpdateManyWithoutUserInput;
 }

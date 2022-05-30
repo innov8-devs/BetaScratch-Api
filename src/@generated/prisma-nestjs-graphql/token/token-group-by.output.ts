@@ -26,6 +26,9 @@ export class TokenGroupBy {
     mobileNumber!: string;
 
     @Field(() => String, {nullable:false})
+    email!: string;
+
+    @Field(() => String, {nullable:false})
     code!: string;
 
     @Field(() => Int, {nullable:false})
