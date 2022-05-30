@@ -192,7 +192,7 @@ export class AdminService {
       to: newAdmin.email,
     });
 
-    return newAdmin;
+    return true;
   }
 
   public async confirmAdminToken(token: string) {

@@ -12,7 +12,7 @@ export class AdminResolver {
     return await this.adminService.getDashboardData();
   }
 
-  @Mutation(() => User)
+  @Mutation(() => Boolean)
   async createNewAdmin(@Args('input') input: RegisterAdminInput) {
     return await this.adminService.createNewAdmin(input);
   }
