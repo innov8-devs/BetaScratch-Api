@@ -51,6 +51,15 @@ export class LoginInput {
   password: string;
 
   @Field()
+  phoneNumberOrEmail: string;
+}
+
+@InputType()
+export class AdminLoginInput {
+  @Field()
+  password: string;
+
+  @Field()
   email: string;
 }
 

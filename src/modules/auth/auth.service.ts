@@ -15,7 +15,7 @@ import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { AUTH_TYPE } from 'types/constants/enum';
 import { MailService } from 'modules/mail/mail.service';
 import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
-import { LoginInput } from 'modules/user/dto/user.request';
+import { AdminLoginInput } from 'modules/user/dto/user.request';
 
 @Injectable()
 export class AuthService {
@@ -81,7 +81,7 @@ export class AuthService {
     return { auth };
   }
 
-  async requestAdminLoginOtp(input: LoginInput) {
+  async requestAdminLoginOtp(input: AdminLoginInput) {
     const user = await this.validateUser(input.email, input.password);
 
     if (user.role !== ROLE.ADMIN) {
@@ -106,6 +106,7 @@ export class AuthService {
   }
 
   async adminLogin(user: User, otp: string) {
+    console.log(user);
     if (!user) {
       throw new UnauthorizedException({
         name: 'user',

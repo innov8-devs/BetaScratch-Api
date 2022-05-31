@@ -2,7 +2,7 @@ import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { parseCookies } from 'helpers/parseCookie';
-import { LoginInput } from 'modules/user/dto/user.request';
+import { AdminLoginInput, LoginInput } from 'modules/user/dto/user.request';
 import { MyContext } from 'types/constants/types';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
@@ -40,14 +40,14 @@ export class AuthResolver {
   }
 
   @Mutation(() => Boolean)
-  async requestAdminLoginOtp(@Args('input') input: LoginInput) {
+  async requestAdminLoginOtp(@Args('input') input: AdminLoginInput) {
     return this.authService.requestAdminLoginOtp(input);
   }
 
   @UseGuards(LocalAuthGuard)
   @Mutation(() => User)
   async adminLogin(
-    @Args('input') _input: LoginInput,
+    @Args('input') _input: AdminLoginInput,
     @Args('otp') otp: string,
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
