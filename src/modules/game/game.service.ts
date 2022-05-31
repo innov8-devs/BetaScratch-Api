@@ -174,7 +174,7 @@ export class GameService {
 
       await this.prismaService.wallet.update({
         where: { userId: referral.userId },
-        data: { withdrawable: { increment: referrerAmount } },
+        data: { withdrawable: { increment: referrerAmount }, bonus: 500 },
       });
 
       await this.prismaService.referral.update({
@@ -189,7 +189,7 @@ export class GameService {
 
       await this.prismaService.wallet.update({
         where: { userId },
-        data: { withdrawable: { increment: refereeAmount } },
+        data: { withdrawable: { increment: refereeAmount }, bonus: 500 },
       });
     }
 
@@ -229,7 +229,10 @@ export class GameService {
 
       await this.prismaService.wallet.update({
         where: { userId: referral.userId },
-        data: { withdrawable: { increment: referrerAmount } },
+        data: {
+          withdrawable: { increment: referrerAmount },
+          bonus: { increment: 500 },
+        },
       });
 
       await this.prismaService.referral.update({
@@ -244,7 +247,10 @@ export class GameService {
 
       await this.prismaService.wallet.update({
         where: { userId },
-        data: { withdrawable: { increment: refereeAmount } },
+        data: {
+          withdrawable: { increment: refereeAmount },
+          bonus: { increment: 500 },
+        },
       });
     }
 
@@ -375,7 +381,10 @@ export class GameService {
 
       await this.prismaService.wallet.update({
         where: { userId: referral.userId },
-        data: { withdrawable: { increment: referrerAmount } },
+        data: {
+          withdrawable: { increment: referrerAmount },
+          bonus: { increment: 500 },
+        },
       });
 
       await this.prismaService.referral.update({
@@ -390,7 +399,10 @@ export class GameService {
 
       await this.prismaService.wallet.update({
         where: { userId },
-        data: { withdrawable: { increment: refereeAmount } },
+        data: {
+          withdrawable: { increment: refereeAmount },
+          bonus: { increment: 500 },
+        },
       });
     }
 
