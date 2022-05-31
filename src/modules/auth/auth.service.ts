@@ -1,5 +1,6 @@
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import {
+  BadRequestException,
   ForbiddenException,
   Injectable,
   UnauthorizedException,
@@ -11,7 +12,6 @@ import { ConfigService } from '@nestjs/config';
 import { PrismaService } from 'modules/prisma.service';
 import { Response } from 'express';
 import { OtpService } from 'modules/otp/otp.service';
-import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { AUTH_TYPE } from 'types/constants/enum';
 import { MailService } from 'modules/mail/mail.service';
 import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
@@ -82,9 +82,20 @@ export class AuthService {
   }
 
   async requestAdminLoginOtp(input: AdminLoginInput) {
-    const user = await this.validateUser(input.email, input.password);
+    const admin = await this.prismaService.user.findUnique({
+      where: { email: input.email },
+    });
 
-    if (user.role !== ROLE.ADMIN) {
+    const passwordValid = await argon2.verify(admin.password, input.password);
+
+    if (!passwordValid) {
+      throw new BadRequestException({
+        name: 'password',
+        message: MESSAGES.AUTH.INVALID_CREDENTIALS,
+      });
+    }
+
+    if (!admin.role.includes('ADMIN')) {
       throw new ForbiddenException({
         name: 'login',
         message: MESSAGES.AUTH.UNAUTHORIZED,
@@ -92,21 +103,20 @@ export class AuthService {
     }
 
     const otp = await this.otpService.createAuthOtp(
-      user,
+      admin,
       AUTH_TYPE.ADMIN_LOGIN,
     );
 
     await this.mailService.sendMail({
       subject: MAIL_SUBJECT.ADMIN_LOGIN,
       html: MAIL_MESSAGE.ADMIN_LOGIN(otp.code),
-      to: user.email,
+      to: admin.email,
     });
 
     return true;
   }
 
   async adminLogin(user: User, otp: string) {
-    console.log(user);
     if (!user) {
       throw new UnauthorizedException({
         name: 'user',
