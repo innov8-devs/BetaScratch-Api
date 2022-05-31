@@ -1,12 +1,30 @@
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
+import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { AuthService } from 'modules/auth/auth.service';
 import { Auth } from 'modules/auth/decorators/auth.decorator';
+import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
+import { MyContext } from 'types/constants/types';
 import { AdminService } from './admin.service';
 import { RegisterAdminInput } from './dto/admin.request';
 
 @Resolver()
 export class AdminResolver {
-  constructor(private readonly adminService: AdminService) {}
+  constructor(
+    private readonly adminService: AdminService,
+    private readonly authService: AuthService,
+  ) {}
+
+  // Get logged in user
+  @Auth()
+  @Query(() => User, { nullable: true })
+  async meAdmin(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ): Promise<User> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    return this.adminService.meAdmin(user);
+  }
 
   @Query(() => Boolean)
   async getDashboardData() {

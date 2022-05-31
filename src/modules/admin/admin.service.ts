@@ -16,6 +16,7 @@ import { generateRandomString } from 'utils/generateRandomString.util';
 import * as argon2 from 'argon2';
 import { RegisterAdminInput } from './dto/admin.request';
 import { v4 } from 'uuid';
+import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 
 @Injectable()
 export class AdminService {
@@ -24,6 +25,13 @@ export class AdminService {
     private readonly mailService: MailService,
     private readonly tokenService: TokenService,
   ) {}
+
+  // Get current logged in user
+  async meAdmin(user: User): Promise<User> {
+    return await this.prismaService.user.findUnique({
+      where: { id: user.id },
+    });
+  }
 
   public async getDashboardData() {
     let tabs = [];
