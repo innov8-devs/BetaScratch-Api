@@ -8,11 +8,14 @@ import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(private authService: AuthService) {
-    super({ usernameField: 'phoneNumberOrEmail'});
+    super({ usernameField: 'phoneNumberOrEmail' });
   }
 
   async validate(phoneNumberOrEmail: string, password: string): Promise<User> {
-    const user = await this.authService.validateUser(phoneNumberOrEmail, password);
+    const user = await this.authService.validateUser(
+      phoneNumberOrEmail,
+      password,
+    );
     if (!user)
       throw new UnauthorizedException(MESSAGES.AUTH.INVALID_CREDENTIALS);
 
