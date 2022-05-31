@@ -6,7 +6,10 @@ import { Auth } from 'modules/auth/decorators/auth.decorator';
 import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
 import { MyContext } from 'types/constants/types';
 import { AdminService } from './admin.service';
-import { RegisterAdminInput } from './dto/admin.request';
+import {
+  GetUsersFromAdminInput,
+  RegisterAdminInput,
+} from './dto/admin.request';
 
 @Resolver()
 export class AdminResolver {
@@ -48,5 +51,16 @@ export class AdminResolver {
     @Args('token') token: string,
   ) {
     return await this.adminService.resetNewAdminPassword(password, token);
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => [User], { nullable: true })
+  async getUsersFromAdmin(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+    @Args('input') input: GetUsersFromAdminInput,
+  ): Promise<User[]> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    return this.adminService.getUsersFromAdmin(input);
   }
 }

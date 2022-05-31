@@ -14,7 +14,10 @@ import {
 } from 'types/constants/enum';
 import { generateRandomString } from 'utils/generateRandomString.util';
 import * as argon2 from 'argon2';
-import { RegisterAdminInput } from './dto/admin.request';
+import {
+  GetUsersFromAdminInput,
+  RegisterAdminInput,
+} from './dto/admin.request';
 import { v4 } from 'uuid';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 
@@ -142,8 +145,6 @@ export class AdminService {
       },
     );
 
-    console.log(tabs);
-
     return true;
   }
 
@@ -249,5 +250,19 @@ export class AdminService {
     });
 
     return true;
+  }
+
+  public async getUsersFromAdmin(input: GetUsersFromAdminInput) {
+    const { orderBy, orderColumn, page, size } = input;
+    let skipValue = page * size - size;
+    return await this.prismaService.user.findMany({
+      where: { role: ROLE.USER },
+      orderBy: {
+        [orderColumn]: orderBy,
+      },
+      take: size,
+      skip: skipValue,
+      include: { wallet: true },
+    });
   }
 }

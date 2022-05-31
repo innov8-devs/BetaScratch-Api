@@ -62,7 +62,6 @@ export class AuthService {
   }
 
   public async generateAccessToken(payload: any) {
-    console.log(this.otpService);
     const algorithm: any = process.env.JWT_ALGORITHM;
     const secret = this.configService.get('token.access.secret');
     const expiresIn = this.configService.get('token.access.expiration');
