@@ -23,7 +23,6 @@ export class AdminCreateWithoutMessageInput {
     lastName!: string;
 
     @Field(() => ROLE, {nullable:false})
-    @Validator.IsDate()
     role!: keyof typeof ROLE;
 
     @Field(() => String, {nullable:false})

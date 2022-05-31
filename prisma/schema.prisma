@@ -76,7 +76,7 @@ model Admin {
   /// @Validator.IsString()
   /// @Validator.MinLength(2)
   lastName     String
-  /// @Validator.IsDate()
+  // @Validator.IsEnum(GENDER, { each: true })
   role         ROLE
   ///@Validator.IsPhoneNumber()
   mobileNumber String    @unique
