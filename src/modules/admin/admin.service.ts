@@ -158,7 +158,7 @@ export class AdminService {
         message: MESSAGES.AUTH.MOBILE_NUMBER_CONFLICT,
       });
     }
-    if (input.role === ROLE.USER || input.role === ROLE.ADMIN) {
+    if (input.role === ROLE.USER) {
       throw new BadRequestException({
         name: 'admin',
         message: MESSAGES.AUTH.INVALID_ADMIN,
