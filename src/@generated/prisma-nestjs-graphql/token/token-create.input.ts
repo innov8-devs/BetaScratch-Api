@@ -2,6 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import * as Validator from 'class-validator';
 import { UserCreateNestedOneWithoutTokenInput } from '../user/user-create-nested-one-without-token.input';
+import { AdminCreateNestedOneWithoutTokenInput } from '../admin/admin-create-nested-one-without-token.input';
 
 @InputType()
 export class TokenCreateInput {
@@ -37,4 +38,7 @@ export class TokenCreateInput {
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
+
+    @Field(() => AdminCreateNestedOneWithoutTokenInput, {nullable:true})
+    Admin?: AdminCreateNestedOneWithoutTokenInput;
 }

@@ -13,4 +13,7 @@ export class MessageAvgAggregate {
 
     @Field(() => Float, {nullable:true})
     readStatus?: number;
+
+    @Field(() => Float, {nullable:true})
+    adminId?: number;
 }

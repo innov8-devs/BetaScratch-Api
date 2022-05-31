@@ -40,6 +40,9 @@ export class TokenGroupBy {
     @Field(() => Date, {nullable:false})
     updatedAt!: Date | string;
 
+    @Field(() => Int, {nullable:true})
+    adminId?: number;
+
     @Field(() => TokenCountAggregate, {nullable:true})
     _count?: TokenCountAggregate;
 

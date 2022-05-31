@@ -33,4 +33,7 @@ export class TokenMaxAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     updatedAt?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    adminId?: true;
 }

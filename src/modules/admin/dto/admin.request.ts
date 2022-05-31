@@ -15,11 +15,6 @@ export class RegisterAdminInput {
   @Field()
   mobileNumber: string;
 
-  @Field(() => ROLE)
-  role: ROLE =
-    ROLE.ADMIN ||
-    ROLE.ACCOUNT_ADMIN ||
-    ROLE.BUSINESS_DEV_ADMIN ||
-    ROLE.CUSTOMER_SUPPORT_ADMIN ||
-    ROLE.IT_ADMIN;
+  @Field(() => ROLE, { nullable: false })
+  role!: keyof typeof ROLE;
 }

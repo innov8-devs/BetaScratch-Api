@@ -12,4 +12,7 @@ export class MessageSumAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     readStatus?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    adminId?: true;
 }

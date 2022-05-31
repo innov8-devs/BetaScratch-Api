@@ -10,7 +10,8 @@ export enum OtpScalarFieldEnum {
     code = "code",
     userId = "userId",
     createdAt = "createdAt",
-    updatedAt = "updatedAt"
+    updatedAt = "updatedAt",
+    adminId = "adminId"
 }
 
 

@@ -40,6 +40,9 @@ export class OtpOrderByWithAggregationInput {
     @Field(() => SortOrder, {nullable:true})
     updatedAt?: keyof typeof SortOrder;
 
+    @Field(() => SortOrder, {nullable:true})
+    adminId?: keyof typeof SortOrder;
+
     @Field(() => OtpCountOrderByAggregateInput, {nullable:true})
     _count?: OtpCountOrderByAggregateInput;
 

@@ -10,4 +10,7 @@ export class TokenAvgAggregate {
 
     @Field(() => Float, {nullable:true})
     userId?: number;
+
+    @Field(() => Float, {nullable:true})
+    adminId?: number;
 }

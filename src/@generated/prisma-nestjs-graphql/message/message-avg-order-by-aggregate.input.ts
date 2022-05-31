@@ -13,4 +13,7 @@ export class MessageAvgOrderByAggregateInput {
 
     @Field(() => SortOrder, {nullable:true})
     readStatus?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    adminId?: keyof typeof SortOrder;
 }

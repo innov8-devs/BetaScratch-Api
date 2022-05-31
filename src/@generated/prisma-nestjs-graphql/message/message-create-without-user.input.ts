@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import * as Validator from 'class-validator';
 import { Int } from '@nestjs/graphql';
 import { GraphQLJSON } from 'graphql-type-json';
+import { AdminCreateNestedOneWithoutMessageInput } from '../admin/admin-create-nested-one-without-message.input';
 
 @InputType()
 export class MessageCreateWithoutUserInput {
@@ -35,4 +36,7 @@ export class MessageCreateWithoutUserInput {
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
+
+    @Field(() => AdminCreateNestedOneWithoutMessageInput, {nullable:true})
+    Admin?: AdminCreateNestedOneWithoutMessageInput;
 }

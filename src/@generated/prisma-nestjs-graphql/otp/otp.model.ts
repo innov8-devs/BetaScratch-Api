@@ -3,6 +3,7 @@ import { ObjectType } from '@nestjs/graphql';
 import { ID } from '@nestjs/graphql';
 import { User } from '../user/user.model';
 import { Int } from '@nestjs/graphql';
+import { Admin } from '../admin/admin.model';
 
 @ObjectType()
 export class Otp {
@@ -39,4 +40,10 @@ export class Otp {
 
     @Field(() => Date, {nullable:false})
     updatedAt!: Date;
+
+    @Field(() => Admin, {nullable:true})
+    Admin?: Admin | null;
+
+    @Field(() => Int, {nullable:true})
+    adminId!: number | null;
 }

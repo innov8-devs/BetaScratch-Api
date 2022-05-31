@@ -40,6 +40,9 @@ export class TokenOrderByWithAggregationInput {
     @Field(() => SortOrder, {nullable:true})
     updatedAt?: keyof typeof SortOrder;
 
+    @Field(() => SortOrder, {nullable:true})
+    adminId?: keyof typeof SortOrder;
+
     @Field(() => TokenCountOrderByAggregateInput, {nullable:true})
     _count?: TokenCountOrderByAggregateInput;
 

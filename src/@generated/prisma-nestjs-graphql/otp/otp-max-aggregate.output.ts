@@ -34,4 +34,7 @@ export class OtpMaxAggregate {
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
+
+    @Field(() => Int, {nullable:true})
+    adminId?: number;
 }

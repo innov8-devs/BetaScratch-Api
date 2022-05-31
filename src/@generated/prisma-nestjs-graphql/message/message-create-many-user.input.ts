@@ -38,4 +38,7 @@ export class MessageCreateManyUserInput {
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
+
+    @Field(() => Int, {nullable:true})
+    adminId?: number;
 }

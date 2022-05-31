@@ -6,6 +6,8 @@ import { StringFilter } from '../prisma/string-filter.input';
 import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
 import { JsonNullableFilter } from '../prisma/json-nullable-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
+import { AdminRelationFilter } from '../admin/admin-relation-filter.input';
+import { IntNullableFilter } from '../prisma/int-nullable-filter.input';
 
 @InputType()
 export class MessageWhereInput {
@@ -51,4 +53,10 @@ export class MessageWhereInput {
 
     @Field(() => DateTimeFilter, {nullable:true})
     updatedAt?: DateTimeFilter;
+
+    @Field(() => AdminRelationFilter, {nullable:true})
+    Admin?: AdminRelationFilter;
+
+    @Field(() => IntNullableFilter, {nullable:true})
+    adminId?: IntNullableFilter;
 }

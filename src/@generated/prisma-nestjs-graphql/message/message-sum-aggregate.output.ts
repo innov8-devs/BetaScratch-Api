@@ -13,4 +13,7 @@ export class MessageSumAggregate {
 
     @Field(() => Int, {nullable:true})
     readStatus?: number;
+
+    @Field(() => Int, {nullable:true})
+    adminId?: number;
 }

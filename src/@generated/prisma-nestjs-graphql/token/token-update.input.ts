@@ -4,6 +4,7 @@ import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-operations.input';
 import { UserUpdateOneRequiredWithoutTokenInput } from '../user/user-update-one-required-without-token.input';
+import { AdminUpdateOneWithoutTokenInput } from '../admin/admin-update-one-without-token.input';
 
 @InputType()
 export class TokenUpdateInput {
@@ -34,4 +35,7 @@ export class TokenUpdateInput {
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;
+
+    @Field(() => AdminUpdateOneWithoutTokenInput, {nullable:true})
+    Admin?: AdminUpdateOneWithoutTokenInput;
 }

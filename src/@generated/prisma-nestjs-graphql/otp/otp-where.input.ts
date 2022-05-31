@@ -5,6 +5,8 @@ import { StringFilter } from '../prisma/string-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 import { BoolFilter } from '../prisma/bool-filter.input';
 import { UserRelationFilter } from '../user/user-relation-filter.input';
+import { AdminRelationFilter } from '../admin/admin-relation-filter.input';
+import { IntNullableFilter } from '../prisma/int-nullable-filter.input';
 
 @InputType()
 export class OtpWhereInput {
@@ -50,4 +52,10 @@ export class OtpWhereInput {
 
     @Field(() => DateTimeFilter, {nullable:true})
     updatedAt?: DateTimeFilter;
+
+    @Field(() => AdminRelationFilter, {nullable:true})
+    Admin?: AdminRelationFilter;
+
+    @Field(() => IntNullableFilter, {nullable:true})
+    adminId?: IntNullableFilter;
 }

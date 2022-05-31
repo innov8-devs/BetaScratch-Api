@@ -9,4 +9,7 @@ export class OtpAvgAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     userId?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    adminId?: true;
 }

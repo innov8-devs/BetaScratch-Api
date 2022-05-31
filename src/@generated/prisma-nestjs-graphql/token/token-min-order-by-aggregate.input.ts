@@ -34,4 +34,7 @@ export class TokenMinOrderByAggregateInput {
 
     @Field(() => SortOrder, {nullable:true})
     updatedAt?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    adminId?: keyof typeof SortOrder;
 }

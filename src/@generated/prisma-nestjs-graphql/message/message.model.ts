@@ -4,6 +4,7 @@ import { ID } from '@nestjs/graphql';
 import { User } from '../user/user.model';
 import { Int } from '@nestjs/graphql';
 import { GraphQLJSON } from 'graphql-type-json';
+import { Admin } from '../admin/admin.model';
 
 @ObjectType()
 export class Message {
@@ -40,4 +41,10 @@ export class Message {
 
     @Field(() => Date, {nullable:false})
     updatedAt!: Date;
+
+    @Field(() => Admin, {nullable:true})
+    Admin?: Admin | null;
+
+    @Field(() => Int, {nullable:true})
+    adminId!: number | null;
 }

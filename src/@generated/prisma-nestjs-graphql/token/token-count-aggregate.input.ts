@@ -35,5 +35,8 @@ export class TokenCountAggregateInput {
     updatedAt?: true;
 
     @Field(() => Boolean, {nullable:true})
+    adminId?: true;
+
+    @Field(() => Boolean, {nullable:true})
     _all?: true;
 }

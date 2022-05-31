@@ -9,4 +9,7 @@ export class TokenSumAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     userId?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    adminId?: true;
 }

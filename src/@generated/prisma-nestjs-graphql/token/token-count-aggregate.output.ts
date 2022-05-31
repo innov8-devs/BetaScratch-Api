@@ -36,5 +36,8 @@ export class TokenCountAggregate {
     updatedAt!: number;
 
     @Field(() => Int, {nullable:false})
+    adminId!: number;
+
+    @Field(() => Int, {nullable:false})
     _all!: number;
 }

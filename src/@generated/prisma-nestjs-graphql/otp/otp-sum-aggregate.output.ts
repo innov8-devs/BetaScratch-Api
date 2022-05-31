@@ -10,4 +10,7 @@ export class OtpSumAggregate {
 
     @Field(() => Int, {nullable:true})
     userId?: number;
+
+    @Field(() => Int, {nullable:true})
+    adminId?: number;
 }

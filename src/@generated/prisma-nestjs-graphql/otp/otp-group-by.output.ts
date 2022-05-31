@@ -40,6 +40,9 @@ export class OtpGroupBy {
     @Field(() => Date, {nullable:false})
     updatedAt!: Date | string;
 
+    @Field(() => Int, {nullable:true})
+    adminId?: number;
+
     @Field(() => OtpCountAggregate, {nullable:true})
     _count?: OtpCountAggregate;
 

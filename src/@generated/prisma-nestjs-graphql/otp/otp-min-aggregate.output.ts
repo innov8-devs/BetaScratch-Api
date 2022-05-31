@@ -34,4 +34,7 @@ export class OtpMinAggregate {
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
+
+    @Field(() => Int, {nullable:true})
+    adminId?: number;
 }

@@ -36,5 +36,8 @@ export class MessageCountAggregate {
     updatedAt!: number;
 
     @Field(() => Int, {nullable:false})
+    adminId!: number;
+
+    @Field(() => Int, {nullable:false})
     _all!: number;
 }

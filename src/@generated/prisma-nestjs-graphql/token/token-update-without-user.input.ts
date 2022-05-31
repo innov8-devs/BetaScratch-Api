@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-operations.input';
+import { AdminUpdateOneWithoutTokenInput } from '../admin/admin-update-one-without-token.input';
 
 @InputType()
 export class TokenUpdateWithoutUserInput {
@@ -30,4 +31,7 @@ export class TokenUpdateWithoutUserInput {
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;
+
+    @Field(() => AdminUpdateOneWithoutTokenInput, {nullable:true})
+    Admin?: AdminUpdateOneWithoutTokenInput;
 }

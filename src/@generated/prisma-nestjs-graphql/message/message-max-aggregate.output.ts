@@ -31,4 +31,7 @@ export class MessageMaxAggregate {
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
+
+    @Field(() => Int, {nullable:true})
+    adminId?: number;
 }

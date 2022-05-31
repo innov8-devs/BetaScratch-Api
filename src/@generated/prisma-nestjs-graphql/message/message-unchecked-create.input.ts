@@ -41,4 +41,7 @@ export class MessageUncheckedCreateInput {
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
+
+    @Field(() => Int, {nullable:true})
+    adminId?: number;
 }

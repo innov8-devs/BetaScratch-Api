@@ -9,4 +9,7 @@ export class TokenAvgAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     userId?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    adminId?: true;
 }

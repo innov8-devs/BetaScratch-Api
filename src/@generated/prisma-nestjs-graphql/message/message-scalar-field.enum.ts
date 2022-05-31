@@ -10,7 +10,8 @@ export enum MessageScalarFieldEnum {
     messageType = "messageType",
     cards = "cards",
     createdAt = "createdAt",
-    updatedAt = "updatedAt"
+    updatedAt = "updatedAt",
+    adminId = "adminId"
 }
 
 

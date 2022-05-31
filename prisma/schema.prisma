@@ -66,6 +66,32 @@ model User {
   Token              Token[]
 }
 
+model Admin {
+  id           Int       @id @default(autoincrement())
+  /// @Validator.IsEmail()
+  email        String    @unique
+  /// @Validator.IsString()
+  /// @Validator.MinLength(2)
+  firstName    String
+  /// @Validator.IsString()
+  /// @Validator.MinLength(2)
+  lastName     String
+  /// @Validator.IsDate()
+  role         ROLE
+  ///@Validator.IsPhoneNumber()
+  mobileNumber String    @unique
+  /// @Validaror.IsBoolean()
+  /// @Validation.IsOptional()
+  confirmed    Boolean   @default(false)
+  /// @Validator.IsString()
+  /// @Validation.HideField({output: true})
+  password     String
+  createdAt    DateTime  @default(now())
+  Otp          Otp[]
+  Message      Message[]
+  Token        Token[]
+}
+
 model Wallet {
   id           Int      @id @default(autoincrement())
   user         User     @relation(fields: [userId], references: [id])
@@ -156,6 +182,8 @@ model Message {
   cards       Json?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  Admin       Admin?   @relation(fields: [adminId], references: [id])
+  adminId     Int?
 }
 
 model Cart {
@@ -212,6 +240,8 @@ model Otp {
   userId       Int
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  Admin        Admin?   @relation(fields: [adminId], references: [id])
+  adminId      Int?
 }
 
 model Token {
@@ -232,6 +262,8 @@ model Token {
   userId       Int
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  Admin        Admin?   @relation(fields: [adminId], references: [id])
+  adminId      Int?
 }
 
 enum ROLE {

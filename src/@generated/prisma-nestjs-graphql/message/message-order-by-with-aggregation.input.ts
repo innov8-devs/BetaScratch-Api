@@ -40,6 +40,9 @@ export class MessageOrderByWithAggregationInput {
     @Field(() => SortOrder, {nullable:true})
     updatedAt?: keyof typeof SortOrder;
 
+    @Field(() => SortOrder, {nullable:true})
+    adminId?: keyof typeof SortOrder;
+
     @Field(() => MessageCountOrderByAggregateInput, {nullable:true})
     _count?: MessageCountOrderByAggregateInput;
 
