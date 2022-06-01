@@ -82,7 +82,7 @@ export class AuthService {
 
   async requestAdminLoginOtp(input: AdminLoginInput) {
     const admin = await this.prismaService.user.findUnique({
-      where: { email: input.email },
+      where: { email: input.email.toLowerCase() },
     });
 
     const passwordValid = await argon2.verify(admin.password, input.password);

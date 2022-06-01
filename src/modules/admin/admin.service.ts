@@ -178,6 +178,7 @@ export class AdminService {
     const newAdmin = await this.prismaService.user.create({
       data: {
         ...input,
+        email: input.email.toLowerCase(),
         password: dummyPass,
         country: COUNTRY.NIGERIA,
         dateOfBirth: new Date(),
