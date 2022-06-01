@@ -63,4 +63,15 @@ export class AdminResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res);
     return this.adminService.getUsersFromAdmin(input);
   }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => User, { nullable: true })
+  async getOneUserFromAdmin(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+    @Args('userId') userId: number,
+  ): Promise<User> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    return this.adminService.getOneUserFromAdmin(userId);
+  }
 }

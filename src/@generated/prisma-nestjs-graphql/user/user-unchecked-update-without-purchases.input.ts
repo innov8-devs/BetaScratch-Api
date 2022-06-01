@@ -1,5 +1,6 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
+import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operations.input';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 import { EnumROLEFieldUpdateOperationsInput } from '../prisma/enum-role-field-update-operations.input';
@@ -7,17 +8,19 @@ import { EnumGENDERFieldUpdateOperationsInput } from '../prisma/enum-gender-fiel
 import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-operations.input';
 import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-string-field-update-operations.input';
 import { FloatFieldUpdateOperationsInput } from '../prisma/float-field-update-operations.input';
-import { WalletUpdateOneWithoutUserInput } from '../wallet/wallet-update-one-without-user.input';
-import { TransactionUpdateManyWithoutUserInput } from '../transaction/transaction-update-many-without-user.input';
-import { OtpUpdateManyWithoutUserInput } from '../otp/otp-update-many-without-user.input';
-import { WithdrawalRequestUpdateManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-update-many-without-user.input';
-import { CartUpdateManyWithoutUserInput } from '../cart/cart-update-many-without-user.input';
-import { MessageUpdateManyWithoutUserInput } from '../message/message-update-many-without-user.input';
-import { ReferralUpdateManyWithoutUserInput } from '../referral/referral-update-many-without-user.input';
-import { TokenUpdateManyWithoutUserInput } from '../token/token-update-many-without-user.input';
+import { WalletUncheckedUpdateOneWithoutUserInput } from '../wallet/wallet-unchecked-update-one-without-user.input';
+import { TransactionUncheckedUpdateManyWithoutUserInput } from '../transaction/transaction-unchecked-update-many-without-user.input';
+import { OtpUncheckedUpdateManyWithoutUserInput } from '../otp/otp-unchecked-update-many-without-user.input';
+import { WithdrawalRequestUncheckedUpdateManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-unchecked-update-many-without-user.input';
+import { MessageUncheckedUpdateManyWithoutUserInput } from '../message/message-unchecked-update-many-without-user.input';
+import { ReferralUncheckedUpdateManyWithoutUserInput } from '../referral/referral-unchecked-update-many-without-user.input';
+import { TokenUncheckedUpdateManyWithoutUserInput } from '../token/token-unchecked-update-many-without-user.input';
 
 @InputType()
-export class UserUpdateInput {
+export class UserUncheckedUpdateWithoutPurchasesInput {
+
+    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
+    id?: IntFieldUpdateOperationsInput;
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     email?: StringFieldUpdateOperationsInput;
@@ -67,11 +70,11 @@ export class UserUpdateInput {
     @Field(() => FloatFieldUpdateOperationsInput, {nullable:true})
     vipStatus?: FloatFieldUpdateOperationsInput;
 
-    @Field(() => WalletUpdateOneWithoutUserInput, {nullable:true})
-    wallet?: WalletUpdateOneWithoutUserInput;
+    @Field(() => WalletUncheckedUpdateOneWithoutUserInput, {nullable:true})
+    wallet?: WalletUncheckedUpdateOneWithoutUserInput;
 
-    @Field(() => TransactionUpdateManyWithoutUserInput, {nullable:true})
-    transactions?: TransactionUpdateManyWithoutUserInput;
+    @Field(() => TransactionUncheckedUpdateManyWithoutUserInput, {nullable:true})
+    transactions?: TransactionUncheckedUpdateManyWithoutUserInput;
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;
@@ -79,21 +82,18 @@ export class UserUpdateInput {
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;
 
-    @Field(() => OtpUpdateManyWithoutUserInput, {nullable:true})
-    otp?: OtpUpdateManyWithoutUserInput;
+    @Field(() => OtpUncheckedUpdateManyWithoutUserInput, {nullable:true})
+    otp?: OtpUncheckedUpdateManyWithoutUserInput;
 
-    @Field(() => WithdrawalRequestUpdateManyWithoutUserInput, {nullable:true})
-    withdrawalRequest?: WithdrawalRequestUpdateManyWithoutUserInput;
+    @Field(() => WithdrawalRequestUncheckedUpdateManyWithoutUserInput, {nullable:true})
+    withdrawalRequest?: WithdrawalRequestUncheckedUpdateManyWithoutUserInput;
 
-    @Field(() => CartUpdateManyWithoutUserInput, {nullable:true})
-    purchases?: CartUpdateManyWithoutUserInput;
+    @Field(() => MessageUncheckedUpdateManyWithoutUserInput, {nullable:true})
+    message?: MessageUncheckedUpdateManyWithoutUserInput;
 
-    @Field(() => MessageUpdateManyWithoutUserInput, {nullable:true})
-    message?: MessageUpdateManyWithoutUserInput;
+    @Field(() => ReferralUncheckedUpdateManyWithoutUserInput, {nullable:true})
+    referral?: ReferralUncheckedUpdateManyWithoutUserInput;
 
-    @Field(() => ReferralUpdateManyWithoutUserInput, {nullable:true})
-    referral?: ReferralUpdateManyWithoutUserInput;
-
-    @Field(() => TokenUpdateManyWithoutUserInput, {nullable:true})
-    token?: TokenUpdateManyWithoutUserInput;
+    @Field(() => TokenUncheckedUpdateManyWithoutUserInput, {nullable:true})
+    token?: TokenUncheckedUpdateManyWithoutUserInput;
 }

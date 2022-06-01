@@ -92,17 +92,17 @@ export class UserUncheckedCreateWithoutTokenInput {
     updatedAt?: Date | string;
 
     @Field(() => OtpUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
-    Otp?: OtpUncheckedCreateNestedManyWithoutUserInput;
+    otp?: OtpUncheckedCreateNestedManyWithoutUserInput;
 
     @Field(() => WithdrawalRequestUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
-    WithdrawalRequest?: WithdrawalRequestUncheckedCreateNestedManyWithoutUserInput;
+    withdrawalRequest?: WithdrawalRequestUncheckedCreateNestedManyWithoutUserInput;
 
     @Field(() => CartUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
-    Cart?: CartUncheckedCreateNestedManyWithoutUserInput;
+    purchases?: CartUncheckedCreateNestedManyWithoutUserInput;
 
     @Field(() => MessageUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
-    Message?: MessageUncheckedCreateNestedManyWithoutUserInput;
+    message?: MessageUncheckedCreateNestedManyWithoutUserInput;
 
     @Field(() => ReferralUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
-    Referral?: ReferralUncheckedCreateNestedManyWithoutUserInput;
+    referral?: ReferralUncheckedCreateNestedManyWithoutUserInput;
 }

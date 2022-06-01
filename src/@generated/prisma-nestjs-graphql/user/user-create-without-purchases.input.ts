@@ -8,12 +8,12 @@ import { WalletCreateNestedOneWithoutUserInput } from '../wallet/wallet-create-n
 import { TransactionCreateNestedManyWithoutUserInput } from '../transaction/transaction-create-nested-many-without-user.input';
 import { OtpCreateNestedManyWithoutUserInput } from '../otp/otp-create-nested-many-without-user.input';
 import { WithdrawalRequestCreateNestedManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-create-nested-many-without-user.input';
-import { CartCreateNestedManyWithoutUserInput } from '../cart/cart-create-nested-many-without-user.input';
 import { MessageCreateNestedManyWithoutUserInput } from '../message/message-create-nested-many-without-user.input';
 import { ReferralCreateNestedManyWithoutUserInput } from '../referral/referral-create-nested-many-without-user.input';
+import { TokenCreateNestedManyWithoutUserInput } from '../token/token-create-nested-many-without-user.input';
 
 @InputType()
-export class UserCreateWithoutTokenInput {
+export class UserCreateWithoutPurchasesInput {
 
     @Field(() => String, {nullable:false})
     @Validator.IsEmail()
@@ -93,12 +93,12 @@ export class UserCreateWithoutTokenInput {
     @Field(() => WithdrawalRequestCreateNestedManyWithoutUserInput, {nullable:true})
     withdrawalRequest?: WithdrawalRequestCreateNestedManyWithoutUserInput;
 
-    @Field(() => CartCreateNestedManyWithoutUserInput, {nullable:true})
-    purchases?: CartCreateNestedManyWithoutUserInput;
-
     @Field(() => MessageCreateNestedManyWithoutUserInput, {nullable:true})
     message?: MessageCreateNestedManyWithoutUserInput;
 
     @Field(() => ReferralCreateNestedManyWithoutUserInput, {nullable:true})
     referral?: ReferralCreateNestedManyWithoutUserInput;
+
+    @Field(() => TokenCreateNestedManyWithoutUserInput, {nullable:true})
+    token?: TokenCreateNestedManyWithoutUserInput;
 }

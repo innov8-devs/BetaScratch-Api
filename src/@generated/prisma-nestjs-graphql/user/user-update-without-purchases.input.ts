@@ -11,13 +11,12 @@ import { WalletUpdateOneWithoutUserInput } from '../wallet/wallet-update-one-wit
 import { TransactionUpdateManyWithoutUserInput } from '../transaction/transaction-update-many-without-user.input';
 import { OtpUpdateManyWithoutUserInput } from '../otp/otp-update-many-without-user.input';
 import { WithdrawalRequestUpdateManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-update-many-without-user.input';
-import { CartUpdateManyWithoutUserInput } from '../cart/cart-update-many-without-user.input';
 import { MessageUpdateManyWithoutUserInput } from '../message/message-update-many-without-user.input';
 import { ReferralUpdateManyWithoutUserInput } from '../referral/referral-update-many-without-user.input';
 import { TokenUpdateManyWithoutUserInput } from '../token/token-update-many-without-user.input';
 
 @InputType()
-export class UserUpdateInput {
+export class UserUpdateWithoutPurchasesInput {
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     email?: StringFieldUpdateOperationsInput;
@@ -84,9 +83,6 @@ export class UserUpdateInput {
 
     @Field(() => WithdrawalRequestUpdateManyWithoutUserInput, {nullable:true})
     withdrawalRequest?: WithdrawalRequestUpdateManyWithoutUserInput;
-
-    @Field(() => CartUpdateManyWithoutUserInput, {nullable:true})
-    purchases?: CartUpdateManyWithoutUserInput;
 
     @Field(() => MessageUpdateManyWithoutUserInput, {nullable:true})
     message?: MessageUpdateManyWithoutUserInput;

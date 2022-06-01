@@ -9,20 +9,20 @@ export class UserCount {
     transactions?: number;
 
     @Field(() => Int, {nullable:false})
-    Otp?: number;
+    otp?: number;
 
     @Field(() => Int, {nullable:false})
-    WithdrawalRequest?: number;
+    withdrawalRequest?: number;
 
     @Field(() => Int, {nullable:false})
-    Cart?: number;
+    purchases?: number;
 
     @Field(() => Int, {nullable:false})
-    Message?: number;
+    message?: number;
 
     @Field(() => Int, {nullable:false})
-    Referral?: number;
+    referral?: number;
 
     @Field(() => Int, {nullable:false})
-    Token?: number;
+    token?: number;
 }

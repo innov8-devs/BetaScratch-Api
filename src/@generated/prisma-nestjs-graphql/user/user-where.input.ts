@@ -93,20 +93,20 @@ export class UserWhereInput {
     updatedAt?: DateTimeFilter;
 
     @Field(() => OtpListRelationFilter, {nullable:true})
-    Otp?: OtpListRelationFilter;
+    otp?: OtpListRelationFilter;
 
     @Field(() => WithdrawalRequestListRelationFilter, {nullable:true})
-    WithdrawalRequest?: WithdrawalRequestListRelationFilter;
+    withdrawalRequest?: WithdrawalRequestListRelationFilter;
 
     @Field(() => CartListRelationFilter, {nullable:true})
-    Cart?: CartListRelationFilter;
+    purchases?: CartListRelationFilter;
 
     @Field(() => MessageListRelationFilter, {nullable:true})
-    Message?: MessageListRelationFilter;
+    message?: MessageListRelationFilter;
 
     @Field(() => ReferralListRelationFilter, {nullable:true})
-    Referral?: ReferralListRelationFilter;
+    referral?: ReferralListRelationFilter;
 
     @Field(() => TokenListRelationFilter, {nullable:true})
-    Token?: TokenListRelationFilter;
+    token?: TokenListRelationFilter;
 }

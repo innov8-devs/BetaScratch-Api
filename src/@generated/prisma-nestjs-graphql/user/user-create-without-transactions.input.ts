@@ -85,20 +85,20 @@ export class UserCreateWithoutTransactionsInput {
     updatedAt?: Date | string;
 
     @Field(() => OtpCreateNestedManyWithoutUserInput, {nullable:true})
-    Otp?: OtpCreateNestedManyWithoutUserInput;
+    otp?: OtpCreateNestedManyWithoutUserInput;
 
     @Field(() => WithdrawalRequestCreateNestedManyWithoutUserInput, {nullable:true})
-    WithdrawalRequest?: WithdrawalRequestCreateNestedManyWithoutUserInput;
+    withdrawalRequest?: WithdrawalRequestCreateNestedManyWithoutUserInput;
 
     @Field(() => CartCreateNestedManyWithoutUserInput, {nullable:true})
-    Cart?: CartCreateNestedManyWithoutUserInput;
+    purchases?: CartCreateNestedManyWithoutUserInput;
 
     @Field(() => MessageCreateNestedManyWithoutUserInput, {nullable:true})
-    Message?: MessageCreateNestedManyWithoutUserInput;
+    message?: MessageCreateNestedManyWithoutUserInput;
 
     @Field(() => ReferralCreateNestedManyWithoutUserInput, {nullable:true})
-    Referral?: ReferralCreateNestedManyWithoutUserInput;
+    referral?: ReferralCreateNestedManyWithoutUserInput;
 
     @Field(() => TokenCreateNestedManyWithoutUserInput, {nullable:true})
-    Token?: TokenCreateNestedManyWithoutUserInput;
+    token?: TokenCreateNestedManyWithoutUserInput;
 }

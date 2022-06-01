@@ -9,13 +9,12 @@ import { WalletUncheckedCreateNestedOneWithoutUserInput } from '../wallet/wallet
 import { TransactionUncheckedCreateNestedManyWithoutUserInput } from '../transaction/transaction-unchecked-create-nested-many-without-user.input';
 import { OtpUncheckedCreateNestedManyWithoutUserInput } from '../otp/otp-unchecked-create-nested-many-without-user.input';
 import { WithdrawalRequestUncheckedCreateNestedManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-unchecked-create-nested-many-without-user.input';
-import { CartUncheckedCreateNestedManyWithoutUserInput } from '../cart/cart-unchecked-create-nested-many-without-user.input';
 import { MessageUncheckedCreateNestedManyWithoutUserInput } from '../message/message-unchecked-create-nested-many-without-user.input';
 import { ReferralUncheckedCreateNestedManyWithoutUserInput } from '../referral/referral-unchecked-create-nested-many-without-user.input';
 import { TokenUncheckedCreateNestedManyWithoutUserInput } from '../token/token-unchecked-create-nested-many-without-user.input';
 
 @InputType()
-export class UserUncheckedCreateInput {
+export class UserUncheckedCreateWithoutPurchasesInput {
 
     @Field(() => Int, {nullable:true})
     id?: number;
@@ -97,9 +96,6 @@ export class UserUncheckedCreateInput {
 
     @Field(() => WithdrawalRequestUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
     withdrawalRequest?: WithdrawalRequestUncheckedCreateNestedManyWithoutUserInput;
-
-    @Field(() => CartUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
-    purchases?: CartUncheckedCreateNestedManyWithoutUserInput;
 
     @Field(() => MessageUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
     message?: MessageUncheckedCreateNestedManyWithoutUserInput;
