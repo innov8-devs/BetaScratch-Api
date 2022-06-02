@@ -83,17 +83,17 @@ export class UserUncheckedUpdateWithoutMessageInput {
     updatedAt?: DateTimeFieldUpdateOperationsInput;
 
     @Field(() => OtpUncheckedUpdateManyWithoutUserInput, {nullable:true})
-    Otp?: OtpUncheckedUpdateManyWithoutUserInput;
+    otp?: OtpUncheckedUpdateManyWithoutUserInput;
 
     @Field(() => WithdrawalRequestUncheckedUpdateManyWithoutUserInput, {nullable:true})
-    WithdrawalRequest?: WithdrawalRequestUncheckedUpdateManyWithoutUserInput;
+    withdrawalRequest?: WithdrawalRequestUncheckedUpdateManyWithoutUserInput;
 
     @Field(() => CartUncheckedUpdateManyWithoutUserInput, {nullable:true})
-    Cart?: CartUncheckedUpdateManyWithoutUserInput;
+    purchases?: CartUncheckedUpdateManyWithoutUserInput;
 
     @Field(() => ReferralUncheckedUpdateManyWithoutUserInput, {nullable:true})
-    Referral?: ReferralUncheckedUpdateManyWithoutUserInput;
+    referral?: ReferralUncheckedUpdateManyWithoutUserInput;
 
     @Field(() => TokenUncheckedUpdateManyWithoutUserInput, {nullable:true})
-    Token?: TokenUncheckedUpdateManyWithoutUserInput;
+    token?: TokenUncheckedUpdateManyWithoutUserInput;
 }

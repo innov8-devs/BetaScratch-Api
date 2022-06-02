@@ -79,17 +79,17 @@ export class UserUpdateWithoutReferralInput {
     updatedAt?: DateTimeFieldUpdateOperationsInput;
 
     @Field(() => OtpUpdateManyWithoutUserInput, {nullable:true})
-    Otp?: OtpUpdateManyWithoutUserInput;
+    otp?: OtpUpdateManyWithoutUserInput;
 
     @Field(() => WithdrawalRequestUpdateManyWithoutUserInput, {nullable:true})
-    WithdrawalRequest?: WithdrawalRequestUpdateManyWithoutUserInput;
+    withdrawalRequest?: WithdrawalRequestUpdateManyWithoutUserInput;
 
     @Field(() => CartUpdateManyWithoutUserInput, {nullable:true})
-    Cart?: CartUpdateManyWithoutUserInput;
+    purchases?: CartUpdateManyWithoutUserInput;
 
     @Field(() => MessageUpdateManyWithoutUserInput, {nullable:true})
-    Message?: MessageUpdateManyWithoutUserInput;
+    message?: MessageUpdateManyWithoutUserInput;
 
     @Field(() => TokenUpdateManyWithoutUserInput, {nullable:true})
-    Token?: TokenUpdateManyWithoutUserInput;
+    token?: TokenUpdateManyWithoutUserInput;
 }

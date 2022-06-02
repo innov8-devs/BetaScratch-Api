@@ -1,25 +1,25 @@
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { GENDER } from '@prisma/client';
 import { MESSAGES } from 'core/messages';
 import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
 import { MailService } from 'modules/mail/mail.service';
 import { PrismaService } from 'modules/prisma.service';
 import { TokenService } from 'modules/token/token.service';
 import {
-  COUNTRY,
   PAYMENT_PURPOSE,
   PAYMENT_STATUS,
   TRANSACTION,
 } from 'types/constants/enum';
-import { generateRandomString } from 'utils/generateRandomString.util';
 import * as argon2 from 'argon2';
 import {
   GetUsersFromAdminInput,
+  GetWalletsFromAdminInput,
   RegisterAdminInput,
 } from './dto/admin.request';
 import { v4 } from 'uuid';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
+import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
+import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
 
 @Injectable()
 export class AdminService {
@@ -30,9 +30,9 @@ export class AdminService {
   ) {}
 
   // Get current logged in user
-  async meAdmin(user: User): Promise<User> {
-    return await this.prismaService.user.findUnique({
-      where: { id: user.id },
+  async meAdmin(admin: User): Promise<Admin> {
+    return await this.prismaService.admin.findUnique({
+      where: { id: admin.id },
     });
   }
 
@@ -149,10 +149,10 @@ export class AdminService {
   }
 
   public async createNewAdmin(input: RegisterAdminInput) {
-    const emailUsed = await this.prismaService.user.findUnique({
+    const emailUsed = await this.prismaService.admin.findUnique({
       where: { email: input.email.toLowerCase() },
     });
-    const mobileNumberUsed = await this.prismaService.user.findUnique({
+    const mobileNumberUsed = await this.prismaService.admin.findUnique({
       where: { mobileNumber: input.mobileNumber },
     });
     if (emailUsed) {
@@ -175,20 +175,18 @@ export class AdminService {
     }
 
     const dummyPass = await argon2.hash(v4());
-    const newAdmin = await this.prismaService.user.create({
+    const newAdmin = await this.prismaService.admin.create({
       data: {
-        ...input,
+        firstName: input.firstName,
+        lastName: input.lastName,
+        mobileNumber: input.mobileNumber,
+        role: input.role,
+        email: input.email.toLowerCase(),
         password: dummyPass,
-        country: COUNTRY.NIGERIA,
-        dateOfBirth: new Date(),
-        gender: GENDER.MALE,
-        state: 'Lagos',
-        username: generateRandomString(),
-        confirmed: true,
       },
     });
 
-    const adminToken = await this.tokenService.createAuthToken(
+    const adminToken = await this.tokenService.createAdminAuthToken(
       newAdmin,
       'verify admin',
     );
@@ -212,11 +210,15 @@ export class AdminService {
       mobileNumber: adminToken.mobileNumber,
     });
     if (!tokenIsValid) {
-      await this.prismaService.user.delete({
+      await this.prismaService.admin.delete({
         where: { email: adminToken.email },
       });
       return false;
     }
+    await this.prismaService.admin.update({
+      where: { email: adminToken.email },
+      data: { confirmed: true },
+    });
     return true;
   }
 
@@ -239,7 +241,7 @@ export class AdminService {
       });
     }
     const hashedPassword = await argon2.hash(password);
-    const updatedAdmin = await this.prismaService.user.update({
+    const updatedAdmin = await this.prismaService.admin.update({
       where: { email: adminToken.email },
       data: { password: hashedPassword },
     });
@@ -263,6 +265,25 @@ export class AdminService {
       take: size,
       skip: skipValue,
       include: { wallet: true },
+    });
+  }
+
+  public async getOneUserFromAdmin(userId: number): Promise<User> {
+    return await this.prismaService.user.findUnique({
+      where: { id: userId },
+      include: { transactions: true, purchases: true },
+    });
+  }
+
+  public async getWalletsFromAdmin(
+    input: GetWalletsFromAdminInput,
+  ): Promise<Wallet[]> {
+    const { page, size } = input;
+    let skipValue = page * size - size;
+    return await this.prismaService.wallet.findMany({
+      include: { user: true },
+      take: size,
+      skip: skipValue,
     });
   }
 }

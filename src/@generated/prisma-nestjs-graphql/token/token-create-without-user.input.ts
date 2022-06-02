@@ -36,5 +36,5 @@ export class TokenCreateWithoutUserInput {
     updatedAt?: Date | string;
 
     @Field(() => AdminCreateNestedOneWithoutTokenInput, {nullable:true})
-    Admin?: AdminCreateNestedOneWithoutTokenInput;
+    admin?: AdminCreateNestedOneWithoutTokenInput;
 }

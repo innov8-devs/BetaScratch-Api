@@ -1,3 +1,4 @@
+import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
 import { Otp } from '@generated/prisma-nestjs-graphql/otp/otp.model';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
@@ -22,6 +23,20 @@ export class OtpService {
         subject,
         validity: true,
         user: { connect: { id: user.id } },
+      },
+    });
+  }
+
+  public async createAdminAuthOtp(admin: Admin, subject: string) {
+    return await this.prismaService.otp.create({
+      data: {
+        email: admin.email,
+        code: generateOtp(),
+        expire: addMinutes(new Date(), 15),
+        mobileNumber: admin.mobileNumber,
+        subject,
+        validity: true,
+        admin: { connect: { id: admin.id } },
       },
     });
   }

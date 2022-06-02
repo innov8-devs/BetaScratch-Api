@@ -2,12 +2,18 @@ import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { parseCookies } from 'helpers/parseCookie';
-import { AdminLoginInput, LoginInput } from 'modules/user/dto/user.request';
+import {
+  AdminLoginInput,
+  AdminLoginOtpInput,
+  LoginInput,
+} from 'modules/user/dto/user.request';
 import { MyContext } from 'types/constants/types';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import jwt_decode from 'jwt-decode';
+import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
+import { authTypeSetterFn } from 'utils/authType';
 
 @Resolver()
 export class AuthResolver {
@@ -17,10 +23,11 @@ export class AuthResolver {
   async generateAccessToken(@Context() { req, res }: MyContext) {
     const cookieObject = parseCookies(req);
     if (!cookieObject.refresh_token) return false;
-    let decoded: { sub: number; iat: number; exp: number } = jwt_decode(
-      cookieObject.refresh_token,
-    );
+    let decoded: { sub: number; iat: number; exp: number; isAdmin: boolean } =
+      jwt_decode(cookieObject.refresh_token);
     if (Date.now() >= decoded.exp * 1000) return false;
+    if (decoded.isAdmin) authTypeSetterFn(true);
+    else authTypeSetterFn(false);
     await this.authService.setAccessTokenHeaderCredentials(decoded.sub, res);
     await this.authService.setRefreshTokenHeaderCredentials(decoded.sub, res);
     return true;
@@ -29,34 +36,29 @@ export class AuthResolver {
   @UseGuards(LocalAuthGuard)
   @Mutation(() => User)
   async login(
-    @Args('input') _input: LoginInput,
+    @Args('input') input: LoginInput,
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res);
     await this.authService.setRefreshTokenHeaderCredentials(user.id, res);
-    const { auth } = await this.authService.login(user);
-    return auth;
+    return await this.authService.login(input);
   }
 
   @Mutation(() => Boolean)
-  async requestAdminLoginOtp(@Args('input') input: AdminLoginInput) {
+  async requestAdminLoginOtp(@Args('input') input: AdminLoginOtpInput) {
     return this.authService.requestAdminLoginOtp(input);
   }
 
   @UseGuards(LocalAuthGuard)
-  @Mutation(() => User)
+  @Mutation(() => Admin)
   async adminLogin(
-    @Args('input') _input: AdminLoginInput,
-    @Args('otp') otp: string,
-    @CurrentUser() user: User,
+    @Args('input') input: AdminLoginInput,
+    @CurrentUser() admin: Admin,
     @Context() { res }: MyContext,
   ) {
-    if (user) {
-      await this.authService.setAccessTokenHeaderCredentials(user.id, res);
-      await this.authService.setRefreshTokenHeaderCredentials(user.id, res);
-    }
-    const { auth } = await this.authService.adminLogin(user, otp);
-    return auth;
+    await this.authService.setAccessTokenHeaderCredentials(admin.id, res);
+    await this.authService.setRefreshTokenHeaderCredentials(admin.id, res);
+    return await this.authService.adminLogin(input);
   }
 }

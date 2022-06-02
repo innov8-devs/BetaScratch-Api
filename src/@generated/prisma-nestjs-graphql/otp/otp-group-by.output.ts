@@ -31,8 +31,8 @@ export class OtpGroupBy {
     @Field(() => String, {nullable:false})
     code!: string;
 
-    @Field(() => Int, {nullable:false})
-    userId!: number;
+    @Field(() => Int, {nullable:true})
+    userId?: number;
 
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;

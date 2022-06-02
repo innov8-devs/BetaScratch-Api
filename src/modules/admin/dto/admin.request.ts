@@ -39,3 +39,14 @@ export class GetUsersFromAdminInput {
   @Field(() => String, { nullable: true })
   orderBy?: string = 'asc';
 }
+
+@InputType()
+export class GetWalletsFromAdminInput {
+  @Field(() => Number)
+  @IsNumber()
+  page: number;
+
+  @Field(() => Number)
+  @IsNumber()
+  size: number;
+}

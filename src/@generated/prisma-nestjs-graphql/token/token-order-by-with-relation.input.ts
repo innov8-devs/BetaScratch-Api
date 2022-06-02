@@ -41,7 +41,7 @@ export class TokenOrderByWithRelationInput {
     updatedAt?: keyof typeof SortOrder;
 
     @Field(() => AdminOrderByWithRelationInput, {nullable:true})
-    Admin?: AdminOrderByWithRelationInput;
+    admin?: AdminOrderByWithRelationInput;
 
     @Field(() => SortOrder, {nullable:true})
     adminId?: keyof typeof SortOrder;

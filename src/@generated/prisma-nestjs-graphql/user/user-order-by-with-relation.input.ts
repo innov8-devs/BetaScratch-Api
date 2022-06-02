@@ -77,20 +77,20 @@ export class UserOrderByWithRelationInput {
     updatedAt?: keyof typeof SortOrder;
 
     @Field(() => OtpOrderByRelationAggregateInput, {nullable:true})
-    Otp?: OtpOrderByRelationAggregateInput;
+    otp?: OtpOrderByRelationAggregateInput;
 
     @Field(() => WithdrawalRequestOrderByRelationAggregateInput, {nullable:true})
-    WithdrawalRequest?: WithdrawalRequestOrderByRelationAggregateInput;
+    withdrawalRequest?: WithdrawalRequestOrderByRelationAggregateInput;
 
     @Field(() => CartOrderByRelationAggregateInput, {nullable:true})
-    Cart?: CartOrderByRelationAggregateInput;
+    purchases?: CartOrderByRelationAggregateInput;
 
     @Field(() => MessageOrderByRelationAggregateInput, {nullable:true})
-    Message?: MessageOrderByRelationAggregateInput;
+    message?: MessageOrderByRelationAggregateInput;
 
     @Field(() => ReferralOrderByRelationAggregateInput, {nullable:true})
-    Referral?: ReferralOrderByRelationAggregateInput;
+    referral?: ReferralOrderByRelationAggregateInput;
 
     @Field(() => TokenOrderByRelationAggregateInput, {nullable:true})
-    Token?: TokenOrderByRelationAggregateInput;
+    token?: TokenOrderByRelationAggregateInput;
 }

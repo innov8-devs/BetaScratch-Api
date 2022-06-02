@@ -1,5 +1,7 @@
+import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
+import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AuthService } from 'modules/auth/auth.service';
 import { Auth } from 'modules/auth/decorators/auth.decorator';
@@ -8,6 +10,7 @@ import { MyContext } from 'types/constants/types';
 import { AdminService } from './admin.service';
 import {
   GetUsersFromAdminInput,
+  GetWalletsFromAdminInput,
   RegisterAdminInput,
 } from './dto/admin.request';
 
@@ -20,11 +23,11 @@ export class AdminResolver {
 
   // Get logged in user
   @Auth()
-  @Query(() => User, { nullable: true })
+  @Query(() => Admin, { nullable: true })
   async meAdmin(
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
-  ): Promise<User> {
+  ): Promise<Admin> {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res);
     return this.adminService.meAdmin(user);
   }
@@ -62,5 +65,27 @@ export class AdminResolver {
   ): Promise<User[]> {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res);
     return this.adminService.getUsersFromAdmin(input);
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => User, { nullable: true })
+  async getOneUserFromAdmin(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+    @Args('userId') userId: number,
+  ): Promise<User> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    return this.adminService.getOneUserFromAdmin(userId);
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => [Wallet], { nullable: true })
+  async getWalletsFromAdmin(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+    @Args('input') input: GetWalletsFromAdminInput,
+  ): Promise<Wallet[]> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    return this.adminService.getWalletsFromAdmin(input);
   }
 }

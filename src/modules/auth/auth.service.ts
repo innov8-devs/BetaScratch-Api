@@ -15,7 +15,13 @@ import { OtpService } from 'modules/otp/otp.service';
 import { AUTH_TYPE } from 'types/constants/enum';
 import { MailService } from 'modules/mail/mail.service';
 import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
-import { AdminLoginInput } from 'modules/user/dto/user.request';
+import {
+  AdminLoginInput,
+  AdminLoginOtpInput,
+  LoginInput,
+} from 'modules/user/dto/user.request';
+import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
+import { authTypeGetterFn } from 'utils/authType';
 
 @Injectable()
 export class AuthService {
@@ -30,35 +36,49 @@ export class AuthService {
   async validateUser(
     phoneNumberOrEmail: string,
     password: string,
-  ): Promise<User> {
-    const user = await this.prismaService.user.findFirst({
-      where: {
-        OR: [
-          {
-            email: {
-              equals: phoneNumberOrEmail.toLowerCase(),
-            },
-          },
-          {
-            mobileNumber: {
-              equals: phoneNumberOrEmail,
-            },
-          },
-        ],
-      },
-      include: { wallet: true },
-    });
-    if (!user) return null;
-    const userPass = user.password;
-
-    if (!userPass || user.confirmed === false)
-      throw new UnauthorizedException({
-        name: 'confirm',
-        message: MESSAGES.AUTH.CONFIRM_ACCOUNT,
+  ): Promise<User | Admin> {
+    const isAdmin = authTypeGetterFn();
+    if (isAdmin) {
+      const admin = await this.prismaService.admin.findFirst({
+        where: {
+          email: phoneNumberOrEmail,
+        },
       });
+      if (!admin) return null;
+      const adminPass = admin.password;
 
-    if (await argon2.verify(userPass, password)) return user;
-    return null;
+      if (await argon2.verify(adminPass, password)) return admin;
+      return null;
+    } else {
+      const user = await this.prismaService.user.findFirst({
+        where: {
+          OR: [
+            {
+              email: {
+                equals: phoneNumberOrEmail.toLowerCase(),
+              },
+            },
+            {
+              mobileNumber: {
+                equals: phoneNumberOrEmail,
+              },
+            },
+          ],
+        },
+        // include: { wallet: true },
+      });
+      if (!user) return null;
+      const userPass = user.password;
+
+      if (!userPass || user.confirmed === false)
+        throw new UnauthorizedException({
+          name: 'confirm',
+          message: MESSAGES.AUTH.CONFIRM_ACCOUNT,
+        });
+
+      if (await argon2.verify(userPass, password)) return user;
+      return null;
+    }
   }
 
   public async generateAccessToken(payload: any) {
@@ -75,14 +95,28 @@ export class AuthService {
     return await this.jwt.signAsync(payload, { algorithm, expiresIn, secret });
   }
 
-  async login(user: User) {
-    const auth: User = user;
-    return { auth };
+  async login(input: LoginInput) {
+    return await this.prismaService.user.findFirst({
+      where: {
+        OR: [
+          {
+            email: {
+              equals: input.phoneNumberOrEmail.toLowerCase(),
+            },
+          },
+          {
+            mobileNumber: {
+              equals: input.phoneNumberOrEmail,
+            },
+          },
+        ],
+      },
+    });
   }
 
-  async requestAdminLoginOtp(input: AdminLoginInput) {
-    const admin = await this.prismaService.user.findUnique({
-      where: { email: input.email },
+  async requestAdminLoginOtp(input: AdminLoginOtpInput) {
+    const admin = await this.prismaService.admin.findUnique({
+      where: { email: input.email.toLowerCase() },
     });
 
     const passwordValid = await argon2.verify(admin.password, input.password);
@@ -101,7 +135,7 @@ export class AuthService {
       });
     }
 
-    const otp = await this.otpService.createAuthOtp(
+    const otp = await this.otpService.createAdminAuthOtp(
       admin,
       AUTH_TYPE.ADMIN_LOGIN,
     );
@@ -115,8 +149,14 @@ export class AuthService {
     return true;
   }
 
-  async adminLogin(user: User, otp: string) {
-    if (!user) {
+  async adminLogin(input: AdminLoginInput) {
+    const { otp } = input;
+
+    const admin = await this.prismaService.admin.findFirst({
+      where: { email: input.email.toLowerCase() },
+    });
+
+    if (!admin) {
       throw new UnauthorizedException({
         name: 'user',
         message: MESSAGES.AUTH.USER_NOT_FOUND,
@@ -126,7 +166,7 @@ export class AuthService {
     const currOtp = await this.otpService.findOne({ code: otp });
 
     const isValid = await this.otpService.checkOtpValidity({
-      mobileNumber: user.mobileNumber,
+      mobileNumber: admin.mobileNumber,
       otp,
     });
 
@@ -138,16 +178,18 @@ export class AuthService {
     }
 
     await this.otpService.validateOtp({
-      mobileNumber: user.mobileNumber,
+      mobileNumber: admin.mobileNumber,
       otp,
     });
 
-    const auth: User = user;
-    return { auth };
+    return admin;
   }
 
   async setAccessTokenHeaderCredentials(userId: number, res: Response) {
-    const payload = { sub: userId };
+    const isAdmin = authTypeGetterFn();
+    const payload = isAdmin
+      ? { sub: userId, isAdmin: true }
+      : { sub: userId, isAdmin: false };
     const accessToken = await this.generateAccessToken(payload);
     res.append('Access-Control-Expose-Headers', ['access_token']);
     res.append('access_token', accessToken);
@@ -159,7 +201,10 @@ export class AuthService {
   }
 
   async setRefreshTokenHeaderCredentials(userId: number, res: Response) {
-    const payload = { sub: userId };
+    const isAdmin = authTypeGetterFn();
+    const payload = isAdmin
+      ? { sub: userId, isAdmin: true }
+      : { sub: userId, isAdmin: false };
     const refreshToken = await this.generateRefreshToken(payload);
     res.append('Access-Control-Expose-Headers', ['refresh_token']);
     res.append('refresh_token', refreshToken);

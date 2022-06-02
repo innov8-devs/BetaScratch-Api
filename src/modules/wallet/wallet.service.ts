@@ -1,5 +1,9 @@
 import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
-import { Injectable, NotAcceptableException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotAcceptableException,
+} from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
 import { MailService } from 'modules/mail/mail.service';
@@ -190,6 +194,17 @@ export class WalletService {
     input: Prisma.WithdrawalRequestCreateInput,
     userId: number,
   ) {
+    const isPending = await this.prismaService.withdrawalRequest.findFirst({
+      where: {
+        AND: [{ userId }, { status: 'Pending' }],
+      },
+    });
+    if (isPending) {
+      throw new BadRequestException({
+        name: 'withdrawal request',
+        message: 'You have a pending request',
+      });
+    }
     await this.prismaService.withdrawalRequest.create({
       data: {
         ...input,

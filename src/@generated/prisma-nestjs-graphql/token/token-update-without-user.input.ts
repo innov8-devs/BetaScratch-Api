@@ -33,5 +33,5 @@ export class TokenUpdateWithoutUserInput {
     updatedAt?: DateTimeFieldUpdateOperationsInput;
 
     @Field(() => AdminUpdateOneWithoutTokenInput, {nullable:true})
-    Admin?: AdminUpdateOneWithoutTokenInput;
+    admin?: AdminUpdateOneWithoutTokenInput;
 }

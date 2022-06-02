@@ -29,8 +29,8 @@ export class TokenCreateWithoutAdminInput {
     @Validator.IsString()
     code!: string;
 
-    @Field(() => UserCreateNestedOneWithoutTokenInput, {nullable:false})
-    user!: UserCreateNestedOneWithoutTokenInput;
+    @Field(() => UserCreateNestedOneWithoutTokenInput, {nullable:true})
+    user?: UserCreateNestedOneWithoutTokenInput;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;

@@ -81,22 +81,22 @@ export class User {
     updatedAt!: Date;
 
     @Field(() => [Otp], {nullable:true})
-    Otp?: Array<Otp>;
+    otp?: Array<Otp>;
 
     @Field(() => [WithdrawalRequest], {nullable:true})
-    WithdrawalRequest?: Array<WithdrawalRequest>;
+    withdrawalRequest?: Array<WithdrawalRequest>;
 
     @Field(() => [Cart], {nullable:true})
-    Cart?: Array<Cart>;
+    purchases?: Array<Cart>;
 
     @Field(() => [Message], {nullable:true})
-    Message?: Array<Message>;
+    message?: Array<Message>;
 
     @Field(() => [Referral], {nullable:true})
-    Referral?: Array<Referral>;
+    referral?: Array<Referral>;
 
     @Field(() => [Token], {nullable:true})
-    Token?: Array<Token>;
+    token?: Array<Token>;
 
     @Field(() => UserCount, {nullable:false})
     _count?: UserCount;
