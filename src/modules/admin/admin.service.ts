@@ -271,7 +271,14 @@ export class AdminService {
   public async getOneUserFromAdmin(userId: number): Promise<User> {
     return await this.prismaService.user.findUnique({
       where: { id: userId },
-      include: { transactions: true, purchases: true },
+      include: {
+        transactions: {
+          take: 20,
+        },
+        purchases: {
+          take: 20,
+        },
+      },
     });
   }
 
@@ -284,6 +291,13 @@ export class AdminService {
       include: { user: true },
       take: size,
       skip: skipValue,
+    });
+  }
+
+  public async getOneWalletFromAdmin(userId: number): Promise<Wallet> {
+    return await this.prismaService.wallet.findUnique({
+      where: { userId },
+      include: { user: true },
     });
   }
 }

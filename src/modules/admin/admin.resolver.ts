@@ -88,4 +88,15 @@ export class AdminResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res);
     return this.adminService.getWalletsFromAdmin(input);
   }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => Wallet, { nullable: true })
+  async getOneWalletFromAdmin(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+    @Args('userId') userId: number,
+  ): Promise<Wallet> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    return this.adminService.getOneWalletFromAdmin(userId);
+  }
 }
