@@ -9,9 +9,11 @@ import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
 import { MyContext } from 'types/constants/types';
 import { AdminService } from './admin.service';
 import {
+  GetUsersCountInput,
   GetUsersFromAdminInput,
   GetWalletsFromAdminInput,
   RegisterAdminInput,
+  UpdateUserWalletInput,
 } from './dto/admin.request';
 
 @Resolver()
@@ -98,5 +100,27 @@ export class AdminResolver {
   ): Promise<Wallet> {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res);
     return this.adminService.getOneWalletFromAdmin(userId);
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => Number, { nullable: true })
+  async getCount(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+    @Args('input') input: GetUsersCountInput,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    return this.adminService.getCount(input);
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Mutation(() => Wallet, { nullable: true })
+  async updateUserWallet(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+    @Args('input') input: UpdateUserWalletInput,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    return this.adminService.updateUserWallet(input);
   }
 }

@@ -6,15 +6,19 @@ import { MailService } from 'modules/mail/mail.service';
 import { PrismaService } from 'modules/prisma.service';
 import { TokenService } from 'modules/token/token.service';
 import {
+  DB_TYPES,
   PAYMENT_PURPOSE,
   PAYMENT_STATUS,
   TRANSACTION,
+  WALLET_TYPE,
 } from 'types/constants/enum';
 import * as argon2 from 'argon2';
 import {
+  GetUsersCountInput,
   GetUsersFromAdminInput,
   GetWalletsFromAdminInput,
   RegisterAdminInput,
+  UpdateUserWalletInput,
 } from './dto/admin.request';
 import { v4 } from 'uuid';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
@@ -299,5 +303,41 @@ export class AdminService {
       where: { userId },
       include: { user: true },
     });
+  }
+
+  public async updateUserWallet(input: UpdateUserWalletInput): Promise<Wallet> {
+    if (input.type === WALLET_TYPE.ACCOUNT) {
+      return await this.prismaService.wallet.update({
+        where: { userId: input.userId },
+        data: { withdrawable: { increment: input.amount } },
+        include: { user: true },
+      });
+    } else if (input.type === WALLET_TYPE.BONUS) {
+      return await this.prismaService.wallet.update({
+        where: { userId: input.userId },
+        data: { bonus: { increment: input.amount } },
+        include: { user: true },
+      });
+    } else {
+      throw new BadRequestException({
+        name: 'wallet',
+        message: 'unknown wallet',
+      });
+    }
+  }
+
+  public async getCount(input: GetUsersCountInput): Promise<Number> {
+    if (input.field === DB_TYPES.GAME) {
+      return await this.prismaService.game.count({});
+    } else if (input.field === DB_TYPES.USER) {
+      return await this.prismaService.user.count();
+    } else if (input.field === DB_TYPES.ADMIN) {
+      return await this.prismaService.admin.count();
+    } else if (input.field === DB_TYPES.TRANSACTION) {
+      return await this.prismaService.transaction.count();
+    } else if (input.field === DB_TYPES.PURCHASE) {
+      return await this.prismaService.cart.count();
+    }
+    return 0;
   }
 }
