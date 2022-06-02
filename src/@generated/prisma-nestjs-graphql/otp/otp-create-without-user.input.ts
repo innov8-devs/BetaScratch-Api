@@ -36,5 +36,5 @@ export class OtpCreateWithoutUserInput {
     updatedAt?: Date | string;
 
     @Field(() => AdminCreateNestedOneWithoutOtpInput, {nullable:true})
-    Admin?: AdminCreateNestedOneWithoutOtpInput;
+    admin?: AdminCreateNestedOneWithoutOtpInput;
 }

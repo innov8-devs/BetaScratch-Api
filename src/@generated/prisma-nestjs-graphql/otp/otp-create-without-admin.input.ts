@@ -29,8 +29,8 @@ export class OtpCreateWithoutAdminInput {
     @Validator.IsString()
     code!: string;
 
-    @Field(() => UserCreateNestedOneWithoutOtpInput, {nullable:false})
-    user!: UserCreateNestedOneWithoutOtpInput;
+    @Field(() => UserCreateNestedOneWithoutOtpInput, {nullable:true})
+    user?: UserCreateNestedOneWithoutOtpInput;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;

@@ -5,8 +5,8 @@ import { StringFilter } from '../prisma/string-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 import { BoolFilter } from '../prisma/bool-filter.input';
 import { UserRelationFilter } from '../user/user-relation-filter.input';
-import { AdminRelationFilter } from '../admin/admin-relation-filter.input';
 import { IntNullableFilter } from '../prisma/int-nullable-filter.input';
+import { AdminRelationFilter } from '../admin/admin-relation-filter.input';
 
 @InputType()
 export class TokenWhereInput {
@@ -44,8 +44,8 @@ export class TokenWhereInput {
     @Field(() => UserRelationFilter, {nullable:true})
     user?: UserRelationFilter;
 
-    @Field(() => IntFilter, {nullable:true})
-    userId?: IntFilter;
+    @Field(() => IntNullableFilter, {nullable:true})
+    userId?: IntNullableFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;
@@ -54,7 +54,7 @@ export class TokenWhereInput {
     updatedAt?: DateTimeFilter;
 
     @Field(() => AdminRelationFilter, {nullable:true})
-    Admin?: AdminRelationFilter;
+    admin?: AdminRelationFilter;
 
     @Field(() => IntNullableFilter, {nullable:true})
     adminId?: IntNullableFilter;

@@ -1,6 +1,7 @@
 import { AuthGuard } from '@nestjs/passport';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { ExecutionContext, Injectable } from '@nestjs/common';
+import { authTypeSetterFn } from 'utils/authType';
 
 @Injectable()
 export class LocalAuthGuard extends AuthGuard('local') {
@@ -11,6 +12,9 @@ export class LocalAuthGuard extends AuthGuard('local') {
     if (!req) return context.switchToHttp().getRequest();
     req.body = ctx.getArgs()['input'];
 
+    if (req.body.isAdmin) authTypeSetterFn(true);
+    else authTypeSetterFn(false);
+
     const body = {
       // TODO here for login with multiple
       // pass: req.body.password,
@@ -18,6 +22,7 @@ export class LocalAuthGuard extends AuthGuard('local') {
 
       password: req.body.password,
       phoneNumberOrEmail: req.body.phoneNumberOrEmail || req.body.email,
+      // isAdmin: req.body.isAdmin,
     };
 
     req.body = body;

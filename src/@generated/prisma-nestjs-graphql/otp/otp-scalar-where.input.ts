@@ -39,8 +39,8 @@ export class OtpScalarWhereInput {
     @Field(() => StringFilter, {nullable:true})
     code?: StringFilter;
 
-    @Field(() => IntFilter, {nullable:true})
-    userId?: IntFilter;
+    @Field(() => IntNullableFilter, {nullable:true})
+    userId?: IntNullableFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;

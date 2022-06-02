@@ -52,10 +52,28 @@ export class LoginInput {
 
   @Field()
   phoneNumberOrEmail: string;
+
+  @Field({ nullable: true, defaultValue: false })
+  isAdmin: boolean = false;
 }
 
 @InputType()
 export class AdminLoginInput {
+  @Field()
+  password: string;
+
+  @Field()
+  email: string;
+
+  @Field()
+  otp: string;
+
+  @Field({ nullable: true, defaultValue: true })
+  isAdmin: boolean = true;
+}
+
+@InputType()
+export class AdminLoginOtpInput {
   @Field()
   password: string;
 

@@ -29,11 +29,11 @@ export class Otp {
     @Field(() => String, {nullable:false})
     code!: string;
 
-    @Field(() => User, {nullable:false})
-    user?: User;
+    @Field(() => User, {nullable:true})
+    user?: User | null;
 
-    @Field(() => Int, {nullable:false})
-    userId!: number;
+    @Field(() => Int, {nullable:true})
+    userId!: number | null;
 
     @Field(() => Date, {nullable:false})
     createdAt!: Date;
@@ -42,7 +42,7 @@ export class Otp {
     updatedAt!: Date;
 
     @Field(() => Admin, {nullable:true})
-    Admin?: Admin | null;
+    admin?: Admin | null;
 
     @Field(() => Int, {nullable:true})
     adminId!: number | null;

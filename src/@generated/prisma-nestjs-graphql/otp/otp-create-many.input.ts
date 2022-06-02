@@ -32,8 +32,8 @@ export class OtpCreateManyInput {
     @Validator.IsString()
     code!: string;
 
-    @Field(() => Int, {nullable:false})
-    userId!: number;
+    @Field(() => Int, {nullable:true})
+    userId?: number;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;

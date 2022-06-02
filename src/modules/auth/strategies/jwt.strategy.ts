@@ -5,6 +5,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { JWTPayload } from 'types/interface/jwt.payload';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { PrismaService } from 'modules/prisma.service';
+import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
 
 dotenv.config();
 
@@ -18,10 +19,16 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: JWTPayload): Promise<User> {
-    return await this.prismaService.user.findUnique({
-      where: { id: payload.sub },
-      include: { wallet: true },
-    });
+  async validate(payload: JWTPayload): Promise<User | Admin> {
+    if (payload.isAdmin) {
+      return await this.prismaService.admin.findUnique({
+        where: { id: payload.sub },
+      });
+    } else {
+      return await this.prismaService.user.findUnique({
+        where: { id: payload.sub },
+        include: { wallet: true },
+      });
+    }
   }
 }

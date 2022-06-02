@@ -1,3 +1,4 @@
+import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
 import { Token } from '@generated/prisma-nestjs-graphql/token/token.model';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
@@ -22,6 +23,20 @@ export class TokenService {
         subject,
         validity: true,
         user: { connect: { id: user.id } },
+      },
+    });
+  }
+
+  public async createAdminAuthToken(admin: Admin, subject: string) {
+    return await this.prismaService.token.create({
+      data: {
+        email: admin.email,
+        code: generateToken(),
+        expire: addMinutes(new Date(), 15),
+        mobileNumber: admin.mobileNumber,
+        subject,
+        validity: true,
+        admin: { connect: { id: admin.id } },
       },
     });
   }

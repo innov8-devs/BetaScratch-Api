@@ -33,5 +33,5 @@ export class OtpUpdateWithoutUserInput {
     updatedAt?: DateTimeFieldUpdateOperationsInput;
 
     @Field(() => AdminUpdateOneWithoutOtpInput, {nullable:true})
-    Admin?: AdminUpdateOneWithoutOtpInput;
+    admin?: AdminUpdateOneWithoutOtpInput;
 }

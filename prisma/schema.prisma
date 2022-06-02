@@ -236,11 +236,11 @@ model Otp {
   email        String
   /// @Validator.IsString()
   code         String
-  user         User     @relation(fields: [userId], references: [id])
-  userId       Int
+  user         User?    @relation(fields: [userId], references: [id])
+  userId       Int?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-  Admin        Admin?   @relation(fields: [adminId], references: [id])
+  admin        Admin?   @relation(fields: [adminId], references: [id])
   adminId      Int?
 }
 
@@ -258,11 +258,11 @@ model Token {
   email        String
   /// @Validator.IsString()
   code         String   @unique
-  user         User     @relation(fields: [userId], references: [id])
-  userId       Int
+  user         User?    @relation(fields: [userId], references: [id])
+  userId       Int?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-  Admin        Admin?   @relation(fields: [adminId], references: [id])
+  admin        Admin?   @relation(fields: [adminId], references: [id])
   adminId      Int?
 }
 
