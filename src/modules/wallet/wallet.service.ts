@@ -199,12 +199,28 @@ export class WalletService {
         AND: [{ userId }, { status: 'Pending' }],
       },
     });
+
     if (isPending) {
       throw new BadRequestException({
         name: 'withdrawal request',
         message: 'You have a pending request',
       });
     }
+
+    const requestedAmount = Number(input.amount);
+    const userWallet = await this.findUnique({ userId });
+    if (requestedAmount > userWallet.withdrawable) {
+      throw new NotAcceptableException({
+        name: 'withdrawal',
+        message: MESSAGES.USER.INSUFFICIENT_WALLET_FUND,
+      });
+    }
+
+    await this.prismaService.wallet.update({
+      where: { userId },
+      data: { withdrawable: { decrement: Number(input.amount) } },
+    });
+
     await this.prismaService.withdrawalRequest.create({
       data: {
         ...input,
@@ -212,9 +228,7 @@ export class WalletService {
         User: { connect: { id: userId } },
       },
     });
-    const userWallet = await this.prismaService.wallet.findUnique({
-      where: { userId },
-    });
+
     await this.transactionService.createTransaction({
       amount: Number(input.amount),
       currency: userWallet.currency,
@@ -314,21 +328,7 @@ export class WalletService {
       await this.prismaService.withdrawalRequest.findUnique({
         where: { id: requestId },
       });
-    const requestedAmount = Number(withdrawalRequest.amount);
     const userWallet = await this.findUnique({ userId });
-    if (requestedAmount > userWallet.withdrawable) {
-      throw new NotAcceptableException({
-        name: 'withdrawal',
-        message: MESSAGES.USER.INSUFFICIENT_WALLET_FUND,
-      });
-    }
-    const newBalance = userWallet.withdrawable - requestedAmount;
-
-    await this.prismaService.wallet.update({
-      where: { userId },
-      data: { withdrawable: newBalance },
-    });
-
     await this.prismaService.withdrawalRequest.update({
       where: { id: requestId },
       data: { status: 'Successful' },

@@ -28,8 +28,16 @@ export class AuthResolver {
     if (Date.now() >= decoded.exp * 1000) return false;
     if (decoded.isAdmin) authTypeSetterFn(true);
     else authTypeSetterFn(false);
-    await this.authService.setAccessTokenHeaderCredentials(decoded.sub, res);
-    await this.authService.setRefreshTokenHeaderCredentials(decoded.sub, res);
+    await this.authService.setAccessTokenHeaderCredentials(
+      decoded.sub,
+      res,
+      true,
+    );
+    await this.authService.setRefreshTokenHeaderCredentials(
+      decoded.sub,
+      res,
+      true,
+    );
     return true;
   }
 
@@ -40,8 +48,12 @@ export class AuthResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
-    await this.authService.setRefreshTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
+    await this.authService.setRefreshTokenHeaderCredentials(
+      user.id,
+      res,
+      false,
+    );
     return await this.authService.login(input);
   }
 
@@ -57,8 +69,12 @@ export class AuthResolver {
     @CurrentUser() admin: Admin,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(admin.id, res);
-    await this.authService.setRefreshTokenHeaderCredentials(admin.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(admin.id, res, true);
+    await this.authService.setRefreshTokenHeaderCredentials(
+      admin.id,
+      res,
+      true,
+    );
     return await this.authService.adminLogin(input);
   }
 }

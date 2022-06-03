@@ -185,8 +185,11 @@ export class AuthService {
     return admin;
   }
 
-  async setAccessTokenHeaderCredentials(userId: number, res: Response) {
-    const isAdmin = authTypeGetterFn();
+  async setAccessTokenHeaderCredentials(
+    userId: number,
+    res: Response,
+    isAdmin: boolean,
+  ) {
     const payload = isAdmin
       ? { sub: userId, isAdmin: true }
       : { sub: userId, isAdmin: false };
@@ -200,8 +203,11 @@ export class AuthService {
     });
   }
 
-  async setRefreshTokenHeaderCredentials(userId: number, res: Response) {
-    const isAdmin = authTypeGetterFn();
+  async setRefreshTokenHeaderCredentials(
+    userId: number,
+    res: Response,
+    isAdmin: boolean,
+  ) {
     const payload = isAdmin
       ? { sub: userId, isAdmin: true }
       : { sub: userId, isAdmin: false };

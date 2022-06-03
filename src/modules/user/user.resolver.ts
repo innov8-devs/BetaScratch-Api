@@ -32,7 +32,7 @@ export class UserResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ): Promise<User> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
     return this.userService.me(user);
   }
 
@@ -101,7 +101,7 @@ export class UserResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ): Promise<User> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
     return await this.userService.editAccount(user.id, input);
   }
 
@@ -113,7 +113,7 @@ export class UserResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ): Promise<User> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
     return await this.userService.resetAccountPassword(
       user,
       oldPassword,
@@ -160,7 +160,7 @@ export class UserResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
     return await this.userService.fetchUserReferrals(user.id);
   }
 }

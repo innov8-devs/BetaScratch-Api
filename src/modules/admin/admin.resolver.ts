@@ -32,7 +32,7 @@ export class AdminResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ): Promise<Admin> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.meAdmin(user);
   }
 
@@ -67,7 +67,7 @@ export class AdminResolver {
     @Context() { res }: MyContext,
     @Args('input') input: GetUsersFromAdminInput,
   ): Promise<User[]> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getUsersFromAdmin(input);
   }
 
@@ -78,7 +78,7 @@ export class AdminResolver {
     @Context() { res }: MyContext,
     @Args('userId') userId: number,
   ): Promise<User> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getOneUserFromAdmin(userId);
   }
 
@@ -89,7 +89,7 @@ export class AdminResolver {
     @Context() { res }: MyContext,
     @Args('input') input: GetWalletsFromAdminInput,
   ): Promise<Wallet[]> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getWalletsFromAdmin(input);
   }
 
@@ -100,7 +100,7 @@ export class AdminResolver {
     @Context() { res }: MyContext,
     @Args('userId') userId: number,
   ): Promise<Wallet> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getOneWalletFromAdmin(userId);
   }
 
@@ -111,7 +111,7 @@ export class AdminResolver {
     @Context() { res }: MyContext,
     @Args('input') input: GetGamesFromAdminInput,
   ): Promise<Game[]> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getGamesFromAdmin(input);
   }
 
@@ -122,7 +122,7 @@ export class AdminResolver {
     @Context() { res }: MyContext,
     @Args('gameId') gameId: number,
   ): Promise<Game> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getOneGameFromAdmin(gameId);
   }
 
@@ -133,7 +133,7 @@ export class AdminResolver {
     @Context() { res }: MyContext,
     @Args('input') input: GetUsersCountInput,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getCount(input);
   }
 
@@ -144,7 +144,7 @@ export class AdminResolver {
     @Context() { res }: MyContext,
     @Args('input') input: UpdateUserWalletInput,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.updateUserWallet(input);
   }
 }

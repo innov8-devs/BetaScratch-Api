@@ -22,7 +22,7 @@ export class MessageResolver {
     @Context() { res }: MyContext,
     @CurrentUser() user: User,
   ): Promise<Boolean> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
     return await this.messageService.changeMessageToRead(messageId);
   }
 
@@ -32,7 +32,7 @@ export class MessageResolver {
     @Context() { res }: MyContext,
     @CurrentUser() user: User,
   ): Promise<GetUserMessagesResponse> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
     return await this.messageService.getUserMessages(user.id);
   }
 }

@@ -29,7 +29,7 @@ export class WalletResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
     return await this.walletService.getUserBalance(user.id);
   }
 
@@ -56,13 +56,13 @@ export class WalletResolver {
   }
 
   @Auth([ROLE.USER])
-  @Mutation(() => WithdrawalRequest)
+  @Mutation(() => Boolean)
   async recordWithdrawalRequest(
     @Args('input') input: WithdrawalRequestCreateInput,
     @Context() { res }: MyContext,
     @CurrentUser() user: User,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
     return await this.walletService.recordWithdrawalRequest(input, user.id);
   }
 
@@ -102,7 +102,7 @@ export class WalletResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
     return await this.walletService.deposit(
       transaction_id,
       PAYMENT_PURPOSE.DEPOSIT,

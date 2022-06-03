@@ -38,7 +38,7 @@ export class TransactionResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ): Promise<Number> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
     return await this.transactionService.checkTotalAmountSpent(user.id);
   }
 
@@ -49,7 +49,7 @@ export class TransactionResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
     return await this.transactionService.transactionHistory(user.id, input);
   }
 
@@ -61,7 +61,7 @@ export class TransactionResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return await this.transactionService.fetchFlutterTransactions(from, to);
   }
 
@@ -72,7 +72,7 @@ export class TransactionResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return await this.transactionService.fetchFlutterTransactionTimeline(
       transaction_Id,
     );

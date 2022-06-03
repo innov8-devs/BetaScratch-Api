@@ -98,7 +98,7 @@ export class GameResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
     return await this.gameService.cartCheckout(user.id, input);
   }
 
@@ -109,7 +109,7 @@ export class GameResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
     return await this.gameService.purchaseHistory(user.id, input);
   }
 
@@ -120,7 +120,7 @@ export class GameResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
     return await this.gameService.flutterCheckoutOne(user.id, input);
   }
 
@@ -131,7 +131,7 @@ export class GameResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
     return await this.gameService.flutterCheckoutTwo(input, user.id);
   }
 }
