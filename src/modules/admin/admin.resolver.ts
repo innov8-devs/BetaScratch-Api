@@ -10,6 +10,7 @@ import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
 import { MyContext } from 'types/constants/types';
 import { AdminService } from './admin.service';
 import {
+  GetGamesFromAdminInput,
   GetUsersCountInput,
   GetUsersFromAdminInput,
   GetWalletsFromAdminInput,
@@ -108,7 +109,7 @@ export class AdminResolver {
   async getGamesFromAdmin(
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
-    @Args('input') input: GetWalletsFromAdminInput,
+    @Args('input') input: GetGamesFromAdminInput,
   ): Promise<Game[]> {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res);
     return this.adminService.getGamesFromAdmin(input);

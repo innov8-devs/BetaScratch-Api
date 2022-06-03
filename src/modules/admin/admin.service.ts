@@ -310,9 +310,12 @@ export class AdminService {
   public async getGamesFromAdmin(
     input: GetGamesFromAdminInput,
   ): Promise<Game[]> {
-    const { page, size } = input;
+    const { orderBy, orderColumn, page, size } = input;
     let skipValue = page * size - size;
     return await this.prismaService.game.findMany({
+      orderBy: {
+        [orderColumn]: orderBy,
+      },
       take: size,
       skip: skipValue,
     });

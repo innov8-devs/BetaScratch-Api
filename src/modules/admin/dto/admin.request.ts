@@ -63,6 +63,12 @@ export class GetGamesFromAdminInput {
   @Field(() => Number)
   @IsNumber()
   size: number;
+
+  @Field(() => String, { nullable: true })
+  orderColumn?: string = 'id';
+
+  @Field(() => String, { nullable: true })
+  orderBy?: string = 'asc';
 }
 
 @InputType()
