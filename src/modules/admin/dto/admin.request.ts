@@ -55,6 +55,17 @@ export class GetWalletsFromAdminInput {
 }
 
 @InputType()
+export class GetGamesFromAdminInput {
+  @Field(() => Number)
+  @IsNumber()
+  page: number;
+
+  @Field(() => Number)
+  @IsNumber()
+  size: number;
+}
+
+@InputType()
 export class GetUsersCountInput {
   @Field(() => DB_TYPES)
   field: keyof typeof DB_TYPES;

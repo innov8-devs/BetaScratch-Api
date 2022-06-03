@@ -1,4 +1,5 @@
 import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
+import { Game } from '@generated/prisma-nestjs-graphql/game/game.model';
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
@@ -100,6 +101,28 @@ export class AdminResolver {
   ): Promise<Wallet> {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res);
     return this.adminService.getOneWalletFromAdmin(userId);
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => [Game], { nullable: true })
+  async getGamesFromAdmin(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+    @Args('input') input: GetWalletsFromAdminInput,
+  ): Promise<Game[]> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    return this.adminService.getGamesFromAdmin(input);
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => Game, { nullable: true })
+  async getOneGameFromAdmin(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+    @Args('gameId') gameId: number,
+  ): Promise<Game> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res);
+    return this.adminService.getOneGameFromAdmin(gameId);
   }
 
   @Auth([ROLE.ADMIN])

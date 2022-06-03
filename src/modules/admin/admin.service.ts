@@ -14,6 +14,7 @@ import {
 } from 'types/constants/enum';
 import * as argon2 from 'argon2';
 import {
+  GetGamesFromAdminInput,
   GetUsersCountInput,
   GetUsersFromAdminInput,
   GetWalletsFromAdminInput,
@@ -24,6 +25,7 @@ import { v4 } from 'uuid';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
 import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
+import { Game } from '@generated/prisma-nestjs-graphql/game/game.model';
 
 @Injectable()
 export class AdminService {
@@ -298,10 +300,27 @@ export class AdminService {
     });
   }
 
-  public async getOneWalletFromAdmin(userId: number): Promise<Wallet> {
+  public async getOneWalletFromAdmin(walletId: number): Promise<Wallet> {
     return await this.prismaService.wallet.findUnique({
-      where: { userId },
+      where: { userId: walletId },
       include: { user: true },
+    });
+  }
+
+  public async getGamesFromAdmin(
+    input: GetGamesFromAdminInput,
+  ): Promise<Game[]> {
+    const { page, size } = input;
+    let skipValue = page * size - size;
+    return await this.prismaService.game.findMany({
+      take: size,
+      skip: skipValue,
+    });
+  }
+
+  public async getOneGameFromAdmin(gameId: number): Promise<Game> {
+    return await this.prismaService.game.findUnique({
+      where: { id: gameId },
     });
   }
 
