@@ -65,7 +65,7 @@ export class AuthService {
             },
           ],
         },
-        // include: { wallet: true },
+        include: { wallet: true },
       });
       if (!user) return null;
       const userPass = user.password;
@@ -111,6 +111,7 @@ export class AuthService {
           },
         ],
       },
+      include: { wallet: true },
     });
   }
 
