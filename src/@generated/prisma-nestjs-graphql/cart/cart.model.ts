@@ -4,6 +4,7 @@ import { ID } from '@nestjs/graphql';
 import { User } from '../user/user.model';
 import { Int } from '@nestjs/graphql';
 import { GraphQLJSON } from 'graphql-type-json';
+import { Purchase } from '../purchase/purchase.model';
 
 @ObjectType()
 export class Cart {
@@ -35,12 +36,21 @@ export class Cart {
     @Field(() => Boolean, {nullable:false,defaultValue:false})
     played!: boolean;
 
+    @Field(() => String, {nullable:false})
+    reference!: string;
+
     @Field(() => String, {nullable:true})
-    reference!: string | null;
+    transactionRef!: string | null;
 
     @Field(() => Date, {nullable:false})
     createdAt!: Date;
 
     @Field(() => Date, {nullable:false})
     updatedAt!: Date;
+
+    @Field(() => Purchase, {nullable:true})
+    purchase?: Purchase | null;
+
+    @Field(() => Int, {nullable:true})
+    purchaseId!: number | null;
 }

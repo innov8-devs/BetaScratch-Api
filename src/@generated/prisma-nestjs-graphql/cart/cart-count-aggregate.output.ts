@@ -33,10 +33,16 @@ export class CartCountAggregate {
     reference!: number;
 
     @Field(() => Int, {nullable:false})
+    transactionRef!: number;
+
+    @Field(() => Int, {nullable:false})
     createdAt!: number;
 
     @Field(() => Int, {nullable:false})
     updatedAt!: number;
+
+    @Field(() => Int, {nullable:false})
+    purchaseId!: number;
 
     @Field(() => Int, {nullable:false})
     _all!: number;

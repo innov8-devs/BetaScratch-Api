@@ -1,4 +1,5 @@
 import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
+import { Cart } from '@generated/prisma-nestjs-graphql/cart/cart.model';
 import { Game } from '@generated/prisma-nestjs-graphql/game/game.model';
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
@@ -11,6 +12,7 @@ import { MyContext } from 'types/constants/types';
 import { AdminService } from './admin.service';
 import {
   GetGamesFromAdminInput,
+  GetUserPurchasesFromAdminInput,
   GetUsersCountInput,
   GetUsersFromAdminInput,
   GetWalletsFromAdminInput,
@@ -124,6 +126,32 @@ export class AdminResolver {
   ): Promise<Game> {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getOneGameFromAdmin(gameId);
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => [Cart], { nullable: true })
+  async getUserPurchasesFromAdmin(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+    @Args('input') input: GetUserPurchasesFromAdminInput,
+  ): Promise<Cart[]> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    return this.adminService.getUserPurchasesFromAdmin(input);
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Mutation(() => Cart, { nullable: true })
+  async updateUserPurchaseStatusFromAdmin(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+    @Args('purchaseId') purchaseId: number,
+    @Args('played') played: boolean,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    return this.adminService.updateUserPurchaseStatusFromAdmin(
+      purchaseId,
+      played,
+    );
   }
 
   @Auth([ROLE.ADMIN])

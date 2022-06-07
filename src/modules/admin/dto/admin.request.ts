@@ -72,6 +72,27 @@ export class GetGamesFromAdminInput {
 }
 
 @InputType()
+export class GetUserPurchasesFromAdminInput {
+  @Field(() => Number)
+  @IsNumber()
+  userId: number;
+
+  @Field(() => Number)
+  @IsNumber()
+  page: number;
+
+  @Field(() => Number)
+  @IsNumber()
+  size: number;
+
+  @Field(() => String, { nullable: true })
+  orderColumn?: string = 'id';
+
+  @Field(() => String, { nullable: true })
+  orderBy?: string = 'asc';
+}
+
+@InputType()
 export class GetUsersCountInput {
   @Field(() => DB_TYPES)
   field: keyof typeof DB_TYPES;

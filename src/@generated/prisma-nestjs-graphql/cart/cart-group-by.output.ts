@@ -35,14 +35,20 @@ export class CartGroupBy {
     @Field(() => Boolean, {nullable:false})
     played!: boolean;
 
+    @Field(() => String, {nullable:false})
+    reference!: string;
+
     @Field(() => String, {nullable:true})
-    reference?: string;
+    transactionRef?: string;
 
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;
 
     @Field(() => Date, {nullable:false})
     updatedAt!: Date | string;
+
+    @Field(() => Int, {nullable:true})
+    purchaseId?: number;
 
     @Field(() => CartCountAggregate, {nullable:true})
     _count?: CartCountAggregate;

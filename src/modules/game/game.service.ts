@@ -10,6 +10,7 @@ import { TransactionService } from 'modules/transaction/transaction.service';
 import {
   PAYMENT_PURPOSE,
   PAYMENT_STATUS,
+  PURCHASE_STATUS,
   TRANSACTION,
 } from 'types/constants/enum';
 import {
@@ -170,27 +171,29 @@ export class GameService {
       const referral = await this.prismaService.referral.findFirst({
         where: { referrals: { has: userId } },
       });
-      const referrerAmount = (5 * amount) / 100;
+      if (referral) {
+        const referrerAmount = (5 * amount) / 100;
 
-      await this.prismaService.wallet.update({
-        where: { userId: referral.userId },
-        data: { withdrawable: { increment: referrerAmount }, bonus: 500 },
-      });
+        await this.prismaService.wallet.update({
+          where: { userId: referral.userId },
+          data: { withdrawable: { increment: referrerAmount }, bonus: 500 },
+        });
 
-      await this.prismaService.referral.update({
-        where: { userId: referral.userId },
-        data: {
-          invitesFunded: { increment: 1 },
-          totalEarned: { increment: referrerAmount },
-        },
-      });
+        await this.prismaService.referral.update({
+          where: { userId: referral.userId },
+          data: {
+            invitesFunded: { increment: 1 },
+            totalEarned: { increment: referrerAmount },
+          },
+        });
 
-      const refereeAmount = (3 * amount) / 100;
+        const refereeAmount = (3 * amount) / 100;
 
-      await this.prismaService.wallet.update({
-        where: { userId },
-        data: { withdrawable: { increment: refereeAmount }, bonus: 500 },
-      });
+        await this.prismaService.wallet.update({
+          where: { userId },
+          data: { withdrawable: { increment: refereeAmount }, bonus: 500 },
+        });
+      }
     }
 
     await this.prismaService.wallet.update({
@@ -262,6 +265,10 @@ export class GameService {
       where: { userId },
     });
 
+    const user = await this.prismaService.user.findUnique({
+      where: { id: userId },
+    });
+
     const cartDetail = computeCart(input.cart, userId);
     const messageCards = computeCheckoutMessageCards(input.cart, userId);
 
@@ -272,8 +279,20 @@ export class GameService {
         userWallet,
       );
       if (response === true) {
-        await this.prismaService.cart.createMany({
-          data: cartDetail,
+        const transactionRef = generateRandomString();
+        await this.prismaService.purchase.create({
+          data: {
+            email: user.email,
+            username: user.username,
+            quantity: cartDetail.length,
+            reference: transactionRef,
+            status: PURCHASE_STATUS.INACTIVE,
+            cards: {
+              createMany: {
+                data: cartDetail,
+              },
+            },
+          },
         });
         await this.calculateVipProgress(userId);
         await this.transactionService.cashback(userId, input.subtotal);
@@ -283,7 +302,7 @@ export class GameService {
           purpose: PAYMENT_PURPOSE.CART,
           status: PAYMENT_STATUS.SUCCESSFUL,
           transactionId: generateRandomNumbers(),
-          transactionRef: generateRandomString(),
+          transactionRef,
           type: TRANSACTION.ACCOUNT,
           User: { connect: { id: userId } },
         });
@@ -307,8 +326,23 @@ export class GameService {
         userWallet,
       );
       if (response === true) {
-        await this.prismaService.cart.createMany({
-          data: cartDetail,
+        // await this.prismaService.cart.createMany({
+        //   data: cartDetail,
+        // });
+        const transactionRef = generateRandomString();
+        await this.prismaService.purchase.create({
+          data: {
+            email: user.email,
+            username: user.username,
+            quantity: cartDetail.length,
+            reference: transactionRef,
+            status: PURCHASE_STATUS.INACTIVE,
+            cards: {
+              createMany: {
+                data: cartDetail,
+              },
+            },
+          },
         });
         await this.transactionService.createTransaction({
           amount: input.subtotal,
@@ -317,7 +351,7 @@ export class GameService {
           status: PAYMENT_STATUS.SUCCESSFUL,
           type: TRANSACTION.BONUS,
           transactionId: generateRandomNumbers(),
-          transactionRef: generateRandomString(),
+          transactionRef,
           User: { connect: { id: userId } },
         });
         await this.messageService.sendCheckoutMessage(userId, messageCards);

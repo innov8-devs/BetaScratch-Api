@@ -7,6 +7,8 @@ import { JsonFilter } from '../prisma/json-filter.input';
 import { BoolFilter } from '../prisma/bool-filter.input';
 import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
+import { PurchaseRelationFilter } from '../purchase/purchase-relation-filter.input';
+import { IntNullableFilter } from '../prisma/int-nullable-filter.input';
 
 @InputType()
 export class CartWhereInput {
@@ -47,12 +49,21 @@ export class CartWhereInput {
     @Field(() => BoolFilter, {nullable:true})
     played?: BoolFilter;
 
+    @Field(() => StringFilter, {nullable:true})
+    reference?: StringFilter;
+
     @Field(() => StringNullableFilter, {nullable:true})
-    reference?: StringNullableFilter;
+    transactionRef?: StringNullableFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
     updatedAt?: DateTimeFilter;
+
+    @Field(() => PurchaseRelationFilter, {nullable:true})
+    purchase?: PurchaseRelationFilter;
+
+    @Field(() => IntNullableFilter, {nullable:true})
+    purchaseId?: IntNullableFilter;
 }

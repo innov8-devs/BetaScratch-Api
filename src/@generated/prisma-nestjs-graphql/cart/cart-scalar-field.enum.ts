@@ -10,8 +10,10 @@ export enum CartScalarFieldEnum {
     imageUrl = "imageUrl",
     played = "played",
     reference = "reference",
+    transactionRef = "transactionRef",
     createdAt = "createdAt",
-    updatedAt = "updatedAt"
+    updatedAt = "updatedAt",
+    purchaseId = "purchaseId"
 }
 
 

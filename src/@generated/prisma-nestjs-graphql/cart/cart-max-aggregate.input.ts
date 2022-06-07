@@ -29,8 +29,14 @@ export class CartMaxAggregateInput {
     reference?: true;
 
     @Field(() => Boolean, {nullable:true})
+    transactionRef?: true;
+
+    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})
     updatedAt?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    purchaseId?: true;
 }

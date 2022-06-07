@@ -28,8 +28,11 @@ export class CartUpdateManyMutationInput {
     @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
     played?: BoolFieldUpdateOperationsInput;
 
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    reference?: StringFieldUpdateOperationsInput;
+
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    reference?: NullableStringFieldUpdateOperationsInput;
+    transactionRef?: NullableStringFieldUpdateOperationsInput;
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;

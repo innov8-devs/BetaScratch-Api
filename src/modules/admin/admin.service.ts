@@ -15,6 +15,7 @@ import {
 import * as argon2 from 'argon2';
 import {
   GetGamesFromAdminInput,
+  GetUserPurchasesFromAdminInput,
   GetUsersCountInput,
   GetUsersFromAdminInput,
   GetWalletsFromAdminInput,
@@ -26,6 +27,7 @@ import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
 import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
 import { Game } from '@generated/prisma-nestjs-graphql/game/game.model';
+import { Cart } from '@generated/prisma-nestjs-graphql/cart/cart.model';
 
 @Injectable()
 export class AdminService {
@@ -324,6 +326,33 @@ export class AdminService {
   public async getOneGameFromAdmin(gameId: number): Promise<Game> {
     return await this.prismaService.game.findUnique({
       where: { id: gameId },
+    });
+  }
+
+  public async getUserPurchasesFromAdmin(
+    input: GetUserPurchasesFromAdminInput,
+  ): Promise<Cart[]> {
+    const { orderBy, orderColumn, page, size, userId } = input;
+    let skipValue = page * size - size;
+    return await this.prismaService.cart.findMany({
+      where: { userId },
+      include: { user: true },
+      orderBy: {
+        [orderColumn]: orderBy,
+      },
+      take: size,
+      skip: skipValue,
+    });
+  }
+
+  public async updateUserPurchaseStatusFromAdmin(
+    purchaseId: number,
+    played: boolean,
+  ) {
+    return await this.prismaService.cart.update({
+      where: { id: purchaseId },
+      data: { played },
+      include: { user: true },
     });
   }
 

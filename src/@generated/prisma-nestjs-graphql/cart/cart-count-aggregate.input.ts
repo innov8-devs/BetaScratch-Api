@@ -32,10 +32,16 @@ export class CartCountAggregateInput {
     reference?: true;
 
     @Field(() => Boolean, {nullable:true})
+    transactionRef?: true;
+
+    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})
     updatedAt?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    purchaseId?: true;
 
     @Field(() => Boolean, {nullable:true})
     _all?: true;

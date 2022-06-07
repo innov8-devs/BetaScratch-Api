@@ -13,4 +13,7 @@ export class CartAvgAggregate {
 
     @Field(() => Float, {nullable:true})
     quantity?: number;
+
+    @Field(() => Float, {nullable:true})
+    purchaseId?: number;
 }

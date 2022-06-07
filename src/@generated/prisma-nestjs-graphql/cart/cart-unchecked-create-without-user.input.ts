@@ -33,13 +33,19 @@ export class CartUncheckedCreateWithoutUserInput {
     @Validator.IsBoolean()
     played?: boolean;
 
-    @Field(() => String, {nullable:true})
+    @Field(() => String, {nullable:false})
     @Validator.IsString()
-    reference?: string;
+    reference!: string;
+
+    @Field(() => String, {nullable:true})
+    transactionRef?: string;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
+
+    @Field(() => Int, {nullable:true})
+    purchaseId?: number;
 }

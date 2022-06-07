@@ -72,3 +72,8 @@ export enum DB_TYPES {
   TRANSACTION = 'TRANSACTION',
   PURCHASE = 'PURCHASE',
 }
+
+export enum PURCHASE_STATUS {
+  INACTIVE = 'inactive',
+  ACTIVE = 'active',
+}

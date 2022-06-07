@@ -29,9 +29,15 @@ export class CartMinAggregate {
     @Field(() => String, {nullable:true})
     reference?: string;
 
+    @Field(() => String, {nullable:true})
+    transactionRef?: string;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
+
+    @Field(() => Int, {nullable:true})
+    purchaseId?: number;
 }

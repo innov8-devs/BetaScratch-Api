@@ -38,10 +38,16 @@ export class CartOrderByWithAggregationInput {
     reference?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    transactionRef?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
     updatedAt?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    purchaseId?: keyof typeof SortOrder;
 
     @Field(() => CartCountOrderByAggregateInput, {nullable:true})
     _count?: CartCountOrderByAggregateInput;

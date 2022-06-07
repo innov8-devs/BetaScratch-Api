@@ -13,4 +13,7 @@ export class CartSumAggregate {
 
     @Field(() => Int, {nullable:true})
     quantity?: number;
+
+    @Field(() => Int, {nullable:true})
+    purchaseId?: number;
 }

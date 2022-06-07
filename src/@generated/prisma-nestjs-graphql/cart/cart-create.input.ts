@@ -4,6 +4,7 @@ import { UserCreateNestedOneWithoutPurchasesInput } from '../user/user-create-ne
 import * as Validator from 'class-validator';
 import { GraphQLJSON } from 'graphql-type-json';
 import { Int } from '@nestjs/graphql';
+import { PurchaseCreateNestedOneWithoutCardsInput } from '../purchase/purchase-create-nested-one-without-cards.input';
 
 @InputType()
 export class CartCreateInput {
@@ -34,13 +35,19 @@ export class CartCreateInput {
     @Validator.IsBoolean()
     played?: boolean;
 
-    @Field(() => String, {nullable:true})
+    @Field(() => String, {nullable:false})
     @Validator.IsString()
-    reference?: string;
+    reference!: string;
+
+    @Field(() => String, {nullable:true})
+    transactionRef?: string;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
+
+    @Field(() => PurchaseCreateNestedOneWithoutCardsInput, {nullable:true})
+    purchase?: PurchaseCreateNestedOneWithoutCardsInput;
 }

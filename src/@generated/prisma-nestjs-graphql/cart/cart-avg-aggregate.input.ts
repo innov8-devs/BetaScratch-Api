@@ -12,4 +12,7 @@ export class CartAvgAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     quantity?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    purchaseId?: true;
 }
