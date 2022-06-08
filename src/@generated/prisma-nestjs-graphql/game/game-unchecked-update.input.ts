@@ -29,6 +29,9 @@ export class GameUncheckedUpdateInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     category?: StringFieldUpdateOperationsInput;
 
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    status?: StringFieldUpdateOperationsInput;
+
     @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
     availability?: IntFieldUpdateOperationsInput;
 

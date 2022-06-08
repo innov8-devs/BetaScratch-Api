@@ -26,6 +26,9 @@ export class GameCountAggregateInput {
     category?: true;
 
     @Field(() => Boolean, {nullable:true})
+    status?: true;
+
+    @Field(() => Boolean, {nullable:true})
     availability?: true;
 
     @Field(() => Boolean, {nullable:true})

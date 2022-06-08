@@ -48,7 +48,7 @@ export class UserController {
     @CurrentUser() user: User,
     @Body() input: UploadImageDto,
   ) {
-    const image = `${process.env.SERVER_UPLOAD_ORIGIN}/${file.filename}`;
+    const image = `${process.env.SERVER_UPLOAD_ORIGIN}/user/${file.filename}`;
     if (input.imageFor === VERIFICATION.LICENSE_FRONT_IMAGE) {
       await this.userService.updateVerificaionStatusToPending(
         user.id,

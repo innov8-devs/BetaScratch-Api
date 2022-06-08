@@ -6,9 +6,13 @@ import { TRANSACTION } from 'types/constants/enum';
 @InputType()
 export class UpdateGameInput {
   @Field(() => String, { nullable: true })
+  gameId?: string;
+  @Field(() => String, { nullable: true })
   name?: string;
   @Field(() => String, { nullable: true })
   imageUrl?: string;
+  @Field(() => String, { nullable: true })
+  status?: string;
   @Field(() => String, { nullable: true })
   description?: string;
   @Field(() => GraphQLJSON, { nullable: true })

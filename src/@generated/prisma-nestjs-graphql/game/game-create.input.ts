@@ -29,6 +29,9 @@ export class GameCreateInput {
     @Field(() => String, {nullable:false})
     category!: string;
 
+    @Field(() => String, {nullable:true})
+    status?: string;
+
     @Field(() => Int, {nullable:false})
     @Validator.IsNumber()
     availability!: number;

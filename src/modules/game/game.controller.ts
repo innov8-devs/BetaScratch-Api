@@ -1,4 +1,7 @@
+import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import {
+  BadRequestException,
+  Body,
   Controller,
   Get,
   Param,
@@ -9,11 +12,15 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
+import { Auth } from 'modules/auth/decorators/auth.decorator';
+import { UploadImageDto } from 'modules/user/dto/user.request';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import { IMAGE_TYPE } from 'types/constants/enum';
 
 @Controller('api/game')
 export class GameController {
+  @Auth([ROLE.ADMIN])
   @Post('upload')
   @UseInterceptors(
     FileInterceptor('image', {
@@ -29,8 +36,18 @@ export class GameController {
       }),
     }),
   )
-  uploadImage(@UploadedFile() file: Express.Multer.File) {
-    return file.filename;
+  uploadImage(
+    @UploadedFile() file: Express.Multer.File,
+    @Body() input: UploadImageDto,
+  ) {
+    if (input.imageFor !== IMAGE_TYPE.GAME) {
+      throw new BadRequestException({
+        name: 'upload',
+        message: 'Upload not successful',
+      });
+    }
+    const image = `${process.env.SERVER_UPLOAD_ORIGIN}/game/${file.filename}`;
+    return image;
   }
 
   @Get(':imgpath')

@@ -38,6 +38,9 @@ export class GameWhereInput {
     @Field(() => StringFilter, {nullable:true})
     category?: StringFilter;
 
+    @Field(() => StringFilter, {nullable:true})
+    status?: StringFilter;
+
     @Field(() => IntFilter, {nullable:true})
     availability?: IntFilter;
 

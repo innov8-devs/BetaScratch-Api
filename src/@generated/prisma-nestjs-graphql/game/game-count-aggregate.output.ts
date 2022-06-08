@@ -27,6 +27,9 @@ export class GameCountAggregate {
     category!: number;
 
     @Field(() => Int, {nullable:false})
+    status!: number;
+
+    @Field(() => Int, {nullable:false})
     availability!: number;
 
     @Field(() => Int, {nullable:false})

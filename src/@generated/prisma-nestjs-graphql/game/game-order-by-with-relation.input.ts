@@ -27,6 +27,9 @@ export class GameOrderByWithRelationInput {
     category?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    status?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     availability?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

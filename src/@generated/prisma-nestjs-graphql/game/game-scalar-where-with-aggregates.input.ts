@@ -38,6 +38,9 @@ export class GameScalarWhereWithAggregatesInput {
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     category?: StringWithAggregatesFilter;
 
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    status?: StringWithAggregatesFilter;
+
     @Field(() => IntWithAggregatesFilter, {nullable:true})
     availability?: IntWithAggregatesFilter;
 

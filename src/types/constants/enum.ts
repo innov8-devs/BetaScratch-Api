@@ -65,6 +65,10 @@ export enum MESSAGE_TYPE {
   WITHDRAWAL_APPROVED = 'WITHDRAWAL_APPROVED',
 }
 
+export enum IMAGE_TYPE {
+  GAME = 'game',
+}
+
 export enum DB_TYPES {
   GAME = 'GAME',
   USER = 'USER',

@@ -152,6 +152,7 @@ model Game {
   gameId       String   @unique
   price        Json
   category     String
+  status       String   @default("active")
   /// @Validator.IsNumber()
   availability Int
   createdAt    DateTime @default(now())

@@ -8,6 +8,7 @@ export enum GameScalarFieldEnum {
     gameId = "gameId",
     price = "price",
     category = "category",
+    status = "status",
     availability = "availability",
     createdAt = "createdAt",
     updatedAt = "updatedAt"

@@ -32,6 +32,9 @@ export class GameGroupBy {
     @Field(() => String, {nullable:false})
     category!: string;
 
+    @Field(() => String, {nullable:false})
+    status!: string;
+
     @Field(() => Int, {nullable:false})
     availability!: number;
 

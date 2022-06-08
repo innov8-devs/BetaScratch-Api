@@ -23,6 +23,9 @@ export class GameMinAggregate {
     @Field(() => String, {nullable:true})
     category?: string;
 
+    @Field(() => String, {nullable:true})
+    status?: string;
+
     @Field(() => Int, {nullable:true})
     availability?: number;
 

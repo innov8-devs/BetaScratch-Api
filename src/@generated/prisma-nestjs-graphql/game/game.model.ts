@@ -28,6 +28,9 @@ export class Game {
     @Field(() => String, {nullable:false})
     category!: string;
 
+    @Field(() => String, {nullable:false,defaultValue:'active'})
+    status!: string;
+
     @Field(() => Int, {nullable:false})
     availability!: number;
 

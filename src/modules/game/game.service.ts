@@ -27,6 +27,7 @@ import {
   GameCateogorySearch,
   GamePaginationInput,
   PurchaseSearch,
+  UpdateGameInput,
 } from './dto/game.request';
 import {
   FlutterCheckoutOneReturnType,
@@ -47,16 +48,16 @@ export class GameService {
     });
   }
 
-  async editGame(gameId: number, input: Prisma.GameUpdateInput) {
-    await this.prismaService.game.update({
+  async editGame(input: UpdateGameInput) {
+    const { gameId } = input;
+    return await this.prismaService.game.update({
       where: {
-        id: gameId,
+        gameId,
       },
       data: {
         ...input,
       },
     });
-    return true;
   }
 
   async findAllGames(): Promise<Game[]> {
@@ -112,6 +113,7 @@ export class GameService {
         imageUrl: true,
         name: true,
         price: true,
+        status: true,
         createdAt: true,
         updatedAt: true,
       },

@@ -26,6 +26,9 @@ export class GameUpdateManyMutationInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     category?: StringFieldUpdateOperationsInput;
 
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    status?: StringFieldUpdateOperationsInput;
+
     @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
     availability?: IntFieldUpdateOperationsInput;
 

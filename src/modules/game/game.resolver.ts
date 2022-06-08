@@ -46,12 +46,9 @@ export class GameResolver {
     return await this.gameService.createGameCategory(input);
   }
 
-  @Mutation(() => Boolean)
-  async editGame(
-    @Args('gameId') gameId: number,
-    @Args('input') input: UpdateGameInput,
-  ): Promise<Boolean> {
-    return await this.gameService.editGame(gameId, input);
+  @Mutation(() => Game)
+  async editGame(@Args('input') input: UpdateGameInput): Promise<Game> {
+    return await this.gameService.editGame(input);
   }
 
   @Query(() => [Game], { nullable: true })
