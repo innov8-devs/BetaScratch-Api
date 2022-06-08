@@ -463,7 +463,7 @@ export class UserService {
       data: {
         verificationStatus: 'pending',
         licenseFrontImage,
-        licenseBackImage: licenseBackImage ? licenseBackImage : null,
+        licenseBackImage 
       },
       where: {
         id: userId,

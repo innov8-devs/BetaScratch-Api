@@ -49,20 +49,14 @@ export class UserController {
     @Body() input: UploadImageDto,
   ) {
     const image = `${process.env.SERVER_UPLOAD_ORIGIN}/user/${file.filename}`;
-    if (input.imageFor === VERIFICATION.LICENSE_FRONT_IMAGE) {
+    if (
+      input.imageFor === VERIFICATION.LICENSE_FRONT_IMAGE ||
+      input.imageFor === VERIFICATION.LICENSE_BACK_IMAGE
+    ) {
       await this.userService.updateVerificaionStatusToPending(
         user.id,
         image,
         null,
-      );
-    } else if (
-      input.imageFor === VERIFICATION.LICENSE_BACK_IMAGE &&
-      user.licenseFrontImage
-    ) {
-      await this.userService.updateVerificaionStatusToPending(
-        user.id,
-        user.licenseFrontImage,
-        image,
       );
     } else {
       throw new BadRequestException({
