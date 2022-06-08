@@ -29,6 +29,9 @@ export class PurchaseGroupBy {
     reference!: string;
 
     @Field(() => Int, {nullable:false})
+    subtotal!: number;
+
+    @Field(() => Int, {nullable:false})
     userId!: number;
 
     @Field(() => Date, {nullable:false})

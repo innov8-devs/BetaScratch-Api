@@ -11,5 +11,8 @@ export class PurchaseSumAggregateInput {
     quantity?: true;
 
     @Field(() => Boolean, {nullable:true})
+    subtotal?: true;
+
+    @Field(() => Boolean, {nullable:true})
     userId?: true;
 }

@@ -23,6 +23,9 @@ export class PurchaseCountAggregateInput {
     reference?: true;
 
     @Field(() => Boolean, {nullable:true})
+    subtotal?: true;
+
+    @Field(() => Boolean, {nullable:true})
     userId?: true;
 
     @Field(() => Boolean, {nullable:true})

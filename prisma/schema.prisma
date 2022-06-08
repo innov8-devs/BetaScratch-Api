@@ -218,6 +218,7 @@ model Purchase {
   status    String   @default("inactive")
   quantity  Int
   reference String
+  subtotal  Int      @default(0)
   cards     Cart[]
   user      User     @relation(fields: [userId], references: [id])
   userId    Int

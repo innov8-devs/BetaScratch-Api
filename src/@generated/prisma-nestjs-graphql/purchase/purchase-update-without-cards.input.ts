@@ -23,6 +23,9 @@ export class PurchaseUpdateWithoutCardsInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     reference?: StringFieldUpdateOperationsInput;
 
+    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
+    subtotal?: IntFieldUpdateOperationsInput;
+
     @Field(() => UserUpdateOneRequiredWithoutPurchaseInput, {nullable:true})
     user?: UserUpdateOneRequiredWithoutPurchaseInput;
 

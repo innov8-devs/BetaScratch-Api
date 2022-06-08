@@ -27,6 +27,9 @@ export class Purchase {
     @Field(() => String, {nullable:false})
     reference!: string;
 
+    @Field(() => Int, {nullable:false,defaultValue:0})
+    subtotal!: number;
+
     @Field(() => [Cart], {nullable:true})
     cards?: Array<Cart>;
 

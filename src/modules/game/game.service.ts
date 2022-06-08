@@ -266,6 +266,7 @@ export class GameService {
     userId: number,
     cartDetail: any,
     transactionRef: string,
+    subtotal: number,
   ) {
     const user = await this.prismaService.user.findUnique({
       where: { id: userId },
@@ -273,6 +274,7 @@ export class GameService {
 
     await this.prismaService.purchase.create({
       data: {
+        subtotal,
         email: user.email,
         username: user.username,
         quantity: cartDetail.length,
@@ -304,7 +306,12 @@ export class GameService {
         userWallet,
       );
       if (response === true) {
-        await this.recordPurchase(userId, cartDetail, transactionRef);
+        await this.recordPurchase(
+          userId,
+          cartDetail,
+          transactionRef,
+          input.subtotal,
+        );
         await this.calculateVipProgress(userId);
         await this.transactionService.cashback(userId, input.subtotal);
         await this.transactionService.createTransaction({
@@ -337,7 +344,12 @@ export class GameService {
         userWallet,
       );
       if (response === true) {
-        await this.recordPurchase(userId, cartDetail, transactionRef);
+        await this.recordPurchase(
+          userId,
+          cartDetail,
+          transactionRef,
+          input.subtotal,
+        );
         await this.transactionService.createTransaction({
           amount: input.subtotal,
           currency: userWallet.currency,
@@ -440,7 +452,12 @@ export class GameService {
 
     const cartDetail = computeCart(input.cart, userId, transactionRef);
 
-    await this.recordPurchase(userId, cartDetail, transactionRef);
+    await this.recordPurchase(
+      userId,
+      cartDetail,
+      transactionRef,
+      input.subtotal,
+    );
 
     await this.transactionService.createTransaction({
       amount: input.subtotal,

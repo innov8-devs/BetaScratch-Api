@@ -24,6 +24,9 @@ export class PurchaseMaxAggregate {
     reference?: string;
 
     @Field(() => Int, {nullable:true})
+    subtotal?: number;
+
+    @Field(() => Int, {nullable:true})
     userId?: number;
 
     @Field(() => Date, {nullable:true})

@@ -21,6 +21,9 @@ export class PurchaseCreateWithoutCardsInput {
     @Field(() => String, {nullable:false})
     reference!: string;
 
+    @Field(() => Int, {nullable:true})
+    subtotal?: number;
+
     @Field(() => UserCreateNestedOneWithoutPurchaseInput, {nullable:false})
     user!: UserCreateNestedOneWithoutPurchaseInput;
 

@@ -23,6 +23,9 @@ export class PurchaseCreateManyInput {
     @Field(() => String, {nullable:false})
     reference!: string;
 
+    @Field(() => Int, {nullable:true})
+    subtotal?: number;
+
     @Field(() => Int, {nullable:false})
     userId!: number;
 

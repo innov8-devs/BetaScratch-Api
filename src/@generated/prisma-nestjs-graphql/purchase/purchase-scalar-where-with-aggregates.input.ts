@@ -35,6 +35,9 @@ export class PurchaseScalarWhereWithAggregatesInput {
     reference?: StringWithAggregatesFilter;
 
     @Field(() => IntWithAggregatesFilter, {nullable:true})
+    subtotal?: IntWithAggregatesFilter;
+
+    @Field(() => IntWithAggregatesFilter, {nullable:true})
     userId?: IntWithAggregatesFilter;
 
     @Field(() => DateTimeWithAggregatesFilter, {nullable:true})

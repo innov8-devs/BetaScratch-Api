@@ -25,6 +25,9 @@ export class PurchaseUncheckedUpdateManyWithoutPurchaseInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     reference?: StringFieldUpdateOperationsInput;
 
+    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
+    subtotal?: IntFieldUpdateOperationsInput;
+
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;
 

@@ -12,5 +12,8 @@ export class PurchaseSumOrderByAggregateInput {
     quantity?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    subtotal?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     userId?: keyof typeof SortOrder;
 }

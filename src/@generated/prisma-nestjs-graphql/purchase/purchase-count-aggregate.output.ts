@@ -24,6 +24,9 @@ export class PurchaseCountAggregate {
     reference!: number;
 
     @Field(() => Int, {nullable:false})
+    subtotal!: number;
+
+    @Field(() => Int, {nullable:false})
     userId!: number;
 
     @Field(() => Int, {nullable:false})

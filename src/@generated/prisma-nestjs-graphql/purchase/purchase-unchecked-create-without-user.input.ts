@@ -24,6 +24,9 @@ export class PurchaseUncheckedCreateWithoutUserInput {
     @Field(() => String, {nullable:false})
     reference!: string;
 
+    @Field(() => Int, {nullable:true})
+    subtotal?: number;
+
     @Field(() => CartUncheckedCreateNestedManyWithoutPurchaseInput, {nullable:true})
     cards?: CartUncheckedCreateNestedManyWithoutPurchaseInput;
 

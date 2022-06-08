@@ -12,5 +12,8 @@ export class PurchaseSumAggregate {
     quantity?: number;
 
     @Field(() => Int, {nullable:true})
+    subtotal?: number;
+
+    @Field(() => Int, {nullable:true})
     userId?: number;
 }

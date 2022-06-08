@@ -25,6 +25,9 @@ export class PurchaseOrderByWithRelationInput {
     @Field(() => SortOrder, {nullable:true})
     reference?: keyof typeof SortOrder;
 
+    @Field(() => SortOrder, {nullable:true})
+    subtotal?: keyof typeof SortOrder;
+
     @Field(() => CartOrderByRelationAggregateInput, {nullable:true})
     cards?: CartOrderByRelationAggregateInput;
 

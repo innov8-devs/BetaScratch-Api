@@ -36,6 +36,9 @@ export class PurchaseWhereInput {
     @Field(() => StringFilter, {nullable:true})
     reference?: StringFilter;
 
+    @Field(() => IntFilter, {nullable:true})
+    subtotal?: IntFilter;
+
     @Field(() => CartListRelationFilter, {nullable:true})
     cards?: CartListRelationFilter;
 

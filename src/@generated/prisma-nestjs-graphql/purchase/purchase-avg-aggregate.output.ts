@@ -12,5 +12,8 @@ export class PurchaseAvgAggregate {
     quantity?: number;
 
     @Field(() => Float, {nullable:true})
+    subtotal?: number;
+
+    @Field(() => Float, {nullable:true})
     userId?: number;
 }

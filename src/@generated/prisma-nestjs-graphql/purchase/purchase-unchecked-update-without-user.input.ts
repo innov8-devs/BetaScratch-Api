@@ -26,6 +26,9 @@ export class PurchaseUncheckedUpdateWithoutUserInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     reference?: StringFieldUpdateOperationsInput;
 
+    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
+    subtotal?: IntFieldUpdateOperationsInput;
+
     @Field(() => CartUncheckedUpdateManyWithoutPurchaseInput, {nullable:true})
     cards?: CartUncheckedUpdateManyWithoutPurchaseInput;
 

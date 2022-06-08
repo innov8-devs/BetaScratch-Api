@@ -35,6 +35,9 @@ export class PurchaseScalarWhereInput {
     reference?: StringFilter;
 
     @Field(() => IntFilter, {nullable:true})
+    subtotal?: IntFilter;
+
+    @Field(() => IntFilter, {nullable:true})
     userId?: IntFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
