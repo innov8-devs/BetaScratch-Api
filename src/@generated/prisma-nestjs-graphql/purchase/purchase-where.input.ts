@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import { IntFilter } from '../prisma/int-filter.input';
 import { StringFilter } from '../prisma/string-filter.input';
 import { CartListRelationFilter } from '../cart/cart-list-relation-filter.input';
+import { UserRelationFilter } from '../user/user-relation-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 
 @InputType()
@@ -37,6 +38,12 @@ export class PurchaseWhereInput {
 
     @Field(() => CartListRelationFilter, {nullable:true})
     cards?: CartListRelationFilter;
+
+    @Field(() => UserRelationFilter, {nullable:true})
+    user?: UserRelationFilter;
+
+    @Field(() => IntFilter, {nullable:true})
+    userId?: IntFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;

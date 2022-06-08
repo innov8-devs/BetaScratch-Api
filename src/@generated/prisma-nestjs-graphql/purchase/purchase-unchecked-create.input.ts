@@ -27,6 +27,9 @@ export class PurchaseUncheckedCreateInput {
     @Field(() => CartUncheckedCreateNestedManyWithoutPurchaseInput, {nullable:true})
     cards?: CartUncheckedCreateNestedManyWithoutPurchaseInput;
 
+    @Field(() => Int, {nullable:false})
+    userId!: number;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

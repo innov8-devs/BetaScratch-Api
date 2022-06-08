@@ -23,6 +23,9 @@ export class PurchaseMaxAggregateInput {
     reference?: true;
 
     @Field(() => Boolean, {nullable:true})
+    userId?: true;
+
+    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})

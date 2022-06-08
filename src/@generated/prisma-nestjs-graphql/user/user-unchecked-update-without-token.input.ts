@@ -15,6 +15,7 @@ import { WithdrawalRequestUncheckedUpdateManyWithoutUserInput } from '../withdra
 import { CartUncheckedUpdateManyWithoutUserInput } from '../cart/cart-unchecked-update-many-without-user.input';
 import { MessageUncheckedUpdateManyWithoutUserInput } from '../message/message-unchecked-update-many-without-user.input';
 import { ReferralUncheckedUpdateManyWithoutUserInput } from '../referral/referral-unchecked-update-many-without-user.input';
+import { PurchaseUncheckedUpdateManyWithoutUserInput } from '../purchase/purchase-unchecked-update-many-without-user.input';
 
 @InputType()
 export class UserUncheckedUpdateWithoutTokenInput {
@@ -96,4 +97,7 @@ export class UserUncheckedUpdateWithoutTokenInput {
 
     @Field(() => ReferralUncheckedUpdateManyWithoutUserInput, {nullable:true})
     referral?: ReferralUncheckedUpdateManyWithoutUserInput;
+
+    @Field(() => PurchaseUncheckedUpdateManyWithoutUserInput, {nullable:true})
+    purchase?: PurchaseUncheckedUpdateManyWithoutUserInput;
 }

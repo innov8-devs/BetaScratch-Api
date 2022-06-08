@@ -12,6 +12,7 @@ import { CartUncheckedCreateNestedManyWithoutUserInput } from '../cart/cart-unch
 import { MessageUncheckedCreateNestedManyWithoutUserInput } from '../message/message-unchecked-create-nested-many-without-user.input';
 import { ReferralUncheckedCreateNestedManyWithoutUserInput } from '../referral/referral-unchecked-create-nested-many-without-user.input';
 import { TokenUncheckedCreateNestedManyWithoutUserInput } from '../token/token-unchecked-create-nested-many-without-user.input';
+import { PurchaseUncheckedCreateNestedManyWithoutUserInput } from '../purchase/purchase-unchecked-create-nested-many-without-user.input';
 
 @InputType()
 export class UserUncheckedCreateWithoutWithdrawalRequestInput {
@@ -105,4 +106,7 @@ export class UserUncheckedCreateWithoutWithdrawalRequestInput {
 
     @Field(() => TokenUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
     token?: TokenUncheckedCreateNestedManyWithoutUserInput;
+
+    @Field(() => PurchaseUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
+    purchase?: PurchaseUncheckedCreateNestedManyWithoutUserInput;
 }

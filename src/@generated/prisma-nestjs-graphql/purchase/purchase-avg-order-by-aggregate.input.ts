@@ -10,4 +10,7 @@ export class PurchaseAvgOrderByAggregateInput {
 
     @Field(() => SortOrder, {nullable:true})
     quantity?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    userId?: keyof typeof SortOrder;
 }

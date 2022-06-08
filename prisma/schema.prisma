@@ -64,6 +64,7 @@ model User {
   message            Message[]
   referral           Referral[]
   token              Token[]
+  purchase           Purchase[]
 }
 
 model Admin {
@@ -218,6 +219,8 @@ model Purchase {
   quantity  Int
   reference String
   cards     Cart[]
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

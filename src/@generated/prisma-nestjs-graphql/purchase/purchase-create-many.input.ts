@@ -23,6 +23,9 @@ export class PurchaseCreateManyInput {
     @Field(() => String, {nullable:false})
     reference!: string;
 
+    @Field(() => Int, {nullable:false})
+    userId!: number;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

@@ -11,6 +11,7 @@ import { WithdrawalRequestCreateNestedManyWithoutUserInput } from '../withdrawal
 import { MessageCreateNestedManyWithoutUserInput } from '../message/message-create-nested-many-without-user.input';
 import { ReferralCreateNestedManyWithoutUserInput } from '../referral/referral-create-nested-many-without-user.input';
 import { TokenCreateNestedManyWithoutUserInput } from '../token/token-create-nested-many-without-user.input';
+import { PurchaseCreateNestedManyWithoutUserInput } from '../purchase/purchase-create-nested-many-without-user.input';
 
 @InputType()
 export class UserCreateWithoutPurchasesInput {
@@ -101,4 +102,7 @@ export class UserCreateWithoutPurchasesInput {
 
     @Field(() => TokenCreateNestedManyWithoutUserInput, {nullable:true})
     token?: TokenCreateNestedManyWithoutUserInput;
+
+    @Field(() => PurchaseCreateNestedManyWithoutUserInput, {nullable:true})
+    purchase?: PurchaseCreateNestedManyWithoutUserInput;
 }

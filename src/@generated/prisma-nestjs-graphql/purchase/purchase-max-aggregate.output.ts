@@ -23,6 +23,9 @@ export class PurchaseMaxAggregate {
     @Field(() => String, {nullable:true})
     reference?: string;
 
+    @Field(() => Int, {nullable:true})
+    userId?: number;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

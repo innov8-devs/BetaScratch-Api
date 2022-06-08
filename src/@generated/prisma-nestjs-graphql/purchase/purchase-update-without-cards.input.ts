@@ -2,6 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
 import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operations.input';
+import { UserUpdateOneRequiredWithoutPurchaseInput } from '../user/user-update-one-required-without-purchase.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 
 @InputType()
@@ -21,6 +22,9 @@ export class PurchaseUpdateWithoutCardsInput {
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     reference?: StringFieldUpdateOperationsInput;
+
+    @Field(() => UserUpdateOneRequiredWithoutPurchaseInput, {nullable:true})
+    user?: UserUpdateOneRequiredWithoutPurchaseInput;
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;

@@ -1,7 +1,11 @@
 import { CartItems } from 'modules/game/dto/game.request';
 import { generateRandomString } from 'utils/generateRandomString.util';
 
-export const computeCart = (data: CartItems[], userId: number) => {
+export const computeCart = (
+  data: CartItems[],
+  userId: number,
+  transactionRef?: string,
+) => {
   const cartDetail = [];
 
   for (let item of data) {
@@ -20,6 +24,7 @@ export const computeCart = (data: CartItems[], userId: number) => {
         },
         quantity: 1,
         userId: userId,
+        transactionRef: transactionRef ? transactionRef : '',
       });
       gameQuantity--;
     }

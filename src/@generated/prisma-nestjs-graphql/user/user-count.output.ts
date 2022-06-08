@@ -25,4 +25,7 @@ export class UserCount {
 
     @Field(() => Int, {nullable:false})
     token?: number;
+
+    @Field(() => Int, {nullable:false})
+    purchase?: number;
 }

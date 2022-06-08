@@ -75,10 +75,6 @@ export class GetGamesFromAdminInput {
 export class GetUserPurchasesFromAdminInput {
   @Field(() => Number)
   @IsNumber()
-  userId: number;
-
-  @Field(() => Number)
-  @IsNumber()
   page: number;
 
   @Field(() => Number)

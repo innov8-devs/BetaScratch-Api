@@ -2,6 +2,7 @@ import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
 import { Cart } from '@generated/prisma-nestjs-graphql/cart/cart.model';
 import { Game } from '@generated/prisma-nestjs-graphql/game/game.model';
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
+import { Purchase } from '@generated/prisma-nestjs-graphql/purchase/purchase.model';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
@@ -129,12 +130,12 @@ export class AdminResolver {
   }
 
   @Auth([ROLE.ADMIN])
-  @Query(() => [Cart], { nullable: true })
+  @Query(() => [Purchase], { nullable: true })
   async getUserPurchasesFromAdmin(
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
     @Args('input') input: GetUserPurchasesFromAdminInput,
-  ): Promise<Cart[]> {
+  ): Promise<Purchase[]> {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getUserPurchasesFromAdmin(input);
   }

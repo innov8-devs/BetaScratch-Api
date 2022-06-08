@@ -2,6 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import { CartCreateNestedManyWithoutPurchaseInput } from '../cart/cart-create-nested-many-without-purchase.input';
+import { UserCreateNestedOneWithoutPurchaseInput } from '../user/user-create-nested-one-without-purchase.input';
 
 @InputType()
 export class PurchaseCreateInput {
@@ -23,6 +24,9 @@ export class PurchaseCreateInput {
 
     @Field(() => CartCreateNestedManyWithoutPurchaseInput, {nullable:true})
     cards?: CartCreateNestedManyWithoutPurchaseInput;
+
+    @Field(() => UserCreateNestedOneWithoutPurchaseInput, {nullable:false})
+    user!: UserCreateNestedOneWithoutPurchaseInput;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;

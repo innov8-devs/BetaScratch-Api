@@ -16,6 +16,7 @@ import { CartListRelationFilter } from '../cart/cart-list-relation-filter.input'
 import { MessageListRelationFilter } from '../message/message-list-relation-filter.input';
 import { ReferralListRelationFilter } from '../referral/referral-list-relation-filter.input';
 import { TokenListRelationFilter } from '../token/token-list-relation-filter.input';
+import { PurchaseListRelationFilter } from '../purchase/purchase-list-relation-filter.input';
 
 @InputType()
 export class UserWhereInput {
@@ -109,4 +110,7 @@ export class UserWhereInput {
 
     @Field(() => TokenListRelationFilter, {nullable:true})
     token?: TokenListRelationFilter;
+
+    @Field(() => PurchaseListRelationFilter, {nullable:true})
+    purchase?: PurchaseListRelationFilter;
 }

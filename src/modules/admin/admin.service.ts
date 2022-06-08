@@ -27,7 +27,7 @@ import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
 import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
 import { Game } from '@generated/prisma-nestjs-graphql/game/game.model';
-import { Cart } from '@generated/prisma-nestjs-graphql/cart/cart.model';
+import { Purchase } from '@generated/prisma-nestjs-graphql/purchase/purchase.model';
 
 @Injectable()
 export class AdminService {
@@ -331,12 +331,11 @@ export class AdminService {
 
   public async getUserPurchasesFromAdmin(
     input: GetUserPurchasesFromAdminInput,
-  ): Promise<Cart[]> {
-    const { orderBy, orderColumn, page, size, userId } = input;
+  ): Promise<Purchase[]> {
+    const { orderBy, orderColumn, page, size } = input;
     let skipValue = page * size - size;
-    return await this.prismaService.cart.findMany({
-      where: { userId },
-      include: { user: true },
+    return await this.prismaService.purchase.findMany({
+      include: { cards: true },
       orderBy: {
         [orderColumn]: orderBy,
       },

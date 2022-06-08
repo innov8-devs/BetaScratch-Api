@@ -3,6 +3,7 @@ import { ObjectType } from '@nestjs/graphql';
 import { ID } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import { Cart } from '../cart/cart.model';
+import { User } from '../user/user.model';
 import { PurchaseCount } from './purchase-count.output';
 
 @ObjectType()
@@ -28,6 +29,12 @@ export class Purchase {
 
     @Field(() => [Cart], {nullable:true})
     cards?: Array<Cart>;
+
+    @Field(() => User, {nullable:false})
+    user?: User;
+
+    @Field(() => Int, {nullable:false})
+    userId!: number;
 
     @Field(() => Date, {nullable:false})
     createdAt!: Date;

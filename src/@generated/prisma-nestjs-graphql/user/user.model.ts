@@ -12,6 +12,7 @@ import { Cart } from '../cart/cart.model';
 import { Message } from '../message/message.model';
 import { Referral } from '../referral/referral.model';
 import { Token } from '../token/token.model';
+import { Purchase } from '../purchase/purchase.model';
 import { UserCount } from './user-count.output';
 
 @ObjectType()
@@ -97,6 +98,9 @@ export class User {
 
     @Field(() => [Token], {nullable:true})
     token?: Array<Token>;
+
+    @Field(() => [Purchase], {nullable:true})
+    purchase?: Array<Purchase>;
 
     @Field(() => UserCount, {nullable:false})
     _count?: UserCount;

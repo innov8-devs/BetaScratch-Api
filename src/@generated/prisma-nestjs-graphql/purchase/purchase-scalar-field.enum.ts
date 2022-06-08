@@ -7,6 +7,7 @@ export enum PurchaseScalarFieldEnum {
     status = "status",
     quantity = "quantity",
     reference = "reference",
+    userId = "userId",
     createdAt = "createdAt",
     updatedAt = "updatedAt"
 }

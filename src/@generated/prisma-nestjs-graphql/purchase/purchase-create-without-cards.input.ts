@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
+import { UserCreateNestedOneWithoutPurchaseInput } from '../user/user-create-nested-one-without-purchase.input';
 
 @InputType()
 export class PurchaseCreateWithoutCardsInput {
@@ -19,6 +20,9 @@ export class PurchaseCreateWithoutCardsInput {
 
     @Field(() => String, {nullable:false})
     reference!: string;
+
+    @Field(() => UserCreateNestedOneWithoutPurchaseInput, {nullable:false})
+    user!: UserCreateNestedOneWithoutPurchaseInput;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;

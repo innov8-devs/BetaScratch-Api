@@ -28,6 +28,9 @@ export class PurchaseGroupBy {
     @Field(() => String, {nullable:false})
     reference!: string;
 
+    @Field(() => Int, {nullable:false})
+    userId!: number;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;
 

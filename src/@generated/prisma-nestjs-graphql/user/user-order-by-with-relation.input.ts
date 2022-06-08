@@ -9,6 +9,7 @@ import { CartOrderByRelationAggregateInput } from '../cart/cart-order-by-relatio
 import { MessageOrderByRelationAggregateInput } from '../message/message-order-by-relation-aggregate.input';
 import { ReferralOrderByRelationAggregateInput } from '../referral/referral-order-by-relation-aggregate.input';
 import { TokenOrderByRelationAggregateInput } from '../token/token-order-by-relation-aggregate.input';
+import { PurchaseOrderByRelationAggregateInput } from '../purchase/purchase-order-by-relation-aggregate.input';
 
 @InputType()
 export class UserOrderByWithRelationInput {
@@ -93,4 +94,7 @@ export class UserOrderByWithRelationInput {
 
     @Field(() => TokenOrderByRelationAggregateInput, {nullable:true})
     token?: TokenOrderByRelationAggregateInput;
+
+    @Field(() => PurchaseOrderByRelationAggregateInput, {nullable:true})
+    purchase?: PurchaseOrderByRelationAggregateInput;
 }

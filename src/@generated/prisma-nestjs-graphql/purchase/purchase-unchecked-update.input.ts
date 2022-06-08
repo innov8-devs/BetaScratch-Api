@@ -29,6 +29,9 @@ export class PurchaseUncheckedUpdateInput {
     @Field(() => CartUncheckedUpdateManyWithoutPurchaseInput, {nullable:true})
     cards?: CartUncheckedUpdateManyWithoutPurchaseInput;
 
+    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
+    userId?: IntFieldUpdateOperationsInput;
+
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;
 
