@@ -386,7 +386,7 @@ export class AdminService {
     } else if (input.field === DB_TYPES.TRANSACTION) {
       return await this.prismaService.transaction.count();
     } else if (input.field === DB_TYPES.PURCHASE) {
-      return await this.prismaService.cart.count();
+      return await this.prismaService.purchase.count();
     }
     return 0;
   }
