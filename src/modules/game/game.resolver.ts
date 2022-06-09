@@ -39,10 +39,14 @@ export class GameResolver {
     return await this.gameService.createGame(input);
   }
 
-  @Mutation(() => GameCategory)
+  @Auth([ROLE.ADMIN])
+  @Mutation(() => Boolean)
   async createGameCategory(
     @Args('input') input: GameCategoryCreateInput,
-  ): Promise<GameCategory> {
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ): Promise<Boolean> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return await this.gameService.createGameCategory(input);
   }
 
@@ -73,8 +77,13 @@ export class GameResolver {
     return this.gameService.findAllGamesByCategories(input);
   }
 
+  @Auth([ROLE.ADMIN])
   @Query(() => [GameCategory], { nullable: true })
-  findAllGameCategories() {
+  async findAllGameCategories(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.gameService.findAllGameCategories();
   }
 

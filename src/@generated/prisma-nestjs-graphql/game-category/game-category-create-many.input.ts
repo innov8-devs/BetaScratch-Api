@@ -12,8 +12,4 @@ export class GameCategoryCreateManyInput {
     @Field(() => String, {nullable:false})
     @Validator.IsString()
     categoryName!: string;
-
-    @Field(() => String, {nullable:false})
-    @Validator.IsString()
-    categoryLabel!: string;
 }

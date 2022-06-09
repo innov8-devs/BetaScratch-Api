@@ -16,9 +16,6 @@ export class GameCategoryGroupBy {
     @Field(() => String, {nullable:false})
     categoryName!: string;
 
-    @Field(() => String, {nullable:false})
-    categoryLabel!: string;
-
     @Field(() => GameCategoryCountAggregate, {nullable:true})
     _count?: GameCategoryCountAggregate;
 

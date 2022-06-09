@@ -20,7 +20,4 @@ export class GameCategoryScalarWhereWithAggregatesInput {
 
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     categoryName?: StringWithAggregatesFilter;
-
-    @Field(() => StringWithAggregatesFilter, {nullable:true})
-    categoryLabel?: StringWithAggregatesFilter;
 }

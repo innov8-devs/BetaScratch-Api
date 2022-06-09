@@ -20,7 +20,4 @@ export class GameCategoryWhereInput {
 
     @Field(() => StringFilter, {nullable:true})
     categoryName?: StringFilter;
-
-    @Field(() => StringFilter, {nullable:true})
-    categoryLabel?: StringFilter;
 }

@@ -160,11 +160,9 @@ model Game {
 }
 
 model GameCategory {
-  id            Int    @id @default(autoincrement())
+  id           Int    @id @default(autoincrement())
   /// @Validator.IsString()
-  categoryName  String
-  /// @Validator.IsString()
-  categoryLabel String
+  categoryName String
 }
 
 model Message {

@@ -12,8 +12,5 @@ export class GameCategoryCountAggregate {
     categoryName!: number;
 
     @Field(() => Int, {nullable:false})
-    categoryLabel!: number;
-
-    @Field(() => Int, {nullable:false})
     _all!: number;
 }

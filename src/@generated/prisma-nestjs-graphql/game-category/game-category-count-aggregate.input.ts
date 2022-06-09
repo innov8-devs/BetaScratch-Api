@@ -11,8 +11,5 @@ export class GameCategoryCountAggregateInput {
     categoryName?: true;
 
     @Field(() => Boolean, {nullable:true})
-    categoryLabel?: true;
-
-    @Field(() => Boolean, {nullable:true})
     _all?: true;
 }

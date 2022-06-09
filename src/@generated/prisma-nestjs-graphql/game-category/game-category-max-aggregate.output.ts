@@ -10,7 +10,4 @@ export class GameCategoryMaxAggregate {
 
     @Field(() => String, {nullable:true})
     categoryName?: string;
-
-    @Field(() => String, {nullable:true})
-    categoryLabel?: string;
 }

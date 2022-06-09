@@ -29,7 +29,7 @@ export class AdminResolver {
   ) {}
 
   // Get logged in user
-  @Auth()
+  @Auth([ROLE.ADMIN])
   @Query(() => Admin, { nullable: true })
   async meAdmin(
     @CurrentUser() user: User,

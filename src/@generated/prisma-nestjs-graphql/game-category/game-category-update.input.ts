@@ -7,7 +7,4 @@ export class GameCategoryUpdateInput {
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     categoryName?: StringFieldUpdateOperationsInput;
-
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    categoryLabel?: StringFieldUpdateOperationsInput;
 }

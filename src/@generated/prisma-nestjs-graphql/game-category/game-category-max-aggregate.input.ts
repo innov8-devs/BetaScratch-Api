@@ -9,7 +9,4 @@ export class GameCategoryMaxAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     categoryName?: true;
-
-    @Field(() => Boolean, {nullable:true})
-    categoryLabel?: true;
 }

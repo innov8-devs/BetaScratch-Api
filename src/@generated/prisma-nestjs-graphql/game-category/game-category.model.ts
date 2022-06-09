@@ -10,7 +10,4 @@ export class GameCategory {
 
     @Field(() => String, {nullable:false})
     categoryName!: string;
-
-    @Field(() => String, {nullable:false})
-    categoryLabel!: string;
 }

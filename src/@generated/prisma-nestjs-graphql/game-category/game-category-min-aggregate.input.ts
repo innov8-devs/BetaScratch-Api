@@ -9,7 +9,4 @@ export class GameCategoryMinAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     categoryName?: true;
-
-    @Field(() => Boolean, {nullable:true})
-    categoryLabel?: true;
 }

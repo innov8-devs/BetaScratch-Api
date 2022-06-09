@@ -124,11 +124,16 @@ export class GameService {
   }
 
   async createGameCategory(input: Prisma.GameCategoryCreateInput) {
-    return await this.prismaService.gameCategory.create({
-      data: {
-        ...input,
-      },
-    });
+    try {
+      await this.prismaService.gameCategory.create({
+        data: {
+          ...input,
+        },
+      });
+      return true;
+    } catch (err) {
+      return false;
+    }
   }
 
   async findAllGameCategories() {

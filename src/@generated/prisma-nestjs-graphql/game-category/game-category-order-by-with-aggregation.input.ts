@@ -16,9 +16,6 @@ export class GameCategoryOrderByWithAggregationInput {
     @Field(() => SortOrder, {nullable:true})
     categoryName?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    categoryLabel?: keyof typeof SortOrder;
-
     @Field(() => GameCategoryCountOrderByAggregateInput, {nullable:true})
     _count?: GameCategoryCountOrderByAggregateInput;
 
