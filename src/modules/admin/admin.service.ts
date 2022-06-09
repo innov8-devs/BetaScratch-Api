@@ -14,11 +14,13 @@ import {
 } from 'types/constants/enum';
 import * as argon2 from 'argon2';
 import {
+  EditUserPurchasesFromAdminInput,
   GetGamesFromAdminInput,
   GetUserPurchasesFromAdminInput,
   GetUsersCountInput,
   GetUsersFromAdminInput,
   GetWalletsFromAdminInput,
+  GetWithdrawlistFromAdminInput,
   RegisterAdminInput,
   UpdateUserWalletInput,
 } from './dto/admin.request';
@@ -28,6 +30,7 @@ import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
 import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
 import { Game } from '@generated/prisma-nestjs-graphql/game/game.model';
 import { Purchase } from '@generated/prisma-nestjs-graphql/purchase/purchase.model';
+import { WithdrawalRequest } from '@generated/prisma-nestjs-graphql/withdrawal-request/withdrawal-request.model';
 
 @Injectable()
 export class AdminService {
@@ -344,14 +347,14 @@ export class AdminService {
     });
   }
 
-  public async updateUserPurchaseStatusFromAdmin(
-    purchaseId: number,
-    played: boolean,
+  public async editUserPurchaseStatusFromAdmin(
+    input: EditUserPurchasesFromAdminInput,
   ) {
-    return await this.prismaService.cart.update({
-      where: { id: purchaseId },
-      data: { played },
-      include: { user: true },
+    const { purchaseId, ...rest } = input;
+    return await this.prismaService.purchase.update({
+      where: { id: input.purchaseId },
+      data: rest,
+      include: { cards: true },
     });
   }
 
@@ -389,5 +392,20 @@ export class AdminService {
       return await this.prismaService.purchase.count();
     }
     return 0;
+  }
+
+  public async getWithdrawaListFromAdmin(
+    input: GetWithdrawlistFromAdminInput,
+  ): Promise<WithdrawalRequest[]> {
+    const { orderBy, orderColumn, page, size } = input;
+    let skipValue = page * size - size;
+    return await this.prismaService.withdrawalRequest.findMany({
+      orderBy: {
+        [orderColumn]: orderBy,
+      },
+      take: size,
+      skip: skipValue,
+      include: { user: true },
+    });
   }
 }

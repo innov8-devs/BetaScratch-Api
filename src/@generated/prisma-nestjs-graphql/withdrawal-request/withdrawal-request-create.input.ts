@@ -6,7 +6,7 @@ import { UserCreateNestedOneWithoutWithdrawalRequestInput } from '../user/user-c
 export class WithdrawalRequestCreateInput {
 
     @Field(() => UserCreateNestedOneWithoutWithdrawalRequestInput, {nullable:true})
-    User?: UserCreateNestedOneWithoutWithdrawalRequestInput;
+    user?: UserCreateNestedOneWithoutWithdrawalRequestInput;
 
     @Field(() => String, {nullable:true})
     bank?: string;

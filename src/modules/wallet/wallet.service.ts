@@ -225,7 +225,7 @@ export class WalletService {
       data: {
         ...input,
         status: 'Pending',
-        User: { connect: { id: userId } },
+        user: { connect: { id: userId } },
       },
     });
 

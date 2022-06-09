@@ -31,12 +31,12 @@ export class AuthResolver {
     await this.authService.setAccessTokenHeaderCredentials(
       decoded.sub,
       res,
-      true,
+      decoded.isAdmin,
     );
     await this.authService.setRefreshTokenHeaderCredentials(
       decoded.sub,
       res,
-      true,
+      decoded.isAdmin,
     );
     return true;
   }

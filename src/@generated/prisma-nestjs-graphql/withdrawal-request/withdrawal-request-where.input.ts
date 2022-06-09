@@ -22,7 +22,7 @@ export class WithdrawalRequestWhereInput {
     id?: IntFilter;
 
     @Field(() => UserRelationFilter, {nullable:true})
-    User?: UserRelationFilter;
+    user?: UserRelationFilter;
 
     @Field(() => IntNullableFilter, {nullable:true})
     userId?: IntNullableFilter;

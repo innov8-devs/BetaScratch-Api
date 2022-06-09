@@ -8,7 +8,7 @@ import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-
 export class WithdrawalRequestUpdateInput {
 
     @Field(() => UserUpdateOneWithoutWithdrawalRequestInput, {nullable:true})
-    User?: UserUpdateOneWithoutWithdrawalRequestInput;
+    user?: UserUpdateOneWithoutWithdrawalRequestInput;
 
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     bank?: NullableStringFieldUpdateOperationsInput;

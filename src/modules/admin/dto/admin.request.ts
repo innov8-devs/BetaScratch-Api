@@ -89,6 +89,18 @@ export class GetUserPurchasesFromAdminInput {
 }
 
 @InputType()
+export class EditUserPurchasesFromAdminInput {
+  @Field(() => Number, { nullable: true })
+  purchaseId?: number;
+
+  @Field(() => String, { nullable: true })
+  reference?: string;
+
+  @Field(() => String, { nullable: true })
+  status?: string;
+}
+
+@InputType()
 export class GetUsersCountInput {
   @Field(() => DB_TYPES)
   field: keyof typeof DB_TYPES;
@@ -104,4 +116,21 @@ export class UpdateUserWalletInput {
 
   @Field(() => WALLET_TYPE)
   type: keyof typeof WALLET_TYPE;
+}
+
+@InputType()
+export class GetWithdrawlistFromAdminInput {
+  @Field(() => Number)
+  @IsNumber()
+  page: number;
+
+  @Field(() => Number)
+  @IsNumber()
+  size: number;
+
+  @Field(() => String, { nullable: true })
+  orderColumn?: string = 'id';
+
+  @Field(() => String, { nullable: true })
+  orderBy?: string = 'asc';
 }

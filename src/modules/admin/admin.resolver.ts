@@ -1,10 +1,10 @@
 import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
-import { Cart } from '@generated/prisma-nestjs-graphql/cart/cart.model';
 import { Game } from '@generated/prisma-nestjs-graphql/game/game.model';
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { Purchase } from '@generated/prisma-nestjs-graphql/purchase/purchase.model';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
+import { WithdrawalRequest } from '@generated/prisma-nestjs-graphql/withdrawal-request/withdrawal-request.model';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AuthService } from 'modules/auth/auth.service';
 import { Auth } from 'modules/auth/decorators/auth.decorator';
@@ -12,6 +12,7 @@ import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
 import { MyContext } from 'types/constants/types';
 import { AdminService } from './admin.service';
 import {
+  EditUserPurchasesFromAdminInput,
   GetGamesFromAdminInput,
   GetUserPurchasesFromAdminInput,
   GetUsersCountInput,
@@ -141,18 +142,14 @@ export class AdminResolver {
   }
 
   @Auth([ROLE.ADMIN])
-  @Mutation(() => Cart, { nullable: true })
-  async updateUserPurchaseStatusFromAdmin(
+  @Mutation(() => Purchase, { nullable: true })
+  async editUserPurchaseStatusFromAdmin(
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
-    @Args('purchaseId') purchaseId: number,
-    @Args('played') played: boolean,
+    @Args('input') input: EditUserPurchasesFromAdminInput,
   ) {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return this.adminService.updateUserPurchaseStatusFromAdmin(
-      purchaseId,
-      played,
-    );
+    return this.adminService.editUserPurchaseStatusFromAdmin(input);
   }
 
   @Auth([ROLE.ADMIN])
@@ -175,5 +172,16 @@ export class AdminResolver {
   ) {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.updateUserWallet(input);
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => [WithdrawalRequest], { nullable: true })
+  async getWithdrawlistFromAdmin(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+    @Args('input') input: GetWalletsFromAdminInput,
+  ): Promise<WithdrawalRequest[]> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    return this.adminService.getWithdrawaListFromAdmin(input);
   }
 }

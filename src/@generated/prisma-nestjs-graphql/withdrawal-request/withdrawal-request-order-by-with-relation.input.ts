@@ -10,7 +10,7 @@ export class WithdrawalRequestOrderByWithRelationInput {
     id?: keyof typeof SortOrder;
 
     @Field(() => UserOrderByWithRelationInput, {nullable:true})
-    User?: UserOrderByWithRelationInput;
+    user?: UserOrderByWithRelationInput;
 
     @Field(() => SortOrder, {nullable:true})
     userId?: keyof typeof SortOrder;
