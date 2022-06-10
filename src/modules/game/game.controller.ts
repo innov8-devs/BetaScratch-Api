@@ -47,7 +47,11 @@ export class GameController {
       });
     }
     const image = `${process.env.SERVER_UPLOAD_ORIGIN}/game/${file.filename}`;
-    return image;
+    return {
+      data: {
+        url: image,
+      },
+    };
   }
 
   @Get(':imgpath')
