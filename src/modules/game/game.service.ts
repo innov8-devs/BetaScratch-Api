@@ -22,6 +22,7 @@ import { PrismaService } from '../prisma.service';
 import {
   CartCheckoutInput,
   CartDetailInput,
+  CreateGameInput,
   FlutterCheckoutOneInput,
   FlutterCheckoutTwoInput,
   GameCateogorySearch,
@@ -33,6 +34,7 @@ import {
   FlutterCheckoutOneReturnType,
   GameCategoryReturnType,
 } from './dto/game.response';
+import { v4 } from 'uuid';
 
 @Injectable()
 export class GameService {
@@ -50,14 +52,19 @@ export class GameService {
 
   async editGame(input: UpdateGameInput) {
     const { gameId } = input;
-    return await this.prismaService.game.update({
-      where: {
-        gameId,
-      },
-      data: {
-        ...input,
-      },
-    });
+    try {
+      await this.prismaService.game.update({
+        where: {
+          gameId,
+        },
+        data: {
+          ...input,
+        },
+      });
+      return true;
+    } catch (err) {
+      return false;
+    }
   }
 
   async findAllGames(): Promise<Game[]> {
@@ -85,12 +92,18 @@ export class GameService {
     return gamesData;
   }
 
-  async createGame(input: Prisma.GameCreateInput) {
-    return await this.prismaService.game.create({
-      data: {
-        ...input,
-      },
-    });
+  async createGame(input: CreateGameInput) {
+    try {
+      await this.prismaService.game.create({
+        data: {
+          ...input,
+          gameId: v4(),
+        },
+      });
+      return true;
+    } catch (err) {
+      return false;
+    }
   }
 
   async totalGameCount() {

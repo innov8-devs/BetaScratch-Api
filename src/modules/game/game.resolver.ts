@@ -1,7 +1,6 @@
 import { Cart } from '@generated/prisma-nestjs-graphql/cart/cart.model';
 import { GameCategoryCreateInput } from '@generated/prisma-nestjs-graphql/game-category/game-category-create.input';
 import { GameCategory } from '@generated/prisma-nestjs-graphql/game-category/game-category.model';
-import { GameCreateInput } from '@generated/prisma-nestjs-graphql/game/game-create.input';
 import { Game } from '@generated/prisma-nestjs-graphql/game/game.model';
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
@@ -13,6 +12,7 @@ import { MyContext } from 'types/constants/types';
 import {
   CartCheckoutInput,
   CartDetailInput,
+  CreateGameInput,
   FlutterCheckoutOneInput,
   FlutterCheckoutTwoInput,
   GameCateogorySearch,
@@ -34,8 +34,8 @@ export class GameResolver {
     private readonly authService: AuthService,
   ) {}
 
-  @Mutation(() => Game)
-  async createGame(@Args('input') input: GameCreateInput): Promise<Game> {
+  @Mutation(() => Boolean)
+  async createGame(@Args('input') input: CreateGameInput): Promise<Boolean> {
     return await this.gameService.createGame(input);
   }
 
@@ -50,8 +50,8 @@ export class GameResolver {
     return await this.gameService.createGameCategory(input);
   }
 
-  @Mutation(() => Game)
-  async editGame(@Args('input') input: UpdateGameInput): Promise<Game> {
+  @Mutation(() => Boolean)
+  async editGame(@Args('input') input: UpdateGameInput): Promise<Boolean> {
     return await this.gameService.editGame(input);
   }
 

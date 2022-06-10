@@ -1,4 +1,4 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, Int } from '@nestjs/graphql';
 import GraphQLJSON from 'graphql-type-json';
 import { IsArray, IsEnum, IsNumber, IsString } from 'class-validator';
 import { TRANSACTION } from 'types/constants/enum';
@@ -157,4 +157,32 @@ export class FlutterCheckoutTwoInput {
   @Field(() => [CartItems], { nullable: false })
   @IsArray()
   cart: CartItems[];
+}
+
+@InputType()
+export class CreateGameInput {
+  @Field(() => String, { nullable: false })
+  @IsString()
+  name!: string;
+
+  @Field(() => String, { nullable: false })
+  @IsString()
+  imageUrl!: string;
+
+  @Field(() => String, { nullable: false })
+  @IsString()
+  description!: string;
+
+  @Field(() => GraphQLJSON, { nullable: false })
+  price!: any;
+
+  @Field(() => String, { nullable: false })
+  category!: string;
+
+  @Field(() => String, { nullable: true })
+  status?: string;
+
+  @Field(() => Int, { nullable: false })
+  @IsNumber()
+  availability!: number;
 }
