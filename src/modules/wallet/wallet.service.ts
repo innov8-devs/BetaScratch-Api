@@ -332,7 +332,9 @@ export class WalletService {
       where: { id: withdrawalRequest.userId },
     });
 
-    const userWallet = await this.findUnique({ id: withdrawalRequest.userId });
+    const userWallet = await this.findUnique({
+      userId: withdrawalRequest.userId,
+    });
 
     if (status === 'approved') {
       await this.prismaService.withdrawalRequest.update({
