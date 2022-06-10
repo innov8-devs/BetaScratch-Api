@@ -1,7 +1,7 @@
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { Field, InputType } from '@nestjs/graphql';
 import { registerEnumType } from '@nestjs/graphql';
-import { IsNumber } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 import { DB_TYPES, WALLET_TYPE } from 'types/constants/enum';
 
 registerEnumType(ROLE, { name: 'ROLE', description: undefined });
@@ -120,6 +120,48 @@ export class UpdateUserWalletInput {
 
 @InputType()
 export class GetWithdrawlistFromAdminInput {
+  @Field(() => Number)
+  @IsNumber()
+  page: number;
+
+  @Field(() => Number)
+  @IsNumber()
+  size: number;
+
+  @Field(() => String, { nullable: true })
+  orderColumn?: string = 'id';
+
+  @Field(() => String, { nullable: true })
+  orderBy?: string = 'asc';
+}
+
+@InputType()
+export class GetPendingVerificationsFromAdminInput {
+  @Field(() => Number)
+  @IsNumber()
+  page: number;
+
+  @Field(() => Number)
+  @IsNumber()
+  size: number;
+
+  @Field(() => String, { nullable: true })
+  orderColumn?: string = 'id';
+
+  @Field(() => String, { nullable: true })
+  orderBy?: string = 'asc';
+}
+
+@InputType()
+export class ChangeVerificationRequestInput {
+  @Field(() => Number)
+  @IsNumber()
+  id: number;
+
+  @Field(() => String)
+  @IsString()
+  status: string;
+
   @Field(() => Number)
   @IsNumber()
   page: number;

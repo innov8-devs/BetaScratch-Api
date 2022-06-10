@@ -50,6 +50,16 @@ export class MessageService {
     });
   }
 
+  public async sendWithdrawalRejected(userId: number) {
+    await this.createMessage(userId, {
+      title: 'Your Withdrawal request was rejected',
+      description: 'Your withdrawal request was rejected',
+      messageType: MESSAGE_TYPE.WITHDRAWAL_REJECTED,
+      readStatus: 0,
+      user: { connect: { id: userId } },
+    });
+  }
+
   public async changeMessageToRead(messageId: number) {
     await this.prismaService.message.update({
       where: { id: messageId },

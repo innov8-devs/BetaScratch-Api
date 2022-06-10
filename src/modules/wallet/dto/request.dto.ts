@@ -44,3 +44,28 @@ export class WithdrawalRequestPaginationInput {
   @IsNumber()
   take?: number;
 }
+
+@InputType()
+export class ChangeUserWithdrawalRequestInput {
+  @Field(() => Number)
+  @IsNumber()
+  id: number;
+
+  @Field(() => String)
+  @IsString()
+  status: string;
+
+  @Field(() => Number)
+  @IsNumber()
+  page: number;
+
+  @Field(() => Number)
+  @IsNumber()
+  size: number;
+
+  @Field(() => String, { nullable: true })
+  orderColumn?: string = 'id';
+
+  @Field(() => String, { nullable: true })
+  orderBy?: string = 'asc';
+}

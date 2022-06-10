@@ -2,6 +2,7 @@ import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 import { WalletService } from './wallet.service';
 import {
   CashBackTransactionInput,
+  ChangeUserWithdrawalRequestInput,
   DeductUserBalanceInput,
   WithdrawalRequestPaginationInput,
 } from './dto/request.dto';
@@ -87,12 +88,14 @@ export class WalletResolver {
   }
 
   @Auth([ROLE.ADMIN])
-  @Mutation(() => Boolean)
-  async approveWithdrawalRequest(
-    @Args('userId') userId: number,
-    @Args('requestId') requestId: number,
+  @Mutation(() => [WithdrawalRequest])
+  async changeWithdrawalStatus(
+    @Args('input') input: ChangeUserWithdrawalRequestInput,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
   ) {
-    return await this.walletService.approveWithdrawalRequest(userId, requestId);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
+    return await this.walletService.changeWithdrawalStatus(input);
   }
 
   @Auth([ROLE.USER])

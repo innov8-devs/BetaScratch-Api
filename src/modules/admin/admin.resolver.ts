@@ -12,8 +12,10 @@ import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
 import { MyContext } from 'types/constants/types';
 import { AdminService } from './admin.service';
 import {
+  ChangeVerificationRequestInput,
   EditUserPurchasesFromAdminInput,
   GetGamesFromAdminInput,
+  GetPendingVerificationsFromAdminInput,
   GetUserPurchasesFromAdminInput,
   GetUsersCountInput,
   GetUsersFromAdminInput,
@@ -183,5 +185,27 @@ export class AdminResolver {
   ): Promise<WithdrawalRequest[]> {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getWithdrawaListFromAdmin(input);
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => [User], { nullable: true })
+  async getPendingVerificationsFromAdmin(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+    @Args('input') input: GetPendingVerificationsFromAdminInput,
+  ): Promise<User[]> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    return this.adminService.getPendingVerificationsFromAdmin(input);
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => [User], { nullable: true })
+  async changeVerificationStatus(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+    @Args('input') input: ChangeVerificationRequestInput,
+  ): Promise<User[]> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    return this.adminService.changeVerificationStatus(input);
   }
 }

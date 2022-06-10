@@ -24,6 +24,7 @@ import { MESSAGES } from '../../core/messages';
 import { PrismaService } from '../prisma.service';
 import {
   CashBackTransactionInput,
+  ChangeUserWithdrawalRequestInput,
   DeductUserBalanceInput,
   WithdrawalRequestPaginationInput,
 } from './dto/request.dto';
@@ -196,7 +197,7 @@ export class WalletService {
   ) {
     const isPending = await this.prismaService.withdrawalRequest.findFirst({
       where: {
-        AND: [{ userId }, { status: 'Pending' }],
+        AND: [{ userId }, { status: 'pending' }],
       },
     });
 
@@ -320,41 +321,89 @@ export class WalletService {
     });
   }
 
-  async approveWithdrawalRequest(userId: number, requestId: number) {
-    const user = await this.prismaService.user.findUnique({
-      where: { id: userId },
-    });
+  async changeWithdrawalStatus(input: ChangeUserWithdrawalRequestInput) {
+    const { id, page, size, status, orderBy, orderColumn } = input;
     const withdrawalRequest =
       await this.prismaService.withdrawalRequest.findUnique({
-        where: { id: requestId },
+        where: { id },
       });
-    const userWallet = await this.findUnique({ userId });
-    await this.prismaService.withdrawalRequest.update({
-      where: { id: requestId },
-      data: { status: 'Successful' },
+
+    const user = await this.prismaService.user.findUnique({
+      where: { id: withdrawalRequest.userId },
     });
 
-    await this.transactionService.createTransaction({
-      amount: Number(withdrawalRequest.amount),
-      currency: userWallet.currency,
-      purpose: TRANSACTION.WITHDRAWAL,
-      status: PAYMENT_STATUS.SUCCESSFUL,
-      type: TRANSACTION.WITHDRAWAL,
-      transactionId: generateRandomNumbers(),
-      transactionRef: generateRandomString(),
-      User: { connect: { id: userId } },
-    });
+    const userWallet = await this.findUnique({ id: withdrawalRequest.userId });
 
-    await this.mailService.sendMail({
-      subject: MAIL_SUBJECT.WITHDRAWAL_APPROAL,
-      html: MAIL_MESSAGE.WITHDRAWAL_APPROVAL(
-        withdrawalRequest.amount,
-        userWallet.currency,
-      ),
-      to: user.email,
-    });
+    if (status === 'approved') {
+      await this.prismaService.withdrawalRequest.update({
+        where: { id },
+        data: { status },
+      });
 
-    await this.messageService.sendWithdrawalApproved(userId);
-    return true;
+      await this.transactionService.createTransaction({
+        amount: Number(withdrawalRequest.amount),
+        currency: userWallet.currency,
+        purpose: TRANSACTION.WITHDRAWAL,
+        status: PAYMENT_STATUS.SUCCESSFUL,
+        type: TRANSACTION.WITHDRAWAL,
+        transactionId: generateRandomNumbers(),
+        transactionRef: generateRandomString(),
+        User: { connect: { id: user.id } },
+      });
+
+      await this.mailService.sendMail({
+        subject: MAIL_SUBJECT.WITHDRAWAL_APPROAL,
+        html: MAIL_MESSAGE.WITHDRAWAL_APPROVAL(
+          withdrawalRequest.amount,
+          userWallet.currency,
+        ),
+        to: user.email,
+      });
+
+      await this.messageService.sendWithdrawalApproved(user.id);
+    } else {
+      await this.prismaService.withdrawalRequest.update({
+        where: { id },
+        data: { status },
+      });
+
+      await this.transactionService.createTransaction({
+        amount: Number(withdrawalRequest.amount),
+        currency: userWallet.currency,
+        purpose: TRANSACTION.WITHDRAWAL,
+        status: PAYMENT_STATUS.FAILED,
+        type: TRANSACTION.WITHDRAWAL,
+        transactionId: generateRandomNumbers(),
+        transactionRef: generateRandomString(),
+        User: { connect: { id: user.id } },
+      });
+
+      await this.prismaService.wallet.update({
+        where: { userId: user.id },
+        data: { withdrawable: { increment: Number(withdrawalRequest.amount) } },
+      });
+
+      await this.mailService.sendMail({
+        subject: MAIL_SUBJECT.WITHDRAWAL_APPROAL,
+        html: MAIL_MESSAGE.WITHDRAWAL_REJECTED(
+          withdrawalRequest.amount,
+          userWallet.currency,
+        ),
+        to: user.email,
+      });
+
+      await this.messageService.sendWithdrawalRejected(user.id);
+    }
+
+    let skipValue = page * size - size;
+    return await this.prismaService.withdrawalRequest.findMany({
+      where: { status: 'pending' },
+      orderBy: {
+        [orderColumn]: orderBy,
+      },
+      take: size,
+      skip: skipValue,
+      include: { user: true },
+    });
   }
 }

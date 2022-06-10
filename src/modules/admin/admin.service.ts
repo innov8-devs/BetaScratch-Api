@@ -14,8 +14,10 @@ import {
 } from 'types/constants/enum';
 import * as argon2 from 'argon2';
 import {
+  ChangeVerificationRequestInput,
   EditUserPurchasesFromAdminInput,
   GetGamesFromAdminInput,
+  GetPendingVerificationsFromAdminInput,
   GetUserPurchasesFromAdminInput,
   GetUsersCountInput,
   GetUsersFromAdminInput,
@@ -406,6 +408,50 @@ export class AdminService {
       take: size,
       skip: skipValue,
       include: { user: true },
+    });
+  }
+
+  public async getPendingVerificationsFromAdmin(
+    input: GetPendingVerificationsFromAdminInput,
+  ) {
+    const { orderBy, orderColumn, page, size } = input;
+    let skipValue = page * size - size;
+    return await this.prismaService.user.findMany({
+      where: { verificationStatus: 'pending' },
+      orderBy: {
+        [orderColumn]: orderBy,
+      },
+      take: size,
+      skip: skipValue,
+      include: { withdrawalRequest: true },
+    });
+  }
+
+  async changeVerificationStatus(input: ChangeVerificationRequestInput) {
+    const { id, page, size, status, orderBy, orderColumn } = input;
+    const withdrawal = await this.prismaService.withdrawalRequest.findUnique({
+      where: { id },
+    });
+    if (status === 'approved' || status === 'active') {
+      await this.prismaService.user.update({
+        where: { id: withdrawal.userId },
+        data: { verificationStatus: 'active' },
+      });
+    } else {
+      await this.prismaService.user.update({
+        where: { id: withdrawal.userId },
+        data: { verificationStatus: 'inactive' },
+      });
+    }
+    let skipValue = page * size - size;
+    return await this.prismaService.user.findMany({
+      where: { verificationStatus: 'pending' },
+      orderBy: {
+        [orderColumn]: orderBy,
+      },
+      take: size,
+      skip: skipValue,
+      include: { withdrawalRequest: true },
     });
   }
 }

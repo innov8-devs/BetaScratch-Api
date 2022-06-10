@@ -4,6 +4,7 @@ export const MAIL_SUBJECT = {
   FORGOT_PASSWORD: 'Reset your password',
   REQUEST_WITHDRAWAL: 'Withdrawal Request',
   WITHDRAWAL_APPROAL: 'Credit Alert',
+  WITHDRAWAL_REJECTED: 'Withdrawal Failed',
   REFERRAL: 'Referral',
   ADMIN_LOGIN: 'Administrator Login',
   ADMIN_NEW: 'Verify admin account',
@@ -170,7 +171,9 @@ export const MAIL_MESSAGE = {
   REQUEST_WITHDRAWAL: (otp: string) =>
     `Your otp code is ${otp}. Do not share this code with anyone, expires in 15 minutes`,
 
-  //? not used for now
   WITHDRAWAL_APPROVAL: (amount: string, currency: string) =>
     `Your account has been credited with ${currency}${amount}`,
+
+  WITHDRAWAL_REJECTED: (amount: string, currency: string) =>
+    `Your withdrawal request failed and account has been refunded with ${currency}${amount}, kindly reach our to out customer service.`,
 };
