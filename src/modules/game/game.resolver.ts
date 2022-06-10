@@ -34,8 +34,14 @@ export class GameResolver {
     private readonly authService: AuthService,
   ) {}
 
+  @Auth([ROLE.ADMIN])
   @Mutation(() => Boolean)
-  async createGame(@Args('input') input: CreateGameInput): Promise<Boolean> {
+  async createGame(
+    @Args('input') input: CreateGameInput,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ): Promise<Boolean> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return await this.gameService.createGame(input);
   }
 
@@ -50,8 +56,14 @@ export class GameResolver {
     return await this.gameService.createGameCategory(input);
   }
 
+  @Auth([ROLE.ADMIN])
   @Mutation(() => Boolean)
-  async editGame(@Args('input') input: UpdateGameInput): Promise<Boolean> {
+  async editGame(
+    @Args('input') input: UpdateGameInput,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ): Promise<Boolean> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return await this.gameService.editGame(input);
   }
 
