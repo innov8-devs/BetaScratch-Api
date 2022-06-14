@@ -55,7 +55,7 @@ export class GameService {
     try {
       await this.prismaService.game.update({
         where: {
-          gameId,
+          id: Number(gameId),
         },
         data: {
           ...input,
