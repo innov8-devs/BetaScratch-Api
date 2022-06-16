@@ -23,6 +23,7 @@ import {
   GetUsersFromAdminInput,
   GetWalletsFromAdminInput,
   GetWithdrawlistFromAdminInput,
+  PaginationInput,
   RegisterAdminInput,
   UpdateUserWalletInput,
 } from './dto/admin.request';
@@ -33,6 +34,7 @@ import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
 import { Game } from '@generated/prisma-nestjs-graphql/game/game.model';
 import { Purchase } from '@generated/prisma-nestjs-graphql/purchase/purchase.model';
 import { WithdrawalRequest } from '@generated/prisma-nestjs-graphql/withdrawal-request/withdrawal-request.model';
+import { DashboardDataResponse } from './dto/admin.response';
 
 @Injectable()
 export class AdminService {
@@ -49,15 +51,18 @@ export class AdminService {
     });
   }
 
-  public async getDashboardData() {
+  public async getDashboardData(): Promise<DashboardDataResponse> {
     let tabs = [];
-    // let purchasedToday = [];
-    let cumulativeRevenueToday = 0;
-    let totalFlutterRevenue = 0;
     const currentDate = new Date().getDate();
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth() + 1;
-    const totalUserCount = await this.prismaService.user.count();
+    const todaysDate = `${currentYear}-${currentMonth}-${currentDate}`;
+
+    // total list of registered users
+    const playersCount = await this.prismaService.user.count();
+    tabs.push({ title: 'players', value: playersCount });
+
+    // total withdraw by players
     const totalWithdrawalCount = await this.prismaService.transaction.count({
       where: {
         AND: [
@@ -70,12 +75,22 @@ export class AdminService {
         ],
       },
     });
+    tabs.push({ title: 'withdraw', value: totalWithdrawalCount });
+
+    // total purchases
     const totalPurchases = await this.prismaService.transaction.count({
       where: {
         purpose: PAYMENT_PURPOSE.CART,
       },
     });
+    tabs.push({ title: 'purchase', value: totalPurchases });
+
+    // cards purchased
     const totalCardsPurchased = await this.prismaService.cart.count({});
+    tabs.push({ title: 'cards', value: totalCardsPurchased });
+
+    //total revenue using flutterwave
+    let totalFlutterRevenue = 0;
     const totalFlutterTransactions =
       await this.prismaService.transaction.findMany({
         where: { type: TRANSACTION.FLUTTERWAVE },
@@ -83,21 +98,19 @@ export class AdminService {
     for (let transacton of totalFlutterTransactions) {
       totalFlutterRevenue += transacton.amount;
     }
+    tabs.push({ title: 'revenue', value: totalFlutterRevenue });
 
+    // registered today
     const registeredToday = await this.prismaService.user.count({
       where: {
-        AND: [
-          {
-            createdAt: {
-              in: new Date(
-                `${currentYear}-${currentMonth}-${currentDate}`,
-              ).toISOString(),
-            },
-          },
-        ],
+        createdAt: {
+          gte: new Date(todaysDate).toISOString(),
+        },
       },
     });
+    tabs.push({ title: 'registeredToday', value: registeredToday });
 
+    // total revenue today
     const totalRevenueToday = await this.prismaService.transaction.findMany({
       where: {
         OR: [
@@ -115,50 +128,34 @@ export class AdminService {
           },
           {
             createdAt: {
-              in: new Date(
-                `${currentYear}-${currentMonth}-${currentDate}`,
-              ).toISOString(),
+              gte: new Date(todaysDate).toISOString(),
             },
           },
         ],
       },
     });
+    let cumulativeRevenueToday = 0;
     for (let revenue of totalRevenueToday) {
       cumulativeRevenueToday += revenue.amount;
     }
+    tabs.push({ title: 'revenueToday', value: cumulativeRevenueToday });
 
-    tabs.push(
-      {
-        title: 'players',
-        value: totalUserCount,
+    // total purchase today
+    const purchaseToday = await this.prismaService.purchase.findMany({
+      where: {
+        createdAt: {
+          gte: new Date(todaysDate).toISOString(),
+        },
       },
-      {
-        title: 'withdraw',
-        value: totalWithdrawalCount,
-      },
-      {
-        title: 'purchase',
-        value: totalPurchases,
-      },
-      {
-        title: 'cards',
-        value: totalCardsPurchased,
-      },
-      {
-        title: 'revenue',
-        value: totalFlutterRevenue,
-      },
-      {
-        title: 'registeredToday',
-        value: registeredToday,
-      },
-      {
-        title: 'revenueToday',
-        value: cumulativeRevenueToday,
-      },
-    );
+      take: 10,
+    });
 
-    return true;
+    return {
+      data: {
+        tabs,
+        purchaseToday,
+      },
+    };
   }
 
   public async createNewAdmin(input: RegisterAdminInput) {
@@ -452,6 +449,18 @@ export class AdminService {
       take: size,
       skip: skipValue,
       include: { withdrawalRequest: true },
+    });
+  }
+
+  async getAdminList(input: PaginationInput) {
+    const { orderBy, orderColumn, page, size } = input;
+    let skipValue = page * size - size;
+    return await this.prismaService.admin.findMany({
+      orderBy: {
+        [orderColumn]: orderBy,
+      },
+      take: size,
+      skip: skipValue,
     });
   }
 }

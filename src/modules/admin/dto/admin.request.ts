@@ -176,3 +176,20 @@ export class ChangeVerificationRequestInput {
   @Field(() => String, { nullable: true })
   orderBy?: string = 'asc';
 }
+
+@InputType()
+export class PaginationInput {
+  @Field(() => Number)
+  @IsNumber()
+  page: number;
+
+  @Field(() => Number)
+  @IsNumber()
+  size: number;
+
+  @Field(() => String, { nullable: true })
+  orderColumn?: string = 'id';
+
+  @Field(() => String, { nullable: true })
+  orderBy?: string = 'asc';
+}

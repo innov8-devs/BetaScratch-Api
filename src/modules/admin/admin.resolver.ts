@@ -20,9 +20,11 @@ import {
   GetUsersCountInput,
   GetUsersFromAdminInput,
   GetWalletsFromAdminInput,
+  PaginationInput,
   RegisterAdminInput,
   UpdateUserWalletInput,
 } from './dto/admin.request';
+import { DashboardDataResponse } from './dto/admin.response';
 
 @Resolver()
 export class AdminResolver {
@@ -42,8 +44,13 @@ export class AdminResolver {
     return this.adminService.meAdmin(user);
   }
 
-  @Query(() => Boolean)
-  async getDashboardData() {
+  @Auth([ROLE.ADMIN])
+  @Query(() => DashboardDataResponse)
+  async getDashboardData(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return await this.adminService.getDashboardData();
   }
 
@@ -207,5 +214,16 @@ export class AdminResolver {
   ): Promise<User[]> {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.changeVerificationStatus(input);
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => [Admin], { nullable: true })
+  async getAdminList(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+    @Args('input') input: PaginationInput,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    return await this.adminService.getAdminList(input);
   }
 }
