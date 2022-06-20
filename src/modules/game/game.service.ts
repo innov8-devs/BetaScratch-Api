@@ -51,14 +51,14 @@ export class GameService {
   }
 
   async editGame(input: UpdateGameInput) {
-    const { gameId } = input;
+    const {id, ...rest} = input
     try {
       await this.prismaService.game.update({
         where: {
-          id: Number(gameId),
+          id,
         },
         data: {
-          ...input,
+          ...rest,
         },
       });
       return true;

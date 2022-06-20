@@ -5,8 +5,8 @@ import { TRANSACTION } from 'types/constants/enum';
 
 @InputType()
 export class UpdateGameInput {
-  @Field(() => String, { nullable: true })
-  gameId?: string;
+  @Field(() => Number, { nullable: true })
+  id?: number;
   @Field(() => String, { nullable: true })
   name?: string;
   @Field(() => String, { nullable: true })
