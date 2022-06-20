@@ -140,20 +140,24 @@ export class AdminService {
     }
     tabs.push({ title: 'revenueToday', value: cumulativeRevenueToday });
 
-    // total purchase today
-    const purchaseToday = await this.prismaService.purchase.findMany({
-      where: {
-        createdAt: {
+    // total cards purchased
+    const cardsPurchased = await this.prismaService.cart.count()
+    tabs.push({ title: 'cardsPurchased', value: cardsPurchased});
+
+    // total cards purchased today
+    const purchasedToday = await this.prismaService.cart.count({
+      where:{
+        createdAt:{
           gte: new Date(todaysDate).toISOString(),
-        },
-      },
-      take: 10,
-    });
+        }
+      }
+    })
+    tabs.push({ title: 'purcahsedToday', value: purchasedToday});
+
 
     return {
       data: {
         tabs,
-        purchaseToday,
       },
     };
   }
