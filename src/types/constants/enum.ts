@@ -82,3 +82,8 @@ export enum PURCHASE_STATUS {
   INACTIVE = 'inactive',
   ACTIVE = 'active',
 }
+
+export enum GAME_STATUS {
+  INACTIVE = 'inactive',
+  ACTIVE = 'active',
+}

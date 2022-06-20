@@ -8,6 +8,7 @@ import { computeCheckoutMessageCards } from 'helpers/computeCheckoutMessageCards
 import { MessageService } from 'modules/message/message.service';
 import { TransactionService } from 'modules/transaction/transaction.service';
 import {
+  GAME_STATUS,
   PAYMENT_PURPOSE,
   PAYMENT_STATUS,
   PURCHASE_STATUS,
@@ -68,7 +69,11 @@ export class GameService {
   }
 
   async findAllGames(): Promise<Game[]> {
-    return await this.prismaService.game.findMany();
+    return await this.prismaService.game.findMany({
+      where:{
+        status:{equals: GAME_STATUS.ACTIVE}
+      }
+    });
   }
 
   async findAllGamesByCategories(input: GameCateogorySearch) {
@@ -82,6 +87,7 @@ export class GameService {
           category: {
             equals: category,
           },
+          status: {equals: GAME_STATUS.ACTIVE}
         },
         take: size,
         skip: skipValue,

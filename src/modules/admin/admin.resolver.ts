@@ -9,6 +9,7 @@ import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AuthService } from 'modules/auth/auth.service';
 import { Auth } from 'modules/auth/decorators/auth.decorator';
 import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
+import { GAME_STATUS } from 'types/constants/enum';
 import { MyContext } from 'types/constants/types';
 import { AdminService } from './admin.service';
 import {
@@ -225,5 +226,32 @@ export class AdminResolver {
   ) {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return await this.adminService.getAdminList(input);
+  }
+
+
+  @Auth([ROLE.ADMIN])
+  @Mutation(() => Boolean, { nullable: true })
+  async toggleGameStatus(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+    @Args('id') id: number,
+    @Args('status') status: GAME_STATUS,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    await this.adminService.toggleGameStatus(id, status);
+    return true
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Mutation(() => Boolean, { nullable: true })
+  async toggleCardPlayedStatus(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+    @Args('id') id: number,
+    @Args('played') played: boolean,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    await this.adminService.toggleCardPlayedStatus(id, played);
+    return true
   }
 }

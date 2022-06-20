@@ -7,6 +7,7 @@ import { PrismaService } from 'modules/prisma.service';
 import { TokenService } from 'modules/token/token.service';
 import {
   DB_TYPES,
+  GAME_STATUS,
   PAYMENT_PURPOSE,
   PAYMENT_STATUS,
   TRANSACTION,
@@ -63,7 +64,7 @@ export class AdminService {
     tabs.push({ title: 'players', value: playersCount });
 
     // total withdraw by players
-    const totalWithdrawalCount = await this.prismaService.transaction.count({
+    const totalWithdrawalCount = await this.prismaService.transaction.findMany({
       where: {
         AND: [
           {
@@ -75,7 +76,11 @@ export class AdminService {
         ],
       },
     });
-    tabs.push({ title: 'withdraw', value: totalWithdrawalCount });
+    let cumulativeWithdrawal = 0;
+    for(let withdraw of totalWithdrawalCount){
+      cumulativeWithdrawal += withdraw.amount
+    }
+    tabs.push({ title: 'withdraw', value: cumulativeWithdrawal});
 
     // total purchases
     const totalPurchases = await this.prismaService.transaction.count({
@@ -84,10 +89,6 @@ export class AdminService {
       },
     });
     tabs.push({ title: 'purchase', value: totalPurchases });
-
-    // cards purchased
-    const totalCardsPurchased = await this.prismaService.cart.count({});
-    tabs.push({ title: 'cards', value: totalCardsPurchased });
 
     //total revenue using flutterwave
     let totalFlutterRevenue = 0;
@@ -466,5 +467,19 @@ export class AdminService {
       take: size,
       skip: skipValue,
     });
+  }
+
+  async toggleGameStatus(id: number, status: GAME_STATUS){
+    await this.prismaService.game.update({
+      where: { id },
+      data: {status}
+    })
+  }
+
+  async toggleCardPlayedStatus(id: number, played: boolean){
+    await this.prismaService.cart.update({
+      where: { id },
+      data: {played}
+    })
   }
 }
