@@ -64,23 +64,17 @@ export class AdminService {
     tabs.push({ title: 'players', value: playersCount });
 
     // total withdraw by players
-    const totalWithdrawalCount = await this.prismaService.transaction.findMany({
-      where: {
-        AND: [
-          {
-            purpose: { equals: TRANSACTION.WITHDRAWAL },
-          },
-          {
-            status: { equals: PAYMENT_STATUS.SUCCESSFUL },
-          },
-        ],
-      },
-    });
+    const totalWithdrawalCount =
+      await this.prismaService.withdrawalRequest.findMany({
+        where: {
+          status: PAYMENT_STATUS.APPROVED.toLowerCase(),
+        },
+      });
     let cumulativeWithdrawal = 0;
-    for(let withdraw of totalWithdrawalCount){
-      cumulativeWithdrawal += withdraw.amount
+    for (let withdraw of totalWithdrawalCount) {
+      cumulativeWithdrawal += Number(withdraw.amount);
     }
-    tabs.push({ title: 'withdraw', value: cumulativeWithdrawal});
+    tabs.push({ title: 'withdraw', value: cumulativeWithdrawal });
 
     // total purchases
     const totalPurchases = await this.prismaService.transaction.count({
@@ -91,15 +85,29 @@ export class AdminService {
     tabs.push({ title: 'purchase', value: totalPurchases });
 
     //total revenue using flutterwave
-    let totalFlutterRevenue = 0;
-    const totalFlutterTransactions =
-      await this.prismaService.transaction.findMany({
-        where: { type: TRANSACTION.FLUTTERWAVE },
-      });
-    for (let transacton of totalFlutterTransactions) {
-      totalFlutterRevenue += transacton.amount;
+    let revenue = 0;
+    const totalTransactions = await this.prismaService.transaction.findMany({
+      where: {
+        OR: [
+          {
+            type: { equals: TRANSACTION.FLUTTERWAVE },
+          },
+          {
+            type: { equals: TRANSACTION.ACCOUNT },
+          },
+        ],
+        AND: [
+          { purpose: { equals: PAYMENT_PURPOSE.CART } },
+          {
+            status: { equals: PAYMENT_STATUS.SUCCESSFUL },
+          },
+        ],
+      },
+    });
+    for (let transacton of totalTransactions) {
+      revenue += transacton.amount;
     }
-    tabs.push({ title: 'revenue', value: totalFlutterRevenue });
+    tabs.push({ title: 'revenue', value: revenue });
 
     // registered today
     const registeredToday = await this.prismaService.user.count({
@@ -142,23 +150,22 @@ export class AdminService {
     tabs.push({ title: 'revenueToday', value: cumulativeRevenueToday });
 
     // total cards purchased
-    const cardsPurchased = await this.prismaService.cart.count()
-    tabs.push({ title: 'cardsPurchased', value: cardsPurchased});
+    const cardsPurchased = await this.prismaService.cart.count();
+    tabs.push({ title: 'cardsPurchased', value: cardsPurchased });
 
     // total cards purchased today
     const purchasedToday = await this.prismaService.cart.count({
-      where:{
-        createdAt:{
+      where: {
+        createdAt: {
           gte: new Date(todaysDate).toISOString(),
-        }
-      }
-    })
-
+        },
+      },
+    });
 
     return {
       data: {
         tabs,
-        purchasedToday
+        purchasedToday,
       },
     };
   }
@@ -469,17 +476,17 @@ export class AdminService {
     });
   }
 
-  async toggleGameStatus(id: number, status: GAME_STATUS){
+  async toggleGameStatus(id: number, status: GAME_STATUS) {
     await this.prismaService.game.update({
       where: { id },
-      data: {status}
-    })
+      data: { status },
+    });
   }
 
-  async toggleCardPlayedStatus(id: number, played: boolean){
+  async toggleCardPlayedStatus(id: number, played: boolean) {
     await this.prismaService.cart.update({
       where: { id },
-      data: {played}
-    })
+      data: { played },
+    });
   }
 }
