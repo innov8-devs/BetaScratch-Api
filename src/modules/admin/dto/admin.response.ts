@@ -13,6 +13,8 @@ export class DashboardTabsResponse {
 export class DashboardData {
   @Field(() => [DashboardTabsResponse], { nullable: true })
   tabs: DashboardTabsResponse[];
+  @Field()
+  purchasedToday: Number
 }
 
 @ObjectType()

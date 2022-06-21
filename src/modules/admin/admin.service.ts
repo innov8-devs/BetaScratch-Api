@@ -153,12 +153,12 @@ export class AdminService {
         }
       }
     })
-    tabs.push({ title: 'purcahsedToday', value: purchasedToday});
 
 
     return {
       data: {
         tabs,
+        purchasedToday
       },
     };
   }
