@@ -297,6 +297,7 @@ export class AdminService {
         transactions: {
           take: 20,
         },
+        wallet: true,
         purchases: {
           take: 20,
         },
