@@ -225,7 +225,7 @@ export class WalletService {
     await this.prismaService.withdrawalRequest.create({
       data: {
         ...input,
-        status: 'Pending',
+        status: 'pending',
         user: { connect: { id: userId } },
       },
     });
@@ -322,7 +322,7 @@ export class WalletService {
   }
 
   async changeWithdrawalStatus(input: ChangeUserWithdrawalRequestInput) {
-    const { id, page, size, status, orderBy, orderColumn } = input;
+    const { id, status, } = input;
     const withdrawalRequest =
       await this.prismaService.withdrawalRequest.findUnique({
         where: { id },
@@ -396,16 +396,5 @@ export class WalletService {
 
       await this.messageService.sendWithdrawalRejected(user.id);
     }
-
-    let skipValue = page * size - size;
-    return await this.prismaService.withdrawalRequest.findMany({
-      where: { status: 'pending' },
-      orderBy: {
-        [orderColumn]: orderBy,
-      },
-      take: size,
-      skip: skipValue,
-      include: { user: true },
-    });
   }
 }

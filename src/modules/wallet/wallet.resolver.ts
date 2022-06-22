@@ -88,14 +88,15 @@ export class WalletResolver {
   }
 
   @Auth([ROLE.ADMIN])
-  @Mutation(() => [WithdrawalRequest])
+  @Mutation(() => Boolean)
   async changeWithdrawalStatus(
     @Args('input') input: ChangeUserWithdrawalRequestInput,
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
-    return await this.walletService.changeWithdrawalStatus(input);
+    await this.walletService.changeWithdrawalStatus(input);
+    return true;
   }
 
   @Auth([ROLE.USER])

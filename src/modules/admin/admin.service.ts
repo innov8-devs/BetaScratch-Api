@@ -406,12 +406,15 @@ export class AdminService {
     return 0;
   }
 
-  public async getWithdrawaListFromAdmin(
+  public async getWithdrawRequestFromAdmin(
     input: GetWithdrawlistFromAdminInput,
   ): Promise<WithdrawalRequest[]> {
     const { orderBy, orderColumn, page, size } = input;
     let skipValue = page * size - size;
     return await this.prismaService.withdrawalRequest.findMany({
+      where:{
+        status: "pending"
+      },
       orderBy: {
         [orderColumn]: orderBy,
       },
@@ -490,4 +493,11 @@ export class AdminService {
       data: { played },
     });
   }
+
+  // async runSomoething(){
+  //   await this.prismaService.withdrawalRequest.updateMany({
+  //     where:{status: "Pending"},
+  //     data:{status: "pending"}
+  //   })
+  // }
 }

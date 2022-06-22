@@ -21,6 +21,7 @@ import {
   GetUsersCountInput,
   GetUsersFromAdminInput,
   GetWalletsFromAdminInput,
+  GetWithdrawlistFromAdminInput,
   PaginationInput,
   RegisterAdminInput,
   UpdateUserWalletInput,
@@ -186,13 +187,13 @@ export class AdminResolver {
 
   @Auth([ROLE.ADMIN])
   @Query(() => [WithdrawalRequest], { nullable: true })
-  async getWithdrawlistFromAdmin(
+  async getWithdrawRequestFromAdmin(
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
-    @Args('input') input: GetWalletsFromAdminInput,
+    @Args('input') input: GetWithdrawlistFromAdminInput,
   ): Promise<WithdrawalRequest[]> {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return this.adminService.getWithdrawaListFromAdmin(input);
+    return this.adminService.getWithdrawRequestFromAdmin(input);
   }
 
   @Auth([ROLE.ADMIN])
@@ -254,4 +255,10 @@ export class AdminResolver {
     await this.adminService.toggleCardPlayedStatus(id, played);
     return true
   }
+
+  // @Mutation(() => Boolean)
+  // async run(){
+  //  await this.adminService.runSomoething()
+  //   return true
+  // }
 }

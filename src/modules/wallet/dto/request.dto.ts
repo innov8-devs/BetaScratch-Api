@@ -54,18 +54,4 @@ export class ChangeUserWithdrawalRequestInput {
   @Field(() => String)
   @IsString()
   status: string;
-
-  @Field(() => Number)
-  @IsNumber()
-  page: number;
-
-  @Field(() => Number)
-  @IsNumber()
-  size: number;
-
-  @Field(() => String, { nullable: true })
-  orderColumn?: string = 'id';
-
-  @Field(() => String, { nullable: true })
-  orderBy?: string = 'asc';
 }
