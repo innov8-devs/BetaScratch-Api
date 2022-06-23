@@ -408,6 +408,10 @@ export class AdminService {
           status: 'pending',
         },
       });
+    } else if (input.field === DB_TYPES.PENDING_VERIFICATION_REQUEST) {
+      return await this.prismaService.user.count({
+        where: { verificationStatus: 'pending' },
+      });
     }
     return 0;
   }
