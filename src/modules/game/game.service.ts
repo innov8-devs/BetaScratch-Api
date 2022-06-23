@@ -305,7 +305,7 @@ export class GameService {
         username: user.username,
         quantity: cartDetail.length,
         reference: transactionRef,
-        status: PURCHASE_STATUS.INACTIVE,
+        status: PURCHASE_STATUS.ACTIVE,
         userId,
         cards: {
           createMany: {
