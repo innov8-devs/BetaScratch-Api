@@ -94,7 +94,7 @@ export class WalletResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     await this.walletService.changeWithdrawalStatus(input);
     return true;
   }
