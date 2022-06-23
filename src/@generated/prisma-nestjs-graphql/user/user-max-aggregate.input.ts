@@ -50,6 +50,12 @@ export class UserMaxAggregateInput {
     licenseBackImage?: true;
 
     @Field(() => Boolean, {nullable:true})
+    licenseNumber?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    verificationType?: true;
+
+    @Field(() => Boolean, {nullable:true})
     verificationStatus?: true;
 
     @Field(() => Boolean, {nullable:true})

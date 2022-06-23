@@ -75,6 +75,12 @@ export class UserWhereInput {
     @Field(() => StringNullableFilter, {nullable:true})
     licenseBackImage?: StringNullableFilter;
 
+    @Field(() => StringNullableFilter, {nullable:true})
+    licenseNumber?: StringNullableFilter;
+
+    @Field(() => StringNullableFilter, {nullable:true})
+    verificationType?: StringNullableFilter;
+
     @Field(() => StringFilter, {nullable:true})
     verificationStatus?: StringFilter;
 

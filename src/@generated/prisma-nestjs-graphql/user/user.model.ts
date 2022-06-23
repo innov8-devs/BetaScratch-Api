@@ -63,6 +63,12 @@ export class User {
     @Field(() => String, {nullable:true})
     licenseBackImage!: string | null;
 
+    @Field(() => String, {nullable:true})
+    licenseNumber!: string | null;
+
+    @Field(() => String, {nullable:true})
+    verificationType!: string | null;
+
     @Field(() => String, {nullable:false,defaultValue:'inactive'})
     verificationStatus!: string;
 

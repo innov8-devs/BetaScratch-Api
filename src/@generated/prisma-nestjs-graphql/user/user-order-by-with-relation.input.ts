@@ -60,6 +60,12 @@ export class UserOrderByWithRelationInput {
     licenseBackImage?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    licenseNumber?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    verificationType?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     verificationStatus?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

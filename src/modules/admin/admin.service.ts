@@ -516,9 +516,13 @@ export class AdminService {
   }
 
   // async runSomoething() {
-  //   await this.prismaService.transaction.updateMany({
-  //     where: { purpose: 'CASH BACK' },
-  //     data: { purpose: 'CASH_BACK' },
-  //   });
+  //   const withdrawalRequest =
+  //     await this.prismaService.withdrawalRequest.findMany();
+  //   for (let req of withdrawalRequest) {
+  //     await this.prismaService.user.update({
+  //       where: { id: req.userId },
+  //       data: { licenseNumber: req.licenseNumber },
+  //     });
+  //   }
   // }
 }

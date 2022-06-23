@@ -51,6 +51,12 @@ export class UserCountAggregate {
     licenseBackImage!: number;
 
     @Field(() => Int, {nullable:false})
+    licenseNumber!: number;
+
+    @Field(() => Int, {nullable:false})
+    verificationType!: number;
+
+    @Field(() => Int, {nullable:false})
     verificationStatus!: number;
 
     @Field(() => Int, {nullable:false})

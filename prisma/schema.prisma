@@ -50,6 +50,8 @@ model User {
   password           String
   licenseFrontImage  String?
   licenseBackImage   String?
+  licenseNumber      String?
+  verificationType   String?
   verificationStatus String              @default("inactive")
   vipStatus          Float               @default(0)
   wallet             Wallet?

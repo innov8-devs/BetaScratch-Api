@@ -54,6 +54,12 @@ export class UserMinAggregate {
     licenseBackImage?: string;
 
     @Field(() => String, {nullable:true})
+    licenseNumber?: string;
+
+    @Field(() => String, {nullable:true})
+    verificationType?: string;
+
+    @Field(() => String, {nullable:true})
     verificationStatus?: string;
 
     @Field(() => Float, {nullable:true})

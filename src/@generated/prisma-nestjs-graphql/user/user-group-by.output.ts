@@ -58,6 +58,12 @@ export class UserGroupBy {
     @Field(() => String, {nullable:true})
     licenseBackImage?: string;
 
+    @Field(() => String, {nullable:true})
+    licenseNumber?: string;
+
+    @Field(() => String, {nullable:true})
+    verificationType?: string;
+
     @Field(() => String, {nullable:false})
     verificationStatus!: string;
 
