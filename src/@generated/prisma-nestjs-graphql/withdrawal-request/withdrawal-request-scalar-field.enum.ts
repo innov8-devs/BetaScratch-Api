@@ -11,7 +11,9 @@ export enum WithdrawalRequestScalarFieldEnum {
     paypal = "paypal",
     btcWalletAdderess = "btcWalletAdderess",
     licenseNumber = "licenseNumber",
-    licenseType = "licenseType"
+    licenseType = "licenseType",
+    createdAt = "createdAt",
+    updatedAt = "updatedAt"
 }
 
 

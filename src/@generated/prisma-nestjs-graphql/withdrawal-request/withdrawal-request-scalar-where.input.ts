@@ -4,6 +4,7 @@ import { IntFilter } from '../prisma/int-filter.input';
 import { IntNullableFilter } from '../prisma/int-nullable-filter.input';
 import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
 import { StringFilter } from '../prisma/string-filter.input';
+import { DateTimeFilter } from '../prisma/date-time-filter.input';
 
 @InputType()
 export class WithdrawalRequestScalarWhereInput {
@@ -49,4 +50,10 @@ export class WithdrawalRequestScalarWhereInput {
 
     @Field(() => StringNullableFilter, {nullable:true})
     licenseType?: StringNullableFilter;
+
+    @Field(() => DateTimeFilter, {nullable:true})
+    createdAt?: DateTimeFilter;
+
+    @Field(() => DateTimeFilter, {nullable:true})
+    updatedAt?: DateTimeFilter;
 }

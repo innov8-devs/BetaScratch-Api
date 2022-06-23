@@ -226,8 +226,8 @@ model Purchase {
 }
 
 model WithdrawalRequest {
-  id                Int     @id @default(autoincrement())
-  user              User?   @relation(fields: [userId], references: [id])
+  id                Int      @id @default(autoincrement())
+  user              User?    @relation(fields: [userId], references: [id])
   userId            Int?
   bank              String?
   accountNumber     String?
@@ -238,6 +238,8 @@ model WithdrawalRequest {
   btcWalletAdderess String?
   licenseNumber     String?
   licenseType       String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
 
 model Otp {

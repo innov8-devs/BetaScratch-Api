@@ -43,6 +43,12 @@ export class WithdrawalRequestGroupBy {
     @Field(() => String, {nullable:true})
     licenseType?: string;
 
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date | string;
+
+    @Field(() => Date, {nullable:false})
+    updatedAt!: Date | string;
+
     @Field(() => WithdrawalRequestCountAggregate, {nullable:true})
     _count?: WithdrawalRequestCountAggregate;
 

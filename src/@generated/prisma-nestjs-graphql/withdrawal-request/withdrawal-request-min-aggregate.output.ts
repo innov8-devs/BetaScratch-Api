@@ -37,4 +37,10 @@ export class WithdrawalRequestMinAggregate {
 
     @Field(() => String, {nullable:true})
     licenseType?: string;
+
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
+
+    @Field(() => Date, {nullable:true})
+    updatedAt?: Date | string;
 }
