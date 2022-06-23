@@ -402,10 +402,12 @@ export class AdminService {
       return await this.prismaService.transaction.count();
     } else if (input.field === DB_TYPES.PURCHASE) {
       return await this.prismaService.purchase.count();
-    }else if (input.field === DB_TYPES.PENDING_WITHDRAWAL_REQUEST){
-      return await this.prismaService.withdrawalRequest.count({where: {
-        status: "pending"
-      }})
+    } else if (input.field === DB_TYPES.PENDING_WITHDRAWAL_REQUEST) {
+      return await this.prismaService.withdrawalRequest.count({
+        where: {
+          status: 'pending',
+        },
+      });
     }
     return 0;
   }
@@ -416,8 +418,8 @@ export class AdminService {
     const { orderBy, orderColumn, page, size } = input;
     let skipValue = page * size - size;
     return await this.prismaService.withdrawalRequest.findMany({
-      where:{
-        status: "pending"
+      where: {
+        status: 'pending',
       },
       orderBy: {
         [orderColumn]: orderBy,
@@ -498,10 +500,10 @@ export class AdminService {
     });
   }
 
-  // async runSomoething(){
-  //   await this.prismaService.withdrawalRequest.updateMany({
-  //     where:{status: "Pending"},
-  //     data:{status: "pending"}
-  //   })
+  // async runSomoething() {
+  //   await this.prismaService.transaction.updateMany({
+  //     where: { purpose: 'CASH BACK' },
+  //     data: { purpose: 'CASH_BACK' },
+  //   });
   // }
 }

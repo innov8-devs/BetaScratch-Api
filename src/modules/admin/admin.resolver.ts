@@ -229,7 +229,6 @@ export class AdminResolver {
     return await this.adminService.getAdminList(input);
   }
 
-
   @Auth([ROLE.ADMIN])
   @Mutation(() => Boolean, { nullable: true })
   async toggleGameStatus(
@@ -240,7 +239,7 @@ export class AdminResolver {
   ) {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     await this.adminService.toggleGameStatus(id, status);
-    return true
+    return true;
   }
 
   @Auth([ROLE.ADMIN])
@@ -253,12 +252,12 @@ export class AdminResolver {
   ) {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     await this.adminService.toggleCardPlayedStatus(id, played);
-    return true
+    return true;
   }
 
   // @Mutation(() => Boolean)
-  // async run(){
-  //  await this.adminService.runSomoething()
-  //   return true
+  // async run() {
+  //   await this.adminService.runSomoething();
+  //   return true;
   // }
 }
