@@ -402,7 +402,7 @@ export class AdminService {
       return await this.prismaService.transaction.count();
     } else if (input.field === DB_TYPES.PURCHASE) {
       return await this.prismaService.purchase.count();
-    }else if (input.field === DB_TYPES.WITHDRAWAL_REQUEST){
+    }else if (input.field === DB_TYPES.PENDING_WITHDRAWAL_REQUEST){
       return await this.prismaService.withdrawalRequest.count({where: {
         status: "pending"
       }})
