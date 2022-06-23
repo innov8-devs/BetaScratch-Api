@@ -493,11 +493,22 @@ export class AdminService {
     });
   }
 
-  async toggleCardPlayedStatus(id: number, played: boolean) {
+  async toggleCardPlayedStatus(
+    id: number,
+    played: boolean,
+    parentId?: number,
+    parentStatus?: string,
+  ) {
     await this.prismaService.cart.update({
       where: { id },
       data: { played },
     });
+    if (parentStatus === 'inactive') {
+      await this.prismaService.purchase.update({
+        where: { id: parentId },
+        data: { status: parentStatus },
+      });
+    }
   }
 
   // async runSomoething() {

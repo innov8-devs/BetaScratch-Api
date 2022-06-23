@@ -249,9 +249,16 @@ export class AdminResolver {
     @Context() { res }: MyContext,
     @Args('id') id: number,
     @Args('played') played: boolean,
+    @Args('parentId', { nullable: true }) parentId: number,
+    @Args('parentStatus', { nullable: true }) parentStatus: string,
   ) {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    await this.adminService.toggleCardPlayedStatus(id, played);
+    await this.adminService.toggleCardPlayedStatus(
+      id,
+      played,
+      parentId,
+      parentStatus,
+    );
     return true;
   }
 
