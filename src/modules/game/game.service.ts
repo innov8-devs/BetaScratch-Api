@@ -52,7 +52,7 @@ export class GameService {
   }
 
   async editGame(input: UpdateGameInput) {
-    const {id, ...rest} = input
+    const { id, ...rest } = input;
     try {
       await this.prismaService.game.update({
         where: {
@@ -70,9 +70,9 @@ export class GameService {
 
   async findAllGames(): Promise<Game[]> {
     return await this.prismaService.game.findMany({
-      where:{
-        status:{equals: GAME_STATUS.ACTIVE}
-      }
+      where: {
+        status: { equals: GAME_STATUS.ACTIVE },
+      },
     });
   }
 
@@ -87,7 +87,7 @@ export class GameService {
           category: {
             equals: category,
           },
-          status: {equals: GAME_STATUS.ACTIVE}
+          status: { equals: GAME_STATUS.ACTIVE },
         },
         take: size,
         skip: skipValue,
@@ -379,7 +379,7 @@ export class GameService {
         await this.transactionService.createTransaction({
           amount: input.subtotal,
           currency: userWallet.currency,
-          purpose: input.transaction_type,
+          purpose: PAYMENT_PURPOSE.CART,
           status: PAYMENT_STATUS.SUCCESSFUL,
           type: TRANSACTION.BONUS,
           transactionId: generateRandomNumbers(),
@@ -391,7 +391,7 @@ export class GameService {
         await this.transactionService.createTransaction({
           amount: input.subtotal,
           currency: userWallet.currency,
-          purpose: input.transaction_type,
+          purpose: PAYMENT_PURPOSE.CART,
           status: PAYMENT_STATUS.FAILED,
           type: TRANSACTION.BONUS,
           transactionId: generateRandomNumbers(),
