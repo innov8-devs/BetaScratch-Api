@@ -293,6 +293,7 @@ export class GameService {
     cartDetail: any,
     transactionRef: string,
     subtotal: number,
+    status?: string,
   ) {
     const user = await this.prismaService.user.findUnique({
       where: { id: userId },
@@ -305,7 +306,7 @@ export class GameService {
         username: user.username,
         quantity: cartDetail.length,
         reference: transactionRef,
-        status: PURCHASE_STATUS.ACTIVE,
+        status: status ? status : PURCHASE_STATUS.ACTIVE,
         userId,
         cards: {
           createMany: {

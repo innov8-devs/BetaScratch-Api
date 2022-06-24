@@ -515,14 +515,23 @@ export class AdminService {
     }
   }
 
-  // async runSomoething() {
-  //   const withdrawalRequest =
-  //     await this.prismaService.withdrawalRequest.findMany();
-  //   for (let req of withdrawalRequest) {
-  //     await this.prismaService.user.update({
-  //       where: { id: req.userId },
-  //       data: { licenseNumber: req.licenseNumber },
-  //     });
-  //   }
-  // }
+  async resetPurchases() {
+    const transactions = await this.prismaService.transaction.findMany({
+      where: {
+        purpose: 'CART',
+        type: 'FLUTTERWAVE',
+        status: 'PENDING',
+      },
+    });
+    for (let trx of transactions) {
+      await this.prismaService.purchase.deleteMany({
+        where: {
+          AND: [
+            { userId: { equals: trx.userId } },
+            { reference: { equals: trx.transactionRef } },
+          ],
+        },
+      });
+    }
+  }
 }

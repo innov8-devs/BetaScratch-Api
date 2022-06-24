@@ -262,9 +262,9 @@ export class AdminResolver {
     return true;
   }
 
-  // @Mutation(() => Boolean)
-  // async run() {
-  //   await this.adminService.runSomoething();
-  //   return true;
-  // }
+  @Mutation(() => Boolean)
+  async resetPurchases() {
+    await this.adminService.resetPurchases();
+    return true;
+  }
 }
