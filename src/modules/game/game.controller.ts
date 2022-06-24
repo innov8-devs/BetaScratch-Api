@@ -61,7 +61,7 @@ export class GameController {
     res.sendFile(image, { root: 'uploads' });
   }
 
-  @Post('flutter-webhook')
+  @Post('flutterwave-webhook')
   verifyPurchase(@Res() _res: Response, @Req() req: Request) {
     console.log(req.body);
     // res.json(req.body);
