@@ -18,6 +18,7 @@ import { UploadImageDto } from 'modules/user/dto/user.request';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { IMAGE_TYPE } from 'types/constants/enum';
+import { Request, Response } from 'express';
 
 @Controller('api/game')
 export class GameController {
@@ -61,7 +62,8 @@ export class GameController {
   }
 
   @Post('flutter-webhook')
-  verifyPurchase(@Res() _res: any, @Req() req: any) {
+  verifyPurchase(@Res() res: Response, @Req() req: Request) {
     console.log(req.body);
+    res.json(req.body);
   }
 }
