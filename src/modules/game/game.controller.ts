@@ -62,8 +62,8 @@ export class GameController {
   }
 
   @Post('flutter-webhook')
-  verifyPurchase(@Res() res: Response, @Req() req: Request) {
+  verifyPurchase(@Res() _res: Response, @Req() req: Request) {
     console.log(req.body);
-    res.json(req.body);
+    // res.json(req.body);
   }
 }
