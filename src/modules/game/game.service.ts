@@ -485,7 +485,7 @@ export class GameService {
       cartDetail,
       transactionRef,
       input.subtotal,
-      'Inactive',
+      'inactive',
     );
 
     await this.transactionService.createTransaction({

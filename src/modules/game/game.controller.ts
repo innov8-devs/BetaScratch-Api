@@ -6,6 +6,7 @@ import {
   Get,
   Param,
   Post,
+  Req,
   Res,
   UploadedFile,
   UseInterceptors,
@@ -57,5 +58,10 @@ export class GameController {
   @Get(':imgpath')
   fetchUploadedFile(@Param('imgpath') image: any, @Res() res: any) {
     res.sendFile(image, { root: 'uploads' });
+  }
+
+  @Post('flutter-webhook')
+  verifyPurchase(@Res() _res: any, @Req() req: any) {
+    console.log(req.body);
   }
 }
