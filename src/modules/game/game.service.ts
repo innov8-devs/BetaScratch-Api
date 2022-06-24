@@ -479,11 +479,13 @@ export class GameService {
 
     const cartDetail = computeCart(input.cart, userId, transactionRef);
 
+    // TODO remove this after fix
     await this.recordPurchase(
       userId,
       cartDetail,
       transactionRef,
       input.subtotal,
+      'Inactive',
     );
 
     await this.transactionService.createTransaction({
