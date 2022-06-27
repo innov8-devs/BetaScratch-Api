@@ -31,10 +31,7 @@ import {
   PurchaseSearch,
   UpdateGameInput,
 } from './dto/game.request';
-import {
-  FlutterCheckoutOneReturnType,
-  GameCategoryReturnType,
-} from './dto/game.response';
+import { GameCategoryReturnType } from './dto/game.response';
 import { v4 } from 'uuid';
 
 @Injectable()

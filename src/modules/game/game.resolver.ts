@@ -20,11 +20,7 @@ import {
   PurchaseSearch,
   UpdateGameInput,
 } from './dto/game.request';
-import {
-  FlutterCheckoutOneReturnType,
-  GameCategoryReturnType,
-  TotalGameCount,
-} from './dto/game.response';
+import { GameCategoryReturnType, TotalGameCount } from './dto/game.response';
 import { GameService } from './game.service';
 
 @Resolver(() => Game)
