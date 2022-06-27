@@ -505,7 +505,7 @@ export class GameService {
 
     const transaction = await this.prismaService.transaction.findFirst({
       where: {
-        transactionRef: input.transaction_reference,
+        transactionRef: input.tx_ref,
         userId,
         status: PAYMENT_STATUS.PENDING,
         type: TRANSACTION.FLUTTERWAVE,

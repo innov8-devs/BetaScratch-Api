@@ -152,7 +152,7 @@ export class FlutterCheckoutOneInput {
 @InputType()
 export class FlutterCheckoutTwoInput {
   @Field(() => String, { nullable: false })
-  transaction_reference!: string;
+  tx_ref!: string;
 
   @Field(() => Number, { nullable: false })
   transaction_id!: number;
