@@ -40,7 +40,7 @@ export const MAIL_MESSAGE = {
             <a href='google.com'><img src='https://betascratch.com/assets/google.png' alt='Get on GooglePlay'
                 style='max-height: 40px; display: block;' /></a>
           </div>
-          <p style="margin-bottom: 14px;"> 68 Johnston street, Sunnyside Gauteng, 0002. Pretoria, South Africa.</p>
+          <p style="margin-bottom: 14px;">Lagos, Nigeria.</p>
           <div style="display: block; margin: 21px 0; text-align: center;">
             <a href='facebook.com'><img
                 src='https://childsvoice.org/wp-content/uploads/2016/01/facebook-logo-200x200.png' alt='FB'

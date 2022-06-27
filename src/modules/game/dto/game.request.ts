@@ -138,6 +138,9 @@ export class FlutterCheckoutOneInput {
   subtotal!: number;
 
   @Field(() => String, { nullable: false })
+  tx_ref!: string;
+
+  @Field(() => String, { nullable: false })
   @IsEnum(TRANSACTION, { each: true })
   transaction_type!: TRANSACTION | string;
 

@@ -132,7 +132,7 @@ export class GameResolver {
   }
 
   @Auth([ROLE.USER])
-  @Mutation(() => FlutterCheckoutOneReturnType)
+  @Mutation(() => Boolean)
   async flutterCheckoutOne(
     @Args('input') input: FlutterCheckoutOneInput,
     @CurrentUser() user: User,

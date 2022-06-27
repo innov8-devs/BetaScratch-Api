@@ -431,7 +431,7 @@ export class GameService {
   async flutterCheckoutOne(
     userId: number,
     input: FlutterCheckoutOneInput,
-  ): Promise<FlutterCheckoutOneReturnType> {
+  ): Promise<Boolean> {
     const userWallet = await this.prismaService.wallet.findUnique({
       where: { userId },
     });
@@ -475,15 +475,13 @@ export class GameService {
       }
     }
 
-    const transactionRef = generateRandomString();
-
-    const cartDetail = computeCart(input.cart, userId, transactionRef);
+    const cartDetail = computeCart(input.cart, userId, input.tx_ref);
 
     // TODO remove this after fix
     await this.recordPurchase(
       userId,
       cartDetail,
-      transactionRef,
+      input.tx_ref,
       input.subtotal,
       'inactive',
     );
@@ -495,13 +493,11 @@ export class GameService {
       status: PAYMENT_STATUS.PENDING,
       type: TRANSACTION.FLUTTERWAVE,
       transactionId: generateRandomNumbers(),
-      transactionRef,
+      transactionRef: input.tx_ref,
       User: { connect: { id: userId } },
     });
 
-    return {
-      transaction_reference: transactionRef,
-    };
+    return true;
   }
 
   async flutterCheckoutTwo(input: FlutterCheckoutTwoInput, userId: number) {
