@@ -161,7 +161,7 @@ export class FlutterCheckoutTwoInput {
   @IsArray()
   cart: CartItems[];
 
-  @Field(() => Boolean, { nullable: false })
+  @Field(() => Boolean, { nullable: true, defaultValue: false })
   test: boolean;
 }
 
