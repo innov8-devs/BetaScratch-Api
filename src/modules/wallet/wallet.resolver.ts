@@ -103,6 +103,7 @@ export class WalletResolver {
   @Mutation(() => User)
   async deposit(
     @Args('transaction_id') transaction_id: number,
+    @Args('test', { nullable: true, defaultValue: false }) test: boolean,
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
@@ -111,6 +112,7 @@ export class WalletResolver {
       transaction_id,
       PAYMENT_PURPOSE.DEPOSIT,
       user.id,
+      test,
     );
   }
 }

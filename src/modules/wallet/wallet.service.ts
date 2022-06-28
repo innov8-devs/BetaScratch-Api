@@ -274,11 +274,12 @@ export class WalletService {
     transaction_id: number,
     transaction_type: PAYMENT_PURPOSE,
     userId: number,
+    test: boolean,
   ) {
     const { amount, status, currency, tx_ref } =
       await this.transactionService.verifyFlutterWaveTransaction(
         transaction_id,
-        false,
+        test,
       );
 
     if (status === 'successful') {
