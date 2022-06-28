@@ -70,4 +70,15 @@ export class GameController {
     const status = req.body.status;
     await this.gameService.verifyFlutterTransaction(tx_ref, status);
   }
+
+  @Post('flutterwave-webhook-test')
+  async verifyFlutterTestTransaction(
+    @Res() _res: Response,
+    @Req() req: Request,
+  ) {
+    console.log(req.body);
+    const tx_ref = req.body.tx_ref;
+    const status = req.body.status;
+    await this.gameService.verifyFlutterTransaction(tx_ref, status);
+  }
 }
