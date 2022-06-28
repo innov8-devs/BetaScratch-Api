@@ -501,6 +501,7 @@ export class GameService {
     const { status, amount } =
       await this.transactionService.verifyFlutterWaveTransaction(
         input.transaction_id,
+        input.test,
       );
 
     const transaction = await this.prismaService.transaction.findFirst({
@@ -549,6 +550,7 @@ export class GameService {
   }
 
   async verifyFlutterTransaction(tx_ref: string, status: string) {
+    console.log('TX_REF', tx_ref, status);
     await this.prismaService.transaction.updateMany({
       where: {
         transactionRef: tx_ref,

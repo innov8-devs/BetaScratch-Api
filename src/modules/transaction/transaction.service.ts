@@ -115,11 +115,19 @@ export class TransactionService {
     return totalAmountSpent;
   }
 
-  async verifyFlutterWaveTransaction(transaction_id: number) {
-    const flw = new Flutterwave(
-      process.env.FLUTTERWAVE_PUBLIC_KEY,
-      process.env.FLUTTERWAVE_SECRET_KEY,
-    );
+  async verifyFlutterWaveTransaction(transaction_id: number, test: boolean) {
+    let flw;
+    if (test) {
+      flw = new Flutterwave(
+        'FLWPUBK_TEST-605e7bf00f5a3971a24bdd8f36acb345-X',
+        'FLWSECK_TEST-fc7e5f67bce038ac4ba1d449f50fd72e-X',
+      );
+    } else {
+      flw = new Flutterwave(
+        process.env.FLUTTERWAVE_PUBLIC_KEY,
+        process.env.FLUTTERWAVE_SECRET_KEY,
+      );
+    }
     const response = await flw.Transaction.verify({ id: transaction_id });
     const data = response.data;
     return {

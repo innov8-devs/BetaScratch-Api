@@ -77,8 +77,8 @@ export class GameController {
     @Req() req: Request,
   ) {
     console.log(req.body);
-    const tx_ref = req.body.tx_ref;
-    const status = req.body.status;
+    const tx_ref = req.body.data.tx_ref;
+    const status = req.body.data.status;
     await this.gameService.verifyFlutterTransaction(tx_ref, status);
   }
 }

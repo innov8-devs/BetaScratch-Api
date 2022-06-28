@@ -278,6 +278,7 @@ export class WalletService {
     const { amount, status, currency, tx_ref } =
       await this.transactionService.verifyFlutterWaveTransaction(
         transaction_id,
+        false,
       );
 
     if (status === 'successful') {
@@ -322,7 +323,7 @@ export class WalletService {
   }
 
   async changeWithdrawalStatus(input: ChangeUserWithdrawalRequestInput) {
-    const { id, status, } = input;
+    const { id, status } = input;
     const withdrawalRequest =
       await this.prismaService.withdrawalRequest.findUnique({
         where: { id },
