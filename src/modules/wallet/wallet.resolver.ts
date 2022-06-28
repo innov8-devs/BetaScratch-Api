@@ -15,7 +15,7 @@ import { WithdrawalRequestCreateInput } from '@generated/prisma-nestjs-graphql/w
 import { WithdrawalRequest } from '@generated/prisma-nestjs-graphql/withdrawal-request/withdrawal-request.model';
 import { MyContext } from 'types/constants/types';
 import { AuthService } from 'modules/auth/auth.service';
-import { PAYMENT_PURPOSE } from 'types/constants/enum';
+// import { PAYMENT_PURPOSE } from 'types/constants/enum';
 
 @Resolver(() => Wallet)
 export class WalletResolver {
@@ -99,20 +99,20 @@ export class WalletResolver {
     return true;
   }
 
-  @Auth([ROLE.USER])
-  @Mutation(() => User)
-  async deposit(
-    @Args('transaction_id') transaction_id: number,
-    @Args('test', { nullable: true, defaultValue: false }) test: boolean,
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-  ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
-    return await this.walletService.deposit(
-      transaction_id,
-      PAYMENT_PURPOSE.DEPOSIT,
-      user.id,
-      test,
-    );
-  }
+  // @Auth([ROLE.USER])
+  // @Mutation(() => User)
+  // async deposit(
+  //   @Args('transaction_id') transaction_id: number,
+  //   @Args('test', { nullable: true, defaultValue: false }) test: boolean,
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  // ) {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
+  //   return await this.walletService.deposit(
+  //     transaction_id,
+  //     PAYMENT_PURPOSE.DEPOSIT,
+  //     user.id,
+  //     test,
+  //   );
+  // }
 }

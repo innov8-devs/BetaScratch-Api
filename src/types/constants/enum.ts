@@ -82,9 +82,15 @@ export enum DB_TYPES {
 export enum PURCHASE_STATUS {
   INACTIVE = 'inactive',
   ACTIVE = 'active',
+  FAILED = 'failed',
 }
 
 export enum GAME_STATUS {
   INACTIVE = 'inactive',
   ACTIVE = 'active',
+}
+
+export enum FLUTTER_TRANSACTION_TYPE {
+  CHECKOUT = 'checkout',
+  DEPOSIT = 'deposit',
 }

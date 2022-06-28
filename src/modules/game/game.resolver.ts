@@ -14,7 +14,6 @@ import {
   CartDetailInput,
   CreateGameInput,
   FlutterCheckoutOneInput,
-  FlutterCheckoutTwoInput,
   GameCateogorySearch,
   GamePaginationInput,
   PurchaseSearch,
@@ -129,23 +128,23 @@ export class GameResolver {
 
   @Auth([ROLE.USER])
   @Mutation(() => Boolean)
-  async flutterCheckoutOne(
+  async flutterCheckout(
     @Args('input') input: FlutterCheckoutOneInput,
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
-    return await this.gameService.flutterCheckoutOne(user.id, input);
+    return await this.gameService.flutterCheckout(user.id, input);
   }
 
-  @Auth([ROLE.USER])
-  @Mutation(() => User)
-  async flutterCheckoutTwo(
-    @Args('input') input: FlutterCheckoutTwoInput,
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-  ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
-    return await this.gameService.flutterCheckoutTwo(input, user.id);
-  }
+  // @Auth([ROLE.USER])
+  // @Mutation(() => User)
+  // async flutterCheckoutTwo(
+  //   @Args('input') input: FlutterCheckoutTwoInput,
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  // ) {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
+  //   return await this.gameService.flutterCheckoutTwo(input, user.id);
+  // }
 }

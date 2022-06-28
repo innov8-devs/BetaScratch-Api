@@ -16,10 +16,17 @@ import {
 } from 'types/constants/enum';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { calculateCashback } from 'helpers/calculateCashback';
+import { computeCheckoutMessageCards } from 'helpers/computeCheckoutMessageCards';
+import { CartItems } from 'modules/game/dto/game.request';
+import { calculateVipStatus } from 'helpers/calculateVipStatus';
+import { MessageService } from 'modules/message/message.service';
 
 @Injectable()
 export class TransactionService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly messageService: MessageService,
+  ) {}
 
   async createTransaction(input: Prisma.TransactionCreateInput) {
     return await this.prismaService.transaction.create({
@@ -233,6 +240,129 @@ export class TransactionService {
       throw new BadRequestException({
         name: 'transaction',
         message: 'cannot get transaction timeline',
+      });
+    }
+  }
+
+  async calculateVipProgress(userId: number) {
+    const totalAmountSpent = await this.checkTotalAmountSpent(userId);
+    const vipStatus = calculateVipStatus(totalAmountSpent);
+    await this.prismaService.user.update({
+      where: { id: userId },
+      data: { vipStatus },
+    });
+  }
+
+  async verifyCheckout(data: any) {
+    const tx_ref = data.tx_ref;
+    const status = data.status;
+    const amount = data.amount;
+    const user = await this.prismaService.user.findUnique({
+      where: { email: data.customer.email },
+    });
+    if (status === 'successful') {
+      const cartItems = await this.prismaService.cart.findMany({
+        where: {
+          AND: [
+            { transactionRef: { equals: tx_ref } },
+            { userId: { equals: user.id } },
+          ],
+        },
+      });
+
+      const userCartItems: CartItems[] = [];
+
+      for (let item of cartItems) {
+        userCartItems.push({
+          category: item.category,
+          gameId: '1', // TODO come here and sort the game id out later
+          id: item.id.toString(),
+          imageUrl: item.imageUrl,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+        });
+      }
+
+      const messageCards = computeCheckoutMessageCards(
+        userCartItems,
+        user.id,
+        tx_ref,
+      );
+      await this.messageService.sendCheckoutMessage(user.id, messageCards);
+      await this.calculateVipProgress(user.id);
+      await this.cashback(user.id, amount);
+
+      await this.prismaService.transaction.updateMany({
+        where: {
+          transactionRef: tx_ref,
+        },
+        data: {
+          status: PAYMENT_STATUS.SUCCESSFUL,
+          amount,
+        },
+      });
+
+      await this.prismaService.purchase.updateMany({
+        where: { reference: tx_ref },
+        data: { status: 'active', subtotal: amount },
+      });
+    } else if (status === 'failed') {
+      await this.prismaService.transaction.updateMany({
+        where: {
+          transactionRef: tx_ref,
+        },
+        data: {
+          status: PAYMENT_STATUS.FAILED,
+        },
+      });
+      await this.prismaService.purchase.updateMany({
+        where: { reference: tx_ref },
+        data: { status, subtotal: amount },
+      });
+    }
+  }
+
+  async verifyDeposit(data: any) {
+    const tx_ref = data.tx_ref;
+    const status = data.status;
+    const amount = data.amount;
+    const currency = data.currency;
+    const transactionId = data.id;
+    const user = await this.prismaService.user.findUnique({
+      where: { email: data.customer.email },
+    });
+
+    if (status === 'successful') {
+      await this.createTransaction({
+        amount,
+        currency,
+        purpose: PAYMENT_PURPOSE.DEPOSIT,
+        status: PAYMENT_STATUS.SUCCESSFUL,
+        type: TRANSACTION.FLUTTERWAVE,
+        transactionId,
+        transactionRef: tx_ref,
+        User: { connect: { id: user.id } },
+      });
+
+      await this.prismaService.wallet.update({
+        where: {
+          userId: user.id,
+        },
+        data: {
+          withdrawable: { increment: amount },
+        },
+      });
+    } else if (status === 'failed') {
+      await this.createTransaction({
+        amount,
+        currency,
+        purpose: PAYMENT_PURPOSE.DEPOSIT,
+        status: PAYMENT_STATUS.FAILED,
+        type: TRANSACTION.FLUTTERWAVE,
+        transactionId,
+        transactionRef: tx_ref,
+        User: { connect: { id: user.id } },
       });
     }
   }

@@ -133,16 +133,16 @@ export class CartCheckoutInput {
 
 @InputType()
 export class FlutterCheckoutOneInput {
-  @Field(() => Number, { nullable: false })
-  @IsNumber()
-  subtotal!: number;
+  // @Field(() => Number, { nullable: false })
+  // @IsNumber()
+  // subtotal!: number;
 
   @Field(() => String, { nullable: false })
   tx_ref!: string;
 
-  @Field(() => String, { nullable: false })
-  @IsEnum(TRANSACTION, { each: true })
-  transaction_type!: TRANSACTION | string;
+  // @Field(() => String, { nullable: false })
+  // @IsEnum(TRANSACTION, { each: true })
+  // transaction_type!: TRANSACTION | string;
 
   @Field(() => [CartItems], { nullable: false })
   @IsArray()

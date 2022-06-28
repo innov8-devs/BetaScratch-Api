@@ -2,7 +2,6 @@ import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { MESSAGES } from 'core/messages';
-import { calculateVipStatus } from 'helpers/calculateVipStatus';
 import { computeCart } from 'helpers/computeCartData';
 import { computeCheckoutMessageCards } from 'helpers/computeCheckoutMessageCards';
 import { MessageService } from 'modules/message/message.service';
@@ -25,7 +24,6 @@ import {
   CartDetailInput,
   CreateGameInput,
   FlutterCheckoutOneInput,
-  FlutterCheckoutTwoInput,
   GameCateogorySearch,
   GamePaginationInput,
   PurchaseSearch,
@@ -161,16 +159,6 @@ export class GameService {
       where: {
         id: { in: input.gameIds },
       },
-    });
-  }
-
-  async calculateVipProgress(userId: number) {
-    const totalAmountSpent =
-      await this.transactionService.checkTotalAmountSpent(userId);
-    const vipStatus = calculateVipStatus(totalAmountSpent);
-    await this.prismaService.user.update({
-      where: { id: userId },
-      data: { vipStatus },
     });
   }
 
@@ -321,7 +309,11 @@ export class GameService {
 
     const transactionRef = generateRandomString();
     const cartDetail = computeCart(input.cart, userId, transactionRef);
-    const messageCards = computeCheckoutMessageCards(input.cart, userId);
+    const messageCards = computeCheckoutMessageCards(
+      input.cart,
+      userId,
+      transactionRef,
+    );
 
     if (input.transaction_type === TRANSACTION.ACCOUNT) {
       const response = await this.checkoutWithAccount(
@@ -336,7 +328,7 @@ export class GameService {
           transactionRef,
           input.subtotal,
         );
-        await this.calculateVipProgress(userId);
+        await this.transactionService.calculateVipProgress(userId);
         await this.transactionService.cashback(userId, input.subtotal);
         await this.transactionService.createTransaction({
           amount: input.subtotal,
@@ -425,7 +417,7 @@ export class GameService {
     });
   }
 
-  async flutterCheckoutOne(
+  async flutterCheckout(
     userId: number,
     input: FlutterCheckoutOneInput,
   ): Promise<Boolean> {
@@ -433,58 +425,59 @@ export class GameService {
       where: { userId },
     });
 
-    const checkCheckoutState = await this.prismaService.cart.findFirst({
-      where: { userId },
-    });
+    const initialSubtotal = 0;
 
-    if (!checkCheckoutState) {
-      const referral = await this.prismaService.referral.findFirst({
-        where: { referrals: { has: userId } },
-      });
-      if (referral) {
-        const referrerAmount = (5 * input.subtotal) / 100;
+    // const checkCheckoutState = await this.prismaService.cart.findFirst({
+    //   where: { userId },
+    // });
 
-        await this.prismaService.wallet.update({
-          where: { userId: referral.userId },
-          data: {
-            withdrawable: { increment: referrerAmount },
-            bonus: { increment: 500 },
-          },
-        });
+    // if (!checkCheckoutState) {
+    //   const referral = await this.prismaService.referral.findFirst({
+    //     where: { referrals: { has: userId } },
+    //   });
+    //   if (referral) {
+    //     const referrerAmount = (5 * input.subtotal) / 100;
 
-        await this.prismaService.referral.update({
-          where: { userId: referral.userId },
-          data: {
-            invitesFunded: { increment: 1 },
-            totalEarned: { increment: referrerAmount },
-          },
-        });
+    //     await this.prismaService.wallet.update({
+    //       where: { userId: referral.userId },
+    //       data: {
+    //         withdrawable: { increment: referrerAmount },
+    //         bonus: { increment: 500 },
+    //       },
+    //     });
 
-        const refereeAmount = (3 * input.subtotal) / 100;
+    //     await this.prismaService.referral.update({
+    //       where: { userId: referral.userId },
+    //       data: {
+    //         invitesFunded: { increment: 1 },
+    //         totalEarned: { increment: referrerAmount },
+    //       },
+    //     });
 
-        await this.prismaService.wallet.update({
-          where: { userId },
-          data: {
-            withdrawable: { increment: refereeAmount },
-            bonus: { increment: 500 },
-          },
-        });
-      }
-    }
+    //     const refereeAmount = (3 * input.subtotal) / 100;
+
+    //     await this.prismaService.wallet.update({
+    //       where: { userId },
+    //       data: {
+    //         withdrawable: { increment: refereeAmount },
+    //         bonus: { increment: 500 },
+    //       },
+    //     });
+    //   }
+    // }
 
     const cartDetail = computeCart(input.cart, userId, input.tx_ref);
 
-    // TODO remove this after fix
     await this.recordPurchase(
       userId,
       cartDetail,
       input.tx_ref,
-      input.subtotal,
-      'inactive',
+      initialSubtotal,
+      PURCHASE_STATUS.INACTIVE,
     );
 
     await this.transactionService.createTransaction({
-      amount: input.subtotal,
+      amount: initialSubtotal,
       currency: userWallet.currency,
       purpose: PAYMENT_PURPOSE.CART,
       status: PAYMENT_STATUS.PENDING,
@@ -497,71 +490,55 @@ export class GameService {
     return true;
   }
 
-  async flutterCheckoutTwo(input: FlutterCheckoutTwoInput, userId: number) {
-    const { status, amount } =
-      await this.transactionService.verifyFlutterWaveTransaction(
-        input.transaction_id,
-        input.test,
-      );
+  // async flutterCheckoutTwo(input: FlutterCheckoutTwoInput, userId: number) {
+  //   const { status, amount } =
+  //     await this.transactionService.verifyFlutterWaveTransaction(
+  //       input.transaction_id,
+  //       input.test,
+  //     );
 
-    const transaction = await this.prismaService.transaction.findFirst({
-      where: {
-        transactionRef: input.tx_ref,
-        userId,
-        status: PAYMENT_STATUS.PENDING,
-        type: TRANSACTION.FLUTTERWAVE,
-        purpose: PAYMENT_PURPOSE.CART,
-        amount,
-      },
-    });
+  //   const transaction = await this.prismaService.transaction.findFirst({
+  //     where: {
+  //       transactionRef: input.tx_ref,
+  //       userId,
+  //       status: PAYMENT_STATUS.PENDING,
+  //       type: TRANSACTION.FLUTTERWAVE,
+  //       purpose: PAYMENT_PURPOSE.CART,
+  //       amount,
+  //     },
+  //   });
 
-    if (status === 'successful') {
-      const messageCards = computeCheckoutMessageCards(input.cart, userId);
+  //   if (status === 'successful') {
+  //     const messageCards = computeCheckoutMessageCards(input.cart, userId);
 
-      await this.calculateVipProgress(userId);
-      await this.messageService.sendCheckoutMessage(userId, messageCards);
-      await this.transactionService.cashback(userId, transaction.amount);
-      await this.prismaService.transaction.update({
-        where: { id: transaction.id },
-        data: {
-          status: PAYMENT_STATUS.SUCCESSFUL,
-          transactionId: input.transaction_id,
-        },
-      });
-    }
-    if (status === 'failed') {
-      await this.prismaService.transaction.update({
-        where: { id: transaction.id },
-        data: {
-          status: PAYMENT_STATUS.FAILED,
-          transactionId: input.transaction_id,
-        },
-      });
-      throw new BadRequestException({
-        name: 'payment',
-        message: 'payment failed',
-      });
-    }
+  //     await this.calculateVipProgress(userId);
+  //     await this.messageService.sendCheckoutMessage(userId, messageCards);
+  //     await this.transactionService.cashback(userId, transaction.amount);
+  //     await this.prismaService.transaction.update({
+  //       where: { id: transaction.id },
+  //       data: {
+  //         status: PAYMENT_STATUS.SUCCESSFUL,
+  //         transactionId: input.transaction_id,
+  //       },
+  //     });
+  //   }
+  //   if (status === 'failed') {
+  //     await this.prismaService.transaction.update({
+  //       where: { id: transaction.id },
+  //       data: {
+  //         status: PAYMENT_STATUS.FAILED,
+  //         transactionId: input.transaction_id,
+  //       },
+  //     });
+  //     throw new BadRequestException({
+  //       name: 'payment',
+  //       message: 'payment failed',
+  //     });
+  //   }
 
-    return await this.prismaService.user.findUnique({
-      where: { id: userId },
-      include: { wallet: true },
-    });
-  }
-
-  async verifyFlutterTransaction(tx_ref: string, status: string) {
-    console.log('TX_REF', tx_ref, status);
-    await this.prismaService.transaction.updateMany({
-      where: {
-        transactionRef: tx_ref,
-      },
-      data: {
-        status: status.toUpperCase(),
-      },
-    });
-    await this.prismaService.purchase.updateMany({
-      where: { reference: tx_ref },
-      data: { status: 'active' },
-    });
-  }
+  //   return await this.prismaService.user.findUnique({
+  //     where: { id: userId },
+  //     include: { wallet: true },
+  //   });
+  // }
 }

@@ -15,7 +15,7 @@ export const computeCart = (
         category: item.category,
         imageUrl: item.imageUrl,
         name: item.name,
-        reference: generateRandomString(),
+        reference: transactionRef ? transactionRef : generateRandomString(),
         price: {
           eur: item.price.eur,
           usd: item.price.usd,
