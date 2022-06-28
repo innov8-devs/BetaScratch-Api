@@ -118,7 +118,6 @@ export class TransactionService {
   async verifyFlutterWaveTransaction(transaction_id: number, test: boolean) {
     let flw;
     if (test) {
-      console.log('HERE');
       flw = new Flutterwave(
         'FLWPUBK_TEST-605e7bf00f5a3971a24bdd8f36acb345-X',
         'FLWSECK_TEST-fc7e5f67bce038ac4ba1d449f50fd72e-X',
@@ -131,7 +130,6 @@ export class TransactionService {
     }
     const response = await flw.Transaction.verify({ id: transaction_id });
     const data = response.data;
-    console.log('DATA', response.data);
     return {
       status: data.status,
       amount: data.amount,
