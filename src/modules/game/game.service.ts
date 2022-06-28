@@ -547,4 +547,19 @@ export class GameService {
       include: { wallet: true },
     });
   }
+
+  async verifyFlutterTransaction(tx_ref: string, status: string) {
+    await this.prismaService.transaction.updateMany({
+      where: {
+        transactionRef: tx_ref,
+      },
+      data: {
+        status: status.toUpperCase(),
+      },
+    });
+    await this.prismaService.purchase.updateMany({
+      where: { reference: tx_ref },
+      data: { status: 'active' },
+    });
+  }
 }

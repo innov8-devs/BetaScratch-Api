@@ -19,9 +19,12 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { IMAGE_TYPE } from 'types/constants/enum';
 import { Request, Response } from 'express';
+import { GameService } from './game.service';
 
 @Controller('api/game')
 export class GameController {
+  constructor(private readonly gameService: GameService) {}
+
   @Auth([ROLE.ADMIN])
   @Post('upload')
   @UseInterceptors(
@@ -62,8 +65,9 @@ export class GameController {
   }
 
   @Post('flutterwave-webhook')
-  verifyPurchase(@Res() _res: Response, @Req() req: Request) {
-    console.log(req.body);
-    // res.json(req.body);
+  async verifyFlutterTransaction(@Res() _res: Response, @Req() req: Request) {
+    const tx_ref = req.body.tx_ref;
+    const status = req.body.status;
+    await this.gameService.verifyFlutterTransaction(tx_ref, status);
   }
 }
