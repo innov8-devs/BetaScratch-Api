@@ -270,59 +270,6 @@ export class WalletService {
     return total;
   }
 
-  // async deposit(
-  //   transaction_id: number,
-  //   transaction_type: PAYMENT_PURPOSE,
-  //   userId: number,
-  //   test: boolean,
-  // ) {
-  //   const { amount, status, currency, tx_ref } =
-  //     await this.transactionService.verifyFlutterWaveTransaction(
-  //       transaction_id,
-  //       test,
-  //     );
-
-  //   if (status === 'successful') {
-  //     await this.transactionService.createTransaction({
-  //       amount: amount,
-  //       currency: currency,
-  //       purpose: transaction_type,
-  //       status: PAYMENT_STATUS.SUCCESSFUL,
-  //       type: TRANSACTION.FLUTTERWAVE,
-  //       transactionId: transaction_id,
-  //       transactionRef: tx_ref,
-  //       User: { connect: { id: userId } },
-  //     });
-
-  //     await this.prismaService.wallet.update({
-  //       where: {
-  //         userId,
-  //       },
-  //       data: {
-  //         withdrawable: { increment: amount },
-  //       },
-  //     });
-  //   } else {
-  //     await this.transactionService.createTransaction({
-  //       amount: amount,
-  //       currency: currency,
-  //       purpose: transaction_type,
-  //       status: PAYMENT_STATUS.FAILED,
-  //       type: TRANSACTION.FLUTTERWAVE,
-  //       transactionId: transaction_id,
-  //       transactionRef: tx_ref,
-  //       User: { connect: { id: userId } },
-  //     });
-  //   }
-
-  //   return await this.prismaService.user.findUnique({
-  //     where: { id: userId },
-  //     include: {
-  //       wallet: true,
-  //     },
-  //   });
-  // }
-
   async changeWithdrawalStatus(input: ChangeUserWithdrawalRequestInput) {
     const { id, status } = input;
     const withdrawalRequest =

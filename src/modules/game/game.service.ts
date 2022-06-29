@@ -427,45 +427,6 @@ export class GameService {
 
     const initialSubtotal = 0;
 
-    // const checkCheckoutState = await this.prismaService.cart.findFirst({
-    //   where: { userId },
-    // });
-
-    // if (!checkCheckoutState) {
-    //   const referral = await this.prismaService.referral.findFirst({
-    //     where: { referrals: { has: userId } },
-    //   });
-    //   if (referral) {
-    //     const referrerAmount = (5 * input.subtotal) / 100;
-
-    //     await this.prismaService.wallet.update({
-    //       where: { userId: referral.userId },
-    //       data: {
-    //         withdrawable: { increment: referrerAmount },
-    //         bonus: { increment: 500 },
-    //       },
-    //     });
-
-    //     await this.prismaService.referral.update({
-    //       where: { userId: referral.userId },
-    //       data: {
-    //         invitesFunded: { increment: 1 },
-    //         totalEarned: { increment: referrerAmount },
-    //       },
-    //     });
-
-    //     const refereeAmount = (3 * input.subtotal) / 100;
-
-    //     await this.prismaService.wallet.update({
-    //       where: { userId },
-    //       data: {
-    //         withdrawable: { increment: refereeAmount },
-    //         bonus: { increment: 500 },
-    //       },
-    //     });
-    //   }
-    // }
-
     const cartDetail = computeCart(input.cart, userId, input.tx_ref);
 
     await this.recordPurchase(
@@ -489,56 +450,4 @@ export class GameService {
 
     return true;
   }
-
-  // async flutterCheckoutTwo(input: FlutterCheckoutTwoInput, userId: number) {
-  //   const { status, amount } =
-  //     await this.transactionService.verifyFlutterWaveTransaction(
-  //       input.transaction_id,
-  //       input.test,
-  //     );
-
-  //   const transaction = await this.prismaService.transaction.findFirst({
-  //     where: {
-  //       transactionRef: input.tx_ref,
-  //       userId,
-  //       status: PAYMENT_STATUS.PENDING,
-  //       type: TRANSACTION.FLUTTERWAVE,
-  //       purpose: PAYMENT_PURPOSE.CART,
-  //       amount,
-  //     },
-  //   });
-
-  //   if (status === 'successful') {
-  //     const messageCards = computeCheckoutMessageCards(input.cart, userId);
-
-  //     await this.calculateVipProgress(userId);
-  //     await this.messageService.sendCheckoutMessage(userId, messageCards);
-  //     await this.transactionService.cashback(userId, transaction.amount);
-  //     await this.prismaService.transaction.update({
-  //       where: { id: transaction.id },
-  //       data: {
-  //         status: PAYMENT_STATUS.SUCCESSFUL,
-  //         transactionId: input.transaction_id,
-  //       },
-  //     });
-  //   }
-  //   if (status === 'failed') {
-  //     await this.prismaService.transaction.update({
-  //       where: { id: transaction.id },
-  //       data: {
-  //         status: PAYMENT_STATUS.FAILED,
-  //         transactionId: input.transaction_id,
-  //       },
-  //     });
-  //     throw new BadRequestException({
-  //       name: 'payment',
-  //       message: 'payment failed',
-  //     });
-  //   }
-
-  //   return await this.prismaService.user.findUnique({
-  //     where: { id: userId },
-  //     include: { wallet: true },
-  //   });
-  // }
 }

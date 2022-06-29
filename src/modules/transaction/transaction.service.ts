@@ -309,6 +309,55 @@ export class TransactionService {
         },
         data: { status: 'active', subtotal: amount },
       });
+
+      // refferal
+      const userPurchase = await this.prismaService.purchase.findMany({
+        where: {
+          AND: [
+            {
+              reference: { equals: tx_ref },
+              userId: { equals: user.id },
+              status: { equals: 'active' },
+            },
+          ],
+        },
+      });
+
+      if (userPurchase.length === 1) {
+        const referral = await this.prismaService.referral.findFirst({
+          where: { referrals: { has: user.id } },
+        });
+
+        if (referral) {
+          const referrerAmount = (5 * amount) / 100;
+
+          await this.prismaService.wallet.update({
+            where: { userId: referral.userId },
+            data: {
+              withdrawable: { increment: referrerAmount },
+              bonus: { increment: 500 },
+            },
+          });
+
+          await this.prismaService.referral.update({
+            where: { userId: referral.userId },
+            data: {
+              invitesFunded: { increment: 1 },
+              totalEarned: { increment: referrerAmount },
+            },
+          });
+
+          const refereeAmount = (3 * amount) / 100;
+
+          await this.prismaService.wallet.update({
+            where: { userId: user.id },
+            data: {
+              withdrawable: { increment: refereeAmount },
+              bonus: { increment: 500 },
+            },
+          });
+        }
+      }
     } else if (status === 'failed') {
       await this.prismaService.transaction.updateMany({
         where: {

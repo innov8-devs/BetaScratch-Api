@@ -67,25 +67,6 @@ export class CartDetailInput {
   gameIds?: number[];
 }
 
-// @InputType()
-// export class CartGamePrice {
-//   @Field(() => Number)
-//   @IsNumber()
-//   eur: number;
-
-//   @Field(() => Number)
-//   @IsNumber()
-//   ngn: number;
-
-//   @Field(() => Number)
-//   @IsNumber()
-//   usd: number;
-
-//   @Field(() => Number)
-//   @IsNumber()
-//   gbp: number;
-// }
-
 @InputType()
 export class CartItems {
   @Field(() => String)
@@ -133,16 +114,8 @@ export class CartCheckoutInput {
 
 @InputType()
 export class FlutterCheckoutOneInput {
-  // @Field(() => Number, { nullable: false })
-  // @IsNumber()
-  // subtotal!: number;
-
   @Field(() => String, { nullable: false })
   tx_ref!: string;
-
-  // @Field(() => String, { nullable: false })
-  // @IsEnum(TRANSACTION, { each: true })
-  // transaction_type!: TRANSACTION | string;
 
   @Field(() => [CartItems], { nullable: false })
   @IsArray()

@@ -8,7 +8,6 @@ import { TransactionService } from './transaction.service';
 export class TransactionController {
   constructor(private readonly transactionService: TransactionService) {}
 
-  //   TODO check for refferal
   @Post('flutterwave-webhook')
   async verifyFlutterTransaction(@Res() _res: Response, @Req() req: Request) {
     const transactionType = splitFlutterRef(req.body.data.tx_ref);
