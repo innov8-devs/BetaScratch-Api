@@ -43,7 +43,9 @@ export class UserService {
   async register(input: RegisterInput): Promise<User> {
     const errMessage = [];
     const emailUsed = await this.findUnique({ email: input.email });
-    const usernameUsed = await this.findUnique({ username: input.username });
+    const usernameUsed = await this.findUnique({
+      username: input.username.toLowerCase(),
+    });
     const mobileNumberUsed = await this.findUnique({
       mobileNumber: input.mobileNumber,
     });
@@ -343,7 +345,9 @@ export class UserService {
 
   async validateRegistrationFormTwo(input: ValidateFormTwoInput) {
     const { username, password } = input;
-    const usernameUsed = await this.findUnique({ username });
+    const usernameUsed = await this.findUnique({
+      username: username.toLowerCase(),
+    });
     if (usernameUsed)
       throw new BadRequestException({
         name: 'username',
