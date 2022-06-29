@@ -9,12 +9,12 @@ export class TransactionController {
   constructor(private readonly transactionService: TransactionService) {}
 
   @Post('flutterwave-webhook')
-  async verifyFlutterTransaction(@Res() _res: Response, @Req() req: Request) {
+  async verifyFlutterTransaction(@Res() res: Response, @Req() req: Request) {
     const transactionType = splitFlutterRef(req.body.data.tx_ref);
     if (transactionType === FLUTTER_TRANSACTION_TYPE.CHECKOUT) {
-      await this.transactionService.verifyCheckout(req.body.data);
+      return await this.transactionService.verifyCheckout(req.body.data, res);
     } else if (transactionType === FLUTTER_TRANSACTION_TYPE.DEPOSIT) {
-      await this.transactionService.verifyDeposit(req.body.data);
+      return await this.transactionService.verifyDeposit(req.body.data, res);
     }
   }
 }

@@ -20,6 +20,7 @@ import { computeCheckoutMessageCards } from 'helpers/computeCheckoutMessageCards
 import { CartItems } from 'modules/game/dto/game.request';
 import { calculateVipStatus } from 'helpers/calculateVipStatus';
 import { MessageService } from 'modules/message/message.service';
+import { Response } from 'express';
 
 @Injectable()
 export class TransactionService {
@@ -253,7 +254,7 @@ export class TransactionService {
     });
   }
 
-  async verifyCheckout(data: any) {
+  async verifyCheckout(data: any, res: Response) {
     const tx_ref = data.tx_ref;
     const status = data.status;
     const amount = data.amount;
@@ -275,7 +276,7 @@ export class TransactionService {
       },
     });
 
-    if (confirmedPurchase) return;
+    if (confirmedPurchase) return res.status(200).end();
 
     if (status === 'successful') {
       const cartItems = await this.prismaService.cart.findMany({
@@ -375,6 +376,8 @@ export class TransactionService {
           });
         }
       }
+
+      return res.status(200).end();
     } else if (status === 'failed') {
       await this.prismaService.transaction.updateMany({
         where: {
@@ -388,10 +391,12 @@ export class TransactionService {
         where: { reference: tx_ref },
         data: { status, subtotal: amount },
       });
+
+      return res.status(200).end();
     }
   }
 
-  async verifyDeposit(data: any) {
+  async verifyDeposit(data: any, res: Response) {
     const tx_ref = data.tx_ref;
     const status = data.status;
     const amount = data.amount;
@@ -413,7 +418,7 @@ export class TransactionService {
       },
     });
 
-    if (depositTransaction) return;
+    if (depositTransaction) return res.status(200).end();
 
     if (status === 'successful') {
       await this.createTransaction({
@@ -435,6 +440,7 @@ export class TransactionService {
           withdrawable: { increment: amount },
         },
       });
+      res.status(200).end();
     } else if (status === 'failed') {
       await this.createTransaction({
         amount,
@@ -446,6 +452,7 @@ export class TransactionService {
         transactionRef: tx_ref,
         User: { connect: { id: user.id } },
       });
+      res.status(200).end();
     }
   }
 }
