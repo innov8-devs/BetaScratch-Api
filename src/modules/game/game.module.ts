@@ -8,9 +8,11 @@ import { AuthService } from 'modules/auth/auth.service';
 import { TransactionModule } from 'modules/transaction/transaction.module';
 import { TransactionService } from 'modules/transaction/transaction.service';
 import { MessageService } from 'modules/message/message.service';
+import { GameController } from './game.controller';
 
 @Module({
   imports: [JwtModule.register({}), AuthModule, TransactionModule],
+  controllers: [GameController],
   providers: [
     GameResolver,
     GameService,
