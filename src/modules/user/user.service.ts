@@ -42,7 +42,9 @@ export class UserService {
   // register
   async register(input: RegisterInput): Promise<User> {
     const errMessage = [];
-    const emailUsed = await this.findUnique({ email: input.email });
+    const emailUsed = await this.findUnique({
+      email: input.email.toLowerCase(),
+    });
     const usernameUsed = await this.findUnique({
       username: input.username.toLowerCase(),
     });
