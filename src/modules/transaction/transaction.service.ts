@@ -257,9 +257,26 @@ export class TransactionService {
     const tx_ref = data.tx_ref;
     const status = data.status;
     const amount = data.amount;
+
     const user = await this.prismaService.user.findUnique({
       where: { email: data.customer.email },
     });
+
+    const confirmedPurchase = await this.prismaService.purchase.findFirst({
+      where: {
+        AND: [
+          {
+            reference: { equals: tx_ref },
+            userId: { equals: user.id },
+            status: { equals: 'active' },
+            subtotal: { equals: amount },
+          },
+        ],
+      },
+    });
+
+    if (confirmedPurchase) return;
+
     if (status === 'successful') {
       const cartItems = await this.prismaService.cart.findMany({
         where: {
@@ -383,6 +400,20 @@ export class TransactionService {
     const user = await this.prismaService.user.findUnique({
       where: { email: data.customer.email },
     });
+
+    const depositTransaction = await this.prismaService.transaction.findFirst({
+      where: {
+        AND: [
+          { transactionRef: { equals: tx_ref } },
+          { amount: { equals: amount } },
+          { userId: { equals: user.id } },
+          { status: { equals: PAYMENT_STATUS.SUCCESSFUL } },
+          { transactionId: { equals: transactionId } },
+        ],
+      },
+    });
+
+    if (depositTransaction) return;
 
     if (status === 'successful') {
       await this.createTransaction({
