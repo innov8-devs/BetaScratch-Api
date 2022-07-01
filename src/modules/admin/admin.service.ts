@@ -503,6 +503,12 @@ export class AdminService {
     parentId?: number,
     parentStatus?: string,
   ) {
+    if (parentId && parentStatus === 'played') {
+      await this.prismaService.purchase.update({
+        where: { id: parentId },
+        data: { status: parentStatus.toLowerCase() },
+      });
+    }
     await this.prismaService.cart.update({
       where: { id },
       data: { played },
