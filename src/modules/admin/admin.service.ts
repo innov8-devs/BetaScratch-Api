@@ -422,9 +422,9 @@ export class AdminService {
     const { orderBy, orderColumn, page, size } = input;
     let skipValue = page * size - size;
     return await this.prismaService.withdrawalRequest.findMany({
-      where: {
-        status: 'pending',
-      },
+      // where: {
+      //   status: 'pending',
+      // },
       orderBy: {
         [orderColumn]: orderBy,
       },
