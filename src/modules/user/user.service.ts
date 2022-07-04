@@ -19,7 +19,7 @@ import {
 } from './dto/user.request';
 import { MailService } from 'modules/mail/mail.service';
 import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
-import { AUTH_TYPE } from 'types/constants/enum';
+import { AUTH_TYPE, VERIFICATION } from 'types/constants/enum';
 import { OtpService } from 'modules/otp/otp.service';
 
 @Injectable()
@@ -464,19 +464,30 @@ export class UserService {
 
   async updateVerificaionStatusToPending(
     userId: number,
-    licenseFrontImage?: string,
-    licenseBackImage?: string,
+    imageFor: string,
+    image: string,
   ) {
-    await this.prismaService.user.update({
-      data: {
-        verificationStatus: 'pending',
-        licenseFrontImage,
-        licenseBackImage,
-      },
-      where: {
-        id: userId,
-      },
-    });
+    if (imageFor === VERIFICATION.LICENSE_FRONT_IMAGE) {
+      await this.prismaService.user.update({
+        data: {
+          verificationStatus: 'pending',
+          licenseFrontImage: image,
+        },
+        where: {
+          id: userId,
+        },
+      });
+    } else if (imageFor === VERIFICATION.LICENSE_BACK_IMAGE) {
+      await this.prismaService.user.update({
+        data: {
+          verificationStatus: 'pending',
+          licenseBackImage: image,
+        },
+        where: {
+          id: userId,
+        },
+      });
+    }
   }
 
   async fetchUserReferrals(userId: number) {

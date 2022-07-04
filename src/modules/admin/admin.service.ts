@@ -542,16 +542,15 @@ export class AdminService {
   }
 
   async run() {
-    const withdrawals = await this.prismaService.withdrawalRequest.findMany({
-      where: {
-        status: 'approved',
-      },
-    });
+    const withdrawals = await this.prismaService.withdrawalRequest.findMany();
 
     for (let x of withdrawals) {
       await this.prismaService.user.update({
         where: { id: x.userId },
-        data: { verificationStatus: 'active' },
+        data: {
+          licenseNumber: x.licenseNumber,
+          verificationType: x.licenseType,
+        },
       });
     }
   }

@@ -55,8 +55,8 @@ export class UserController {
     ) {
       await this.userService.updateVerificaionStatusToPending(
         user.id,
+        input.imageFor,
         image,
-        null,
       );
     } else {
       throw new BadRequestException({
