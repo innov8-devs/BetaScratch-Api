@@ -230,6 +230,14 @@ export class WalletService {
       },
     });
 
+    await this.prismaService.user.update({
+      where: { id: userId },
+      data: {
+        verificationType: input.licenseType,
+        licenseNumber: input.licenseNumber,
+      },
+    });
+
     await this.transactionService.createTransaction({
       amount: Number(input.amount),
       currency: userWallet.currency,

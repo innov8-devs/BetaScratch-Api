@@ -267,4 +267,9 @@ export class AdminResolver {
     await this.adminService.resetPurchases();
     return true;
   }
+
+  @Mutation(() => Boolean)
+  async run() {
+    await this.adminService.run();
+  }
 }
