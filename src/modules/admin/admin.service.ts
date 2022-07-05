@@ -452,17 +452,14 @@ export class AdminService {
 
   async changeVerificationStatus(input: ChangeVerificationRequestInput) {
     const { id, status } = input;
-    const withdrawal = await this.prismaService.withdrawalRequest.findUnique({
-      where: { id },
-    });
     if (status === 'active') {
       await this.prismaService.user.update({
-        where: { id: withdrawal.userId },
+        where: { id },
         data: { verificationStatus: status },
       });
     } else {
       await this.prismaService.user.update({
-        where: { id: withdrawal.userId },
+        where: { id },
         data: { verificationStatus: status },
       });
     }
