@@ -208,12 +208,12 @@ export class AdminResolver {
   }
 
   @Auth([ROLE.ADMIN])
-  @Query(() => [User], { nullable: true })
+  @Mutation(() => Boolean, { nullable: true })
   async changeVerificationStatus(
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
     @Args('input') input: ChangeVerificationRequestInput,
-  ): Promise<User[]> {
+  ): Promise<Boolean> {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.changeVerificationStatus(input);
   }

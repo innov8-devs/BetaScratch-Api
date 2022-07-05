@@ -451,31 +451,22 @@ export class AdminService {
   }
 
   async changeVerificationStatus(input: ChangeVerificationRequestInput) {
-    const { id, page, size, status, orderBy, orderColumn } = input;
+    const { id, status } = input;
     const withdrawal = await this.prismaService.withdrawalRequest.findUnique({
       where: { id },
     });
-    if (status === 'approved' || status === 'active') {
+    if (status === 'active') {
       await this.prismaService.user.update({
         where: { id: withdrawal.userId },
-        data: { verificationStatus: 'active' },
+        data: { verificationStatus: status },
       });
     } else {
       await this.prismaService.user.update({
         where: { id: withdrawal.userId },
-        data: { verificationStatus: 'inactive' },
+        data: { verificationStatus: status },
       });
     }
-    let skipValue = page * size - size;
-    return await this.prismaService.user.findMany({
-      where: { verificationStatus: 'pending' },
-      orderBy: {
-        [orderColumn]: orderBy,
-      },
-      take: size,
-      skip: skipValue,
-      include: { withdrawalRequest: true },
-    });
+    return true;
   }
 
   async getAdminList(input: PaginationInput) {
