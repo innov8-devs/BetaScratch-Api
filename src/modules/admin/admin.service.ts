@@ -35,8 +35,11 @@ import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
 import { Game } from '@generated/prisma-nestjs-graphql/game/game.model';
 import { Purchase } from '@generated/prisma-nestjs-graphql/purchase/purchase.model';
 import { WithdrawalRequest } from '@generated/prisma-nestjs-graphql/withdrawal-request/withdrawal-request.model';
-import { DashboardDataResponse } from './dto/admin.response';
-
+import {
+  DashboardDataResponse,
+  FlutterTansactionResponse,
+} from './dto/admin.response';
+import * as Flutterwave from 'flutterwave-node-v3';
 @Injectable()
 export class AdminService {
   constructor(
@@ -506,6 +509,27 @@ export class AdminService {
         where: { id: parentId },
         data: { status: parentStatus },
       });
+    }
+  }
+
+  async getFlutterwaveTransactions(
+    from: string,
+    to: string,
+  ): Promise<FlutterTansactionResponse[]> {
+    const flw = new Flutterwave(
+      process.env.FLUTTERWAVE_PUBLIC_KEY,
+      process.env.FLUTTERWAVE_SECRET_KEY,
+    );
+    try {
+      const payload = {
+        from,
+        to,
+      };
+      const response = await flw.Transaction.fetch(payload);
+      console.log(response.data[0].meta);
+      return response.data;
+    } catch (error) {
+      console.log(error);
     }
   }
 

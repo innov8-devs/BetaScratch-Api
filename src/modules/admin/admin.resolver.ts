@@ -26,7 +26,10 @@ import {
   RegisterAdminInput,
   UpdateUserWalletInput,
 } from './dto/admin.request';
-import { DashboardDataResponse } from './dto/admin.response';
+import {
+  DashboardDataResponse,
+  FlutterTansactionResponse,
+} from './dto/admin.response';
 
 @Resolver()
 export class AdminResolver {
@@ -266,6 +269,18 @@ export class AdminResolver {
   async resetPurchases() {
     await this.adminService.resetPurchases();
     return true;
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => [FlutterTansactionResponse])
+  async getFlutterwaveTransactions(
+    @Args('from') from: string,
+    @Args('to') to: string,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ): Promise<FlutterTansactionResponse[]> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    return this.adminService.getFlutterwaveTransactions(from, to);
   }
 
   @Mutation(() => Boolean)
