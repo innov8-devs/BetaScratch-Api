@@ -352,25 +352,26 @@ export class AdminService {
   ): Promise<Purchase[]> {
     const { orderBy, orderColumn, page, size } = input;
     let skipValue = page * size - size;
-    if (orderColumn === 'status') {
+    if (orderBy === 'status') {
       return await this.prismaService.purchase.findMany({
         include: { cards: true },
         orderBy: {
-          [orderColumn]: 'desc',
+          [orderColumn]: orderBy,
           id: 'desc',
         },
         take: size,
         skip: skipValue,
       });
+    } else {
+      return await this.prismaService.purchase.findMany({
+        include: { cards: true },
+        orderBy: {
+          [orderColumn]: orderBy,
+        },
+        take: size,
+        skip: skipValue,
+      });
     }
-    return await this.prismaService.purchase.findMany({
-      include: { cards: true },
-      orderBy: {
-        [orderColumn]: orderBy,
-      },
-      take: size,
-      skip: skipValue,
-    });
   }
 
   public async editUserPurchaseStatusFromAdmin(
