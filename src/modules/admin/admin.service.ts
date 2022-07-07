@@ -357,6 +357,7 @@ export class AdminService {
         include: { cards: true },
         orderBy: {
           [orderColumn]: 'desc',
+          id: 'desc',
         },
         take: size,
         skip: skipValue,
