@@ -280,7 +280,7 @@ export class AdminResolver {
     @Context() { res }: MyContext,
   ): Promise<FlutterTansactionResponse[]> {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return this.adminService.getFlutterwaveTransactions(from, to);
+    return await this.adminService.getFlutterwaveTransactions(from, to);
   }
 
   @Mutation(() => Boolean)

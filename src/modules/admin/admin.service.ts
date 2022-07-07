@@ -352,6 +352,16 @@ export class AdminService {
   ): Promise<Purchase[]> {
     const { orderBy, orderColumn, page, size } = input;
     let skipValue = page * size - size;
+    if (orderColumn === 'status') {
+      return await this.prismaService.purchase.findMany({
+        include: { cards: true },
+        orderBy: {
+          [orderColumn]: 'desc',
+        },
+        take: size,
+        skip: skipValue,
+      });
+    }
     return await this.prismaService.purchase.findMany({
       include: { cards: true },
       orderBy: {
@@ -516,17 +526,17 @@ export class AdminService {
     from: string,
     to: string,
   ): Promise<FlutterTansactionResponse[]> {
+    console.log(from, to);
     const flw = new Flutterwave(
       process.env.FLUTTERWAVE_PUBLIC_KEY,
       process.env.FLUTTERWAVE_SECRET_KEY,
     );
     try {
-      const payload = {
-        from,
-        to,
-      };
-      const response = await flw.Transaction.fetch(payload);
-      console.log(response.data[0].meta);
+      const response = await flw.Transaction.fetch({
+        from: '2021-05-01',
+        to: '2021-06-01',
+      });
+      console.log(response);
       return response.data;
     } catch (error) {
       console.log(error);
