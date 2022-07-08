@@ -355,10 +355,9 @@ export class AdminService {
     if (orderBy === 'status') {
       return await this.prismaService.purchase.findMany({
         include: { cards: true },
+        where: { status: 'active' },
         orderBy: {
-          // [orderColumn]: orderBy,
-          id: 'desc',
-          status: 'asc',
+          [orderColumn]: orderBy,
         },
         take: size,
         skip: skipValue,
