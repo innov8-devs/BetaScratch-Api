@@ -356,8 +356,9 @@ export class AdminService {
       return await this.prismaService.purchase.findMany({
         include: { cards: true },
         orderBy: {
-          [orderColumn]: orderBy,
+          // [orderColumn]: orderBy,
           id: 'desc',
+          status: 'asc',
         },
         take: size,
         skip: skipValue,
