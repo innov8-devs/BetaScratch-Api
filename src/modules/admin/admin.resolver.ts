@@ -283,6 +283,38 @@ export class AdminResolver {
     return await this.adminService.getFlutterwaveTransactions(from, to);
   }
 
+  @Auth([ROLE.ADMIN])
+  @Mutation(() => Boolean)
+  async updateAdminPersonalInformation(
+    @Args('firstName') firstName: string,
+    @Args('lastName') lastName: string,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ): Promise<Boolean> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    return await this.adminService.updateAdminPersonalInformation(
+      firstName,
+      lastName,
+      user.id,
+    );
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Mutation(() => Boolean)
+  async updateAdminPassword(
+    @Args('oldPassword') oldPassword: string,
+    @Args('newPassword') newPassword: string,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ): Promise<Boolean> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    return await this.adminService.updateAdminPassword(
+      oldPassword,
+      newPassword,
+      user.id,
+    );
+  }
+
   @Mutation(() => Boolean)
   async run() {
     await this.adminService.run();

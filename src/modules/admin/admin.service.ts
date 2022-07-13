@@ -40,6 +40,7 @@ import {
   FlutterTansactionResponse,
 } from './dto/admin.response';
 import * as Flutterwave from 'flutterwave-node-v3';
+
 @Injectable()
 export class AdminService {
   constructor(
@@ -568,12 +569,48 @@ export class AdminService {
   async updateAdminPersonalInformation(
     firstName: string,
     lastName: string,
-    id: number,
-  ) {
-    await this.prismaService.admin.update({
-      where: { id },
-      data: { firstName, lastName },
-    });
+    userId: number,
+  ): Promise<Boolean> {
+    try {
+      await this.prismaService.admin.update({
+        where: { id: userId },
+        data: { firstName, lastName },
+      });
+      return true;
+    } catch (err) {
+      throw new BadRequestException();
+    }
+  }
+
+  async updateAdminPassword(
+    oldPassword: string,
+    newPassword: string,
+    userId: number,
+  ): Promise<Boolean> {
+    try {
+      const user = await this.prismaService.user.findUnique({
+        where: { id: userId },
+      });
+
+      const verifyPassword = await argon2.verify(user.password, oldPassword);
+
+      if (!verifyPassword) {
+        throw new BadRequestException({
+          name: 'credentials',
+          message: MESSAGES.AUTH.INVALID_CREDENTIALS,
+        });
+      }
+
+      const newPass = await argon2.hash(newPassword);
+      await this.prismaService.admin.update({
+        where: { id: userId },
+        data: { password: newPass },
+      });
+
+      return true;
+    } catch (err) {
+      throw new BadRequestException();
+    }
   }
 
   async run() {
