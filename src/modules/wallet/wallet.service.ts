@@ -230,14 +230,22 @@ export class WalletService {
       },
     });
 
-    await this.prismaService.user.update({
+    const user = await this.prismaService.user.findUnique({
       where: { id: userId },
-      data: {
-        verificationType: input.licenseType,
-        licenseNumber: input.licenseNumber,
-        verificationStatus: 'pending',
-      },
     });
+
+    if (input.licenseNumber || input.licenseType) {
+      if (user.verificationStatus !== 'active') {
+        await this.prismaService.user.update({
+          where: { id: userId },
+          data: {
+            verificationType: input.licenseType,
+            licenseNumber: input.licenseNumber,
+            verificationStatus: 'pending',
+          },
+        });
+      }
+    }
 
     await this.transactionService.createTransaction({
       amount: Number(input.amount),
