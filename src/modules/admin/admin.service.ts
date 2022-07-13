@@ -565,17 +565,33 @@ export class AdminService {
     }
   }
 
-  async run() {
-    const withdrawals = await this.prismaService.withdrawalRequest.findMany();
+  async updateAdminPersonalInformation(
+    firstName: string,
+    lastName: string,
+    id: number,
+  ) {
+    await this.prismaService.admin.update({
+      where: { id },
+      data: { firstName, lastName },
+    });
+  }
 
-    for (let x of withdrawals) {
-      await this.prismaService.user.update({
-        where: { id: x.userId },
-        data: {
-          licenseNumber: x.licenseNumber,
-          verificationType: x.licenseType,
-        },
-      });
+  async run() {
+    let unverified = await this.prismaService.user.findMany({
+      where: { confirmed: false },
+    });
+    for (let user of unverified) {
+      try {
+        await this.mailService.sendMail({
+          subject: MAIL_SUBJECT.COMPLETE_VERIFICATION,
+          html: MAIL_MESSAGE.COMPLETE_VERIFICATION(),
+          to: user.email,
+        });
+        console.log(`sent to ${user.email}`);
+      } catch (err) {
+        console.log(err);
+      }
     }
+    return true;
   }
 }
