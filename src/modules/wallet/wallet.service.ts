@@ -5,7 +5,6 @@ import {
   NotAcceptableException,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { STATUS_CODES } from 'http';
 import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
 import { MailService } from 'modules/mail/mail.service';
 import { MessageService } from 'modules/message/message.service';
