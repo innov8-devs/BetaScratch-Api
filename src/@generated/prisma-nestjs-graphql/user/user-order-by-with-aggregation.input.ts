@@ -47,6 +47,9 @@ export class UserOrderByWithAggregationInput {
     confirmed?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    disabled?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     password?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

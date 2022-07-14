@@ -426,6 +426,7 @@ export class UserService {
         licenseNumber: true,
         verificationStatus: true,
         verificationType: true,
+        disabled: true,
         confirmed: true,
         updatedAt: true,
       },

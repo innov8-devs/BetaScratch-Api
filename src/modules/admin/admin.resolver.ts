@@ -315,6 +315,21 @@ export class AdminResolver {
     );
   }
 
+  @Auth([ROLE.ADMIN])
+  @Mutation(() => Boolean)
+  async toggleUserAccountDisalility(
+    @Args('userId') userId: number,
+    @Args('disabled') disabled: boolean,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ): Promise<Boolean> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    return await this.adminService.toggleUserAccountDisalility(
+      userId,
+      disabled,
+    );
+  }
+
   @Mutation(() => Boolean)
   async run() {
     await this.adminService.run();

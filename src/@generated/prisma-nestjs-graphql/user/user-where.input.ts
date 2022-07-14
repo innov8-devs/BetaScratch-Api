@@ -66,6 +66,9 @@ export class UserWhereInput {
     @Field(() => BoolFilter, {nullable:true})
     confirmed?: BoolFilter;
 
+    @Field(() => BoolFilter, {nullable:true})
+    disabled?: BoolFilter;
+
     @Field(() => StringFilter, {nullable:true})
     password?: StringFilter;
 

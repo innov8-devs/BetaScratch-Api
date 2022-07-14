@@ -44,6 +44,9 @@ export class UserMaxAggregate {
     @Field(() => Boolean, {nullable:true})
     confirmed?: boolean;
 
+    @Field(() => Boolean, {nullable:true})
+    disabled?: boolean;
+
     @Field(() => String, {nullable:true})
     password?: string;
 

@@ -57,6 +57,9 @@ export class UserUncheckedUpdateInput {
     @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
     confirmed?: BoolFieldUpdateOperationsInput;
 
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    disabled?: BoolFieldUpdateOperationsInput;
+
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     password?: StringFieldUpdateOperationsInput;
 

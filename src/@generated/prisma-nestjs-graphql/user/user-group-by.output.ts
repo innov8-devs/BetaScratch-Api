@@ -49,6 +49,9 @@ export class UserGroupBy {
     @Field(() => Boolean, {nullable:false})
     confirmed!: boolean;
 
+    @Field(() => Boolean, {nullable:false})
+    disabled!: boolean;
+
     @Field(() => String, {nullable:false})
     password!: string;
 

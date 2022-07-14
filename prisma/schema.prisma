@@ -45,6 +45,9 @@ model User {
   /// @Validaror.IsBoolean()
   /// @Validation.IsOptional()
   confirmed          Boolean             @default(false)
+  /// @Validaror.IsBoolean()
+  /// @Validation.IsOptional()
+  disabled           Boolean             @default(false)
   /// @Validator.IsString()
   /// @Validation.HideField({output: true})
   password           String

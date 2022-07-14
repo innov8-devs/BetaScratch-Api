@@ -70,6 +70,13 @@ export class AuthService {
       if (!user) return null;
       const userPass = user.password;
 
+      if (user.disabled) {
+        throw new UnauthorizedException({
+          name: 'account',
+          message: MESSAGES.ACCOUNT.DISABLED,
+        });
+      }
+
       if (!userPass || user.confirmed === false)
         throw new UnauthorizedException({
           name: 'confirm',

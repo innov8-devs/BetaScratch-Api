@@ -54,6 +54,9 @@ export class User {
     @Field(() => Boolean, {nullable:false,defaultValue:false})
     confirmed!: boolean;
 
+    @Field(() => Boolean, {nullable:false,defaultValue:false})
+    disabled!: boolean;
+
     @Field(() => String, {nullable:false})
     password!: string;
 

@@ -42,6 +42,9 @@ export class UserCountAggregate {
     confirmed!: number;
 
     @Field(() => Int, {nullable:false})
+    disabled!: number;
+
+    @Field(() => Int, {nullable:false})
     password!: number;
 
     @Field(() => Int, {nullable:false})

@@ -57,6 +57,9 @@ export class UserScalarWhereWithAggregatesInput {
     @Field(() => BoolWithAggregatesFilter, {nullable:true})
     confirmed?: BoolWithAggregatesFilter;
 
+    @Field(() => BoolWithAggregatesFilter, {nullable:true})
+    disabled?: BoolWithAggregatesFilter;
+
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     password?: StringWithAggregatesFilter;
 

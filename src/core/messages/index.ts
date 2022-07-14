@@ -41,4 +41,8 @@ const USER = {
   INSUFFICIENT_WALLET_FUND: 'insufficient fund in wallet',
 };
 
-export const MESSAGES = { AUTH, USER };
+const ACCOUNT = {
+  DISABLED: 'account disabled, contact customer service.',
+};
+
+export const MESSAGES = { AUTH, USER, ACCOUNT };

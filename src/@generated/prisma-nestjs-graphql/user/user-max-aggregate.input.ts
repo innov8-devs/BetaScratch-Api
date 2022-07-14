@@ -41,6 +41,9 @@ export class UserMaxAggregateInput {
     confirmed?: true;
 
     @Field(() => Boolean, {nullable:true})
+    disabled?: true;
+
+    @Field(() => Boolean, {nullable:true})
     password?: true;
 
     @Field(() => Boolean, {nullable:true})

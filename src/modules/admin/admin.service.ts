@@ -613,6 +613,19 @@ export class AdminService {
     }
   }
 
+  async toggleUserAccountDisalility(userId: number, disabled: boolean) {
+    try {
+      await this.prismaService.user.update({
+        where: { id: userId },
+        data: { disabled },
+      });
+      return true;
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException();
+    }
+  }
+
   async run() {
     let unverified = await this.prismaService.user.findMany({
       where: { confirmed: false },
