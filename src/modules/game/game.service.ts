@@ -329,7 +329,7 @@ export class GameService {
           cartDetail,
           transactionRef,
           input.subtotal,
-          TRANSACTION_TYPE.ACCOUNT,
+          TRANSACTION_TYPE.WALLET,
         );
         await this.transactionService.calculateVipProgress(userId);
         await this.transactionService.cashback(userId, input.subtotal);
