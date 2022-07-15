@@ -1,6 +1,6 @@
 import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Prisma, TRANSACTION_TYPE } from '@prisma/client';
 import { MESSAGES } from 'core/messages';
 import { computeCart } from 'helpers/computeCartData';
 import { computeCheckoutMessageCards } from 'helpers/computeCheckoutMessageCards';
@@ -278,6 +278,7 @@ export class GameService {
     cartDetail: any,
     transactionRef: string,
     subtotal: number,
+    transactionType: TRANSACTION_TYPE,
     status?: string,
   ) {
     const user = await this.prismaService.user.findUnique({
@@ -292,6 +293,7 @@ export class GameService {
         quantity: cartDetail.length,
         reference: transactionRef,
         status: status ? status : PURCHASE_STATUS.ACTIVE,
+        transactionType,
         userId,
         cards: {
           createMany: {
@@ -327,6 +329,7 @@ export class GameService {
           cartDetail,
           transactionRef,
           input.subtotal,
+          TRANSACTION_TYPE.ACCOUNT,
         );
         await this.transactionService.calculateVipProgress(userId);
         await this.transactionService.cashback(userId, input.subtotal);
@@ -365,6 +368,7 @@ export class GameService {
           cartDetail,
           transactionRef,
           input.subtotal,
+          TRANSACTION_TYPE.BONUS,
         );
         await this.transactionService.createTransaction({
           amount: input.subtotal,
@@ -434,6 +438,7 @@ export class GameService {
       cartDetail,
       input.tx_ref,
       initialSubtotal,
+      TRANSACTION_TYPE.FLUTTERWAVE,
       PURCHASE_STATUS.INACTIVE,
     );
 

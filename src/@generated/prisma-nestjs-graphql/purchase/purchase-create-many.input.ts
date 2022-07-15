@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
+import { TRANSACTION_TYPE } from '../prisma/transaction-type.enum';
 
 @InputType()
 export class PurchaseCreateManyInput {
@@ -28,6 +29,12 @@ export class PurchaseCreateManyInput {
 
     @Field(() => Int, {nullable:false})
     userId!: number;
+
+    @Field(() => TRANSACTION_TYPE, {nullable:true})
+    transactionType?: keyof typeof TRANSACTION_TYPE;
+
+    @Field(() => String, {nullable:true})
+    flutterwaveType?: string;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;

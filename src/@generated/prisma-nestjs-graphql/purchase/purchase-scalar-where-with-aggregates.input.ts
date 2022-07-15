@@ -2,6 +2,8 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { IntWithAggregatesFilter } from '../prisma/int-with-aggregates-filter.input';
 import { StringWithAggregatesFilter } from '../prisma/string-with-aggregates-filter.input';
+import { EnumTRANSACTION_TYPENullableWithAggregatesFilter } from '../prisma/enum-transaction-type-nullable-with-aggregates-filter.input';
+import { StringNullableWithAggregatesFilter } from '../prisma/string-nullable-with-aggregates-filter.input';
 import { DateTimeWithAggregatesFilter } from '../prisma/date-time-with-aggregates-filter.input';
 
 @InputType()
@@ -39,6 +41,12 @@ export class PurchaseScalarWhereWithAggregatesInput {
 
     @Field(() => IntWithAggregatesFilter, {nullable:true})
     userId?: IntWithAggregatesFilter;
+
+    @Field(() => EnumTRANSACTION_TYPENullableWithAggregatesFilter, {nullable:true})
+    transactionType?: EnumTRANSACTION_TYPENullableWithAggregatesFilter;
+
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    flutterwaveType?: StringNullableWithAggregatesFilter;
 
     @Field(() => DateTimeWithAggregatesFilter, {nullable:true})
     createdAt?: DateTimeWithAggregatesFilter;

@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import { CartCreateNestedManyWithoutPurchaseInput } from '../cart/cart-create-nested-many-without-purchase.input';
 import { UserCreateNestedOneWithoutPurchaseInput } from '../user/user-create-nested-one-without-purchase.input';
+import { TRANSACTION_TYPE } from '../prisma/transaction-type.enum';
 
 @InputType()
 export class PurchaseCreateInput {
@@ -30,6 +31,12 @@ export class PurchaseCreateInput {
 
     @Field(() => UserCreateNestedOneWithoutPurchaseInput, {nullable:false})
     user!: UserCreateNestedOneWithoutPurchaseInput;
+
+    @Field(() => TRANSACTION_TYPE, {nullable:true})
+    transactionType?: keyof typeof TRANSACTION_TYPE;
+
+    @Field(() => String, {nullable:true})
+    flutterwaveType?: string;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;

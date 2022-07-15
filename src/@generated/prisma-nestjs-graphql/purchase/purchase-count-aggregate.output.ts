@@ -30,6 +30,12 @@ export class PurchaseCountAggregate {
     userId!: number;
 
     @Field(() => Int, {nullable:false})
+    transactionType!: number;
+
+    @Field(() => Int, {nullable:false})
+    flutterwaveType!: number;
+
+    @Field(() => Int, {nullable:false})
     createdAt!: number;
 
     @Field(() => Int, {nullable:false})

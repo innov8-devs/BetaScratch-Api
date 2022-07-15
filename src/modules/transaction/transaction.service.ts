@@ -323,7 +323,12 @@ export class TransactionService {
 
       await this.prismaService.purchase.updateMany({
         where: {
-          AND: [{ reference: { equals: tx_ref }, userId: { equals: user.id } }],
+          AND: [
+            {
+              reference: { equals: tx_ref },
+              userId: { equals: user.id },
+            },
+          ],
         },
         data: { status: 'active', subtotal: amount },
       });

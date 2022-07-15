@@ -9,6 +9,8 @@ export enum PurchaseScalarFieldEnum {
     reference = "reference",
     subtotal = "subtotal",
     userId = "userId",
+    transactionType = "transactionType",
+    flutterwaveType = "flutterwaveType",
     createdAt = "createdAt",
     updatedAt = "updatedAt"
 }

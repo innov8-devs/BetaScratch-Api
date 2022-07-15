@@ -29,6 +29,12 @@ export class PurchaseMinAggregateInput {
     userId?: true;
 
     @Field(() => Boolean, {nullable:true})
+    transactionType?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    flutterwaveType?: true;
+
+    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})

@@ -30,6 +30,12 @@ export class PurchaseCountOrderByAggregateInput {
     userId?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    transactionType?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    flutterwaveType?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

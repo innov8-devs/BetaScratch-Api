@@ -4,6 +4,7 @@ import { ID } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import { Cart } from '../cart/cart.model';
 import { User } from '../user/user.model';
+import { TRANSACTION_TYPE } from '../prisma/transaction-type.enum';
 import { PurchaseCount } from './purchase-count.output';
 
 @ObjectType()
@@ -38,6 +39,12 @@ export class Purchase {
 
     @Field(() => Int, {nullable:false})
     userId!: number;
+
+    @Field(() => TRANSACTION_TYPE, {nullable:true})
+    transactionType!: keyof typeof TRANSACTION_TYPE | null;
+
+    @Field(() => String, {nullable:true})
+    flutterwaveType!: string | null;
 
     @Field(() => Date, {nullable:false})
     createdAt!: Date;

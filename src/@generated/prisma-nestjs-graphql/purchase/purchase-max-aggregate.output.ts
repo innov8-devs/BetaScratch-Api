@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ObjectType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
+import { TRANSACTION_TYPE } from '../prisma/transaction-type.enum';
 
 @ObjectType()
 export class PurchaseMaxAggregate {
@@ -28,6 +29,12 @@ export class PurchaseMaxAggregate {
 
     @Field(() => Int, {nullable:true})
     userId?: number;
+
+    @Field(() => TRANSACTION_TYPE, {nullable:true})
+    transactionType?: keyof typeof TRANSACTION_TYPE;
+
+    @Field(() => String, {nullable:true})
+    flutterwaveType?: string;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;

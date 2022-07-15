@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ObjectType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
+import { TRANSACTION_TYPE } from '../prisma/transaction-type.enum';
 import { PurchaseCountAggregate } from './purchase-count-aggregate.output';
 import { PurchaseAvgAggregate } from './purchase-avg-aggregate.output';
 import { PurchaseSumAggregate } from './purchase-sum-aggregate.output';
@@ -33,6 +34,12 @@ export class PurchaseGroupBy {
 
     @Field(() => Int, {nullable:false})
     userId!: number;
+
+    @Field(() => TRANSACTION_TYPE, {nullable:true})
+    transactionType?: keyof typeof TRANSACTION_TYPE;
+
+    @Field(() => String, {nullable:true})
+    flutterwaveType?: string;
 
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;
