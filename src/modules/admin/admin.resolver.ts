@@ -1,365 +1,311 @@
-import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
-import { Game } from '@generated/prisma-nestjs-graphql/game/game.model';
-import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
-import { Purchase } from '@generated/prisma-nestjs-graphql/purchase/purchase.model';
-import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
-import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
-import { WithdrawalRequest } from '@generated/prisma-nestjs-graphql/withdrawal-request/withdrawal-request.model';
-import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { AuthService } from 'modules/auth/auth.service';
-import { Auth } from 'modules/auth/decorators/auth.decorator';
-import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
-import { GAME_STATUS } from 'types/constants/enum';
-import { MyContext } from 'types/constants/types';
-import { AdminService } from './admin.service';
-import {
-  ChangeVerificationRequestInput,
-  EditUserPurchasesFromAdminInput,
-  GetGamesFromAdminInput,
-  GetPendingVerificationsFromAdminInput,
-  GetUserPurchasesFromAdminInput,
-  GetUsersCountInput,
-  GetUsersFromAdminInput,
-  GetWalletsFromAdminInput,
-  GetWithdrawlistFromAdminInput,
-  PaginationInput,
-  RegisterAdminInput,
-  UpdateUserWalletInput,
-} from './dto/admin.request';
-import {
-  DashboardDataResponse,
-  FlutterTansactionResponse,
-} from './dto/admin.response';
+// import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
+// import { Game } from '@generated/prisma-nestjs-graphql/game/game.model';
+// import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
+// import { Purchase } from '@generated/prisma-nestjs-graphql/purchase/purchase.model';
+// import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
+// import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
+// import { WithdrawalRequest } from '@generated/prisma-nestjs-graphql/withdrawal-request/withdrawal-request.model';
+import { Resolver } from '@nestjs/graphql';
+// import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
+// import { AuthService } from 'modules/auth/auth.service';
+// import { Auth } from 'modules/auth/decorators/auth.decorator';
+// import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
+// import { GAME_STATUS } from 'types/constants/enum';
+// import { MyContext } from 'types/constants/types';
+// import { AdminService } from './admin.service';
+// import {
+//   ChangeVerificationRequestInput,
+//   EditUserPurchasesFromAdminInput,
+//   GetGamesFromAdminInput,
+//   GetPendingVerificationsFromAdminInput,
+//   GetUserPurchasesFromAdminInput,
+//   GetUsersCountInput,
+//   GetUsersFromAdminInput,
+//   GetWalletsFromAdminInput,
+//   GetWithdrawlistFromAdminInput,
+//   PaginationInput,
+//   RegisterAdminInput,
+//   UpdateUserWalletInput,
+// } from './dto/admin.request';
+// import {
+//   DashboardDataResponse,
+//   FlutterTansactionResponse,
+// } from './dto/admin.response';
 
 @Resolver()
 export class AdminResolver {
-  constructor(
-    private readonly adminService: AdminService,
-    private readonly authService: AuthService,
-  ) {}
-
-  // Get logged in user
-  @Auth([ROLE.DISABLE])
+  // constructor(
+  //   private readonly adminService: AdminService,
+  //   private readonly authService: AuthService,
+  // ) {}
+  // // Get logged in user
   // @Auth([ROLE.ADMIN])
-  @Query(() => Admin, { nullable: true })
-  async meAdmin(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-  ): Promise<Admin> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return this.adminService.meAdmin(user);
-  }
-
+  // @Query(() => Admin, { nullable: true })
+  // async meAdmin(
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  // ): Promise<Admin> {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return this.adminService.meAdmin(user);
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Query(() => DashboardDataResponse)
-  async getDashboardData(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-  ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return await this.adminService.getDashboardData();
-  }
-
+  // @Query(() => DashboardDataResponse)
+  // async getDashboardData(
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  // ) {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return await this.adminService.getDashboardData();
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Mutation(() => Boolean)
-  async createNewAdmin(@Args('input') input: RegisterAdminInput) {
-    return await this.adminService.createNewAdmin(input);
-  }
-
+  // @Mutation(() => Boolean)
+  // async createNewAdmin(@Args('input') input: RegisterAdminInput) {
+  //   return await this.adminService.createNewAdmin(input);
+  // }
+  // @Query(() => Boolean)
+  // async confirmAdminToken(@Args('token') token: string) {
+  //   return await this.adminService.confirmAdminToken(token);
+  // }
+  // @Mutation(() => Boolean)
+  // async resetNewAdminPassword(
+  //   @Args('password') password: string,
+  //   @Args('token') token: string,
+  // ) {
+  //   return await this.adminService.resetNewAdminPassword(password, token);
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Query(() => Boolean)
-  async confirmAdminToken(@Args('token') token: string) {
-    return await this.adminService.confirmAdminToken(token);
-  }
-
-  @Auth([ROLE.DISABLE])
-  @Mutation(() => Boolean)
-  async resetNewAdminPassword(
-    @Args('password') password: string,
-    @Args('token') token: string,
-  ) {
-    return await this.adminService.resetNewAdminPassword(password, token);
-  }
-
-  @Auth([ROLE.DISABLE])
+  // @Query(() => [User], { nullable: true })
+  // async getUsersFromAdmin(
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  //   @Args('input') input: GetUsersFromAdminInput,
+  // ): Promise<User[]> {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return this.adminService.getUsersFromAdmin(input);
+  // }
   // @Auth([ROLE.ADMIN])
-  @Query(() => [User], { nullable: true })
-  async getUsersFromAdmin(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-    @Args('input') input: GetUsersFromAdminInput,
-  ): Promise<User[]> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return this.adminService.getUsersFromAdmin(input);
-  }
-
+  // @Query(() => User, { nullable: true })
+  // async getOneUserFromAdmin(
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  //   @Args('userId') userId: number,
+  // ): Promise<User> {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return this.adminService.getOneUserFromAdmin(userId);
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Query(() => User, { nullable: true })
-  async getOneUserFromAdmin(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-    @Args('userId') userId: number,
-  ): Promise<User> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return this.adminService.getOneUserFromAdmin(userId);
-  }
-
+  // @Query(() => [Wallet], { nullable: true })
+  // async getWalletsFromAdmin(
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  //   @Args('input') input: GetWalletsFromAdminInput,
+  // ): Promise<Wallet[]> {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return this.adminService.getWalletsFromAdmin(input);
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Query(() => [Wallet], { nullable: true })
-  async getWalletsFromAdmin(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-    @Args('input') input: GetWalletsFromAdminInput,
-  ): Promise<Wallet[]> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return this.adminService.getWalletsFromAdmin(input);
-  }
-
+  // @Query(() => Wallet, { nullable: true })
+  // async getOneWalletFromAdmin(
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  //   @Args('userId') userId: number,
+  // ): Promise<Wallet> {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return this.adminService.getOneWalletFromAdmin(userId);
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Query(() => Wallet, { nullable: true })
-  async getOneWalletFromAdmin(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-    @Args('userId') userId: number,
-  ): Promise<Wallet> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return this.adminService.getOneWalletFromAdmin(userId);
-  }
-
+  // @Query(() => [Game], { nullable: true })
+  // async getGamesFromAdmin(
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  //   @Args('input') input: GetGamesFromAdminInput,
+  // ): Promise<Game[]> {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return this.adminService.getGamesFromAdmin(input);
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Query(() => [Game], { nullable: true })
-  async getGamesFromAdmin(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-    @Args('input') input: GetGamesFromAdminInput,
-  ): Promise<Game[]> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return this.adminService.getGamesFromAdmin(input);
-  }
-
+  // @Query(() => Game, { nullable: true })
+  // async getOneGameFromAdmin(
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  //   @Args('gameId') gameId: number,
+  // ): Promise<Game> {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return this.adminService.getOneGameFromAdmin(gameId);
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Query(() => Game, { nullable: true })
-  async getOneGameFromAdmin(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-    @Args('gameId') gameId: number,
-  ): Promise<Game> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return this.adminService.getOneGameFromAdmin(gameId);
-  }
-
+  // @Query(() => [Purchase], { nullable: true })
+  // async getUserPurchasesFromAdmin(
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  //   @Args('input') input: GetUserPurchasesFromAdminInput,
+  // ): Promise<Purchase[]> {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return this.adminService.getUserPurchasesFromAdmin(input);
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Query(() => [Purchase], { nullable: true })
-  async getUserPurchasesFromAdmin(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-    @Args('input') input: GetUserPurchasesFromAdminInput,
-  ): Promise<Purchase[]> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return this.adminService.getUserPurchasesFromAdmin(input);
-  }
-
+  // @Mutation(() => Purchase, { nullable: true })
+  // async editUserPurchaseStatusFromAdmin(
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  //   @Args('input') input: EditUserPurchasesFromAdminInput,
+  // ) {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return this.adminService.editUserPurchaseStatusFromAdmin(input);
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Mutation(() => Purchase, { nullable: true })
-  async editUserPurchaseStatusFromAdmin(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-    @Args('input') input: EditUserPurchasesFromAdminInput,
-  ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return this.adminService.editUserPurchaseStatusFromAdmin(input);
-  }
-
+  // @Query(() => Number, { nullable: true })
+  // async getCount(
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  //   @Args('input') input: GetUsersCountInput,
+  // ) {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return this.adminService.getCount(input);
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Query(() => Number, { nullable: true })
-  async getCount(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-    @Args('input') input: GetUsersCountInput,
-  ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return this.adminService.getCount(input);
-  }
-
+  // @Mutation(() => Wallet, { nullable: true })
+  // async updateUserWallet(
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  //   @Args('input') input: UpdateUserWalletInput,
+  // ) {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return this.adminService.updateUserWallet(input);
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Mutation(() => Wallet, { nullable: true })
-  async updateUserWallet(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-    @Args('input') input: UpdateUserWalletInput,
-  ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return this.adminService.updateUserWallet(input);
-  }
-
+  // @Query(() => [WithdrawalRequest], { nullable: true })
+  // async getWithdrawRequestFromAdmin(
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  //   @Args('input') input: GetWithdrawlistFromAdminInput,
+  // ): Promise<WithdrawalRequest[]> {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return this.adminService.getWithdrawRequestFromAdmin(input);
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Query(() => [WithdrawalRequest], { nullable: true })
-  async getWithdrawRequestFromAdmin(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-    @Args('input') input: GetWithdrawlistFromAdminInput,
-  ): Promise<WithdrawalRequest[]> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return this.adminService.getWithdrawRequestFromAdmin(input);
-  }
-
+  // @Query(() => [User], { nullable: true })
+  // async getPendingVerificationsFromAdmin(
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  //   @Args('input') input: GetPendingVerificationsFromAdminInput,
+  // ): Promise<User[]> {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return this.adminService.getPendingVerificationsFromAdmin(input);
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Query(() => [User], { nullable: true })
-  async getPendingVerificationsFromAdmin(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-    @Args('input') input: GetPendingVerificationsFromAdminInput,
-  ): Promise<User[]> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return this.adminService.getPendingVerificationsFromAdmin(input);
-  }
-
+  // @Mutation(() => Boolean, { nullable: true })
+  // async changeVerificationStatus(
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  //   @Args('input') input: ChangeVerificationRequestInput,
+  // ): Promise<Boolean> {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return this.adminService.changeVerificationStatus(input);
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Mutation(() => Boolean, { nullable: true })
-  async changeVerificationStatus(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-    @Args('input') input: ChangeVerificationRequestInput,
-  ): Promise<Boolean> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return this.adminService.changeVerificationStatus(input);
-  }
-
+  // @Query(() => [Admin], { nullable: true })
+  // async getAdminList(
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  //   @Args('input') input: PaginationInput,
+  // ) {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return await this.adminService.getAdminList(input);
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Query(() => [Admin], { nullable: true })
-  async getAdminList(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-    @Args('input') input: PaginationInput,
-  ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return await this.adminService.getAdminList(input);
-  }
-
+  // @Mutation(() => Boolean, { nullable: true })
+  // async toggleGameStatus(
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  //   @Args('id') id: number,
+  //   @Args('status') status: GAME_STATUS,
+  // ) {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   await this.adminService.toggleGameStatus(id, status);
+  //   return true;
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Mutation(() => Boolean, { nullable: true })
-  async toggleGameStatus(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-    @Args('id') id: number,
-    @Args('status') status: GAME_STATUS,
-  ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    await this.adminService.toggleGameStatus(id, status);
-    return true;
-  }
-
+  // @Mutation(() => Boolean, { nullable: true })
+  // async toggleCardPlayedStatus(
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  //   @Args('id') id: number,
+  //   @Args('played') played: boolean,
+  //   @Args('parentId', { nullable: true }) parentId: number,
+  //   @Args('parentStatus', { nullable: true }) parentStatus: string,
+  // ) {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   await this.adminService.toggleCardPlayedStatus(
+  //     id,
+  //     played,
+  //     parentId,
+  //     parentStatus,
+  //   );
+  //   return true;
+  // }
+  // @Mutation(() => Boolean)
+  // async resetPurchases() {
+  //   await this.adminService.resetPurchases();
+  //   return true;
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Mutation(() => Boolean, { nullable: true })
-  async toggleCardPlayedStatus(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-    @Args('id') id: number,
-    @Args('played') played: boolean,
-    @Args('parentId', { nullable: true }) parentId: number,
-    @Args('parentStatus', { nullable: true }) parentStatus: string,
-  ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    await this.adminService.toggleCardPlayedStatus(
-      id,
-      played,
-      parentId,
-      parentStatus,
-    );
-    return true;
-  }
-
-  @Auth([ROLE.DISABLE])
-  @Mutation(() => Boolean)
-  async resetPurchases() {
-    await this.adminService.resetPurchases();
-    return true;
-  }
-
+  // @Query(() => [FlutterTansactionResponse])
+  // async getFlutterwaveTransactions(
+  //   @Args('from') from: string,
+  //   @Args('to') to: string,
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  // ): Promise<FlutterTansactionResponse[]> {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return await this.adminService.getFlutterwaveTransactions(from, to);
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Query(() => [FlutterTansactionResponse])
-  async getFlutterwaveTransactions(
-    @Args('from') from: string,
-    @Args('to') to: string,
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-  ): Promise<FlutterTansactionResponse[]> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return await this.adminService.getFlutterwaveTransactions(from, to);
-  }
-
+  // @Mutation(() => Boolean)
+  // async updateAdminPersonalInformation(
+  //   @Args('firstName') firstName: string,
+  //   @Args('lastName') lastName: string,
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  // ): Promise<Boolean> {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return await this.adminService.updateAdminPersonalInformation(
+  //     firstName,
+  //     lastName,
+  //     user.id,
+  //   );
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Mutation(() => Boolean)
-  async updateAdminPersonalInformation(
-    @Args('firstName') firstName: string,
-    @Args('lastName') lastName: string,
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-  ): Promise<Boolean> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return await this.adminService.updateAdminPersonalInformation(
-      firstName,
-      lastName,
-      user.id,
-    );
-  }
-
+  // @Mutation(() => Boolean)
+  // async updateAdminPassword(
+  //   @Args('oldPassword') oldPassword: string,
+  //   @Args('newPassword') newPassword: string,
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  // ): Promise<Boolean> {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return await this.adminService.updateAdminPassword(
+  //     oldPassword,
+  //     newPassword,
+  //     user.id,
+  //   );
+  // }
   // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Mutation(() => Boolean)
-  async updateAdminPassword(
-    @Args('oldPassword') oldPassword: string,
-    @Args('newPassword') newPassword: string,
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-  ): Promise<Boolean> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return await this.adminService.updateAdminPassword(
-      oldPassword,
-      newPassword,
-      user.id,
-    );
-  }
-
-  // @Auth([ROLE.ADMIN])
-  @Auth([ROLE.DISABLE])
-  @Mutation(() => Boolean)
-  async toggleUserAccountDisalility(
-    @Args('userId') userId: number,
-    @Args('disabled') disabled: boolean,
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-  ): Promise<Boolean> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return await this.adminService.toggleUserAccountDisalility(
-      userId,
-      disabled,
-    );
-  }
-
-  @Auth([ROLE.DISABLE])
-  @Mutation(() => Boolean)
-  async run() {
-    await this.adminService.run();
-  }
+  // @Mutation(() => Boolean)
+  // async toggleUserAccountDisalility(
+  //   @Args('userId') userId: number,
+  //   @Args('disabled') disabled: boolean,
+  //   @CurrentUser() user: User,
+  //   @Context() { res }: MyContext,
+  // ): Promise<Boolean> {
+  //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  //   return await this.adminService.toggleUserAccountDisalility(
+  //     userId,
+  //     disabled,
+  //   );
+  // }
+  // @Mutation(() => Boolean)
+  // async run() {
+  //   await this.adminService.run();
+  // }
 }
