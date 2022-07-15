@@ -161,7 +161,7 @@ export class AuthService {
     const { otp } = input;
 
     const admin = await this.prismaService.admin.findFirst({
-      where: { email: input.username.toLowerCase() },
+      where: { username: input.username.toLowerCase() },
     });
 
     if (!admin) {

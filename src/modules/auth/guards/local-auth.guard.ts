@@ -21,7 +21,7 @@ export class LocalAuthGuard extends AuthGuard('local') {
       // user: req.body.email || req.body.username,
 
       password: req.body.password,
-      phoneNumberOrEmail: req.body.phoneNumberOrEmail || req.body.email,
+      phoneNumberOrEmail: req.body.phoneNumberOrEmail || req.body.username,
       // isAdmin: req.body.isAdmin,
     };
 
