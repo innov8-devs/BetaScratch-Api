@@ -43,6 +43,9 @@ export class AdminWhereInput {
     confirmed?: BoolFilter;
 
     @Field(() => StringFilter, {nullable:true})
+    username?: StringFilter;
+
+    @Field(() => StringFilter, {nullable:true})
     password?: StringFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})

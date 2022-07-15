@@ -8,6 +8,7 @@ export enum AdminScalarFieldEnum {
     role = "role",
     mobileNumber = "mobileNumber",
     confirmed = "confirmed",
+    username = "username",
     password = "password",
     createdAt = "createdAt"
 }

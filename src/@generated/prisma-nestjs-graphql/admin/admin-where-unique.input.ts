@@ -16,4 +16,9 @@ export class AdminWhereUniqueInput {
     @Field(() => String, {nullable:true})
     @Validator.IsPhoneNumber()
     mobileNumber?: string;
+
+    @Field(() => String, {nullable:true})
+    @Validator.MinLength(2)
+    @Validator.IsString()
+    username?: string;
 }

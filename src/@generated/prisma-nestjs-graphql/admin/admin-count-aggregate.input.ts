@@ -26,6 +26,9 @@ export class AdminCountAggregateInput {
     confirmed?: true;
 
     @Field(() => Boolean, {nullable:true})
+    username?: true;
+
+    @Field(() => Boolean, {nullable:true})
     password?: true;
 
     @Field(() => Boolean, {nullable:true})

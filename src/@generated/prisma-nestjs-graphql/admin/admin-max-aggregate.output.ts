@@ -28,6 +28,9 @@ export class AdminMaxAggregate {
     confirmed?: boolean;
 
     @Field(() => String, {nullable:true})
+    username?: string;
+
+    @Field(() => String, {nullable:true})
     password?: string;
 
     @Field(() => Date, {nullable:true})

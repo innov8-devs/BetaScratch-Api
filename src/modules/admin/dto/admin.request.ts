@@ -20,6 +20,9 @@ export class RegisterAdminInput {
   lastName: string;
 
   @Field()
+  username: string;
+
+  @Field()
   mobileNumber: string;
 
   @Field(() => ROLE, { nullable: false })

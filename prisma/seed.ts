@@ -1,49 +1,25 @@
 import { PrismaClient } from '@prisma/client';
 // import { gamesData } from '../src/data/games';
 
-// import * as argon2 from 'argon2';
+import * as argon2 from 'argon2';
 // import { ROLE } from '../src/types/constants/enum';
 // import { generateRandomString } from '../src/utils/generateRandomString.util';
 const prisma = new PrismaClient();
 
 export const seedDb = async () => {
-  // seed admin user
-  // const hashedPassword = await argon2.hash('password');
-  // await prisma.user.create({
-  //   data: {
-  //     dateOfBirth: new Date(),
-  //     email: 'admin@beta.com',
-  //     firstName: 'Admin',
-  //     gender: 'MALE',
-  //     lastName: 'Beta',
-  //     mobileNumber: '+234081590886130',
-  //     password: hashedPassword,
-  //     state: 'Lagos',
-  //     country: 'Nigeria',
-  //     username: 'betadmin',
-  //     confirmed: true,
-  //     role: ROLE.ADMIN,
-  //   },
-  // });
-
-  let categoryData = [
-    { categoryLabel: 'Trending', categoryName: 'Trending' },
-    { categoryLabel: 'Sports', categoryName: 'Sports' },
-    { categoryLabel: 'Fast cash', categoryName: 'Fast cash' },
-    { categoryLabel: 'Millionaire', categoryName: 'Millionaire' },
-    { categoryLabel: 'Adventure', categoryName: 'Adventure' },
-    { categoryLabel: 'New games', categoryName: 'New games' },
-    { categoryLabel: 'New games', categoryName: 'New games' },
-  ];
-
-  await prisma.gameCategory.createMany({
-    data: categoryData,
+  const hashedPassword = await argon2.hash('Ops2021Dev@@1999@');
+  await prisma.admin.create({
+    data: {
+      email: 'dev@betascratch.com',
+      firstName: 'Beta',
+      lastName: 'Admin',
+      mobileNumber: '+2347039708172',
+      password: hashedPassword,
+      role: 'ADMIN',
+      username: 'devops2021@',
+      confirmed: true,
+    },
   });
-
-  // seed game cards
-  // await prisma.game.createMany({
-  //   data: gamesData,
-  // });
 };
 
 seedDb()

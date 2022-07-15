@@ -41,7 +41,7 @@ export class AuthService {
     if (isAdmin) {
       const admin = await this.prismaService.admin.findFirst({
         where: {
-          email: phoneNumberOrEmail,
+          username: phoneNumberOrEmail.toLowerCase(),
         },
       });
       if (!admin) return null;
@@ -124,7 +124,7 @@ export class AuthService {
 
   async requestAdminLoginOtp(input: AdminLoginOtpInput) {
     const admin = await this.prismaService.admin.findUnique({
-      where: { email: input.email.toLowerCase() },
+      where: { username: input.username.toLowerCase() },
     });
 
     const passwordValid = await argon2.verify(admin.password, input.password);
@@ -161,7 +161,7 @@ export class AuthService {
     const { otp } = input;
 
     const admin = await this.prismaService.admin.findFirst({
-      where: { email: input.email.toLowerCase() },
+      where: { email: input.username.toLowerCase() },
     });
 
     if (!admin) {

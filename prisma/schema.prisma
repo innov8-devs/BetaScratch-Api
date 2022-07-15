@@ -89,6 +89,9 @@ model Admin {
   /// @Validaror.IsBoolean()
   /// @Validation.IsOptional()
   confirmed    Boolean   @default(false)
+  /// @Validator.MinLength(2)
+  /// @Validator.IsString()
+  username     String    @unique
   /// @Validator.IsString()
   /// @Validation.HideField({output: true})
   password     String

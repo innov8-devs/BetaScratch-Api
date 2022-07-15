@@ -27,6 +27,9 @@ export class AdminCountAggregate {
     confirmed!: number;
 
     @Field(() => Int, {nullable:false})
+    username!: number;
+
+    @Field(() => Int, {nullable:false})
     password!: number;
 
     @Field(() => Int, {nullable:false})

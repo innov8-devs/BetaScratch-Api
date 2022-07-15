@@ -32,6 +32,9 @@ export class Admin {
     confirmed!: boolean;
 
     @Field(() => String, {nullable:false})
+    username!: string;
+
+    @Field(() => String, {nullable:false})
     password!: string;
 
     @Field(() => Date, {nullable:false})

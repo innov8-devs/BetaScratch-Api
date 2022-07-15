@@ -63,7 +63,7 @@ export class AdminLoginInput {
   password: string;
 
   @Field()
-  email: string;
+  username: string;
 
   @Field()
   otp: string;
@@ -78,7 +78,7 @@ export class AdminLoginOtpInput {
   password: string;
 
   @Field()
-  email: string;
+  username: string;
 }
 
 @InputType()

@@ -37,6 +37,11 @@ export class AdminUncheckedCreateWithoutOtpInput {
     confirmed?: boolean;
 
     @Field(() => String, {nullable:false})
+    @Validator.MinLength(2)
+    @Validator.IsString()
+    username!: string;
+
+    @Field(() => String, {nullable:false})
     @Validator.IsString()
     password!: string;
 

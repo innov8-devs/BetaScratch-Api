@@ -181,6 +181,15 @@ export class AdminService {
     const mobileNumberUsed = await this.prismaService.admin.findUnique({
       where: { mobileNumber: input.mobileNumber },
     });
+    const usernameUsed = await this.prismaService.admin.findUnique({
+      where: { username: input.username },
+    });
+    if (usernameUsed) {
+      throw new BadRequestException({
+        name: 'username',
+        message: MESSAGES.AUTH.USERNAME_CONFLICT,
+      });
+    }
     if (emailUsed) {
       throw new BadRequestException({
         name: 'email',
@@ -203,6 +212,7 @@ export class AdminService {
     const dummyPass = await argon2.hash(v4());
     const newAdmin = await this.prismaService.admin.create({
       data: {
+        username: input.username,
         firstName: input.firstName,
         lastName: input.lastName,
         mobileNumber: input.mobileNumber,

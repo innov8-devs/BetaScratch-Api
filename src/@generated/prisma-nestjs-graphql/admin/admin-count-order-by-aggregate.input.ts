@@ -27,6 +27,9 @@ export class AdminCountOrderByAggregateInput {
     confirmed?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    username?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     password?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
