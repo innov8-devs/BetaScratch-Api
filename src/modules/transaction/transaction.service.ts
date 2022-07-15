@@ -258,6 +258,7 @@ export class TransactionService {
     const tx_ref = data.tx_ref;
     const status = data.status;
     const amount = data.amount;
+    const paymentType = data.payment_type;
 
     const user = await this.prismaService.user.findUnique({
       where: { email: data.customer.email },
@@ -330,7 +331,11 @@ export class TransactionService {
             },
           ],
         },
-        data: { status: 'active', subtotal: amount },
+        data: {
+          status: 'active',
+          subtotal: amount,
+          flutterwaveType: paymentType,
+        },
       });
 
       // refferal
