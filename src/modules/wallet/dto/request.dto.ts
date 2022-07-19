@@ -1,7 +1,6 @@
-import { CURRENCY } from '@generated/prisma-nestjs-graphql/prisma/currency.enum';
 import { Field, InputType } from '@nestjs/graphql';
 import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { WALLET_TYPE } from 'types/constants/enum';
+import { CURRENCY, WALLET_TYPE } from 'types/constants/enum';
 
 @InputType()
 export class DeductUserBalanceInput {

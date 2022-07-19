@@ -4,7 +4,7 @@ import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operat
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
 import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-string-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
-import { UserUpdateOneWithoutTransactionsInput } from '../user/user-update-one-without-transactions.input';
+import { UserUpdateOneWithoutTransactionsNestedInput } from '../user/user-update-one-without-transactions-nested.input';
 
 @InputType()
 export class TransactionUpdateInput {
@@ -36,6 +36,6 @@ export class TransactionUpdateInput {
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;
 
-    @Field(() => UserUpdateOneWithoutTransactionsInput, {nullable:true})
-    User?: UserUpdateOneWithoutTransactionsInput;
+    @Field(() => UserUpdateOneWithoutTransactionsNestedInput, {nullable:true})
+    User?: UserUpdateOneWithoutTransactionsNestedInput;
 }

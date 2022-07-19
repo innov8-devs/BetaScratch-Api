@@ -636,6 +636,21 @@ export class AdminService {
     }
   }
 
+  async adminSearch(table: DB_TYPES, search: string): Promise<[User] | [Game]> {
+    const searchQuery = `%${search}%`;
+    switch (table) {
+      case DB_TYPES.USER:
+        return await this.prismaService.$queryRaw`
+        SELECT "t"."id","t"."email","t"."username","t"."firstName","t"."lastName","t"."dateOfBirth","t"."role","t"."gender","t"."mobileNumber","t"."state","t"."country","t"."confirmed","t"."licenseFrontImage", "t"."licenseBackImage","t"."verificationStatus","t"."createdAt","t"."updatedAt","t"."vipStatus","t"."verificationType","t"."licenseNumber","t"."disabled", to_json("Wallet".*) as wallet from "User" t INNER JOIN "Wallet" on "t"."id" = "Wallet"."userId" WHERE t::text ILIKE ${searchQuery}`;
+      case DB_TYPES.GAME:
+        return await this.prismaService.$queryRaw`
+            SELECT * FROM "Game" g WHERE g::text ILIKE ${searchQuery}
+          `;
+      default:
+        break;
+    }
+  }
+
   async run() {
     let unverified = await this.prismaService.user.findMany({
       where: { confirmed: false },

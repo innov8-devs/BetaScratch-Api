@@ -6,7 +6,7 @@ import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operat
 import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-operations.input';
 import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-string-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
-import { PurchaseUpdateOneWithoutCardsInput } from '../purchase/purchase-update-one-without-cards.input';
+import { PurchaseUpdateOneWithoutCardsNestedInput } from '../purchase/purchase-update-one-without-cards-nested.input';
 
 @InputType()
 export class CartUpdateWithoutUserInput {
@@ -41,6 +41,6 @@ export class CartUpdateWithoutUserInput {
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;
 
-    @Field(() => PurchaseUpdateOneWithoutCardsInput, {nullable:true})
-    purchase?: PurchaseUpdateOneWithoutCardsInput;
+    @Field(() => PurchaseUpdateOneWithoutCardsNestedInput, {nullable:true})
+    purchase?: PurchaseUpdateOneWithoutCardsNestedInput;
 }

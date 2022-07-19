@@ -1,7 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ArgsType } from '@nestjs/graphql';
 import { OtpWhereInput } from './otp-where.input';
-import { OtpOrderByWithRelationInput } from './otp-order-by-with-relation.input';
+import { OtpOrderByWithRelationAndSearchRelevanceInput } from './otp-order-by-with-relation-and-search-relevance.input';
 import { OtpWhereUniqueInput } from './otp-where-unique.input';
 import { Int } from '@nestjs/graphql';
 import { OtpScalarFieldEnum } from './otp-scalar-field.enum';
@@ -12,8 +12,8 @@ export class FindManyOtpArgs {
     @Field(() => OtpWhereInput, {nullable:true})
     where?: OtpWhereInput;
 
-    @Field(() => [OtpOrderByWithRelationInput], {nullable:true})
-    orderBy?: Array<OtpOrderByWithRelationInput>;
+    @Field(() => [OtpOrderByWithRelationAndSearchRelevanceInput], {nullable:true})
+    orderBy?: Array<OtpOrderByWithRelationAndSearchRelevanceInput>;
 
     @Field(() => OtpWhereUniqueInput, {nullable:true})
     cursor?: OtpWhereUniqueInput;

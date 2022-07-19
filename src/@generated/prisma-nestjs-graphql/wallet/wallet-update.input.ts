@@ -1,6 +1,6 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-import { UserUpdateOneRequiredWithoutWalletInput } from '../user/user-update-one-required-without-wallet.input';
+import { UserUpdateOneRequiredWithoutWalletNestedInput } from '../user/user-update-one-required-without-wallet-nested.input';
 import { FloatFieldUpdateOperationsInput } from '../prisma/float-field-update-operations.input';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
@@ -8,8 +8,8 @@ import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-up
 @InputType()
 export class WalletUpdateInput {
 
-    @Field(() => UserUpdateOneRequiredWithoutWalletInput, {nullable:true})
-    user?: UserUpdateOneRequiredWithoutWalletInput;
+    @Field(() => UserUpdateOneRequiredWithoutWalletNestedInput, {nullable:true})
+    user?: UserUpdateOneRequiredWithoutWalletNestedInput;
 
     @Field(() => FloatFieldUpdateOperationsInput, {nullable:true})
     withdrawable?: FloatFieldUpdateOperationsInput;

@@ -4,8 +4,8 @@ import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-
 import { EnumROLEFieldUpdateOperationsInput } from '../prisma/enum-role-field-update-operations.input';
 import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
-import { OtpUpdateManyWithoutAdminInput } from '../otp/otp-update-many-without-admin.input';
-import { MessageUpdateManyWithoutAdminInput } from '../message/message-update-many-without-admin.input';
+import { OtpUpdateManyWithoutAdminNestedInput } from '../otp/otp-update-many-without-admin-nested.input';
+import { MessageUpdateManyWithoutAdminNestedInput } from '../message/message-update-many-without-admin-nested.input';
 
 @InputType()
 export class AdminUpdateWithoutTokenInput {
@@ -37,9 +37,9 @@ export class AdminUpdateWithoutTokenInput {
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;
 
-    @Field(() => OtpUpdateManyWithoutAdminInput, {nullable:true})
-    Otp?: OtpUpdateManyWithoutAdminInput;
+    @Field(() => OtpUpdateManyWithoutAdminNestedInput, {nullable:true})
+    Otp?: OtpUpdateManyWithoutAdminNestedInput;
 
-    @Field(() => MessageUpdateManyWithoutAdminInput, {nullable:true})
-    Message?: MessageUpdateManyWithoutAdminInput;
+    @Field(() => MessageUpdateManyWithoutAdminNestedInput, {nullable:true})
+    Message?: MessageUpdateManyWithoutAdminNestedInput;
 }

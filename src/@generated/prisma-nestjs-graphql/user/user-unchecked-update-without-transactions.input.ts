@@ -8,14 +8,14 @@ import { EnumGENDERFieldUpdateOperationsInput } from '../prisma/enum-gender-fiel
 import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-operations.input';
 import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-string-field-update-operations.input';
 import { FloatFieldUpdateOperationsInput } from '../prisma/float-field-update-operations.input';
-import { WalletUncheckedUpdateOneWithoutUserInput } from '../wallet/wallet-unchecked-update-one-without-user.input';
-import { OtpUncheckedUpdateManyWithoutUserInput } from '../otp/otp-unchecked-update-many-without-user.input';
-import { WithdrawalRequestUncheckedUpdateManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-unchecked-update-many-without-user.input';
-import { CartUncheckedUpdateManyWithoutUserInput } from '../cart/cart-unchecked-update-many-without-user.input';
-import { MessageUncheckedUpdateManyWithoutUserInput } from '../message/message-unchecked-update-many-without-user.input';
-import { ReferralUncheckedUpdateManyWithoutUserInput } from '../referral/referral-unchecked-update-many-without-user.input';
-import { TokenUncheckedUpdateManyWithoutUserInput } from '../token/token-unchecked-update-many-without-user.input';
-import { PurchaseUncheckedUpdateManyWithoutUserInput } from '../purchase/purchase-unchecked-update-many-without-user.input';
+import { WalletUncheckedUpdateOneWithoutUserNestedInput } from '../wallet/wallet-unchecked-update-one-without-user-nested.input';
+import { OtpUncheckedUpdateManyWithoutUserNestedInput } from '../otp/otp-unchecked-update-many-without-user-nested.input';
+import { WithdrawalRequestUncheckedUpdateManyWithoutUserNestedInput } from '../withdrawal-request/withdrawal-request-unchecked-update-many-without-user-nested.input';
+import { CartUncheckedUpdateManyWithoutUserNestedInput } from '../cart/cart-unchecked-update-many-without-user-nested.input';
+import { MessageUncheckedUpdateManyWithoutUserNestedInput } from '../message/message-unchecked-update-many-without-user-nested.input';
+import { ReferralUncheckedUpdateManyWithoutUserNestedInput } from '../referral/referral-unchecked-update-many-without-user-nested.input';
+import { TokenUncheckedUpdateManyWithoutUserNestedInput } from '../token/token-unchecked-update-many-without-user-nested.input';
+import { PurchaseUncheckedUpdateManyWithoutUserNestedInput } from '../purchase/purchase-unchecked-update-many-without-user-nested.input';
 
 @InputType()
 export class UserUncheckedUpdateWithoutTransactionsInput {
@@ -80,8 +80,8 @@ export class UserUncheckedUpdateWithoutTransactionsInput {
     @Field(() => FloatFieldUpdateOperationsInput, {nullable:true})
     vipStatus?: FloatFieldUpdateOperationsInput;
 
-    @Field(() => WalletUncheckedUpdateOneWithoutUserInput, {nullable:true})
-    wallet?: WalletUncheckedUpdateOneWithoutUserInput;
+    @Field(() => WalletUncheckedUpdateOneWithoutUserNestedInput, {nullable:true})
+    wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput;
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;
@@ -89,24 +89,24 @@ export class UserUncheckedUpdateWithoutTransactionsInput {
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;
 
-    @Field(() => OtpUncheckedUpdateManyWithoutUserInput, {nullable:true})
-    otp?: OtpUncheckedUpdateManyWithoutUserInput;
+    @Field(() => OtpUncheckedUpdateManyWithoutUserNestedInput, {nullable:true})
+    otp?: OtpUncheckedUpdateManyWithoutUserNestedInput;
 
-    @Field(() => WithdrawalRequestUncheckedUpdateManyWithoutUserInput, {nullable:true})
-    withdrawalRequest?: WithdrawalRequestUncheckedUpdateManyWithoutUserInput;
+    @Field(() => WithdrawalRequestUncheckedUpdateManyWithoutUserNestedInput, {nullable:true})
+    withdrawalRequest?: WithdrawalRequestUncheckedUpdateManyWithoutUserNestedInput;
 
-    @Field(() => CartUncheckedUpdateManyWithoutUserInput, {nullable:true})
-    purchases?: CartUncheckedUpdateManyWithoutUserInput;
+    @Field(() => CartUncheckedUpdateManyWithoutUserNestedInput, {nullable:true})
+    purchases?: CartUncheckedUpdateManyWithoutUserNestedInput;
 
-    @Field(() => MessageUncheckedUpdateManyWithoutUserInput, {nullable:true})
-    message?: MessageUncheckedUpdateManyWithoutUserInput;
+    @Field(() => MessageUncheckedUpdateManyWithoutUserNestedInput, {nullable:true})
+    message?: MessageUncheckedUpdateManyWithoutUserNestedInput;
 
-    @Field(() => ReferralUncheckedUpdateManyWithoutUserInput, {nullable:true})
-    referral?: ReferralUncheckedUpdateManyWithoutUserInput;
+    @Field(() => ReferralUncheckedUpdateManyWithoutUserNestedInput, {nullable:true})
+    referral?: ReferralUncheckedUpdateManyWithoutUserNestedInput;
 
-    @Field(() => TokenUncheckedUpdateManyWithoutUserInput, {nullable:true})
-    token?: TokenUncheckedUpdateManyWithoutUserInput;
+    @Field(() => TokenUncheckedUpdateManyWithoutUserNestedInput, {nullable:true})
+    token?: TokenUncheckedUpdateManyWithoutUserNestedInput;
 
-    @Field(() => PurchaseUncheckedUpdateManyWithoutUserInput, {nullable:true})
-    purchase?: PurchaseUncheckedUpdateManyWithoutUserInput;
+    @Field(() => PurchaseUncheckedUpdateManyWithoutUserNestedInput, {nullable:true})
+    purchase?: PurchaseUncheckedUpdateManyWithoutUserNestedInput;
 }

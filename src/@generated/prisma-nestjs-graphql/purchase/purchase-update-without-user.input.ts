@@ -2,7 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
 import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operations.input';
-import { CartUpdateManyWithoutPurchaseInput } from '../cart/cart-update-many-without-purchase.input';
+import { CartUpdateManyWithoutPurchaseNestedInput } from '../cart/cart-update-many-without-purchase-nested.input';
 import { NullableEnumTRANSACTION_TYPEFieldUpdateOperationsInput } from '../prisma/nullable-enum-transaction-type-field-update-operations.input';
 import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-string-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
@@ -28,8 +28,8 @@ export class PurchaseUpdateWithoutUserInput {
     @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
     subtotal?: IntFieldUpdateOperationsInput;
 
-    @Field(() => CartUpdateManyWithoutPurchaseInput, {nullable:true})
-    cards?: CartUpdateManyWithoutPurchaseInput;
+    @Field(() => CartUpdateManyWithoutPurchaseNestedInput, {nullable:true})
+    cards?: CartUpdateManyWithoutPurchaseNestedInput;
 
     @Field(() => NullableEnumTRANSACTION_TYPEFieldUpdateOperationsInput, {nullable:true})
     transactionType?: NullableEnumTRANSACTION_TYPEFieldUpdateOperationsInput;

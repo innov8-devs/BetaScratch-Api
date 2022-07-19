@@ -1,7 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ArgsType } from '@nestjs/graphql';
 import { GameCategoryWhereInput } from './game-category-where.input';
-import { GameCategoryOrderByWithRelationInput } from './game-category-order-by-with-relation.input';
+import { GameCategoryOrderByWithRelationAndSearchRelevanceInput } from './game-category-order-by-with-relation-and-search-relevance.input';
 import { GameCategoryWhereUniqueInput } from './game-category-where-unique.input';
 import { Int } from '@nestjs/graphql';
 import { GameCategoryCountAggregateInput } from './game-category-count-aggregate.input';
@@ -16,8 +16,8 @@ export class GameCategoryAggregateArgs {
     @Field(() => GameCategoryWhereInput, {nullable:true})
     where?: GameCategoryWhereInput;
 
-    @Field(() => [GameCategoryOrderByWithRelationInput], {nullable:true})
-    orderBy?: Array<GameCategoryOrderByWithRelationInput>;
+    @Field(() => [GameCategoryOrderByWithRelationAndSearchRelevanceInput], {nullable:true})
+    orderBy?: Array<GameCategoryOrderByWithRelationAndSearchRelevanceInput>;
 
     @Field(() => GameCategoryWhereUniqueInput, {nullable:true})
     cursor?: GameCategoryWhereUniqueInput;

@@ -5,7 +5,7 @@ import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-str
 import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operations.input';
 import { GraphQLJSON } from 'graphql-type-json';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
-import { AdminUpdateOneWithoutMessageInput } from '../admin/admin-update-one-without-message.input';
+import { AdminUpdateOneWithoutMessageNestedInput } from '../admin/admin-update-one-without-message-nested.input';
 
 @InputType()
 export class MessageUpdateWithoutUserInput {
@@ -34,6 +34,6 @@ export class MessageUpdateWithoutUserInput {
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;
 
-    @Field(() => AdminUpdateOneWithoutMessageInput, {nullable:true})
-    Admin?: AdminUpdateOneWithoutMessageInput;
+    @Field(() => AdminUpdateOneWithoutMessageNestedInput, {nullable:true})
+    Admin?: AdminUpdateOneWithoutMessageNestedInput;
 }

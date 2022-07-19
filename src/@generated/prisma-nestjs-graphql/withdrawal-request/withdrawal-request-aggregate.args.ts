@@ -1,7 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ArgsType } from '@nestjs/graphql';
 import { WithdrawalRequestWhereInput } from './withdrawal-request-where.input';
-import { WithdrawalRequestOrderByWithRelationInput } from './withdrawal-request-order-by-with-relation.input';
+import { WithdrawalRequestOrderByWithRelationAndSearchRelevanceInput } from './withdrawal-request-order-by-with-relation-and-search-relevance.input';
 import { WithdrawalRequestWhereUniqueInput } from './withdrawal-request-where-unique.input';
 import { Int } from '@nestjs/graphql';
 import { WithdrawalRequestCountAggregateInput } from './withdrawal-request-count-aggregate.input';
@@ -16,8 +16,8 @@ export class WithdrawalRequestAggregateArgs {
     @Field(() => WithdrawalRequestWhereInput, {nullable:true})
     where?: WithdrawalRequestWhereInput;
 
-    @Field(() => [WithdrawalRequestOrderByWithRelationInput], {nullable:true})
-    orderBy?: Array<WithdrawalRequestOrderByWithRelationInput>;
+    @Field(() => [WithdrawalRequestOrderByWithRelationAndSearchRelevanceInput], {nullable:true})
+    orderBy?: Array<WithdrawalRequestOrderByWithRelationAndSearchRelevanceInput>;
 
     @Field(() => WithdrawalRequestWhereUniqueInput, {nullable:true})
     cursor?: WithdrawalRequestWhereUniqueInput;

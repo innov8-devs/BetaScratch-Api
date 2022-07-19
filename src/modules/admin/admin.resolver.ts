@@ -9,7 +9,7 @@ import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AuthService } from 'modules/auth/auth.service';
 import { Auth } from 'modules/auth/decorators/auth.decorator';
 import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
-import { GAME_STATUS } from 'types/constants/enum';
+import { DB_TYPES, GAME_STATUS } from 'types/constants/enum';
 import { MyContext } from 'types/constants/types';
 import { AdminService } from './admin.service';
 import {
@@ -303,6 +303,19 @@ export class AdminResolver {
       disabled,
     );
   }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => [User])
+  async adminSearch(
+    @Args('table') table: DB_TYPES,
+    @Args('search') search: string,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    return this.adminService.adminSearch(table, search);
+  }
+
   @Mutation(() => Boolean)
   async run() {
     await this.adminService.run();

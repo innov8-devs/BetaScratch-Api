@@ -1,7 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ArgsType } from '@nestjs/graphql';
 import { PurchaseWhereInput } from './purchase-where.input';
-import { PurchaseOrderByWithRelationInput } from './purchase-order-by-with-relation.input';
+import { PurchaseOrderByWithRelationAndSearchRelevanceInput } from './purchase-order-by-with-relation-and-search-relevance.input';
 import { PurchaseWhereUniqueInput } from './purchase-where-unique.input';
 import { Int } from '@nestjs/graphql';
 import { PurchaseCountAggregateInput } from './purchase-count-aggregate.input';
@@ -16,8 +16,8 @@ export class PurchaseAggregateArgs {
     @Field(() => PurchaseWhereInput, {nullable:true})
     where?: PurchaseWhereInput;
 
-    @Field(() => [PurchaseOrderByWithRelationInput], {nullable:true})
-    orderBy?: Array<PurchaseOrderByWithRelationInput>;
+    @Field(() => [PurchaseOrderByWithRelationAndSearchRelevanceInput], {nullable:true})
+    orderBy?: Array<PurchaseOrderByWithRelationAndSearchRelevanceInput>;
 
     @Field(() => PurchaseWhereUniqueInput, {nullable:true})
     cursor?: PurchaseWhereUniqueInput;

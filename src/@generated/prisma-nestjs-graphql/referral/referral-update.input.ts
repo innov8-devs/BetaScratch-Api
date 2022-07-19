@@ -1,7 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { ReferralUpdatereferralsInput } from '../prisma/referral-updatereferrals.input';
-import { UserUpdateOneRequiredWithoutReferralInput } from '../user/user-update-one-required-without-referral.input';
+import { UserUpdateOneRequiredWithoutReferralNestedInput } from '../user/user-update-one-required-without-referral-nested.input';
 import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 
@@ -11,8 +11,8 @@ export class ReferralUpdateInput {
     @Field(() => ReferralUpdatereferralsInput, {nullable:true})
     referrals?: ReferralUpdatereferralsInput;
 
-    @Field(() => UserUpdateOneRequiredWithoutReferralInput, {nullable:true})
-    user?: UserUpdateOneRequiredWithoutReferralInput;
+    @Field(() => UserUpdateOneRequiredWithoutReferralNestedInput, {nullable:true})
+    user?: UserUpdateOneRequiredWithoutReferralNestedInput;
 
     @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
     invitesFunded?: IntFieldUpdateOperationsInput;

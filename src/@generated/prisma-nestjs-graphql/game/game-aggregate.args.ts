@@ -1,7 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ArgsType } from '@nestjs/graphql';
 import { GameWhereInput } from './game-where.input';
-import { GameOrderByWithRelationInput } from './game-order-by-with-relation.input';
+import { GameOrderByWithRelationAndSearchRelevanceInput } from './game-order-by-with-relation-and-search-relevance.input';
 import { GameWhereUniqueInput } from './game-where-unique.input';
 import { Int } from '@nestjs/graphql';
 import { GameCountAggregateInput } from './game-count-aggregate.input';
@@ -16,8 +16,8 @@ export class GameAggregateArgs {
     @Field(() => GameWhereInput, {nullable:true})
     where?: GameWhereInput;
 
-    @Field(() => [GameOrderByWithRelationInput], {nullable:true})
-    orderBy?: Array<GameOrderByWithRelationInput>;
+    @Field(() => [GameOrderByWithRelationAndSearchRelevanceInput], {nullable:true})
+    orderBy?: Array<GameOrderByWithRelationAndSearchRelevanceInput>;
 
     @Field(() => GameWhereUniqueInput, {nullable:true})
     cursor?: GameWhereUniqueInput;

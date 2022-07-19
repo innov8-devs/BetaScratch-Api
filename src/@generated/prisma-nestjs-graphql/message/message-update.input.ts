@@ -1,18 +1,18 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-import { UserUpdateOneRequiredWithoutMessageInput } from '../user/user-update-one-required-without-message.input';
+import { UserUpdateOneRequiredWithoutMessageNestedInput } from '../user/user-update-one-required-without-message-nested.input';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
 import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-string-field-update-operations.input';
 import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operations.input';
 import { GraphQLJSON } from 'graphql-type-json';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
-import { AdminUpdateOneWithoutMessageInput } from '../admin/admin-update-one-without-message.input';
+import { AdminUpdateOneWithoutMessageNestedInput } from '../admin/admin-update-one-without-message-nested.input';
 
 @InputType()
 export class MessageUpdateInput {
 
-    @Field(() => UserUpdateOneRequiredWithoutMessageInput, {nullable:true})
-    user?: UserUpdateOneRequiredWithoutMessageInput;
+    @Field(() => UserUpdateOneRequiredWithoutMessageNestedInput, {nullable:true})
+    user?: UserUpdateOneRequiredWithoutMessageNestedInput;
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     title?: StringFieldUpdateOperationsInput;
@@ -38,6 +38,6 @@ export class MessageUpdateInput {
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;
 
-    @Field(() => AdminUpdateOneWithoutMessageInput, {nullable:true})
-    Admin?: AdminUpdateOneWithoutMessageInput;
+    @Field(() => AdminUpdateOneWithoutMessageNestedInput, {nullable:true})
+    Admin?: AdminUpdateOneWithoutMessageNestedInput;
 }

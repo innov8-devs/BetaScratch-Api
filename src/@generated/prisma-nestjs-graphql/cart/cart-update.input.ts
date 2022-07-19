@@ -1,19 +1,19 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-import { UserUpdateOneRequiredWithoutPurchasesInput } from '../user/user-update-one-required-without-purchases.input';
+import { UserUpdateOneRequiredWithoutPurchasesNestedInput } from '../user/user-update-one-required-without-purchases-nested.input';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
 import { GraphQLJSON } from 'graphql-type-json';
 import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operations.input';
 import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-operations.input';
 import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-string-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
-import { PurchaseUpdateOneWithoutCardsInput } from '../purchase/purchase-update-one-without-cards.input';
+import { PurchaseUpdateOneWithoutCardsNestedInput } from '../purchase/purchase-update-one-without-cards-nested.input';
 
 @InputType()
 export class CartUpdateInput {
 
-    @Field(() => UserUpdateOneRequiredWithoutPurchasesInput, {nullable:true})
-    user?: UserUpdateOneRequiredWithoutPurchasesInput;
+    @Field(() => UserUpdateOneRequiredWithoutPurchasesNestedInput, {nullable:true})
+    user?: UserUpdateOneRequiredWithoutPurchasesNestedInput;
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     name?: StringFieldUpdateOperationsInput;
@@ -45,6 +45,6 @@ export class CartUpdateInput {
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;
 
-    @Field(() => PurchaseUpdateOneWithoutCardsInput, {nullable:true})
-    purchase?: PurchaseUpdateOneWithoutCardsInput;
+    @Field(() => PurchaseUpdateOneWithoutCardsNestedInput, {nullable:true})
+    purchase?: PurchaseUpdateOneWithoutCardsNestedInput;
 }

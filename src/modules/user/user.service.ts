@@ -10,7 +10,6 @@ import { User } from '../../@generated/prisma-nestjs-graphql/user/user.model';
 import { MESSAGES } from '../../core/messages';
 import { WalletService } from '../wallet/wallet.service';
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
-import { CURRENCY } from '@generated/prisma-nestjs-graphql/prisma/currency.enum';
 import {
   RegisterInput,
   UserPaginationInput,
@@ -19,7 +18,7 @@ import {
 } from './dto/user.request';
 import { MailService } from 'modules/mail/mail.service';
 import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
-import { AUTH_TYPE, VERIFICATION } from 'types/constants/enum';
+import { AUTH_TYPE, CURRENCY, VERIFICATION } from 'types/constants/enum';
 import { OtpService } from 'modules/otp/otp.service';
 
 @Injectable()

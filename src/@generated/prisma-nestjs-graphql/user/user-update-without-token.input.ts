@@ -7,14 +7,14 @@ import { EnumGENDERFieldUpdateOperationsInput } from '../prisma/enum-gender-fiel
 import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-operations.input';
 import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-string-field-update-operations.input';
 import { FloatFieldUpdateOperationsInput } from '../prisma/float-field-update-operations.input';
-import { WalletUpdateOneWithoutUserInput } from '../wallet/wallet-update-one-without-user.input';
-import { TransactionUpdateManyWithoutUserInput } from '../transaction/transaction-update-many-without-user.input';
-import { OtpUpdateManyWithoutUserInput } from '../otp/otp-update-many-without-user.input';
-import { WithdrawalRequestUpdateManyWithoutUserInput } from '../withdrawal-request/withdrawal-request-update-many-without-user.input';
-import { CartUpdateManyWithoutUserInput } from '../cart/cart-update-many-without-user.input';
-import { MessageUpdateManyWithoutUserInput } from '../message/message-update-many-without-user.input';
-import { ReferralUpdateManyWithoutUserInput } from '../referral/referral-update-many-without-user.input';
-import { PurchaseUpdateManyWithoutUserInput } from '../purchase/purchase-update-many-without-user.input';
+import { WalletUpdateOneWithoutUserNestedInput } from '../wallet/wallet-update-one-without-user-nested.input';
+import { TransactionUpdateManyWithoutUserNestedInput } from '../transaction/transaction-update-many-without-user-nested.input';
+import { OtpUpdateManyWithoutUserNestedInput } from '../otp/otp-update-many-without-user-nested.input';
+import { WithdrawalRequestUpdateManyWithoutUserNestedInput } from '../withdrawal-request/withdrawal-request-update-many-without-user-nested.input';
+import { CartUpdateManyWithoutUserNestedInput } from '../cart/cart-update-many-without-user-nested.input';
+import { MessageUpdateManyWithoutUserNestedInput } from '../message/message-update-many-without-user-nested.input';
+import { ReferralUpdateManyWithoutUserNestedInput } from '../referral/referral-update-many-without-user-nested.input';
+import { PurchaseUpdateManyWithoutUserNestedInput } from '../purchase/purchase-update-many-without-user-nested.input';
 
 @InputType()
 export class UserUpdateWithoutTokenInput {
@@ -76,11 +76,11 @@ export class UserUpdateWithoutTokenInput {
     @Field(() => FloatFieldUpdateOperationsInput, {nullable:true})
     vipStatus?: FloatFieldUpdateOperationsInput;
 
-    @Field(() => WalletUpdateOneWithoutUserInput, {nullable:true})
-    wallet?: WalletUpdateOneWithoutUserInput;
+    @Field(() => WalletUpdateOneWithoutUserNestedInput, {nullable:true})
+    wallet?: WalletUpdateOneWithoutUserNestedInput;
 
-    @Field(() => TransactionUpdateManyWithoutUserInput, {nullable:true})
-    transactions?: TransactionUpdateManyWithoutUserInput;
+    @Field(() => TransactionUpdateManyWithoutUserNestedInput, {nullable:true})
+    transactions?: TransactionUpdateManyWithoutUserNestedInput;
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;
@@ -88,21 +88,21 @@ export class UserUpdateWithoutTokenInput {
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;
 
-    @Field(() => OtpUpdateManyWithoutUserInput, {nullable:true})
-    otp?: OtpUpdateManyWithoutUserInput;
+    @Field(() => OtpUpdateManyWithoutUserNestedInput, {nullable:true})
+    otp?: OtpUpdateManyWithoutUserNestedInput;
 
-    @Field(() => WithdrawalRequestUpdateManyWithoutUserInput, {nullable:true})
-    withdrawalRequest?: WithdrawalRequestUpdateManyWithoutUserInput;
+    @Field(() => WithdrawalRequestUpdateManyWithoutUserNestedInput, {nullable:true})
+    withdrawalRequest?: WithdrawalRequestUpdateManyWithoutUserNestedInput;
 
-    @Field(() => CartUpdateManyWithoutUserInput, {nullable:true})
-    purchases?: CartUpdateManyWithoutUserInput;
+    @Field(() => CartUpdateManyWithoutUserNestedInput, {nullable:true})
+    purchases?: CartUpdateManyWithoutUserNestedInput;
 
-    @Field(() => MessageUpdateManyWithoutUserInput, {nullable:true})
-    message?: MessageUpdateManyWithoutUserInput;
+    @Field(() => MessageUpdateManyWithoutUserNestedInput, {nullable:true})
+    message?: MessageUpdateManyWithoutUserNestedInput;
 
-    @Field(() => ReferralUpdateManyWithoutUserInput, {nullable:true})
-    referral?: ReferralUpdateManyWithoutUserInput;
+    @Field(() => ReferralUpdateManyWithoutUserNestedInput, {nullable:true})
+    referral?: ReferralUpdateManyWithoutUserNestedInput;
 
-    @Field(() => PurchaseUpdateManyWithoutUserInput, {nullable:true})
-    purchase?: PurchaseUpdateManyWithoutUserInput;
+    @Field(() => PurchaseUpdateManyWithoutUserNestedInput, {nullable:true})
+    purchase?: PurchaseUpdateManyWithoutUserNestedInput;
 }

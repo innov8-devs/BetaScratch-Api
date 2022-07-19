@@ -1,7 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ArgsType } from '@nestjs/graphql';
 import { TransactionWhereInput } from './transaction-where.input';
-import { TransactionOrderByWithRelationInput } from './transaction-order-by-with-relation.input';
+import { TransactionOrderByWithRelationAndSearchRelevanceInput } from './transaction-order-by-with-relation-and-search-relevance.input';
 import { TransactionWhereUniqueInput } from './transaction-where-unique.input';
 import { Int } from '@nestjs/graphql';
 import { TransactionScalarFieldEnum } from './transaction-scalar-field.enum';
@@ -12,8 +12,8 @@ export class FindManyTransactionArgs {
     @Field(() => TransactionWhereInput, {nullable:true})
     where?: TransactionWhereInput;
 
-    @Field(() => [TransactionOrderByWithRelationInput], {nullable:true})
-    orderBy?: Array<TransactionOrderByWithRelationInput>;
+    @Field(() => [TransactionOrderByWithRelationAndSearchRelevanceInput], {nullable:true})
+    orderBy?: Array<TransactionOrderByWithRelationAndSearchRelevanceInput>;
 
     @Field(() => TransactionWhereUniqueInput, {nullable:true})
     cursor?: TransactionWhereUniqueInput;

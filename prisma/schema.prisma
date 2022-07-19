@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 generator nestgraphql {
@@ -10,6 +11,7 @@ generator nestgraphql {
   output                 = "../src/@generated/prisma-nestjs-graphql"
   fields_Validator_from  = "class-validator"
   fields_Validator_input = true
+  previewFeatures        = ["fullTextSearch"]
 }
 
 datasource db {

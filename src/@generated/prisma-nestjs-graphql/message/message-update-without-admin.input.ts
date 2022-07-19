@@ -1,6 +1,6 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-import { UserUpdateOneRequiredWithoutMessageInput } from '../user/user-update-one-required-without-message.input';
+import { UserUpdateOneRequiredWithoutMessageNestedInput } from '../user/user-update-one-required-without-message-nested.input';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
 import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-string-field-update-operations.input';
 import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operations.input';
@@ -10,8 +10,8 @@ import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-up
 @InputType()
 export class MessageUpdateWithoutAdminInput {
 
-    @Field(() => UserUpdateOneRequiredWithoutMessageInput, {nullable:true})
-    user?: UserUpdateOneRequiredWithoutMessageInput;
+    @Field(() => UserUpdateOneRequiredWithoutMessageNestedInput, {nullable:true})
+    user?: UserUpdateOneRequiredWithoutMessageNestedInput;
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     title?: StringFieldUpdateOperationsInput;

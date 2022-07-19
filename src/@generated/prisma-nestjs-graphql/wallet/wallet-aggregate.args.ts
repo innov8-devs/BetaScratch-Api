@@ -1,7 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ArgsType } from '@nestjs/graphql';
 import { WalletWhereInput } from './wallet-where.input';
-import { WalletOrderByWithRelationInput } from './wallet-order-by-with-relation.input';
+import { WalletOrderByWithRelationAndSearchRelevanceInput } from './wallet-order-by-with-relation-and-search-relevance.input';
 import { WalletWhereUniqueInput } from './wallet-where-unique.input';
 import { Int } from '@nestjs/graphql';
 import { WalletCountAggregateInput } from './wallet-count-aggregate.input';
@@ -16,8 +16,8 @@ export class WalletAggregateArgs {
     @Field(() => WalletWhereInput, {nullable:true})
     where?: WalletWhereInput;
 
-    @Field(() => [WalletOrderByWithRelationInput], {nullable:true})
-    orderBy?: Array<WalletOrderByWithRelationInput>;
+    @Field(() => [WalletOrderByWithRelationAndSearchRelevanceInput], {nullable:true})
+    orderBy?: Array<WalletOrderByWithRelationAndSearchRelevanceInput>;
 
     @Field(() => WalletWhereUniqueInput, {nullable:true})
     cursor?: WalletWhereUniqueInput;
