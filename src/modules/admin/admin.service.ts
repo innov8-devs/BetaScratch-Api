@@ -644,6 +644,7 @@ export class AdminService {
     const searchQuery = `%${search}%`;
     switch (table) {
       case DB_TYPES.USER:
+      case DB_TYPES.WALLET:
         return await this.prismaService.$queryRaw`
         SELECT "t"."id","t"."email","t"."username","t"."firstName","t"."lastName","t"."dateOfBirth","t"."role","t"."gender","t"."mobileNumber","t"."state","t"."country","t"."confirmed","t"."licenseFrontImage", "t"."licenseBackImage","t"."verificationStatus","t"."createdAt","t"."updatedAt","t"."vipStatus","t"."verificationType","t"."licenseNumber","t"."disabled", to_json("Wallet".*) as wallet from "User" t INNER JOIN "Wallet" on "t"."id" = "Wallet"."userId" WHERE t::text ILIKE ${searchQuery}`;
       case DB_TYPES.GAME:
