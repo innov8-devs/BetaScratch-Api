@@ -38,6 +38,7 @@ import { WithdrawalRequest } from '@generated/prisma-nestjs-graphql/withdrawal-r
 import {
   DashboardDataResponse,
   FlutterTansactionResponse,
+  SortReturnData,
 } from './dto/admin.response';
 import * as Flutterwave from 'flutterwave-node-v3';
 
@@ -636,7 +637,10 @@ export class AdminService {
     }
   }
 
-  async adminSearch(table: DB_TYPES, search: string): Promise<[User] | [Game]> {
+  async adminSearch(
+    table: DB_TYPES,
+    search: string,
+  ): Promise<[SortReturnData]> {
     const searchQuery = `%${search}%`;
     switch (table) {
       case DB_TYPES.USER:

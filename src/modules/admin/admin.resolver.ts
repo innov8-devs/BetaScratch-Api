@@ -29,6 +29,7 @@ import {
 import {
   DashboardDataResponse,
   FlutterTansactionResponse,
+  SortReturnData,
 } from './dto/admin.response';
 
 @Resolver()
@@ -305,7 +306,7 @@ export class AdminResolver {
   }
 
   @Auth([ROLE.ADMIN])
-  @Query(() => [User])
+  @Query(() => [SortReturnData])
   async adminSearch(
     @Args('table') table: DB_TYPES,
     @Args('search') search: string,

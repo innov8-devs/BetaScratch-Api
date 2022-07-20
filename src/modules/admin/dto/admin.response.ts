@@ -1,4 +1,8 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { GENDER } from '@generated/prisma-nestjs-graphql/prisma/gender.enum';
+import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
+import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
+import { Field, Float, ID, ObjectType } from '@nestjs/graphql';
+import GraphQLJSON from 'graphql-type-json';
 
 @ObjectType()
 export class DashboardTabsResponse {
@@ -105,4 +109,100 @@ export class FlutterTansactionResponse {
 
   @Field({ nullable: true })
   account_id: string;
+}
+
+@ObjectType()
+export class SortReturnData {
+  @Field(() => ID, { nullable: false })
+  id!: number;
+
+  // user
+  @Field({ nullable: true })
+  email?: string;
+
+  @Field({ nullable: true })
+  username?: string;
+
+  @Field({ nullable: true })
+  firstName?: string;
+
+  @Field({ nullable: true })
+  lastName?: string;
+
+  @Field(() => Date, { nullable: true })
+  dateOfBirth?: Date;
+
+  @Field(() => ROLE, { nullable: true })
+  role?: keyof typeof ROLE;
+
+  @Field(() => GENDER, { nullable: true })
+  gender?: keyof typeof GENDER;
+
+  @Field({ nullable: true })
+  mobileNumber?: string;
+
+  @Field({ nullable: true })
+  state?: string;
+
+  @Field({ nullable: true })
+  country?: string;
+
+  @Field({ nullable: true })
+  confirmed?: boolean;
+
+  @Field({ nullable: true })
+  disabled?: boolean;
+
+  @Field({ nullable: true })
+  licenseFrontImage?: string;
+
+  @Field({ nullable: true })
+  licenseBackImage?: string;
+
+  @Field({ nullable: true })
+  licenseNumber?: string;
+
+  @Field({ nullable: true })
+  verificationType?: string;
+
+  @Field({ nullable: true })
+  verificationStatus?: string;
+
+  @Field(() => Float, { nullable: true })
+  vipStatus?: number;
+
+  @Field(() => Wallet, { nullable: true })
+  wallet?: Wallet;
+
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date | string;
+
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date | string;
+
+  // game
+
+  @Field({ nullable: true })
+  name?: string;
+
+  @Field({ nullable: true })
+  imageUrl?: string;
+
+  @Field({ nullable: true })
+  description?: string;
+
+  @Field({ nullable: true })
+  gameId?: string;
+
+  @Field(() => GraphQLJSON, { nullable: true })
+  price?: any;
+
+  @Field({ nullable: true })
+  category?: string;
+
+  @Field({ nullable: true })
+  status?: string;
+
+  @Field({ nullable: true })
+  availability?: number;
 }
