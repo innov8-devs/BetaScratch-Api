@@ -1,5 +1,7 @@
+import { Cart } from '@generated/prisma-nestjs-graphql/cart/cart.model';
 import { GENDER } from '@generated/prisma-nestjs-graphql/prisma/gender.enum';
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
+import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
 import { Field, Float, ID, ObjectType } from '@nestjs/graphql';
 import GraphQLJSON from 'graphql-type-json';
@@ -205,4 +207,52 @@ export class SortReturnData {
 
   @Field({ nullable: true })
   availability?: number;
+
+  // withdrawal request
+  @Field(() => User, { nullable: true })
+  user?: User;
+
+  @Field({ nullable: true })
+  bank?: string;
+
+  @Field({ nullable: true })
+  accountNumber?: string;
+
+  @Field({ nullable: true })
+  accountName?: string;
+
+  @Field({ nullable: true })
+  amount?: string;
+
+  // @Field( { nullable: true })
+  // status?: string;
+
+  @Field({ nullable: true })
+  paypal?: string;
+
+  @Field({ nullable: true })
+  btcWalletAdderess?: string;
+
+  // purchase
+
+  // @Field( {nullable:true})
+  // username?: string;
+
+  // @Field({nullable:true})
+  // email?: string;
+
+  // @Field( {nullable:true})
+  // status?: string;
+
+  @Field({ nullable: true })
+  quantity?: number;
+
+  @Field({ nullable: true })
+  reference?: string;
+
+  @Field({ nullable: true })
+  subtotal?: number;
+
+  @Field({ nullable: true })
+  cards?: Cart;
 }

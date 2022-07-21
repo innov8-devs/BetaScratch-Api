@@ -449,9 +449,6 @@ export class AdminService {
     const { orderBy, orderColumn, page, size } = input;
     let skipValue = page * size - size;
     return await this.prismaService.withdrawalRequest.findMany({
-      // where: {
-      //   status: 'pending',
-      // },
       orderBy: {
         [orderColumn]: orderBy,
       },
@@ -645,11 +642,24 @@ export class AdminService {
     switch (table) {
       case DB_TYPES.USER:
       case DB_TYPES.WALLET:
+      case DB_TYPES.VERIFICATION:
         return await this.prismaService.$queryRaw`
-        SELECT "t"."id","t"."email","t"."username","t"."firstName","t"."lastName","t"."dateOfBirth","t"."role","t"."gender","t"."mobileNumber","t"."state","t"."country","t"."confirmed","t"."licenseFrontImage", "t"."licenseBackImage","t"."verificationStatus","t"."createdAt","t"."updatedAt","t"."vipStatus","t"."verificationType","t"."licenseNumber","t"."disabled", to_json("Wallet".*) as wallet from "User" t INNER JOIN "Wallet" on "t"."id" = "Wallet"."userId" WHERE t::text ILIKE ${searchQuery}`;
+        SELECT "t"."id","t"."email","t"."username","t"."firstName","t"."lastName","t"."dateOfBirth","t"."role","t"."gender","t"."mobileNumber","t"."state","t"."country","t"."confirmed","t"."licenseFrontImage", "t"."licenseBackImage","t"."verificationStatus","t"."createdAt","t"."updatedAt","t"."vipStatus","t"."verificationType","t"."licenseNumber","t"."disabled", to_json("Wallet".*) as wallet from "User" t INNER JOIN "Wallet" on "t"."id" = "Wallet"."userId" WHERE t::text ILIKE ${searchQuery} LIMIT 20`;
       case DB_TYPES.GAME:
         return await this.prismaService.$queryRaw`
-            SELECT * FROM "Game" g WHERE g::text ILIKE ${searchQuery}
+            SELECT * FROM "Game" g WHERE g::text ILIKE ${searchQuery} LIMIT 20
+          `;
+      case DB_TYPES.WITHDRAWAL_REQUEST:
+        return await this.prismaService.$queryRaw`
+            SELECT "wr"."id", "wr"."bank", "wr"."accountNumber", "wr"."accountName", "wr"."amount", "wr"."status", "wr"."paypal", "wr"."btcWalletAdderess", "wr"."createdAt", "wr"."updatedAt", to_json("User".*) as user FROM "WithdrawalRequest" wr INNER JOIN "User" on "wr"."userId" = "User"."id" WHERE wr::text ILIKE ${searchQuery} LIMIT 20 
+          `;
+      case DB_TYPES.PURCHASE:
+        return await this.prismaService.$queryRaw`
+            SELECT "p"."id", "p"."username", "p"."email", "p"."status", "p"."quantity", "p"."reference", "p"."subtotal", "p"."createdAt", "p"."updatedAt", to_json("Cart".*) as cart FROM "Purchase" p INNER JOIN "Cart" on "p"."reference" = "Cart"."reference" WHERE p::text ILIKE ${searchQuery} LIMIT 20 
+          `;
+      case DB_TYPES.ADMIN:
+        return await this.prismaService.$queryRaw`
+            SELECT * FROM "Admin" a WHERE a::text ILIKE ${searchQuery} LIMIT 20
           `;
       default:
         break;
