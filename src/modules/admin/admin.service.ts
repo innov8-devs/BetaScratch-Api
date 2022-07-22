@@ -323,10 +323,13 @@ export class AdminService {
   public async getWalletsFromAdmin(
     input: GetWalletsFromAdminInput,
   ): Promise<Wallet[]> {
-    const { page, size } = input;
+    const { page, size, orderColumn, orderBy } = input;
     let skipValue = page * size - size;
     return await this.prismaService.wallet.findMany({
       include: { user: true },
+      orderBy: {
+        [orderColumn]: orderBy,
+      },
       take: size,
       skip: skipValue,
     });
