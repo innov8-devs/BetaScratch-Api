@@ -79,6 +79,11 @@ export class GameResolver {
     return this.gameService.findOneGame({ id: Number(gameId) });
   }
 
+  @Query(() => Game, { nullable: true })
+  getSingleGame(@Args('gameId') gameId: number) {
+    return this.gameService.findOneGame({ id: gameId });
+  }
+
   @Query(() => [GameCategoryReturnType], { nullable: true })
   findAllGamesByCategories(@Args('input') input: GameCateogorySearch) {
     return this.gameService.findAllGamesByCategories(input);
