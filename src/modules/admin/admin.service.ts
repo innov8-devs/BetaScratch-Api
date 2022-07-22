@@ -651,12 +651,15 @@ export class AdminService {
           `;
       case DB_TYPES.WITHDRAWAL_REQUEST:
         return await this.prismaService.$queryRaw`
-            SELECT "wr"."id", "wr"."bank", "wr"."accountNumber", "wr"."accountName", "wr"."amount", "wr"."status", "wr"."paypal", "wr"."btcWalletAdderess", "wr"."createdAt", "wr"."updatedAt", to_json("User".*) as user FROM "WithdrawalRequest" wr INNER JOIN "User" on "wr"."userId" = "User"."id" WHERE wr::text ILIKE ${searchQuery} LIMIT 20 
+            SELECT "wr"."id", "wr"."bank", "wr"."accountNumber", "wr"."accountName", "wr"."amount", "wr"."status", "wr"."paypal", "wr"."btcWalletAdderess", "wr"."userId", "wr"."createdAt", "wr"."updatedAt", to_json("User".*) as user FROM "WithdrawalRequest" wr INNER JOIN "User" on "wr"."userId" = "User"."id" WHERE wr::text ILIKE ${searchQuery} LIMIT 20 
           `;
+      // case DB_TYPES.PURCHASE:
+      //   return await this.prismaService.$queryRaw`
+      //       SELECT "p"."id", "p"."username", "p"."email", "p"."status", "p"."quantity", "p"."reference", "p"."subtotal", "p"."createdAt", "p"."updatedAt", to_json("Cart".*) as cart FROM "Purchase" p INNER JOIN "Cart" on "p"."reference" = "Cart"."reference" WHERE p::text ILIKE ${searchQuery} LIMIT 20
+      //     `;
       case DB_TYPES.PURCHASE:
-        return await this.prismaService.$queryRaw`
-            SELECT "p"."id", "p"."username", "p"."email", "p"."status", "p"."quantity", "p"."reference", "p"."subtotal", "p"."createdAt", "p"."updatedAt", to_json("Cart".*) as cart FROM "Purchase" p INNER JOIN "Cart" on "p"."reference" = "Cart"."reference" WHERE p::text ILIKE ${searchQuery} LIMIT 20 
-          `;
+        `SELECT "p"."id", "p"."username", "p"."email", "p"."status", "p"."quantity", "p"."reference", "p"."subtotal", "p"."createdAt", "p"."updatedAt" FROM "Purchase" p, (
+        SELECT to_json(*) FROM "Cart") as cart WHERE "Cart"."reference" = "Purchase"."reference" AND p::text ILIKE ${searchQuery} LIMIT 20`;
       case DB_TYPES.ADMIN:
         return await this.prismaService.$queryRaw`
             SELECT * FROM "Admin" a WHERE a::text ILIKE ${searchQuery} LIMIT 20

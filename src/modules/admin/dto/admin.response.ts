@@ -254,5 +254,8 @@ export class SortReturnData {
   subtotal?: number;
 
   @Field({ nullable: true })
+  userId?: number;
+
+  @Field({ nullable: true })
   cards?: Cart;
 }
