@@ -43,7 +43,7 @@ export class GetUsersFromAdminInput {
   orderColumn?: string = 'id';
 
   @Field(() => String, { nullable: true })
-  orderBy?: string = 'asc';
+  orderBy?: string | any = 'asc';
 }
 
 @InputType()

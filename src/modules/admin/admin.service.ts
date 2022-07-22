@@ -294,8 +294,20 @@ export class AdminService {
   public async getUsersFromAdmin(input: GetUsersFromAdminInput) {
     const { orderBy, orderColumn, page, size } = input;
     let skipValue = page * size - size;
+    if (orderColumn === 'wallet') {
+      return await this.prismaService.user.findMany({
+        orderBy: {
+          wallet: {
+            withdrawable: orderBy,
+          },
+        },
+        take: size,
+        skip: skipValue,
+        include: { wallet: true },
+      });
+    }
+
     return await this.prismaService.user.findMany({
-      where: { role: ROLE.USER },
       orderBy: {
         [orderColumn]: orderBy,
       },
