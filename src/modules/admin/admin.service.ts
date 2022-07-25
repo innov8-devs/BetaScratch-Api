@@ -174,6 +174,15 @@ export class AdminService {
       },
     });
 
+    // total wallet balance
+    const walletsBalance = await this.prismaService.wallet.aggregate({
+      _sum: { withdrawable: true },
+    });
+    tabs.push({
+      title: 'walletBalance',
+      value: walletsBalance._sum.withdrawable,
+    });
+
     return {
       data: {
         tabs,
