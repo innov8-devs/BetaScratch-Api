@@ -338,10 +338,12 @@ export class AdminService {
       where: { id: userId },
       include: {
         transactions: {
+          orderBy: { id: 'desc' },
           take: 20,
         },
         wallet: true,
         purchases: {
+          orderBy: { id: 'desc' },
           take: 20,
         },
       },
