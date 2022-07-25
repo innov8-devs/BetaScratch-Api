@@ -6,6 +6,7 @@ import { MailService } from 'modules/mail/mail.service';
 import { PrismaService } from 'modules/prisma.service';
 import { TokenService } from 'modules/token/token.service';
 import {
+  CURRENCY,
   DB_TYPES,
   GAME_STATUS,
   PAYMENT_PURPOSE,
@@ -41,6 +42,8 @@ import {
   SortReturnData,
 } from './dto/admin.response';
 import * as Flutterwave from 'flutterwave-node-v3';
+import { TransactionService } from 'modules/transaction/transaction.service';
+import { generateRandomString } from 'utils/generateRandomString.util';
 
 @Injectable()
 export class AdminService {
@@ -48,6 +51,7 @@ export class AdminService {
     private readonly prismaService: PrismaService,
     private readonly mailService: MailService,
     private readonly tokenService: TokenService,
+    private readonly transactionService: TransactionService,
   ) {}
 
   // Get current logged in user
@@ -414,12 +418,58 @@ export class AdminService {
 
   public async updateUserWallet(input: UpdateUserWalletInput): Promise<Wallet> {
     if (input.type === WALLET_TYPE.ACCOUNT) {
+      if (input.amount.toString().includes('-')) {
+        await this.transactionService.createTransaction({
+          amount: input.amount,
+          currency: CURRENCY.NGN,
+          purpose: PAYMENT_PURPOSE.DEDUCT_WALLET_BALANCE,
+          status: PAYMENT_STATUS.SUCCESSFUL,
+          type: TRANSACTION.FLUTTERWAVE,
+          transactionId: Number(generateRandomString()),
+          transactionRef: generateRandomString(),
+          User: { connect: { id: input.userId } },
+        });
+      } else {
+        await this.transactionService.createTransaction({
+          amount: input.amount,
+          currency: CURRENCY.NGN,
+          purpose: PAYMENT_PURPOSE.INCREMENT_WALLET_BALANCE,
+          status: PAYMENT_STATUS.SUCCESSFUL,
+          type: TRANSACTION.FLUTTERWAVE,
+          transactionId: Number(generateRandomString()),
+          transactionRef: generateRandomString(),
+          User: { connect: { id: input.userId } },
+        });
+      }
       return await this.prismaService.wallet.update({
         where: { userId: input.userId },
         data: { withdrawable: { increment: input.amount } },
         include: { user: true },
       });
     } else if (input.type === WALLET_TYPE.BONUS) {
+      if (input.amount.toString().includes('-')) {
+        await this.transactionService.createTransaction({
+          amount: input.amount,
+          currency: CURRENCY.NGN,
+          purpose: PAYMENT_PURPOSE.DEDUCT_BONUS_BALANCE,
+          status: PAYMENT_STATUS.SUCCESSFUL,
+          type: TRANSACTION.FLUTTERWAVE,
+          transactionId: Number(generateRandomString()),
+          transactionRef: generateRandomString(),
+          User: { connect: { id: input.userId } },
+        });
+      } else {
+        await this.transactionService.createTransaction({
+          amount: input.amount,
+          currency: CURRENCY.NGN,
+          purpose: PAYMENT_PURPOSE.INCREMENT_BONUS_BALANCE,
+          status: PAYMENT_STATUS.SUCCESSFUL,
+          type: TRANSACTION.FLUTTERWAVE,
+          transactionId: Number(generateRandomString()),
+          transactionRef: generateRandomString(),
+          User: { connect: { id: input.userId } },
+        });
+      }
       return await this.prismaService.wallet.update({
         where: { userId: input.userId },
         data: { bonus: { increment: input.amount } },

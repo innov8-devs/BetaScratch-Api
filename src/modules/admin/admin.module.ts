@@ -7,9 +7,17 @@ import { TokenService } from 'modules/token/token.service';
 import { AuthService } from 'modules/auth/auth.service';
 import { AuthModule } from 'modules/auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
+import { TransactionService } from 'modules/transaction/transaction.service';
+import { TransactionModule } from 'modules/transaction/transaction.module';
+import { MessageModule } from 'modules/message/message.module';
 
 @Module({
-  imports: [AuthModule, JwtModule.register({})],
+  imports: [
+    AuthModule,
+    JwtModule.register({}),
+    TransactionModule,
+    MessageModule,
+  ],
   providers: [
     AdminResolver,
     AdminService,
@@ -17,6 +25,7 @@ import { JwtModule } from '@nestjs/jwt';
     MailService,
     TokenService,
     AuthService,
+    TransactionService,
   ],
 })
 export class AdminModule {}
