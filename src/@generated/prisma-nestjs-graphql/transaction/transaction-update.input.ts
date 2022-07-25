@@ -37,5 +37,5 @@ export class TransactionUpdateInput {
     updatedAt?: DateTimeFieldUpdateOperationsInput;
 
     @Field(() => UserUpdateOneWithoutTransactionsNestedInput, {nullable:true})
-    User?: UserUpdateOneWithoutTransactionsNestedInput;
+    user?: UserUpdateOneWithoutTransactionsNestedInput;
 }

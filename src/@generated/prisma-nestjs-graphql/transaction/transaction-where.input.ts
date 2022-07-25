@@ -50,7 +50,7 @@ export class TransactionWhereInput {
     updatedAt?: DateTimeFilter;
 
     @Field(() => UserRelationFilter, {nullable:true})
-    User?: UserRelationFilter;
+    user?: UserRelationFilter;
 
     @Field(() => IntNullableFilter, {nullable:true})
     userId?: IntNullableFilter;

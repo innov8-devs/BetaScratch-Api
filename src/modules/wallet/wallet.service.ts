@@ -118,7 +118,7 @@ export class WalletService {
           status: PAYMENT_STATUS.SUCCESSFUL,
           transactionId: Number(generateRandomString()),
           transactionRef: generateRandomString(),
-          User: { connect: { id: userId } },
+          user: { connect: { id: userId } },
         },
       });
       return true;
@@ -134,7 +134,7 @@ export class WalletService {
           status: PAYMENT_STATUS.FAILED,
           transactionId: Number(generateRandomNumbers()),
           transactionRef: generateRandomString(),
-          User: { connect: { id: userId } },
+          user: { connect: { id: userId } },
         },
       });
     }
@@ -166,7 +166,7 @@ export class WalletService {
         status: PAYMENT_STATUS.SUCCESSFUL,
         transactionId: Number(generateRandomString()),
         transactionRef: generateRandomString(),
-        User: { connect: { id: userId } },
+        user: { connect: { id: userId } },
       },
     });
     return true;
@@ -255,7 +255,7 @@ export class WalletService {
       type: TRANSACTION.WITHDRAWAL,
       transactionId: generateRandomNumbers(),
       transactionRef: generateRandomString(),
-      User: { connect: { id: userId } },
+      user: { connect: { id: userId } },
     });
     await this.messageService.sendWithdrawalPending(userId);
     return true;
@@ -316,7 +316,7 @@ export class WalletService {
         type: TRANSACTION.WITHDRAWAL,
         transactionId: generateRandomNumbers(),
         transactionRef: generateRandomString(),
-        User: { connect: { id: user.id } },
+        user: { connect: { id: user.id } },
       });
 
       await this.mailService.sendMail({
@@ -343,7 +343,7 @@ export class WalletService {
         type: TRANSACTION.WITHDRAWAL,
         transactionId: generateRandomNumbers(),
         transactionRef: generateRandomString(),
-        User: { connect: { id: user.id } },
+        user: { connect: { id: user.id } },
       });
 
       await this.prismaService.wallet.update({

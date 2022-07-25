@@ -319,15 +319,15 @@ export class AdminResolver {
     );
   }
 
-  @Auth([ROLE.ADMIN])
+  // @Auth([ROLE.ADMIN])
   @Query(() => [SortReturnData])
   async adminSearch(
     @Args('table') table: DB_TYPES,
     @Args('search') search: string,
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
+    // @CurrentUser() user: User,
+    // @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    // await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.adminSearch(table, search);
   }
 

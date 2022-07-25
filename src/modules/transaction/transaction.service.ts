@@ -75,7 +75,7 @@ export class TransactionService {
         transactionRef,
         transactionId: 0,
         amount: Number(amount),
-        User: {
+        user: {
           connect: {
             id: user.id,
           },
@@ -439,7 +439,7 @@ export class TransactionService {
         type: TRANSACTION.FLUTTERWAVE,
         transactionId,
         transactionRef: tx_ref,
-        User: { connect: { id: user.id } },
+        user: { connect: { id: user.id } },
       });
 
       await this.prismaService.wallet.update({
@@ -460,7 +460,7 @@ export class TransactionService {
         type: TRANSACTION.FLUTTERWAVE,
         transactionId,
         transactionRef: tx_ref,
-        User: { connect: { id: user.id } },
+        user: { connect: { id: user.id } },
       });
       res.status(200).end();
     }

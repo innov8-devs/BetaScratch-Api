@@ -38,7 +38,7 @@ export class Transaction {
     updatedAt!: Date;
 
     @Field(() => User, {nullable:true})
-    User?: User | null;
+    user?: User | null;
 
     @Field(() => Int, {nullable:true})
     userId!: number | null;

@@ -341,7 +341,7 @@ export class GameService {
           transactionId: generateRandomNumbers(),
           transactionRef,
           type: TRANSACTION.ACCOUNT,
-          User: { connect: { id: userId } },
+          user: { connect: { id: userId } },
         });
         await this.messageService.sendCheckoutMessage(userId, messageCards);
       } else {
@@ -353,7 +353,7 @@ export class GameService {
           transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
           type: TRANSACTION.ACCOUNT,
-          User: { connect: { id: userId } },
+          user: { connect: { id: userId } },
         });
       }
     } else if (input.transaction_type === TRANSACTION.BONUS) {
@@ -378,7 +378,7 @@ export class GameService {
           type: TRANSACTION.BONUS,
           transactionId: generateRandomNumbers(),
           transactionRef,
-          User: { connect: { id: userId } },
+          user: { connect: { id: userId } },
         });
         await this.messageService.sendCheckoutMessage(userId, messageCards);
       } else {
@@ -390,7 +390,7 @@ export class GameService {
           type: TRANSACTION.BONUS,
           transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
-          User: { connect: { id: userId } },
+          user: { connect: { id: userId } },
         });
       }
     } else {
@@ -450,7 +450,7 @@ export class GameService {
       type: TRANSACTION.FLUTTERWAVE,
       transactionId: generateRandomNumbers(),
       transactionRef: input.tx_ref,
-      User: { connect: { id: userId } },
+      user: { connect: { id: userId } },
     });
 
     return true;

@@ -38,7 +38,7 @@ export class TransactionOrderByWithRelationAndSearchRelevanceInput {
     updatedAt?: keyof typeof SortOrder;
 
     @Field(() => UserOrderByWithRelationAndSearchRelevanceInput, {nullable:true})
-    User?: UserOrderByWithRelationAndSearchRelevanceInput;
+    user?: UserOrderByWithRelationAndSearchRelevanceInput;
 
     @Field(() => SortOrder, {nullable:true})
     userId?: keyof typeof SortOrder;

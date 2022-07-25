@@ -42,5 +42,5 @@ export class TransactionCreateInput {
     updatedAt?: Date | string;
 
     @Field(() => UserCreateNestedOneWithoutTransactionsInput, {nullable:true})
-    User?: UserCreateNestedOneWithoutTransactionsInput;
+    user?: UserCreateNestedOneWithoutTransactionsInput;
 }

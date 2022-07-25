@@ -167,6 +167,10 @@ export class AdminService {
     const cardsPurchased = await this.prismaService.cart.count();
     tabs.push({ title: 'cardsPurchased', value: cardsPurchased });
 
+    // total transactions
+    const transactionCount = await this.prismaService.transaction.count();
+    tabs.push({ title: 'transactionLog', value: transactionCount });
+
     // total cards purchased today
     const purchasedToday = await this.prismaService.cart.count({
       where: {
@@ -380,7 +384,7 @@ export class AdminService {
     const { page, size, orderColumn, orderBy } = input;
     let skipValue = page * size - size;
     return await this.prismaService.transaction.findMany({
-      include: { User: true },
+      include: { user: true },
       orderBy: {
         [orderColumn]: orderBy,
       },
@@ -458,7 +462,7 @@ export class AdminService {
           type: TRANSACTION.ACCOUNT,
           transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
-          User: { connect: { id: input.userId } },
+          user: { connect: { id: input.userId } },
         });
       } else {
         await this.transactionService.createTransaction({
@@ -469,7 +473,7 @@ export class AdminService {
           type: TRANSACTION.ACCOUNT,
           transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
-          User: { connect: { id: input.userId } },
+          user: { connect: { id: input.userId } },
         });
       }
       return await this.prismaService.wallet.update({
@@ -487,7 +491,7 @@ export class AdminService {
           type: TRANSACTION.BONUS,
           transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
-          User: { connect: { id: input.userId } },
+          user: { connect: { id: input.userId } },
         });
       } else {
         await this.transactionService.createTransaction({
@@ -498,7 +502,7 @@ export class AdminService {
           type: TRANSACTION.BONUS,
           transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
-          User: { connect: { id: input.userId } },
+          user: { connect: { id: input.userId } },
         });
       }
       return await this.prismaService.wallet.update({
@@ -760,6 +764,9 @@ export class AdminService {
         return await this.prismaService.$queryRaw`
             SELECT * FROM "Admin" a WHERE a::text ILIKE ${searchQuery} LIMIT 20
           `;
+      case DB_TYPES.TRANSACTION:
+        return await this.prismaService
+          .$queryRaw`SELECT "t"."id", "t"."amount", "t"."transactionId", "t"."currency", "t"."transactionRef", "t"."status", "t"."purpose", "t"."createdAt", "t"."updatedAt", "t"."userId", "t"."type", to_json("User".*) as user from "Transaction" t INNER JOIN "User" on "t"."userId" = "User"."id" WHERE t::text ILIKE ${searchQuery} LIMIT 20`;
       default:
         break;
     }

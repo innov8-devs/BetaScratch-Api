@@ -258,4 +258,20 @@ export class SortReturnData {
 
   @Field({ nullable: true })
   cards?: Cart;
+
+  // transaction
+  @Field({ nullable: true })
+  transactionId?: number;
+
+  @Field({ nullable: true })
+  currency?: string;
+
+  @Field({ nullable: true })
+  transactionRef?: string;
+
+  @Field({ nullable: true })
+  purpose?: string;
+
+  @Field({ nullable: true })
+  type?: string | null;
 }
