@@ -43,7 +43,10 @@ import {
 } from './dto/admin.response';
 import * as Flutterwave from 'flutterwave-node-v3';
 import { TransactionService } from 'modules/transaction/transaction.service';
-import { generateRandomString } from 'utils/generateRandomString.util';
+import {
+  generateRandomNumbers,
+  generateRandomString,
+} from 'utils/generateRandomString.util';
 
 @Injectable()
 export class AdminService {
@@ -425,7 +428,7 @@ export class AdminService {
           purpose: PAYMENT_PURPOSE.DEDUCT_WALLET_BALANCE,
           status: PAYMENT_STATUS.SUCCESSFUL,
           type: TRANSACTION.ACCOUNT,
-          transactionId: Number(generateRandomString()),
+          transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
           User: { connect: { id: input.userId } },
         });
@@ -436,7 +439,7 @@ export class AdminService {
           purpose: PAYMENT_PURPOSE.INCREMENT_WALLET_BALANCE,
           status: PAYMENT_STATUS.SUCCESSFUL,
           type: TRANSACTION.ACCOUNT,
-          transactionId: Number(generateRandomString()),
+          transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
           User: { connect: { id: input.userId } },
         });
@@ -454,7 +457,7 @@ export class AdminService {
           purpose: PAYMENT_PURPOSE.DEDUCT_BONUS_BALANCE,
           status: PAYMENT_STATUS.SUCCESSFUL,
           type: TRANSACTION.BONUS,
-          transactionId: Number(generateRandomString()),
+          transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
           User: { connect: { id: input.userId } },
         });
@@ -465,7 +468,7 @@ export class AdminService {
           purpose: PAYMENT_PURPOSE.INCREMENT_BONUS_BALANCE,
           status: PAYMENT_STATUS.SUCCESSFUL,
           type: TRANSACTION.BONUS,
-          transactionId: Number(generateRandomString()),
+          transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
           User: { connect: { id: input.userId } },
         });
