@@ -20,6 +20,7 @@ import {
   EditUserPurchasesFromAdminInput,
   GetGamesFromAdminInput,
   GetPendingVerificationsFromAdminInput,
+  GetTransactionsFromAdminInput,
   GetUserPurchasesFromAdminInput,
   GetUsersCountInput,
   GetUsersFromAdminInput,
@@ -47,6 +48,7 @@ import {
   generateRandomNumbers,
   generateRandomString,
 } from 'utils/generateRandomString.util';
+import { Transaction } from '@prisma/client';
 
 @Injectable()
 export class AdminService {
@@ -369,6 +371,21 @@ export class AdminService {
     return await this.prismaService.wallet.findUnique({
       where: { userId: walletId },
       include: { user: true },
+    });
+  }
+
+  public async getTransactionsFromAdmin(
+    input: GetTransactionsFromAdminInput,
+  ): Promise<Transaction[]> {
+    const { page, size, orderColumn, orderBy } = input;
+    let skipValue = page * size - size;
+    return await this.prismaService.transaction.findMany({
+      include: { User: true },
+      orderBy: {
+        [orderColumn]: orderBy,
+      },
+      take: size,
+      skip: skipValue,
     });
   }
 

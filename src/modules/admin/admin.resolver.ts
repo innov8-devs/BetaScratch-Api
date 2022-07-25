@@ -2,6 +2,7 @@ import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
 import { Game } from '@generated/prisma-nestjs-graphql/game/game.model';
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { Purchase } from '@generated/prisma-nestjs-graphql/purchase/purchase.model';
+import { Transaction } from '@generated/prisma-nestjs-graphql/transaction/transaction.model';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
 import { WithdrawalRequest } from '@generated/prisma-nestjs-graphql/withdrawal-request/withdrawal-request.model';
@@ -17,6 +18,7 @@ import {
   EditUserPurchasesFromAdminInput,
   GetGamesFromAdminInput,
   GetPendingVerificationsFromAdminInput,
+  GetTransactionsFromAdminInput,
   GetUserPurchasesFromAdminInput,
   GetUsersCountInput,
   GetUsersFromAdminInput,
@@ -103,6 +105,18 @@ export class AdminResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getWalletsFromAdmin(input);
   }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => [Transaction], { nullable: true })
+  async getTransactionsFromAdmin(
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+    @Args('input') input: GetTransactionsFromAdminInput,
+  ): Promise<Transaction[]> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    return this.adminService.getTransactionsFromAdmin(input);
+  }
+
   @Auth([ROLE.ADMIN])
   @Query(() => Wallet, { nullable: true })
   async getOneWalletFromAdmin(

@@ -64,6 +64,23 @@ export class GetWalletsFromAdminInput {
 }
 
 @InputType()
+export class GetTransactionsFromAdminInput {
+  @Field(() => Number)
+  @IsNumber()
+  page: number;
+
+  @Field(() => Number)
+  @IsNumber()
+  size: number;
+
+  @Field(() => String, { nullable: true })
+  orderColumn?: string = 'id';
+
+  @Field(() => String, { nullable: true })
+  orderBy?: string = 'asc';
+}
+
+@InputType()
 export class GetGamesFromAdminInput {
   @Field(() => Number)
   @IsNumber()
