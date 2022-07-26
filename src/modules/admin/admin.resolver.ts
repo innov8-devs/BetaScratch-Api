@@ -1,4 +1,5 @@
 import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
+import { FlutterwaveLog } from '@generated/prisma-nestjs-graphql/flutterwave-log/flutterwave-log.model';
 import { Game } from '@generated/prisma-nestjs-graphql/game/game.model';
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { Purchase } from '@generated/prisma-nestjs-graphql/purchase/purchase.model';
@@ -319,16 +320,27 @@ export class AdminResolver {
     );
   }
 
-  // @Auth([ROLE.ADMIN])
+  @Auth([ROLE.ADMIN])
   @Query(() => [SortReturnData])
   async adminSearch(
     @Args('table') table: DB_TYPES,
     @Args('search') search: string,
-    // @CurrentUser() user: User,
-    // @Context() { res }: MyContext,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
   ) {
-    // await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.adminSearch(table, search);
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => [FlutterwaveLog])
+  async getFlutterwaveLogs(
+    @Args('input') input: PaginationInput,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    return this.adminService.getFlutterwaveLogs(input);
   }
 
   @Mutation(() => Boolean)

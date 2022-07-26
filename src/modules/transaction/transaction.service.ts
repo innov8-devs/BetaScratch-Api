@@ -279,6 +279,29 @@ export class TransactionService {
 
     if (confirmedPurchase) return res.status(200).end();
 
+    await this.prismaService.flutterwaveLog.create({
+      data: {
+        card: {
+          first6digits: data.card.first_6digits,
+          last4digits: data.card.last_4digits,
+          issuer: data.card.issuer,
+          country: data.card.country,
+          type: data.card.type,
+          expiry: data.card.expiry,
+        },
+        currency: data.currency,
+        ip: data.ip,
+        narration: data.narration,
+        paymentType,
+        status,
+        tx_ref,
+        amount,
+        customerName: data.customer.name,
+        customerEmail: data.customer.email,
+        processorResponse: data.processor_response,
+      },
+    });
+
     if (status === 'successful') {
       const cartItems = await this.prismaService.cart.findMany({
         where: {
@@ -414,6 +437,29 @@ export class TransactionService {
     const transactionId = data.id;
     const user = await this.prismaService.user.findUnique({
       where: { email: data.customer.email },
+    });
+
+    await this.prismaService.flutterwaveLog.create({
+      data: {
+        card: {
+          first6digits: data.card.first_6digits,
+          last4digits: data.card.last_4digits,
+          issuer: data.card.issuer,
+          country: data.card.country,
+          type: data.card.type,
+          expiry: data.card.expiry,
+        },
+        currency: data.currency,
+        ip: data.ip,
+        narration: data.narration,
+        paymentType: data.payment_type,
+        status: data.status,
+        tx_ref,
+        amount,
+        customerName: data.customer.name,
+        customerEmail: data.customer.email,
+        processorResponse: data.processor_response,
+      },
     });
 
     const depositTransaction = await this.prismaService.transaction.findFirst({

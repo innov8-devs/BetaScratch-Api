@@ -772,6 +772,18 @@ export class AdminService {
     }
   }
 
+  async getFlutterwaveLogs(input: PaginationInput) {
+    const { orderBy, orderColumn, page, size } = input;
+    let skipValue = page * size - size;
+    return await this.prismaService.flutterwaveLog.findMany({
+      orderBy: {
+        [orderColumn]: orderBy,
+      },
+      take: size,
+      skip: skipValue,
+    });
+  }
+
   async run() {
     let unverified = await this.prismaService.user.findMany({
       where: { confirmed: false },

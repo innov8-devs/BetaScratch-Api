@@ -298,6 +298,23 @@ model Token {
   adminId      Int?
 }
 
+model FlutterwaveLog {
+  id                Int      @id @default(autoincrement())
+  tx_ref            String
+  amount            Int?
+  currency          String
+  ip                String
+  status            String
+  paymentType       String
+  customerName      String?
+  customerEmail     String?
+  narration         String
+  processorResponse String?
+  card              Json?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
 enum ROLE {
   USER
   ADMIN
