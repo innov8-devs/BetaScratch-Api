@@ -9,9 +9,62 @@ export const MAIL_SUBJECT = {
   REFERRAL: 'Referral',
   ADMIN_LOGIN: 'Administrator Login',
   ADMIN_NEW: 'Verify admin account',
+  WELCOME_MESSAGE: 'Welcome to BetaScratch',
 };
 
 export const MAIL_MESSAGE = {
+  WELCOME_MESSAGE: () => `
+<html>
+<body>
+  <div style="background-color: #F2F2F2; padding: 7px; margin: 0px;">
+    <div style="padding: 0px; margin:0px;">
+      <div style="background-color: #F8F9FA; padding: 14px; margin: 0px;">
+        <img src='https://betascratch.com/assets/logo_black.png' alt='Betascratch logo'
+          style='max-height: 60px; display: block; border-radius: 10px;' />
+      </div>
+      <div
+        style="padding: 14px; margin: 0px; font-size: 15px; color: #2B2F33; line-height: 1.5; border-radius: 0px 0px 10px 10px; border-width: 7px; border-style: solid; border-color: #F8F9FA;">
+        <div style="padding-bottom: 36px">
+        <p>Thanks for signing up at Betascratch.</p>
+        <p>Welcome to Betascratch, where dreams come true</p>
+          <h3>
+        Welcome to Betascratch, where dreams come true
+          </h3>
+          <p>
+          Browse through our catalogue of games and win cash prizes.
+          </p>
+          <br><br>
+          <p>Thank you for using Betascratch.</p>
+        </div>
+        <div style="text-align:center; font-size:12px; padding: 16px 22px 0px 22px; border-top: 2px solid #F8F9F2;">
+          <div style="display: flex; justify-content: center; margin-bottom: 21px">
+            <a href='google.com'><img src='https://betascratch.com/assets/apple.png' alt='Get on AppleStore'
+                style='max-height: 40px; display: block; margin-right:1em;' /></a>
+            <a href='google.com'><img src='https://betascratch.com/assets/google.png' alt='Get on GooglePlay'
+                style='max-height: 40px; display: block;' /></a>
+          </div>
+          <p style="margin-bottom: 14px;">Ademola, Adetokumbo VI, Lagos Nigeria.</p>
+          <div style="display: block; margin: 21px 0; text-align: center;">
+            <a href='https://web.facebook.com/betascratchgames/?_rdc=1&_rdr'><img
+                src='https://childsvoice.org/wp-content/uploads/2016/01/facebook-logo-200x200.png' alt='FB'
+                style='max-height: 25px; border-radius:5px; display: inline-block; margin-right:1em;' /></a>
+            <a href='https://twitter.com/betascratch_'><img src='https://awmedu.com/wp-content/uploads/2016/08/twitter-icon-big.png' alt='TW'
+                style='max-height: 28px; display: inline-block; border-radius:5px; margin-right:1em;' /></a>
+            <a href='https://www.linkedin.com/company/betainc/'><img src='http://pngimg.com/uploads/linkedIn/small/linkedIn_PNG16.png' alt='IN'
+                style='max-height: 25px; display: inline-block; border-radius:5px;' />
+          </div>
+          <div style="text-align:center;">
+            <a href="betascratch.com">Home</a> | <a href="betascratch.com/home/?login=true">Login</a> | <a
+              href="betascratch.com/privacy-policy">Privacy</a>
+          </div>
+          <p>Copyright @ Betascratch, <br /> All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
+`,
+
   REGISTER: (otp: string) => `
 <html>
 <body>

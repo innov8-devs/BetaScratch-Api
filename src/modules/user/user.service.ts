@@ -109,14 +109,20 @@ export class UserService {
       });
     }
 
-    const otp = await this.otpService.createAuthOtp(
-      user,
-      AUTH_TYPE.CONFIRM_USER_PREFIX,
-    );
+    // const otp = await this.otpService.createAuthOtp(
+    //   user,
+    //   AUTH_TYPE.CONFIRM_USER_PREFIX,
+    // );
+
+    // await this.mailService.sendMail({
+    //   subject: MAIL_SUBJECT.REGISTER,
+    //   html: MAIL_MESSAGE.REGISTER(otp.code),
+    //   to: user.email,
+    // });
 
     await this.mailService.sendMail({
-      subject: MAIL_SUBJECT.REGISTER,
-      html: MAIL_MESSAGE.REGISTER(otp.code),
+      subject: MAIL_SUBJECT.WELCOME_MESSAGE,
+      html: MAIL_MESSAGE.WELCOME_MESSAGE(),
       to: user.email,
     });
 
