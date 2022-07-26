@@ -383,6 +383,17 @@ export class AdminService {
   ): Promise<Transaction[]> {
     const { page, size, orderColumn, orderBy } = input;
     let skipValue = page * size - size;
+    if (orderColumn === 'purpose') {
+      return await this.prismaService.transaction.findMany({
+        where: { purpose: orderBy },
+        include: { user: true },
+        orderBy: {
+          id: 'desc',
+        },
+        take: size,
+        skip: skipValue,
+      });
+    }
     return await this.prismaService.transaction.findMany({
       include: { user: true },
       orderBy: {
