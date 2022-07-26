@@ -46,7 +46,7 @@ model User {
   country            String
   /// @Validaror.IsBoolean()
   /// @Validation.IsOptional()
-  confirmed          Boolean             @default(false)
+  confirmed          Boolean             @default(true)
   /// @Validaror.IsBoolean()
   /// @Validation.IsOptional()
   disabled           Boolean             @default(false)
