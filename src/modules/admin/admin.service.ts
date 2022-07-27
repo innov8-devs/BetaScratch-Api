@@ -550,7 +550,7 @@ export class AdminService {
       return await this.prismaService.user.count({
         where: { verificationStatus: 'pending' },
       });
-    } else if (input.field === DB_TYPES.FLUTTER_LOG) {
+    } else if (input.field === DB_TYPES.FLUTTERWAVE_LOG) {
       return await this.prismaService.flutterwaveLog.count({});
     }
     return 0;
