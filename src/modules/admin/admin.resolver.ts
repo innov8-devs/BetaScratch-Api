@@ -32,6 +32,7 @@ import {
 import {
   DashboardDataResponse,
   FlutterTansactionResponse,
+  FlutterTransactionsTimelineResponse,
   SortReturnData,
 } from './dto/admin.response';
 
@@ -264,17 +265,18 @@ export class AdminResolver {
     await this.adminService.resetPurchases();
     return true;
   }
-  @Auth([ROLE.ADMIN])
+  // @Auth([ROLE.ADMIN])
   @Query(() => [FlutterTansactionResponse])
   async getFlutterwaveTransactions(
     @Args('from') from: string,
     @Args('to') to: string,
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
+    // @CurrentUser() user: User,
+    // @Context() { res }: MyContext,
   ): Promise<FlutterTansactionResponse[]> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    // await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return await this.adminService.getFlutterwaveTransactions(from, to);
   }
+
   @Auth([ROLE.ADMIN])
   @Mutation(() => Boolean)
   async updateAdminPersonalInformation(
@@ -343,6 +345,18 @@ export class AdminResolver {
     return this.adminService.getFlutterwaveLogs(input);
   }
 
+  @Auth([ROLE.ADMIN])
+  @Query(() => FlutterTransactionsTimelineResponse)
+  async fetchFlutterTransactionTimeline(
+    @Args('transaction_id') transaction_Id: string,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    return await this.adminService.fetchFlutterTransactionTimeline(
+      transaction_Id,
+    );
+  }
   @Mutation(() => Boolean)
   async run() {
     await this.adminService.run();

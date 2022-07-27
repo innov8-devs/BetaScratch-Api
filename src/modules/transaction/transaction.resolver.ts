@@ -10,10 +10,7 @@ import {
   InitiatePaymentInput,
   TransactionHistoryInput,
 } from './dto/request.dto';
-import {
-  FlutterTransactionsResponse,
-  FlutterTransactionsTimelineResponse,
-} from './dto/response.dto';
+import { FlutterTransactionsResponse } from './dto/response.dto';
 import { TransactionService } from './transaction.service';
 
 @Resolver()
@@ -63,18 +60,5 @@ export class TransactionResolver {
   ) {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return await this.transactionService.fetchFlutterTransactions(from, to);
-  }
-
-  @Auth([ROLE.ADMIN])
-  @Query(() => FlutterTransactionsTimelineResponse)
-  async fetchFlutterTransactionTimeline(
-    @Args('transaction_id') transaction_Id: number,
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-  ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
-    return await this.transactionService.fetchFlutterTransactionTimeline(
-      transaction_Id,
-    );
   }
 }

@@ -1,4 +1,3 @@
-import { Transaction } from '@generated/prisma-nestjs-graphql/transaction/transaction.model';
 import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
@@ -41,17 +40,6 @@ class Card {
 }
 
 @ObjectType()
-class FlutterTimelineData {
-  @Field()
-  note: string;
-
-  @Field()
-  createdAt: string;
-  @Field()
-  action: string;
-}
-
-@ObjectType()
 export class FlutterTransactionsResponse {
   @Field()
   id: number;
@@ -79,16 +67,4 @@ export class FlutterTransactionsResponse {
 
   @Field(() => Customer)
   customer: Customer;
-}
-
-@ObjectType()
-export class FlutterTransactionsTimelineResponse {
-  @Field()
-  status: string;
-  @Field()
-  message: string;
-  @Field(() => [FlutterTimelineData])
-  data: FlutterTimelineData[];
-  @Field(() => Transaction)
-  betatransaction: Transaction;
 }

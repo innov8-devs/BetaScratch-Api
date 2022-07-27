@@ -650,13 +650,13 @@ export class AdminService {
   ): Promise<FlutterTansactionResponse[]> {
     console.log(from, to);
     const flw = new Flutterwave(
-      process.env.FLUTTERWAVE_PUBLIC_KEY,
-      process.env.FLUTTERWAVE_SECRET_KEY,
+      'FLWPUBK_TEST-605e7bf00f5a3971a24bdd8f36acb345-X',
+      'FLWSECK_TEST-fc7e5f67bce038ac4ba1d449f50fd72e-X',
     );
     try {
       const response = await flw.Transaction.fetch({
-        from: '2021-05-01',
-        to: '2021-06-01',
+        from: '2022-07-01',
+        to: '2022-07-26',
       });
       console.log(response);
       return response.data;
@@ -793,6 +793,41 @@ export class AdminService {
       take: size,
       skip: skipValue,
     });
+  }
+
+  async fetchFlutterTransactionTimeline(transactionId: string) {
+    const flw = new Flutterwave(
+      process.env.FLUTTERWAVE_PUBLIC_KEY,
+      process.env.FLUTTERWAVE_SECRET_KEY,
+    );
+    // const flw = new Flutterwave(
+    //   'FLWPUBK_TEST-605e7bf00f5a3971a24bdd8f36acb345-X',
+    //   'FLWSECK_TEST-fc7e5f67bce038ac4ba1d449f50fd72e-X',
+    // );
+    let result = [];
+    try {
+      const payload = {
+        id: transactionId,
+      };
+      const response = await flw.Transaction.event(payload);
+      for (let trx of response.data) {
+        result.push({
+          note: trx.note,
+          createdAt: trx.created_at,
+          action: trx.action,
+        });
+      }
+      return {
+        status: response.status,
+        message: response.message,
+        data: result,
+      };
+    } catch (error) {
+      throw new BadRequestException({
+        name: 'transaction',
+        message: 'cannot get transaction timeline',
+      });
+    }
   }
 
   async run() {

@@ -275,3 +275,24 @@ export class SortReturnData {
   @Field({ nullable: true })
   type?: string | null;
 }
+
+@ObjectType()
+class FlutterTimelineData {
+  @Field()
+  note: string;
+
+  @Field()
+  createdAt: string;
+  @Field()
+  action: string;
+}
+
+@ObjectType()
+export class FlutterTransactionsTimelineResponse {
+  @Field()
+  status: string;
+  @Field()
+  message: string;
+  @Field(() => [FlutterTimelineData])
+  data: FlutterTimelineData[];
+}

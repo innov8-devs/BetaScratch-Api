@@ -210,41 +210,6 @@ export class TransactionService {
     }
   }
 
-  async fetchFlutterTransactionTimeline(transactionId: number) {
-    const flw = new Flutterwave(
-      process.env.FLUTTERWAVE_PUBLIC_KEY,
-      process.env.FLUTTERWAVE_SECRET_KEY,
-    );
-    let result = [];
-    try {
-      const betatransaction = await this.prismaService.transaction.findFirst({
-        where: { transactionId },
-      });
-      const payload = {
-        id: transactionId,
-      };
-      const response = await flw.Transaction.event(payload);
-      for (let trx of response.data) {
-        result.push({
-          note: trx.note,
-          createdAt: trx.created_at,
-          action: trx.action,
-        });
-      }
-      return {
-        status: response.status,
-        message: response.message,
-        data: result,
-        betatransaction,
-      };
-    } catch (error) {
-      throw new BadRequestException({
-        name: 'transaction',
-        message: 'cannot get transaction timeline',
-      });
-    }
-  }
-
   async calculateVipProgress(userId: number) {
     const totalAmountSpent = await this.checkTotalAmountSpent(userId);
     const vipStatus = calculateVipStatus(totalAmountSpent);
