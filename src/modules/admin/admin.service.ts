@@ -171,6 +171,9 @@ export class AdminService {
     const transactionCount = await this.prismaService.transaction.count();
     tabs.push({ title: 'transactionLog', value: transactionCount });
 
+    const flutterwaveCount = await this.prismaService.flutterwaveLog.count();
+    tabs.push({ title: 'flutterwaveLog', value: flutterwaveCount });
+
     // total cards purchased today
     const purchasedToday = await this.prismaService.cart.count({
       where: {
