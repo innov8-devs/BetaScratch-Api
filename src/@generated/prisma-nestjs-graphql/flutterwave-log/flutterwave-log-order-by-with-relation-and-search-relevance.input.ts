@@ -13,6 +13,9 @@ export class FlutterwaveLogOrderByWithRelationAndSearchRelevanceInput {
     tx_ref?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    transactionId?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     amount?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

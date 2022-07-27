@@ -12,6 +12,9 @@ export class FlutterwaveLogCountAggregate {
     tx_ref!: number;
 
     @Field(() => Int, {nullable:false})
+    transactionId!: number;
+
+    @Field(() => Int, {nullable:false})
     amount!: number;
 
     @Field(() => Int, {nullable:false})

@@ -13,6 +13,9 @@ export class FlutterwaveLog {
     @Field(() => String, {nullable:false})
     tx_ref!: string;
 
+    @Field(() => Int, {nullable:false})
+    transactionId!: number;
+
     @Field(() => Int, {nullable:true})
     amount!: number | null;
 

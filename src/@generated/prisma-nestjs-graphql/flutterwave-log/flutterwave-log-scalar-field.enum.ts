@@ -3,6 +3,7 @@ import { registerEnumType } from '@nestjs/graphql';
 export enum FlutterwaveLogScalarFieldEnum {
     id = "id",
     tx_ref = "tx_ref",
+    transactionId = "transactionId",
     amount = "amount",
     currency = "currency",
     ip = "ip",

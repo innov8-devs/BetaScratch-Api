@@ -16,6 +16,9 @@ export class FlutterwaveLogUncheckedUpdateInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     tx_ref?: StringFieldUpdateOperationsInput;
 
+    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
+    transactionId?: IntFieldUpdateOperationsInput;
+
     @Field(() => NullableIntFieldUpdateOperationsInput, {nullable:true})
     amount?: NullableIntFieldUpdateOperationsInput;
 

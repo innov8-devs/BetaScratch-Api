@@ -301,6 +301,7 @@ model Token {
 model FlutterwaveLog {
   id                Int      @id @default(autoincrement())
   tx_ref            String
+  transactionId     Int
   amount            Int?
   currency          String
   ip                String

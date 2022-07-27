@@ -11,6 +11,9 @@ export class FlutterwaveLogCountAggregateInput {
     tx_ref?: true;
 
     @Field(() => Boolean, {nullable:true})
+    transactionId?: true;
+
+    @Field(() => Boolean, {nullable:true})
     amount?: true;
 
     @Field(() => Boolean, {nullable:true})

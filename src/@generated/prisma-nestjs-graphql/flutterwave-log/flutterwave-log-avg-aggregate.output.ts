@@ -9,5 +9,8 @@ export class FlutterwaveLogAvgAggregate {
     id?: number;
 
     @Field(() => Float, {nullable:true})
+    transactionId?: number;
+
+    @Field(() => Float, {nullable:true})
     amount?: number;
 }

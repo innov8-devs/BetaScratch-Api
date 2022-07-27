@@ -25,6 +25,9 @@ export class FlutterwaveLogScalarWhereWithAggregatesInput {
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     tx_ref?: StringWithAggregatesFilter;
 
+    @Field(() => IntWithAggregatesFilter, {nullable:true})
+    transactionId?: IntWithAggregatesFilter;
+
     @Field(() => IntNullableWithAggregatesFilter, {nullable:true})
     amount?: IntNullableWithAggregatesFilter;
 

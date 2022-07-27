@@ -246,6 +246,7 @@ export class TransactionService {
 
     await this.prismaService.flutterwaveLog.create({
       data: {
+        transactionId: data.id,
         card: {
           first6digits: data.card.first_6digits,
           last4digits: data.card.last_4digits,
@@ -406,6 +407,7 @@ export class TransactionService {
 
     await this.prismaService.flutterwaveLog.create({
       data: {
+        transactionId: data.id,
         card: {
           first6digits: data.card.first_6digits,
           last4digits: data.card.last_4digits,

@@ -12,6 +12,9 @@ export class FlutterwaveLogMaxAggregate {
     tx_ref?: string;
 
     @Field(() => Int, {nullable:true})
+    transactionId?: number;
+
+    @Field(() => Int, {nullable:true})
     amount?: number;
 
     @Field(() => String, {nullable:true})

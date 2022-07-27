@@ -11,6 +11,9 @@ export class FlutterwaveLogMaxAggregateInput {
     tx_ref?: true;
 
     @Field(() => Boolean, {nullable:true})
+    transactionId?: true;
+
+    @Field(() => Boolean, {nullable:true})
     amount?: true;
 
     @Field(() => Boolean, {nullable:true})

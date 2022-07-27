@@ -25,6 +25,9 @@ export class FlutterwaveLogWhereInput {
     @Field(() => StringFilter, {nullable:true})
     tx_ref?: StringFilter;
 
+    @Field(() => IntFilter, {nullable:true})
+    transactionId?: IntFilter;
+
     @Field(() => IntNullableFilter, {nullable:true})
     amount?: IntNullableFilter;
 

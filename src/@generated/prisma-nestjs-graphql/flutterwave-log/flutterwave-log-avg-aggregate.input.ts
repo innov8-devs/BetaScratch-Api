@@ -8,5 +8,8 @@ export class FlutterwaveLogAvgAggregateInput {
     id?: true;
 
     @Field(() => Boolean, {nullable:true})
+    transactionId?: true;
+
+    @Field(() => Boolean, {nullable:true})
     amount?: true;
 }

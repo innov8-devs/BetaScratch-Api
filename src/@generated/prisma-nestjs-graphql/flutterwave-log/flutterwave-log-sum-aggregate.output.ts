@@ -9,5 +9,8 @@ export class FlutterwaveLogSumAggregate {
     id?: number;
 
     @Field(() => Int, {nullable:true})
+    transactionId?: number;
+
+    @Field(() => Int, {nullable:true})
     amount?: number;
 }
