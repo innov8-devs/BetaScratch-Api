@@ -107,7 +107,7 @@ export class AdminService {
             type: { equals: TRANSACTION.FLUTTERWAVE },
           },
           {
-            type: { equals: TRANSACTION.ACCOUNT },
+            type: { equals: TRANSACTION.WALLET },
           },
         ],
         AND: [
@@ -141,7 +141,7 @@ export class AdminService {
             type: { equals: TRANSACTION.FLUTTERWAVE },
           },
           {
-            type: { equals: TRANSACTION.ACCOUNT },
+            type: { equals: TRANSACTION.WALLET },
           },
         ],
         AND: [
@@ -463,14 +463,14 @@ export class AdminService {
   }
 
   public async updateUserWallet(input: UpdateUserWalletInput): Promise<Wallet> {
-    if (input.type === WALLET_TYPE.ACCOUNT) {
+    if (input.type === WALLET_TYPE.WALLET) {
       if (input.amount.toString().includes('-')) {
         await this.transactionService.createTransaction({
           amount: input.amount,
           currency: CURRENCY.NGN,
           purpose: PAYMENT_PURPOSE.DEDUCT_WALLET_BALANCE,
           status: PAYMENT_STATUS.SUCCESSFUL,
-          type: TRANSACTION.ACCOUNT,
+          type: TRANSACTION.WALLET,
           transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
           user: { connect: { id: input.userId } },
@@ -481,7 +481,7 @@ export class AdminService {
           currency: CURRENCY.NGN,
           purpose: PAYMENT_PURPOSE.INCREMENT_WALLET_BALANCE,
           status: PAYMENT_STATUS.SUCCESSFUL,
-          type: TRANSACTION.ACCOUNT,
+          type: TRANSACTION.WALLET,
           transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
           user: { connect: { id: input.userId } },

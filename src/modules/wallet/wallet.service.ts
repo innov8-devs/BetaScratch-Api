@@ -66,7 +66,7 @@ export class WalletService {
     const errMessage = [];
     const userBalance = await this.getUserBalance(userId);
     if (
-      wallet === WALLET_TYPE.ACCOUNT &&
+      wallet === WALLET_TYPE.WALLET &&
       Number(amount) > userBalance.withdrawable
     ) {
       errMessage.push(MESSAGES.USER.INSUFFICIENT_WALLET_FUND);
@@ -76,7 +76,7 @@ export class WalletService {
     }
     if (errMessage.length) return false;
     try {
-      if (wallet === WALLET_TYPE.ACCOUNT) {
+      if (wallet === WALLET_TYPE.WALLET) {
         await this.prismaService.wallet.update({
           data: {
             withdrawable: Number(userBalance.withdrawable) - Number(amount),
@@ -112,7 +112,7 @@ export class WalletService {
           amount: Number(amount),
           currency,
           purpose:
-            wallet === WALLET_TYPE.ACCOUNT
+            wallet === WALLET_TYPE.WALLET
               ? PAYMENT_PURPOSE.DEDUCT_WITHDRAWAL_BALANCE
               : PAYMENT_PURPOSE.DEDUCT_BONUS_BALANCE,
           status: PAYMENT_STATUS.SUCCESSFUL,
@@ -128,7 +128,7 @@ export class WalletService {
           amount: Number(amount),
           currency,
           purpose:
-            wallet === WALLET_TYPE.ACCOUNT
+            wallet === WALLET_TYPE.WALLET
               ? PAYMENT_PURPOSE.DEDUCT_WITHDRAWAL_BALANCE
               : PAYMENT_PURPOSE.DEDUCT_BONUS_BALANCE,
           status: PAYMENT_STATUS.FAILED,

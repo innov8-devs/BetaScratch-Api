@@ -317,7 +317,7 @@ export class GameService {
       transactionRef,
     );
 
-    if (input.transaction_type === TRANSACTION.ACCOUNT) {
+    if (input.transaction_type === TRANSACTION.WALLET) {
       const response = await this.checkoutWithAccount(
         userId,
         input.subtotal,
@@ -340,7 +340,7 @@ export class GameService {
           status: PAYMENT_STATUS.SUCCESSFUL,
           transactionId: generateRandomNumbers(),
           transactionRef,
-          type: TRANSACTION.ACCOUNT,
+          type: TRANSACTION.WALLET,
           user: { connect: { id: userId } },
         });
         await this.messageService.sendCheckoutMessage(userId, messageCards);
@@ -352,7 +352,7 @@ export class GameService {
           status: PAYMENT_STATUS.FAILED,
           transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
-          type: TRANSACTION.ACCOUNT,
+          type: TRANSACTION.WALLET,
           user: { connect: { id: userId } },
         });
       }

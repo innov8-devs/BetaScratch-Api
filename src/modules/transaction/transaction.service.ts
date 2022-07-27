@@ -110,7 +110,7 @@ export class TransactionService {
             type: { equals: TRANSACTION.FLUTTERWAVE },
           },
           {
-            type: { equals: TRANSACTION.ACCOUNT },
+            type: { equals: TRANSACTION.WALLET },
           },
         ],
       },
