@@ -265,15 +265,15 @@ export class AdminResolver {
     await this.adminService.resetPurchases();
     return true;
   }
-  // @Auth([ROLE.ADMIN])
+  @Auth([ROLE.ADMIN])
   @Query(() => [FlutterTansactionResponse])
   async getFlutterwaveTransactions(
     @Args('from') from: string,
     @Args('to') to: string,
-    // @CurrentUser() user: User,
-    // @Context() { res }: MyContext,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
   ): Promise<FlutterTansactionResponse[]> {
-    // await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return await this.adminService.getFlutterwaveTransactions(from, to);
   }
 
@@ -367,6 +367,17 @@ export class AdminResolver {
   ) {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return await this.adminService.confirmBankPurchase(id);
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Query(() => FlutterTransactionsTimelineResponse)
+  async fetchBankTransferPurchase(
+    @Args('input') input: PaginationInput,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    return await this.adminService.fetchBankTransferPurchase(input);
   }
 
   @Mutation(() => Boolean)

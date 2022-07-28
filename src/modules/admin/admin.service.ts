@@ -48,7 +48,7 @@ import {
   generateRandomNumbers,
   generateRandomString,
 } from 'utils/generateRandomString.util';
-import { Transaction } from '@prisma/client';
+import { Transaction, TRANSACTION_TYPE } from '@prisma/client';
 
 @Injectable()
 export class AdminService {
@@ -552,6 +552,10 @@ export class AdminService {
       });
     } else if (input.field === DB_TYPES.FLUTTERWAVE_LOG) {
       return await this.prismaService.flutterwaveLog.count({});
+    } else if (input.field === DB_TYPES.BANK_TRANSFER_PURCHASE) {
+      return await this.prismaService.purchase.count({
+        where: { transactionType: TRANSACTION_TYPE.BANK_TRANSFER },
+      });
     }
     return 0;
   }
@@ -780,6 +784,10 @@ export class AdminService {
       case DB_TYPES.TRANSACTION:
         return await this.prismaService
           .$queryRaw`SELECT "t"."id", "t"."amount", "t"."transactionId", "t"."currency", "t"."transactionRef", "t"."status", "t"."purpose", "t"."createdAt", "t"."updatedAt", "t"."userId", "t"."type", to_json("User".*) as user from "Transaction" t INNER JOIN "User" on "t"."userId" = "User"."id" WHERE t::text ILIKE ${searchQuery} LIMIT 20`;
+      case DB_TYPES.BANK_TRANSFER_PURCHASE:
+        return await this.prismaService.$queryRaw`
+        SELECT * FROM "Purchase" p WHERE p::text ILIKE ${searchQuery} AND "transactionType" = 'BANK_TRANSFER' LIMIT 20
+        `;
       default:
         break;
     }
@@ -847,6 +855,19 @@ export class AdminService {
     } catch (err) {
       throw new BadRequestException(err);
     }
+  }
+
+  async fetchBankTransferPurchase(input: PaginationInput) {
+    const { orderBy, orderColumn, page, size } = input;
+    let skipValue = page * size - size;
+    return await this.prismaService.purchase.findMany({
+      where: { transactionType: TRANSACTION_TYPE.BANK_TRANSFER },
+      orderBy: {
+        [orderColumn]: orderBy,
+      },
+      take: size,
+      skip: skipValue,
+    });
   }
 
   async run() {
