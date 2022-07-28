@@ -127,6 +127,9 @@ export class BankTransferCheckoutInput {
   @Field(() => String, { nullable: false })
   transaction_type!: string;
 
+  @Field(() => Number, { nullable: false })
+  subtotal!: number;
+
   @Field(() => [CartItems], { nullable: false })
   @IsArray()
   cart: CartItems[];

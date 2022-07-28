@@ -465,12 +465,19 @@ export class GameService {
       where: { userId },
     });
 
-    let subtotal = 0;
+    let calcSubtotal = 0;
     const transactionRef = generateRandomString();
 
     for (let item of input.cart) {
       const price = item.quantity * item.price.ngn;
-      subtotal += price;
+      calcSubtotal += price;
+    }
+
+    if (input.subtotal !== calcSubtotal) {
+      throw new BadRequestException({
+        name: 'amount',
+        message: 'Total does not correlate',
+      });
     }
 
     const cartDetail = computeCart(input.cart, userId, transactionRef);
@@ -479,13 +486,13 @@ export class GameService {
       userId,
       cartDetail,
       transactionRef,
-      subtotal,
+      calcSubtotal,
       TRANSACTION_TYPE.BANK_TRANSFER,
       PURCHASE_STATUS.INACTIVE,
     );
 
     await this.transactionService.createTransaction({
-      amount: subtotal,
+      amount: calcSubtotal,
       currency: userWallet.currency,
       purpose: PAYMENT_PURPOSE.CART,
       status: PAYMENT_STATUS.PENDING,
