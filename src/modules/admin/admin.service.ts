@@ -832,6 +832,23 @@ export class AdminService {
     }
   }
 
+  async confirmBankPurchase(id: number) {
+    try {
+      const purchase = await this.prismaService.purchase.update({
+        where: { id },
+        data: { status: 'active' },
+      });
+      await this.prismaService.transaction.updateMany({
+        where: { transactionRef: purchase.reference },
+        data: {
+          status: PAYMENT_STATUS.SUCCESSFUL,
+        },
+      });
+    } catch (err) {
+      throw new BadRequestException(err);
+    }
+  }
+
   async run() {
     let unverified = await this.prismaService.user.findMany({
       where: { confirmed: false },
