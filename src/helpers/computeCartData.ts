@@ -1,10 +1,10 @@
 import { CartItems } from 'modules/game/dto/game.request';
-import { generateRandomString } from 'utils/generateRandomString.util';
+// import { generateRandomString } from 'utils/generateRandomString.util';
 
 export const computeCart = (
   data: CartItems[],
   userId: number,
-  transactionRef?: string,
+  transactionRef: string,
 ) => {
   const cartDetail = [];
 
@@ -15,7 +15,7 @@ export const computeCart = (
         category: item.category,
         imageUrl: item.imageUrl,
         name: item.name,
-        reference: transactionRef ? transactionRef : generateRandomString(),
+        reference: transactionRef,
         price: {
           eur: item.price.eur,
           usd: item.price.usd,

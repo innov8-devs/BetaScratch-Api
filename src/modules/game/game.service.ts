@@ -20,6 +20,7 @@ import {
 import { Game } from '../../@generated/prisma-nestjs-graphql/game/game.model';
 import { PrismaService } from '../prisma.service';
 import {
+  BankTransferCheckoutInput,
   CartCheckoutInput,
   CartDetailInput,
   CreateGameInput,
@@ -450,6 +451,47 @@ export class GameService {
       type: TRANSACTION.FLUTTERWAVE,
       transactionId: generateRandomNumbers(),
       transactionRef: input.tx_ref,
+      user: { connect: { id: userId } },
+    });
+
+    return true;
+  }
+
+  async bankTransferCheckout(
+    userId: number,
+    input: BankTransferCheckoutInput,
+  ): Promise<Boolean> {
+    const userWallet = await this.prismaService.wallet.findUnique({
+      where: { userId },
+    });
+
+    let subtotal = 0;
+    const transactionRef = generateRandomString();
+
+    for (let item of input.cart) {
+      const price = item.quantity * item.price.ngn;
+      subtotal += price;
+    }
+
+    const cartDetail = computeCart(input.cart, userId, transactionRef);
+
+    await this.recordPurchase(
+      userId,
+      cartDetail,
+      transactionRef,
+      subtotal,
+      TRANSACTION_TYPE.BANK_TRANSFER,
+      PURCHASE_STATUS.INACTIVE,
+    );
+
+    await this.transactionService.createTransaction({
+      amount: subtotal,
+      currency: userWallet.currency,
+      purpose: PAYMENT_PURPOSE.CART,
+      status: PAYMENT_STATUS.PENDING,
+      type: TRANSACTION_TYPE.BANK_TRANSFER,
+      transactionId: generateRandomNumbers(),
+      transactionRef,
       user: { connect: { id: userId } },
     });
 

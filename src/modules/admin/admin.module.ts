@@ -10,6 +10,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { TransactionService } from 'modules/transaction/transaction.service';
 import { TransactionModule } from 'modules/transaction/transaction.module';
 import { MessageModule } from 'modules/message/message.module';
+import { AdminController } from './admin.controller';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { MessageModule } from 'modules/message/message.module';
     TransactionModule,
     MessageModule,
   ],
+  controllers: [AdminController],
   providers: [
     AdminResolver,
     AdminService,

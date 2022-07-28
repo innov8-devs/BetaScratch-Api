@@ -10,6 +10,7 @@ import { Auth } from 'modules/auth/decorators/auth.decorator';
 import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
 import { MyContext } from 'types/constants/types';
 import {
+  BankTransferCheckoutInput,
   CartCheckoutInput,
   CartDetailInput,
   CreateGameInput,
@@ -140,6 +141,17 @@ export class GameResolver {
   ) {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
     return await this.gameService.flutterCheckout(user.id, input);
+  }
+
+  @Auth([ROLE.USER])
+  @Mutation(() => Boolean)
+  async bankTransferCheckout(
+    @Args('input') input: BankTransferCheckoutInput,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
+    return await this.gameService.bankTransferCheckout(user.id, input);
   }
 
   // @Auth([ROLE.USER])

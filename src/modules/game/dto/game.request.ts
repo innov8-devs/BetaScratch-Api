@@ -123,6 +123,16 @@ export class FlutterCheckoutOneInput {
 }
 
 @InputType()
+export class BankTransferCheckoutInput {
+  @Field(() => String, { nullable: false })
+  transaction_type!: string;
+
+  @Field(() => [CartItems], { nullable: false })
+  @IsArray()
+  cart: CartItems[];
+}
+
+@InputType()
 export class FlutterCheckoutTwoInput {
   @Field(() => String, { nullable: false })
   tx_ref!: string;

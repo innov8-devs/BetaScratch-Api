@@ -70,6 +70,7 @@ export enum MESSAGE_TYPE {
 
 export enum IMAGE_TYPE {
   GAME = 'game',
+  BANNER = 'banner',
 }
 
 export enum DB_TYPES {
