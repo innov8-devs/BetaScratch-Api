@@ -370,7 +370,7 @@ export class AdminResolver {
   }
 
   @Auth([ROLE.ADMIN])
-  @Query(() => Purchase)
+  @Query(() => [Purchase])
   async fetchBankTransferPurchase(
     @Args('input') input: PaginationInput,
     @CurrentUser() user: User,
