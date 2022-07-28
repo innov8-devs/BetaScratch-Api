@@ -37,6 +37,9 @@ export class FlutterwaveLogUpdateInput {
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     customerEmail?: NullableStringFieldUpdateOperationsInput;
 
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    customerPhoneNumber?: NullableStringFieldUpdateOperationsInput;
+
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     narration?: StringFieldUpdateOperationsInput;
 

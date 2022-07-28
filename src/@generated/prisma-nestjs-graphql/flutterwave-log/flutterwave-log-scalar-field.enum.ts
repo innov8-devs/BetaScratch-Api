@@ -11,6 +11,7 @@ export enum FlutterwaveLogScalarFieldEnum {
     paymentType = "paymentType",
     customerName = "customerName",
     customerEmail = "customerEmail",
+    customerPhoneNumber = "customerPhoneNumber",
     narration = "narration",
     processorResponse = "processorResponse",
     card = "card",

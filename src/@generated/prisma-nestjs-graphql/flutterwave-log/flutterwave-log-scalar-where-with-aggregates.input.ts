@@ -49,6 +49,9 @@ export class FlutterwaveLogScalarWhereWithAggregatesInput {
     @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
     customerEmail?: StringNullableWithAggregatesFilter;
 
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    customerPhoneNumber?: StringNullableWithAggregatesFilter;
+
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     narration?: StringWithAggregatesFilter;
 

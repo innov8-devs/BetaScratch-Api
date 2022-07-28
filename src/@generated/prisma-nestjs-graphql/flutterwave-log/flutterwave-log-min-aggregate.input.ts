@@ -35,6 +35,9 @@ export class FlutterwaveLogMinAggregateInput {
     customerEmail?: true;
 
     @Field(() => Boolean, {nullable:true})
+    customerPhoneNumber?: true;
+
+    @Field(() => Boolean, {nullable:true})
     narration?: true;
 
     @Field(() => Boolean, {nullable:true})

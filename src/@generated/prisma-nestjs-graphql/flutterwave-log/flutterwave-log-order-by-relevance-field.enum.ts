@@ -8,6 +8,7 @@ export enum FlutterwaveLogOrderByRelevanceFieldEnum {
     paymentType = "paymentType",
     customerName = "customerName",
     customerEmail = "customerEmail",
+    customerPhoneNumber = "customerPhoneNumber",
     narration = "narration",
     processorResponse = "processorResponse"
 }

@@ -36,6 +36,9 @@ export class FlutterwaveLogUncheckedCreateInput {
     @Field(() => String, {nullable:true})
     customerEmail?: string;
 
+    @Field(() => String, {nullable:true})
+    customerPhoneNumber?: string;
+
     @Field(() => String, {nullable:false})
     narration!: string;
 

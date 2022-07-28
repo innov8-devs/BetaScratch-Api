@@ -36,6 +36,9 @@ export class FlutterwaveLogMinAggregate {
     customerEmail?: string;
 
     @Field(() => String, {nullable:true})
+    customerPhoneNumber?: string;
+
+    @Field(() => String, {nullable:true})
     narration?: string;
 
     @Field(() => String, {nullable:true})

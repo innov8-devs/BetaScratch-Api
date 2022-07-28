@@ -37,6 +37,9 @@ export class FlutterwaveLogOrderByWithRelationAndSearchRelevanceInput {
     customerEmail?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    customerPhoneNumber?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     narration?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

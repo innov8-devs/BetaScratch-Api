@@ -36,6 +36,9 @@ export class FlutterwaveLogCountAggregate {
     customerEmail!: number;
 
     @Field(() => Int, {nullable:false})
+    customerPhoneNumber!: number;
+
+    @Field(() => Int, {nullable:false})
     narration!: number;
 
     @Field(() => Int, {nullable:false})

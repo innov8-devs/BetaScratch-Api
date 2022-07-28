@@ -37,6 +37,9 @@ export class FlutterwaveLog {
     @Field(() => String, {nullable:true})
     customerEmail!: string | null;
 
+    @Field(() => String, {nullable:true})
+    customerPhoneNumber!: string | null;
+
     @Field(() => String, {nullable:false})
     narration!: string;
 

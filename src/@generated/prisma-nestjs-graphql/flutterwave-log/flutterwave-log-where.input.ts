@@ -49,6 +49,9 @@ export class FlutterwaveLogWhereInput {
     @Field(() => StringNullableFilter, {nullable:true})
     customerEmail?: StringNullableFilter;
 
+    @Field(() => StringNullableFilter, {nullable:true})
+    customerPhoneNumber?: StringNullableFilter;
+
     @Field(() => StringFilter, {nullable:true})
     narration?: StringFilter;
 
