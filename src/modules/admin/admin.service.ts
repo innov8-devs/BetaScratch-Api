@@ -869,6 +869,7 @@ export class AdminService {
         purchase.userId,
         messageCards,
       );
+      return true;
     } catch (err) {
       throw new BadRequestException(err);
     }
