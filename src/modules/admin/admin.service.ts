@@ -188,18 +188,18 @@ export class AdminService {
     const walletsBalance = await this.prismaService.wallet.aggregate({
       _sum: { withdrawable: true },
     });
-
-    // most played game
-    const mostPlayedGame = await this.prismaService.$queryRaw`
-              SELECT "cardName", "quantity" from 
-              (SELECT "cardName", SUM("quantity")
-              as quantity from "Cards" GROUP BY "cardName")
-              AS C ORDER BY "quantity" DESC LIMIT 1`;
-    console.log(mostPlayedGame);
     tabs.push({
       title: 'walletBalance',
       value: walletsBalance._sum.withdrawable,
     });
+
+    // most played game
+    const mostPlayedGame: any[] = await this.prismaService.$queryRaw`
+              SELECT "name", "quantity" from 
+              (SELECT "name", SUM("quantity")
+              as quantity from "Cart" GROUP BY "name")
+              AS C ORDER BY "quantity" DESC LIMIT 1`;
+    tabs.push({ title: 'mostPlayedGame', value: mostPlayedGame[0].name });
 
     return {
       data: {
