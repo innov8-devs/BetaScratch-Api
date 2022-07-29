@@ -190,10 +190,12 @@ export class AdminService {
     });
 
     // most played game
-    //  const mostPlayedGame =  return await this.prismaService.$queryRaw`
-    //           SELECT * FROM "Game" g WHERE g::text ILIKE ${searchQuery} LIMIT 20
-    //         `;
-
+    const mostPlayedGame = await this.prismaService.$queryRaw`
+              SELECT "cardName", "quantity" from 
+              (SELECT "cardName", SUM("quantity")
+              as quantity from "Cards" GROUP BY "cardName")
+              AS C ORDER BY "quantity" DESC LIMIT 1`;
+    console.log(mostPlayedGame);
     tabs.push({
       title: 'walletBalance',
       value: walletsBalance._sum.withdrawable,

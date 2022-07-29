@@ -53,13 +53,12 @@ export class AdminResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.meAdmin(user);
   }
-  @Auth([ROLE.ADMIN])
+  // @Auth([ROLE.ADMIN])
   @Query(() => DashboardDataResponse)
-  async getDashboardData(
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
-  ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+  async getDashboardData() // @CurrentUser() user: User,
+  // @Context() { res }: MyContext,
+  {
+    // await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return await this.adminService.getDashboardData();
   }
   @Auth([ROLE.ADMIN])
