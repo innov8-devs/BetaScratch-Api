@@ -3,23 +3,23 @@ import {
   BadRequestException,
   Body,
   Controller,
-  Get,
-  Param,
   Post,
-  Res,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
 import { Auth } from 'modules/auth/decorators/auth.decorator';
-import { UploadImageDto } from 'modules/user/dto/user.request';
+import { UploadBannerImageDto } from 'modules/user/dto/user.request';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { IMAGE_TYPE } from 'types/constants/enum';
+import { AdminService } from './admin.service';
 
 @Controller('api/admin')
 export class AdminController {
+  constructor(private readonly adminService: AdminService) {}
+
   @Auth([ROLE.ADMIN])
   @Post('upload')
   @UseInterceptors(
@@ -36,9 +36,9 @@ export class AdminController {
       }),
     }),
   )
-  uploadImage(
+  async uploadImage(
     @UploadedFile() file: Express.Multer.File,
-    @Body() input: UploadImageDto,
+    @Body() input: UploadBannerImageDto,
   ) {
     if (input.imageFor !== IMAGE_TYPE.BANNER) {
       throw new BadRequestException({
@@ -47,15 +47,7 @@ export class AdminController {
       });
     }
     const image = `${process.env.SERVER_UPLOAD_ORIGIN}/banner/${file.filename}`;
-    return {
-      data: {
-        url: image,
-      },
-    };
-  }
-
-  @Get(':imgpath')
-  fetchUploadedFile(@Param('imgpath') image: any, @Res() res: any) {
-    res.sendFile(image, { root: 'uploads' });
+    input.imageUrl = image;
+    return await this.adminService.saveBannerImage(input);
   }
 }

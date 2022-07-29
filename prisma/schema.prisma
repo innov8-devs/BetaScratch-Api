@@ -317,6 +317,13 @@ model FlutterwaveLog {
   updatedAt           DateTime @updatedAt
 }
 
+model Banner {
+  id        Int      @id @default(autoincrement())
+  imageUrl  String   @unique()
+  url       String?
+  createdAt DateTime @default(now())
+}
+
 enum ROLE {
   USER
   ADMIN

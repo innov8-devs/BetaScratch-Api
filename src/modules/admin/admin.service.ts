@@ -51,6 +51,7 @@ import {
 import { Transaction, TRANSACTION_TYPE } from '@prisma/client';
 import { computeCheckoutMessageCards } from 'helpers/computeCheckoutMessageCards';
 import { MessageService } from 'modules/message/message.service';
+import { UploadBannerImageDto } from 'modules/user/dto/user.request';
 
 @Injectable()
 export class AdminService {
@@ -892,6 +893,36 @@ export class AdminService {
       take: size,
       skip: skipValue,
     });
+  }
+
+  async saveBannerImage(input: UploadBannerImageDto) {
+    const { imageUrl, url } = input;
+    try {
+      await this.prismaService.banner.create({
+        data: { url, imageUrl },
+      });
+      return true;
+    } catch (err) {
+      throw new BadRequestException({
+        name: 'Banner',
+        message: 'Banner upload not successful',
+      });
+    }
+  }
+
+  async getAllBannerUploads() {
+    return await this.prismaService.banner.findMany();
+  }
+
+  async deleteBannerUpload(id: number) {
+    try {
+      await this.prismaService.banner.delete({
+        where: { id },
+      });
+      return true;
+    } catch (err) {
+      throw new BadRequestException({ name: 'banner', message: err });
+    }
   }
 
   async run() {

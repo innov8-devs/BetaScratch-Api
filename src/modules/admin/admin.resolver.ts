@@ -1,4 +1,5 @@
 import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
+import { Banner } from '@generated/prisma-nestjs-graphql/banner/banner.model';
 import { FlutterwaveLog } from '@generated/prisma-nestjs-graphql/flutterwave-log/flutterwave-log.model';
 import { Game } from '@generated/prisma-nestjs-graphql/game/game.model';
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
@@ -359,14 +360,14 @@ export class AdminResolver {
     );
   }
 
-  // @Auth([ROLE.ADMIN])
+  @Auth([ROLE.ADMIN])
   @Mutation(() => Boolean)
   async confirmBankPurchase(
     @Args('id') id: number,
-    // @CurrentUser() user: User,
-    // @Context() { res }: MyContext,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
   ) {
-    // await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return await this.adminService.confirmBankPurchase(id);
   }
 
@@ -379,6 +380,22 @@ export class AdminResolver {
   ) {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return await this.adminService.fetchBankTransferPurchase(input);
+  }
+
+  @Query(() => [Banner])
+  async getAllBannerUploads() {
+    return await this.adminService.getAllBannerUploads();
+  }
+
+  @Auth([ROLE.ADMIN])
+  @Mutation(() => Boolean)
+  async deleteBannerUpload(
+    @Args('id') id: number,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    return await this.adminService.deleteBannerUpload(id);
   }
 
   @Mutation(() => Boolean)
