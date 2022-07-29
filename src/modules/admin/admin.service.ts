@@ -849,6 +849,12 @@ export class AdminService {
         where: { id },
         data: { status: 'active' },
       });
+      if (purchase.transactionType !== 'BANK_TRANSFER') {
+        throw new BadRequestException({
+          name: 'purchase',
+          message: 'invalid kind of purchase',
+        });
+      }
       await this.prismaService.transaction.updateMany({
         where: { transactionRef: { equals: purchase.reference } },
         data: {

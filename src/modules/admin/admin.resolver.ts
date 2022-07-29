@@ -359,14 +359,14 @@ export class AdminResolver {
     );
   }
 
-  @Auth([ROLE.ADMIN])
+  // @Auth([ROLE.ADMIN])
   @Mutation(() => Boolean)
   async confirmBankPurchase(
     @Args('id') id: number,
-    @CurrentUser() user: User,
-    @Context() { res }: MyContext,
+    // @CurrentUser() user: User,
+    // @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    // await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return await this.adminService.confirmBankPurchase(id);
   }
 
