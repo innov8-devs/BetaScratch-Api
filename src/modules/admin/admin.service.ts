@@ -49,6 +49,8 @@ import {
   generateRandomString,
 } from 'utils/generateRandomString.util';
 import { Transaction, TRANSACTION_TYPE } from '@prisma/client';
+import { computeCheckoutMessageCards } from 'helpers/computeCheckoutMessageCards';
+import { MessageService } from 'modules/message/message.service';
 
 @Injectable()
 export class AdminService {
@@ -57,6 +59,7 @@ export class AdminService {
     private readonly mailService: MailService,
     private readonly tokenService: TokenService,
     private readonly transactionService: TransactionService,
+    private readonly messageService: MessageService,
   ) {}
 
   // Get current logged in user
@@ -786,7 +789,7 @@ export class AdminService {
           .$queryRaw`SELECT "t"."id", "t"."amount", "t"."transactionId", "t"."currency", "t"."transactionRef", "t"."status", "t"."purpose", "t"."createdAt", "t"."updatedAt", "t"."userId", "t"."type", to_json("User".*) as user from "Transaction" t INNER JOIN "User" on "t"."userId" = "User"."id" WHERE t::text ILIKE ${searchQuery} LIMIT 20`;
       case DB_TYPES.BANK_TRANSFER_PURCHASE:
         return await this.prismaService.$queryRaw`
-        SELECT * FROM "Purchase" p WHERE p::text ILIKE ${searchQuery} AND "transactionType" = 'BANK_TRANSFER' LIMIT 20
+        SELECT * FROM "Purchase" p WHERE p::text ILIKE ${searchQuery} AND "transactionType" = "BANK_TRANSFER" LIMIT 20
         `;
       default:
         break;
@@ -847,11 +850,25 @@ export class AdminService {
         data: { status: 'active' },
       });
       await this.prismaService.transaction.updateMany({
-        where: { transactionRef: purchase.reference },
+        where: { transactionRef: { equals: purchase.reference } },
         data: {
           status: PAYMENT_STATUS.SUCCESSFUL,
         },
       });
+      const cart = await this.prismaService.cart.findMany({
+        where: { reference: purchase.reference },
+      });
+
+      const messageCards = computeCheckoutMessageCards(
+        cart,
+        purchase.userId,
+        purchase.reference,
+      );
+
+      await this.messageService.sendCheckoutMessage(
+        purchase.userId,
+        messageCards,
+      );
     } catch (err) {
       throw new BadRequestException(err);
     }

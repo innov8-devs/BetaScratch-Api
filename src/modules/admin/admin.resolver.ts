@@ -307,6 +307,7 @@ export class AdminResolver {
       user.id,
     );
   }
+
   @Auth([ROLE.ADMIN])
   @Mutation(() => Boolean)
   async toggleUserAccountDisalility(

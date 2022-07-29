@@ -74,10 +74,10 @@ export class CartItems {
   name: string;
 
   @Field(() => String, { nullable: true })
-  gameId: string;
+  gameId?: string;
 
-  @Field(() => String, { nullable: true })
-  id: string;
+  @Field(() => String || Number, { nullable: true })
+  id: string | number;
 
   @Field(() => String)
   @IsString()
