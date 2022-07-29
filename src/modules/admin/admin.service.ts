@@ -188,6 +188,12 @@ export class AdminService {
     const walletsBalance = await this.prismaService.wallet.aggregate({
       _sum: { withdrawable: true },
     });
+
+    // most played game
+    //  const mostPlayedGame =  return await this.prismaService.$queryRaw`
+    //           SELECT * FROM "Game" g WHERE g::text ILIKE ${searchQuery} LIMIT 20
+    //         `;
+
     tabs.push({
       title: 'walletBalance',
       value: walletsBalance._sum.withdrawable,

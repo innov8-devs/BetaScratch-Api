@@ -1,15 +1,18 @@
-import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
+// import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import {
   BadRequestException,
   Body,
   Controller,
+  Get,
+  Param,
   Post,
+  Res,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
-import { Auth } from 'modules/auth/decorators/auth.decorator';
+// import { Auth } from 'modules/auth/decorators/auth.decorator';
 import { UploadBannerImageDto } from 'modules/user/dto/user.request';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
@@ -20,7 +23,7 @@ import { AdminService } from './admin.service';
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
-  @Auth([ROLE.ADMIN])
+  // @Auth([ROLE.ADMIN])
   @Post('upload')
   @UseInterceptors(
     FileInterceptor('image', {
@@ -46,8 +49,14 @@ export class AdminController {
         message: 'Upload not successful',
       });
     }
-    const image = `${process.env.SERVER_UPLOAD_ORIGIN}/banner/${file.filename}`;
+    const image = `${process.env.SERVER_UPLOAD_ORIGIN}/admin/${file.filename}`;
     input.imageUrl = image;
-    return await this.adminService.saveBannerImage(input);
+    const savedBanner = await this.adminService.saveBannerImage(input);
+    if (savedBanner) return image;
+  }
+
+  @Get(':imgpath')
+  fetchUploadedFile(@Param('imgpath') image: any, @Res() res: any) {
+    res.sendFile(image, { root: 'uploads' });
   }
 }
