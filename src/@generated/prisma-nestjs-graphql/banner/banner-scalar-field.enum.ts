@@ -3,7 +3,7 @@ import { registerEnumType } from '@nestjs/graphql';
 export enum BannerScalarFieldEnum {
     id = "id",
     imageUrl = "imageUrl",
-    url = "url",
+    bannerLink = "bannerLink",
     createdAt = "createdAt"
 }
 

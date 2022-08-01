@@ -13,11 +13,11 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
 import { Auth } from 'modules/auth/decorators/auth.decorator';
-import { UploadBannerImageDto } from 'modules/user/dto/user.request';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { IMAGE_TYPE } from 'types/constants/enum';
 import { AdminService } from './admin.service';
+import { UploadBannerImageDto } from './dto/admin.request';
 
 @Controller('api/admin')
 export class AdminController {

@@ -29,6 +29,7 @@ import {
   PaginationInput,
   RegisterAdminInput,
   UpdateUserWalletInput,
+  UploadBannerImageDto,
 } from './dto/admin.request';
 import { v4 } from 'uuid';
 import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
@@ -51,7 +52,6 @@ import {
 import { Transaction, TRANSACTION_TYPE } from '@prisma/client';
 import { computeCheckoutMessageCards } from 'helpers/computeCheckoutMessageCards';
 import { MessageService } from 'modules/message/message.service';
-import { UploadBannerImageDto } from 'modules/user/dto/user.request';
 
 @Injectable()
 export class AdminService {
@@ -904,10 +904,10 @@ export class AdminService {
   }
 
   async saveBannerImage(input: UploadBannerImageDto) {
-    const { imageUrl, url } = input;
+    const { imageUrl, bannerLink} = input;
     try {
       await this.prismaService.banner.create({
-        data: { url, imageUrl },
+        data: { bannerLink, imageUrl },
       });
       return true;
     } catch (err) {

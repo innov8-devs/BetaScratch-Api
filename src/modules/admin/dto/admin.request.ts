@@ -205,3 +205,9 @@ export class PaginationInput {
   @Field(() => String, { nullable: true })
   orderBy?: string = 'asc';
 }
+
+export class UploadBannerImageDto {
+  imageFor: string;
+  imageUrl: string;
+  bannerLink?: string;
+}

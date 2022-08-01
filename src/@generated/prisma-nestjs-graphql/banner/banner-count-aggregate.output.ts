@@ -12,7 +12,7 @@ export class BannerCountAggregate {
     imageUrl!: number;
 
     @Field(() => Int, {nullable:false})
-    url!: number;
+    bannerLink!: number;
 
     @Field(() => Int, {nullable:false})
     createdAt!: number;

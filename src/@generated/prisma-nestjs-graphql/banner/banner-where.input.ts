@@ -24,7 +24,7 @@ export class BannerWhereInput {
     imageUrl?: StringFilter;
 
     @Field(() => StringNullableFilter, {nullable:true})
-    url?: StringNullableFilter;
+    bannerLink?: StringNullableFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;

@@ -24,7 +24,7 @@ export class BannerScalarWhereWithAggregatesInput {
     imageUrl?: StringWithAggregatesFilter;
 
     @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
-    url?: StringNullableWithAggregatesFilter;
+    bannerLink?: StringNullableWithAggregatesFilter;
 
     @Field(() => DateTimeWithAggregatesFilter, {nullable:true})
     createdAt?: DateTimeWithAggregatesFilter;

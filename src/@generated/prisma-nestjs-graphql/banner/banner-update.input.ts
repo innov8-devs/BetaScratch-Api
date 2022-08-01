@@ -11,7 +11,7 @@ export class BannerUpdateInput {
     imageUrl?: StringFieldUpdateOperationsInput;
 
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    url?: NullableStringFieldUpdateOperationsInput;
+    bannerLink?: NullableStringFieldUpdateOperationsInput;
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;

@@ -11,7 +11,7 @@ export class BannerMinAggregateInput {
     imageUrl?: true;
 
     @Field(() => Boolean, {nullable:true})
-    url?: true;
+    bannerLink?: true;
 
     @Field(() => Boolean, {nullable:true})
     createdAt?: true;

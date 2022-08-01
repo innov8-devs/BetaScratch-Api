@@ -12,7 +12,7 @@ export class BannerMaxAggregate {
     imageUrl?: string;
 
     @Field(() => String, {nullable:true})
-    url?: string;
+    bannerLink?: string;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;

@@ -13,7 +13,7 @@ export class BannerOrderByWithRelationAndSearchRelevanceInput {
     imageUrl?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
-    url?: keyof typeof SortOrder;
+    bannerLink?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;

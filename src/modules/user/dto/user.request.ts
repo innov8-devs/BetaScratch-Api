@@ -182,9 +182,3 @@ export class UpdateUserInput {
 export class UploadImageDto {
   imageFor: string;
 }
-
-export class UploadBannerImageDto {
-  imageFor: string;
-  imageUrl: string;
-  url?: string;
-}

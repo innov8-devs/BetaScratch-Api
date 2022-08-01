@@ -12,7 +12,7 @@ export class Banner {
     imageUrl!: string;
 
     @Field(() => String, {nullable:true})
-    url!: string | null;
+    bannerLink!: string | null;
 
     @Field(() => Date, {nullable:false})
     createdAt!: Date;
