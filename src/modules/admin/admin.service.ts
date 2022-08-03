@@ -904,7 +904,7 @@ export class AdminService {
   }
 
   async saveBannerImage(input: UploadBannerImageDto) {
-    const { imageUrl, bannerLink} = input;
+    const { imageUrl, bannerLink } = input;
     try {
       await this.prismaService.banner.create({
         data: { bannerLink, imageUrl },
