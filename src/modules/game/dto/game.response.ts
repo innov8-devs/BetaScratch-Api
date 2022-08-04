@@ -30,3 +30,9 @@ export class FlutterCheckoutOneReturnType {
   @IsNotEmpty()
   transaction_reference: string;
 }
+
+@ObjectType()
+export class StripeTokenResponse {
+  @Field()
+  clientSecret: string;
+}

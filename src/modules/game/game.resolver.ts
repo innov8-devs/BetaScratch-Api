@@ -18,9 +18,14 @@ import {
   GameCateogorySearch,
   GamePaginationInput,
   PurchaseSearch,
+  StripeCheckoutInput,
   UpdateGameInput,
 } from './dto/game.request';
-import { GameCategoryReturnType, TotalGameCount } from './dto/game.response';
+import {
+  GameCategoryReturnType,
+  StripeTokenResponse,
+  TotalGameCount,
+} from './dto/game.response';
 import { GameService } from './game.service';
 
 @Resolver(() => Game)
@@ -152,6 +157,20 @@ export class GameResolver {
   ) {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
     return await this.gameService.bankTransferCheckout(user.id, input);
+  }
+
+  @Auth([ROLE.USER])
+  @Query(() => StripeTokenResponse)
+  async getStripeTokenAndRecordPurchase(
+    @Args('input') input: StripeCheckoutInput,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ): Promise<StripeTokenResponse> {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
+    return await this.gameService.getStripeTokenAndRecordPurchase(
+      input,
+      user.id,
+    );
   }
 
   // @Auth([ROLE.USER])

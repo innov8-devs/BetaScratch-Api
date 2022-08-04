@@ -113,6 +113,13 @@ export class CartCheckoutInput {
 }
 
 @InputType()
+export class StripeCheckoutInput {
+  @Field(() => [CartItems], { nullable: false })
+  @IsArray()
+  cart: any;
+}
+
+@InputType()
 export class FlutterCheckoutOneInput {
   @Field(() => String, { nullable: false })
   tx_ref!: string;

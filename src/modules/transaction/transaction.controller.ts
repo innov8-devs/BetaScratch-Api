@@ -59,22 +59,4 @@ export class TransactionController {
       console.log('Payment intent succeeded');
     }
   }
-
-  @Post('get_stripe_payment_token')
-  async getStripePaymentToken(@Req() _req: Request, @Res() res: Response) {
-    try {
-      const amount = 10000000;
-      const paymentIntent = await stripe.paymentIntents.create({
-        amount,
-        currency: 'ngn',
-        payment_method_types: ['card'],
-      });
-      res.json({ clientSecret: paymentIntent.client_secret });
-    } catch (error) {
-      console.log(error);
-      res
-        .status(400)
-        .json({ error: { message: 'could not initiate payment' } });
-    }
-  }
 }

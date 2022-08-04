@@ -28,10 +28,12 @@ import {
   GameCateogorySearch,
   GamePaginationInput,
   PurchaseSearch,
+  StripeCheckoutInput,
   UpdateGameInput,
 } from './dto/game.request';
 import { GameCategoryReturnType } from './dto/game.response';
 import { v4 } from 'uuid';
+import Stripe from 'stripe';
 
 @Injectable()
 export class GameService {
@@ -503,5 +505,52 @@ export class GameService {
     });
 
     return true;
+  }
+
+  async getStripeTokenAndRecordPurchase(
+    input: StripeCheckoutInput,
+    userId: number,
+  ) {
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: '2020-08-27',
+    });
+
+    let calcSubtotal = 0;
+
+    for (let item of input.cart) {
+      const price = item.quantity * item.price.usd;
+      calcSubtotal += price;
+    }
+
+    const transactionRef = generateRandomString();
+
+    const cartDetail = computeCart(input.cart, userId, transactionRef);
+
+    await this.recordPurchase(
+      userId,
+      cartDetail,
+      transactionRef,
+      calcSubtotal,
+      TRANSACTION_TYPE.STRIPE,
+      PURCHASE_STATUS.INACTIVE,
+    );
+
+    try {
+      const amount = calcSubtotal;
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount,
+        currency: 'usd',
+        payment_method_types: ['card'],
+      });
+      return {
+        clientSecret: paymentIntent.client_secret,
+      };
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException({
+        name: 'stripe',
+        message: 'could not initiate payment',
+      });
+    }
   }
 }
