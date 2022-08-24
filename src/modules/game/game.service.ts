@@ -535,6 +535,17 @@ export class GameService {
       PURCHASE_STATUS.INACTIVE,
     );
 
+    // await this.transactionService.createTransaction({
+    //   amount: calcSubtotal,
+    //   currency: CURRENCY.USD,
+    //   purpose: PAYMENT_PURPOSE.CART,
+    //   status: PAYMENT_STATUS.PENDING,
+    //   type: TRANSACTION.STRIPE,
+    //   transactionId: generateRandomNumbers(),
+    //   transactionRef,
+    //   user: { connect: { id: userId } },
+    // });
+
     try {
       const amount = calcSubtotal;
       const paymentIntent = await stripe.paymentIntents.create({
