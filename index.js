@@ -5,12 +5,13 @@ import cors from 'cors';
 
 const port = process.env.PORT || 5000;
 const app = express();
-const httpServer = createServer(app);
 
+const httpServer = createServer(app);
 const rooms = ['football', 'volleyball', 'backetball'];
 
 const io = new Server();
 io.attach(httpServer, { origins: '*', cors: { origin: '*' } });
+
 app.use(cors());
 
 let previous_messages = {
@@ -31,65 +32,62 @@ let online_user = {
   [rooms[2]]: 0,
 };
 
-io.use(async (socket, next) => {
-  socket.on('send-message', async () => {
-    if (!socket.authenticated) {
-      return next(new Error('User not found'));
-    }
-  });
-});
-
-//verify access_token dummy function
-const verifyToken = (access_token) => true;
+const storage = new Map();
 
 io.on('connection', (socket) => {
+  //username = username | undefined
+  //username = access_token | undefined
   socket.on('join-room', async (room, username, access_token) => {
-    if (verifyToken(access_token) && rooms.includes(room)) {
-      socket.join(room);
-      socket.username = username;
-      socket.roomID = room;
-      socket.authenticated = true;
-      if (user_list[room].findIndex((user) => user === username) < 0) {
-        user_list[room].push(username);
-        online_user[room]++;
-      }
-      io.to(room).emit('online', online_user[room]);
-      io.to(room).emit('previous_messages', previous_messages[room]);
-    } else {
-      socket.emit('error', 'Could not join : ' + room);
+    let auth = 1;
+    if (access_token) {
+      auth = 2;
     }
+    storage.set(socket.id, { auth, room, username, id: socket.id });
+    if (user_list[room].findIndex((user) => user === username) < 0) {
+      user_list[room].push(username ? username : 'unknown');
+      online_user[room]++;
+    }
+    io.to(room).emit('online-users', storage.size);
   });
 
   socket.on('send-message', (message_object) => {
-    if (previous_messages[socket.roomID].lenth === 50) {
-      previous_messages[socket.roomID][0] = message_object;
+    const user = storage.get(socket.id);
+    if (user && user?.auth === 2) {
+      if (previous_messages[user.room].lenth === 50) {
+        previous_messages[user.room][49] = message_object;
+      } else {
+        previous_messages[user.room].push(message_object);
+      }
+      socket.broadcast.to(user.room).emit('new-message', message_object);
     } else {
-      previous_messages[socket.roomID].push(message_object);
+      socket.emit('unauthorized');
     }
-    socket.broadcast.to(socket.roomID).emit('new-message', message_object);
   });
 
   socket.on('search', async (username) => {
-    socket.emit(
-      'user-list',
-      user_list[socket.roomID].filter(
-        (user) => user.startsWith(username) && user != socket.username,
-      ),
-    );
+    const user = storage.get(socket.id);
+    if (user) {
+      socket.emit(
+        'user-list',
+        user_list[user.room].filter(
+          (each) => each.startsWith(username) && each != user.username,
+        ),
+      );
+    }
   });
 
   socket.on('disconnect', () => {
-    const index = user_list[socket.roomID].findIndex(
-      (user) => user === socket.username,
-    );
-    if (index > -1) {
-      user_list[socket.roomID].splice(index, 1);
-      online_user[socket.roomID]--;
-      io.to(socket.roomID).emit('online', online_user[socket.roomID]);
+    const user = storage.get(socket.id);
+    if (user) {
+      const index = user_list[user.room].findIndex(
+        (each) => each === user.username,
+      );
+      if (index > -1) {
+        user_list[user.room].splice(index, 1);
+        online_user[user.room]--;
+      }
+      storage.delete(user.id);
+      io.to(user.room).emit('online-users', storage.size);
     }
   });
 });
-
-httpServer.listen(port, () =>
-  console.log(`Server listening on http://localhost:${port}`),
-);
