@@ -23,26 +23,30 @@
     ></script>
     <script>
       const socket = io('http://localhost:4000');
-      const message = document.getElementById('message');
-      const messages = document.getElementById('messages');
+      // const message = document.getElementById('message');
+      // const messages = document.getElementById('messages');
 
       const handleSubmitNewMessage = () => {
-        socket.emit('send-message', { data: message.value });
+        socket.emit('join-room', {
+          username: 'hello',
+          room: 'football',
+          access_token: 'token',
+        });
       };
 
-      socket.on('send-message', ({ data }) => {
-        handleNewMessage(data);
-      });
+      // socket.on('send-message', ({ data }) => {
+      //   handleNewMessage(data);
+      // });
 
-      const handleNewMessage = (message) => {
-        messages.appendChild(buildNewMessage(message));
-      };
+      // const handleNewMessage = (message) => {
+      //   messages.appendChild(buildNewMessage(message));
+      // };
 
-      const buildNewMessage = (message) => {
-        const li = document.createElement('li');
-        li.appendChild(document.createTextNode(message));
-        return li;
-      };
+      // const buildNewMessage = (message) => {
+      //   const li = document.createElement('li');
+      //   li.appendChild(document.createTextNode(message));
+      //   return li;
+      // };
     </script>
   </body>
 </html>

@@ -6,6 +6,7 @@ import {
   ConnectedSocket,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
+import jwt_decode from 'jwt-decode';
 // import { ChatService } from './chat.service';
 // import { CreateChatDto } from './dto/create-chat.dto';
 // import { UpdateChatDto } from './dto/update-chat.dto';
@@ -65,11 +66,12 @@ export class ChatGateway {
     @MessageBody('access_token') access_token: string,
     @ConnectedSocket() socket: Socket,
   ): void {
+    let decoded: { sub: number; iat: number; exp: number; isAdmin: boolean } =
+      jwt_decode(access_token);
+
     let auth = 1;
-    // validate token here
-    if (access_token) {
-      auth = 2;
-    }
+    if (!access_token || Date.now() >= decoded.exp * 100) auth = 1;
+    else auth = 2;
 
     storage.set(socket.id, { auth, room, username, id: socket.id });
 
@@ -99,6 +101,7 @@ export class ChatGateway {
 
   @SubscribeMessage('disconnect')
   disconnect(@ConnectedSocket() socket: Socket): void {
+    console.log('emmited disconnect');
     const user = storage.get(socket.id);
     const index = user_list[user.room].findIndex(
       (each: any) => each === user.username,
