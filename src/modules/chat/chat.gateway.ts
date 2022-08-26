@@ -101,7 +101,6 @@ export class ChatGateway {
 
   @SubscribeMessage('disconnect')
   disconnect(@ConnectedSocket() socket: Socket): void {
-    console.log('emmited disconnect');
     const user = storage.get(socket.id);
     const index = user_list[user.room].findIndex(
       (each: any) => each === user.username,
