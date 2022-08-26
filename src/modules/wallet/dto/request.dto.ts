@@ -23,6 +23,18 @@ export class DeductUserBalanceInput {
 }
 
 @InputType()
+export class TransferFromWalletInput {
+  @Field(() => String, { nullable: false })
+  @IsNumber()
+  @IsNotEmpty()
+  amount!: number;
+
+  @Field(() => String, { nullable: false })
+  @IsString()
+  reciepientPhoneNumber!: string;
+}
+
+@InputType()
 export class CashBackTransactionInput {
   @Field(() => Number, { nullable: false })
   @IsNotEmpty()

@@ -26,6 +26,7 @@ import {
   CashBackTransactionInput,
   ChangeUserWithdrawalRequestInput,
   DeductUserBalanceInput,
+  TransferFromWalletInput,
   WithdrawalRequestPaginationInput,
 } from './dto/request.dto';
 
@@ -45,6 +46,79 @@ export class WalletService {
         ...input,
       },
     });
+  }
+
+  async transferFromWallet(input: TransferFromWalletInput, userId: number) {
+    const { amount, reciepientPhoneNumber } = input;
+    try {
+      const wallet = await this.prismaService.wallet.findUnique({
+        where: { userId },
+      });
+      if (amount > wallet.withdrawable) {
+        throw new BadRequestException({
+          name: 'wallet',
+          message: MESSAGES.USER.INSUFFICIENT_WALLET_FUND,
+        });
+      }
+
+      const reciepient = await this.prismaService.user.findUnique({
+        where: { mobileNumber: reciepientPhoneNumber },
+      });
+      if (!reciepient) {
+        throw new BadRequestException({
+          name: 'user',
+          message: MESSAGES.AUTH.USER_NOT_FOUND,
+        });
+      }
+
+      await this.prismaService.wallet.update({
+        where: { userId },
+        data: { withdrawable: { decrement: amount } },
+      });
+      await this.prismaService.wallet.update({
+        where: { userId: reciepient.id },
+        data: { withdrawable: { increment: amount } },
+      });
+
+      await this.prismaService.transaction.create({
+        data: {
+          amount: Number(amount),
+          currency: 'NGN',
+          purpose: PAYMENT_PURPOSE.WALLET_TRANSFER,
+          status: PAYMENT_STATUS.SUCCESSFUL,
+          transactionId: Number(generateRandomString()),
+          transactionRef: generateRandomString(),
+          user: { connect: { id: userId } },
+        },
+      });
+
+      await this.prismaService.transaction.create({
+        data: {
+          amount: Number(amount),
+          currency: 'NGN',
+          purpose: PAYMENT_PURPOSE.WALLET_TRANSFER,
+          status: PAYMENT_STATUS.SUCCESSFUL,
+          transactionId: Number(generateRandomString()),
+          transactionRef: generateRandomString(),
+          user: { connect: { id: reciepient.id } },
+        },
+      });
+
+      return true;
+    } catch (err) {
+      await this.prismaService.transaction.create({
+        data: {
+          amount: Number(amount),
+          currency: 'NGN',
+          purpose: PAYMENT_PURPOSE.WALLET_TRANSFER,
+          status: PAYMENT_STATUS.FAILED,
+          transactionId: Number(generateRandomString()),
+          transactionRef: generateRandomString(),
+          user: { connect: { id: userId } },
+        },
+      });
+      throw new BadRequestException('something went wrong');
+    }
   }
 
   async findUnique(input: Prisma.WalletWhereUniqueInput): Promise<Wallet> {
