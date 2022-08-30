@@ -12,24 +12,11 @@ import jwt_decode from 'jwt-decode';
 // import { UpdateChatDto } from './dto/update-chat.dto';
 
 const storage = new Map();
-const rooms = ['football', 'volleyball', 'backetball'];
+const rooms = ['competition', 'scratch card'];
 
 let previous_messages: any = {
   [rooms[0]]: [],
   [rooms[1]]: [],
-  [rooms[2]]: [],
-};
-
-let user_list: any = {
-  [rooms[0]]: [],
-  [rooms[1]]: [],
-  [rooms[2]]: [],
-};
-
-let online_user = {
-  [rooms[0]]: 0,
-  [rooms[1]]: 0,
-  [rooms[2]]: 0,
 };
 
 @WebSocketGateway({
@@ -48,14 +35,15 @@ export class ChatGateway {
   ): void {
     const user = storage.get(socket.id);
     if (user && user?.auth === 2) {
-      if (previous_messages[user.room].lenth === 50) {
-        previous_messages[user.room][49] = message_object;
+      if (previous_messages[user.room].length === 50) {
+        previous_messages[user.room].shift();
+        previous_messages[user.room].push(message_object);
       } else {
         previous_messages[user.room].push(message_object);
       }
       socket.broadcast.to(user.room).emit('new-message', message_object);
     } else {
-      socket.emit('unauthorized');
+      socket.emit('error', 'login to send messages');
     }
   }
 
@@ -73,14 +61,15 @@ export class ChatGateway {
     if (!access_token || Date.now() >= decoded.exp * 100) auth = 1;
     else auth = 2;
 
+    const user = storage.get(socket.id);
+    if (user) {
+      socket.leave(user.room);
+    }
     storage.set(socket.id, { auth, room, username, id: socket.id });
 
-    if (user_list[room].findIndex((user: any) => user === username) < 0) {
-      user_list[room].push(username ? username : 'unknown');
-      online_user[room]++;
-    }
-
+    socket.join(room);
     socket.to(room).emit('online-users', storage.size);
+    socket.emit('old-room-messages', previous_messages[room]);
   }
 
   @SubscribeMessage('search')
@@ -90,26 +79,27 @@ export class ChatGateway {
   ): void {
     const user = storage.get(socket.id);
     if (user) {
-      socket.emit(
-        'user-list',
-        user_list[user.room].filter(
-          (each: any) => each.startsWith(username) && each != user.username,
-        ),
-      );
+      let arrayOfUsers = [];
+      for (let [_key, value] of storage) {
+        if (
+          value.room === user.room &&
+          value.username !== user.username &&
+          value.username !== 'anonymous' &&
+          value.username.startsWith(username)
+        ) {
+          arrayOfUsers.push(value);
+        }
+      }
+      socket.emit('reference', arrayOfUsers);
     }
   }
 
   @SubscribeMessage('disconnect')
   disconnect(@ConnectedSocket() socket: Socket): void {
     const user = storage.get(socket.id);
-    const index = user_list[user.room].findIndex(
-      (each: any) => each === user.username,
-    );
-    if (index > -1) {
-      user_list[user.room].splice(index, 1);
-      online_user[user.room]--;
+    if (user) {
+      storage.delete(socket.id);
+      socket.to(user.room).emit('online-users', storage.size);
     }
-    storage.delete(user.id);
-    socket.to(user.room).emit('online-users', storage.size);
   }
 }
