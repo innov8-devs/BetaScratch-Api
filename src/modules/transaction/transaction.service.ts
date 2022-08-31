@@ -406,6 +406,7 @@ export class TransactionService {
       where: { email: data.customer.email },
     });
 
+    console.log(1);
     await this.prismaService.flutterwaveLog.create({
       data: {
         transactionId: data.id,
@@ -431,6 +432,7 @@ export class TransactionService {
       },
     });
 
+    console.log(2);
     const depositTransaction = await this.prismaService.transaction.findFirst({
       where: {
         AND: [
@@ -443,9 +445,12 @@ export class TransactionService {
       },
     });
 
+    console.log(3);
     if (depositTransaction) return res.status(200).end();
 
+    console.log(4);
     if (status === 'successful') {
+      console.log(5);
       await this.createTransaction({
         amount,
         currency,
@@ -457,6 +462,7 @@ export class TransactionService {
         user: { connect: { id: user.id } },
       });
 
+      console.log(6);
       await this.prismaService.wallet.update({
         where: {
           userId: user.id,
@@ -465,8 +471,12 @@ export class TransactionService {
           withdrawable: { increment: amount },
         },
       });
+
       res.status(200).end();
+
+      console.log(7);
     } else if (status === 'failed') {
+      console.log(8);
       await this.createTransaction({
         amount,
         currency,
@@ -477,7 +487,10 @@ export class TransactionService {
         transactionRef: tx_ref,
         user: { connect: { id: user.id } },
       });
+
+      console.log(9);
       res.status(200).end();
+      console.log(10);
     }
   }
 }
