@@ -22,6 +22,8 @@ export class TransactionController {
     if (transactionType === FLUTTER_TRANSACTION_TYPE.CHECKOUT) {
       return await this.transactionService.verifyCheckout(req.body.data, res);
     } else if (transactionType === FLUTTER_TRANSACTION_TYPE.DEPOSIT) {
+      console.log(req.body.data);
+      return;
       return await this.transactionService.verifyDeposit(req.body.data, res);
     }
   }
