@@ -411,12 +411,12 @@ export class TransactionService {
       data: {
         transactionId: data.id,
         card: {
-          first6digits: data.card.first_6digits,
-          last4digits: data.card.last_4digits,
-          issuer: data.card.issuer,
-          country: data.card.country,
-          type: data.card.type,
-          expiry: data.card.expiry,
+          first6digits: data.card.first_6digits ? data.card.first_6digits : '',
+          last4digits: data.card.last_4digits ? data.card.last_4digits : '',
+          issuer: data.card.issuer ? data.card.issuer : '',
+          country: data.card.country ? data.card.country : '',
+          type: data.card.type ? data.card.type : '',
+          expiry: data.card.expiry ? data.card.expiry : '',
         },
         currency: data.currency,
         ip: data.ip,
