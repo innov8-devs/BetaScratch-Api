@@ -406,18 +406,24 @@ export class TransactionService {
       where: { email: data.customer.email },
     });
 
+    let cardDetails;
+
+    if (data.card) {
+      cardDetails = {
+        first6digits: data.card.first_6digits,
+        last4digits: data.card.last_4digits,
+        issuer: data.card.issuer,
+        country: data.card.country,
+        type: data.card.type,
+        expiry: data.card.expiry,
+      };
+    } else cardDetails = undefined;
+
     console.log(1);
     await this.prismaService.flutterwaveLog.create({
       data: {
         transactionId: data.id,
-        card: {
-          first6digits: data.card.first_6digits ? data.card.first_6digits : '',
-          last4digits: data.card.last_4digits ? data.card.last_4digits : '',
-          issuer: data.card.issuer ? data.card.issuer : '',
-          country: data.card.country ? data.card.country : '',
-          type: data.card.type ? data.card.type : '',
-          expiry: data.card.expiry ? data.card.expiry : '',
-        },
+        card: cardDetails,
         currency: data.currency,
         ip: data.ip,
         narration: data.narration,
