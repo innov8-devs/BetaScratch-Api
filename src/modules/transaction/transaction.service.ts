@@ -244,17 +244,23 @@ export class TransactionService {
 
     if (confirmedPurchase) return res.status(200).end();
 
+    let cardDetails;
+
+    if (data.card) {
+      cardDetails = {
+        first6digits: data.card.first_6digits,
+        last4digits: data.card.last_4digits,
+        issuer: data.card.issuer,
+        country: data.card.country,
+        type: data.card.type,
+        expiry: data.card.expiry,
+      };
+    } else cardDetails = undefined;
+
     await this.prismaService.flutterwaveLog.create({
       data: {
         transactionId: data.id,
-        card: {
-          first6digits: data.card.first_6digits,
-          last4digits: data.card.last_4digits,
-          issuer: data.card.issuer,
-          country: data.card.country,
-          type: data.card.type,
-          expiry: data.card.expiry,
-        },
+        card: cardDetails,
         currency: data.currency,
         ip: data.ip,
         narration: data.narration,
@@ -419,7 +425,6 @@ export class TransactionService {
       };
     } else cardDetails = undefined;
 
-    console.log(1);
     await this.prismaService.flutterwaveLog.create({
       data: {
         transactionId: data.id,
@@ -438,7 +443,6 @@ export class TransactionService {
       },
     });
 
-    console.log(2);
     const depositTransaction = await this.prismaService.transaction.findFirst({
       where: {
         AND: [
@@ -451,12 +455,9 @@ export class TransactionService {
       },
     });
 
-    console.log(3);
     if (depositTransaction) return res.status(200).end();
 
-    console.log(4);
     if (status === 'successful') {
-      console.log(5);
       await this.createTransaction({
         amount,
         currency,
@@ -468,7 +469,6 @@ export class TransactionService {
         user: { connect: { id: user.id } },
       });
 
-      console.log(6);
       await this.prismaService.wallet.update({
         where: {
           userId: user.id,
@@ -479,8 +479,6 @@ export class TransactionService {
       });
 
       res.status(200).end();
-
-      console.log(7);
     } else if (status === 'failed') {
       console.log(8);
       await this.createTransaction({
@@ -494,9 +492,7 @@ export class TransactionService {
         user: { connect: { id: user.id } },
       });
 
-      console.log(9);
       res.status(200).end();
-      console.log(10);
     }
   }
 }
