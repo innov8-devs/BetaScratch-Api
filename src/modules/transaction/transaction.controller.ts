@@ -29,7 +29,7 @@ export class TransactionController {
   @Post('flutterwave-webhook')
   async verifyFlutterTransaction(@Res() res: Response, @Req() req: Request) {
     console.log(req.body.data);
-    return await this.transactionService.verifyCheckout(req.body.data, res);
+    return await this.transactionService.verifyDeposit(req.body.data, res);
   }
 
   @Post('stripe-webhook')
