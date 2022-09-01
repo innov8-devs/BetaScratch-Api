@@ -4,7 +4,7 @@ import {
   CashBackTransactionInput,
   ChangeUserWithdrawalRequestInput,
   DeductUserBalanceInput,
-  TransferFromWalletInput,
+  TipFromWalletInput,
   WithdrawalRequestPaginationInput,
 } from './dto/request.dto';
 import { Wallet } from '@generated/prisma-nestjs-graphql/wallet/wallet.model';
@@ -36,14 +36,14 @@ export class WalletResolver {
   }
 
   @Auth([ROLE.USER])
-  @Query(() => Boolean, { nullable: true })
-  async transferFromWallet(
-    @Args('input') input: TransferFromWalletInput,
+  @Mutation(() => Boolean, { nullable: true })
+  async tip(
+    @Args('input') input: TipFromWalletInput,
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
-    return await this.walletService.transferFromWallet(input, user.id);
+    return await this.walletService.tip(input, user.id);
   }
 
   @Auth([ROLE.ADMIN])

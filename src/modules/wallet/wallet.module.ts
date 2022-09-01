@@ -10,6 +10,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { TransactionModule } from 'modules/transaction/transaction.module';
 import { TransactionService } from 'modules/transaction/transaction.service';
 import { MessageModule } from 'modules/message/message.module';
+import { ChatModule } from 'modules/chat/chat.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { MessageModule } from 'modules/message/message.module';
     AuthModule,
     TransactionModule,
     MessageModule,
+    ChatModule,
     JwtModule.register({}),
   ],
   providers: [

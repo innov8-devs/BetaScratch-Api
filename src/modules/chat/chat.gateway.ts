@@ -12,7 +12,7 @@ import jwt_decode from 'jwt-decode';
 // import { UpdateChatDto } from './dto/update-chat.dto';
 
 const storage = new Map();
-const rooms = ['competition', 'scratch card'];
+const rooms = ['competition', 'scratch and win', 'chatroom'];
 
 let previous_messages: any = {
   [rooms[0]]: [],
@@ -100,6 +100,16 @@ export class ChatGateway {
     if (user) {
       storage.delete(socket.id);
       socket.to(user.room).emit('online-users', storage.size);
+    }
+  }
+
+  @SubscribeMessage('tip')
+  tip(@ConnectedSocket() socket: Socket, @MessageBody() data: any): void {
+    console.log('Hit the tip');
+    const user = storage.get(socket.id);
+    if (user) {
+      storage.delete(socket.id);
+      socket.to(rooms).emit('tip', data);
     }
   }
 }

@@ -5,6 +5,7 @@ import {
   NotAcceptableException,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { ChatGateway } from 'modules/chat/chat.gateway';
 import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
 import { MailService } from 'modules/mail/mail.service';
 import { MessageService } from 'modules/message/message.service';
@@ -26,7 +27,7 @@ import {
   CashBackTransactionInput,
   ChangeUserWithdrawalRequestInput,
   DeductUserBalanceInput,
-  TransferFromWalletInput,
+  TipFromWalletInput,
   WithdrawalRequestPaginationInput,
 } from './dto/request.dto';
 
@@ -38,6 +39,7 @@ export class WalletService {
     private readonly mailService: MailService,
     private readonly messageService: MessageService,
     private readonly transactionService: TransactionService,
+    private readonly chatGateway: ChatGateway,
   ) {}
 
   async createWallet(input: Prisma.WalletCreateInput) {
@@ -48,8 +50,8 @@ export class WalletService {
     });
   }
 
-  async transferFromWallet(input: TransferFromWalletInput, userId: number) {
-    const { amount, reciepientPhoneNumber } = input;
+  async tip(input: TipFromWalletInput, userId: number) {
+    const { amount, to } = input;
     try {
       const wallet = await this.prismaService.wallet.findUnique({
         where: { userId },
@@ -62,7 +64,7 @@ export class WalletService {
       }
 
       const reciepient = await this.prismaService.user.findUnique({
-        where: { mobileNumber: reciepientPhoneNumber },
+        where: { mobileNumber: to },
       });
       if (!reciepient) {
         throw new BadRequestException({
@@ -84,9 +86,9 @@ export class WalletService {
         data: {
           amount: Number(amount),
           currency: 'NGN',
-          purpose: PAYMENT_PURPOSE.WALLET_TRANSFER,
+          purpose: PAYMENT_PURPOSE.TIP,
           status: PAYMENT_STATUS.SUCCESSFUL,
-          transactionId: Number(generateRandomString()),
+          transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
           user: { connect: { id: userId } },
         },
@@ -96,13 +98,15 @@ export class WalletService {
         data: {
           amount: Number(amount),
           currency: 'NGN',
-          purpose: PAYMENT_PURPOSE.WALLET_TRANSFER,
+          purpose: PAYMENT_PURPOSE.TIP,
           status: PAYMENT_STATUS.SUCCESSFUL,
-          transactionId: Number(generateRandomString()),
+          transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
           user: { connect: { id: reciepient.id } },
         },
       });
+
+      if (input.public) this.chatGateway.server.emit('tip', input);
 
       return true;
     } catch (err) {
@@ -110,9 +114,9 @@ export class WalletService {
         data: {
           amount: Number(amount),
           currency: 'NGN',
-          purpose: PAYMENT_PURPOSE.WALLET_TRANSFER,
+          purpose: PAYMENT_PURPOSE.TIP,
           status: PAYMENT_STATUS.FAILED,
-          transactionId: Number(generateRandomString()),
+          transactionId: generateRandomNumbers(),
           transactionRef: generateRandomString(),
           user: { connect: { id: userId } },
         },
@@ -238,7 +242,7 @@ export class WalletService {
         currency,
         purpose: PAYMENT_PURPOSE.CASH_BACK,
         status: PAYMENT_STATUS.SUCCESSFUL,
-        transactionId: Number(generateRandomString()),
+        transactionId: generateRandomNumbers(),
         transactionRef: generateRandomString(),
         user: { connect: { id: userId } },
       },

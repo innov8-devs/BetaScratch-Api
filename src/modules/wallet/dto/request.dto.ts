@@ -1,5 +1,11 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+} from 'class-validator';
 import { CURRENCY, WALLET_TYPE } from 'types/constants/enum';
 
 @InputType()
@@ -23,15 +29,17 @@ export class DeductUserBalanceInput {
 }
 
 @InputType()
-export class TransferFromWalletInput {
-  @Field(() => String, { nullable: false })
+export class TipFromWalletInput {
+  @Field(() => Number, { nullable: false })
   @IsNumber()
-  @IsNotEmpty()
   amount!: number;
 
   @Field(() => String, { nullable: false })
-  @IsString()
-  reciepientPhoneNumber!: string;
+  to!: string;
+
+  @Field(() => Boolean, { nullable: false })
+  @IsBoolean()
+  public!: boolean;
 }
 
 @InputType()
