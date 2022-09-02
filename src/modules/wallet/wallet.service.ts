@@ -52,6 +52,9 @@ export class WalletService {
 
   async tip(input: TipFromWalletInput, userId: number) {
     const { amount, to } = input;
+    const sender = await this.prismaService.user.findUnique({
+      where: { id: userId },
+    });
     try {
       const wallet = await this.prismaService.wallet.findUnique({
         where: { userId },
@@ -108,7 +111,24 @@ export class WalletService {
         },
       });
 
-      if (input.public) this.chatGateway.server.emit('tip', input);
+      await this.messageService.sendSenderTipMessage(
+        userId,
+        amount,
+        reciepient.username,
+      );
+      await this.messageService.sendRecieverTipMessage(
+        reciepient.id,
+        amount,
+        sender.username,
+      );
+
+      const socketData = {
+        from: sender.username,
+        to: reciepient.username,
+        amount,
+      };
+
+      if (input.public) this.chatGateway.server.emit('tip', socketData);
 
       return true;
     } catch (err) {

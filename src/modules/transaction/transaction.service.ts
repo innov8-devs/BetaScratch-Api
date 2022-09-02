@@ -480,7 +480,6 @@ export class TransactionService {
 
       res.status(200).end();
     } else if (status === 'failed') {
-      console.log(8);
       await this.createTransaction({
         amount,
         currency,

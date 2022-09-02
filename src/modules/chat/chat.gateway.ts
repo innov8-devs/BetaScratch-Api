@@ -105,7 +105,6 @@ export class ChatGateway {
 
   @SubscribeMessage('tip')
   tip(@ConnectedSocket() socket: Socket, @MessageBody() data: any): void {
-    console.log('Hit the tip');
     const user = storage.get(socket.id);
     if (user) {
       storage.delete(socket.id);

@@ -30,6 +30,47 @@ export class MessageService {
     });
   }
 
+  public async sendSenderTipMessage(
+    userId: number,
+    amount: number,
+    receiver: string,
+  ) {
+    await this.createMessage(userId, {
+      title: 'Your payment was successful',
+      link: WHATSAPP_URL,
+      description: `You have successfully tipped @${receiver} the amount of NGN${amount}`,
+      messageType: MESSAGE_TYPE.TIP,
+      readStatus: 0,
+      user: { connect: { id: userId } },
+    });
+  }
+
+  public async sendRecieverTipMessage(
+    userId: number,
+    amount: number,
+    sender: string,
+  ) {
+    await this.createMessage(userId, {
+      title: 'Your payment was successful',
+      link: WHATSAPP_URL,
+      description: `You have received NGN${amount} tip from @${sender}`,
+      messageType: MESSAGE_TYPE.TIP,
+      readStatus: 0,
+      user: { connect: { id: userId } },
+    });
+  }
+
+  public async send(userId: number, amount: number, username: string) {
+    await this.createMessage(userId, {
+      title: 'Your payment was successful',
+      link: WHATSAPP_URL,
+      description: `You have successfully tipped ${username} the amount of NGN${amount}`,
+      messageType: MESSAGE_TYPE.TIP,
+      readStatus: 0,
+      user: { connect: { id: userId } },
+    });
+  }
+
   public async sendWithdrawalPending(userId: number) {
     await this.createMessage(userId, {
       title: 'Your Withdrawal request is pending',
