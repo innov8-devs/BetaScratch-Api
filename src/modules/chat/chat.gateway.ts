@@ -54,6 +54,8 @@ export class ChatGateway {
     @MessageBody('access_token') access_token: string,
     @ConnectedSocket() socket: Socket,
   ): void {
+    console.log('Hit');
+    console.log(username, room, access_token);
     let decoded: { sub: number; iat: number; exp: number; isAdmin: boolean } =
       jwt_decode(access_token);
 
