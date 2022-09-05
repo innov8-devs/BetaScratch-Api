@@ -17,6 +17,7 @@ const rooms = ['competition', 'scratch and win', 'chatroom'];
 let previous_messages: any = {
   [rooms[0]]: [],
   [rooms[1]]: [],
+  [rooms[2]]: [],
 };
 
 @WebSocketGateway({
@@ -54,19 +55,22 @@ export class ChatGateway {
     @MessageBody('access_token') access_token: string,
     @ConnectedSocket() socket: Socket,
   ): void {
-    let decoded: { sub: number; iat: number; exp: number; isAdmin: boolean } =
-      jwt_decode(access_token);
-
     let auth = 1;
-    if (!access_token || Date.now() >= decoded.exp * 100) auth = 1;
-    else auth = 2;
+
+    try {
+      let decoded: { sub: number; iat: number; exp: number; isAdmin: boolean } =
+        jwt_decode(access_token);
+
+      if (!access_token || Date.now() >= decoded.exp * 1000) auth = 1;
+      else auth = 2;
+    } catch (err) {
+      auth = 1;
+    }
 
     const user = storage.get(socket.id);
-    if (user) {
-      socket.leave(user.room);
-    }
-    storage.set(socket.id, { auth, room, username, id: socket.id });
+    if (user) socket.leave(user.room);
 
+    storage.set(socket.id, { auth, room, username, id: socket.id });
     socket.join(room);
     socket.to(room).emit('online-users', storage.size);
     socket.emit('old-room-messages', previous_messages[room]);
@@ -103,12 +107,12 @@ export class ChatGateway {
     }
   }
 
-  @SubscribeMessage('tip')
-  tip(@ConnectedSocket() socket: Socket, @MessageBody() data: any): void {
-    const user = storage.get(socket.id);
-    if (user) {
-      storage.delete(socket.id);
-      socket.to(rooms).emit('tip', data);
-    }
-  }
+  // @SubscribeMessage('tip')
+  // tip(@ConnectedSocket() socket: Socket, @MessageBody() data: any): void {
+  //   const user = storage.get(socket.id);
+  //   if (user) {
+  //     storage.delete(socket.id);
+  //     socket.to(rooms).emit('tip', data);
+  //   }
+  // }
 }
