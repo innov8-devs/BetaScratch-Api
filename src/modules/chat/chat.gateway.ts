@@ -50,8 +50,8 @@ export class ChatGateway {
 
   @SubscribeMessage('join-room')
   joinRoom(
-    @MessageBody('username') username: string,
     @MessageBody('room') room: string,
+    @MessageBody('username') username: string,
     @MessageBody('access_token') access_token: string,
     @ConnectedSocket() socket: Socket,
   ): void {
@@ -72,7 +72,7 @@ export class ChatGateway {
 
     storage.set(socket.id, { auth, room, username, id: socket.id });
     socket.join(room);
-    socket.to(room).emit('online-users', storage.size);
+    this.server.to(room).emit('online-users', storage.size);
     socket.emit('old-room-messages', previous_messages[room]);
   }
 
