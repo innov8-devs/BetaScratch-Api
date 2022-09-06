@@ -20,6 +20,8 @@ let previous_messages: any = {
   [rooms[2]]: [],
 };
 
+let user: any;
+
 @WebSocketGateway({
   cors: {
     origin: '*',
@@ -34,7 +36,7 @@ export class ChatGateway {
     @MessageBody() message_object: any,
     @ConnectedSocket() socket: Socket,
   ): void {
-    const user = storage.get(socket.id);
+    storage.get(socket.id);
     if (user && user?.auth === 2) {
       if (previous_messages[user.room].length === 50) {
         previous_messages[user.room].shift();
@@ -50,11 +52,10 @@ export class ChatGateway {
 
   @SubscribeMessage('join-room')
   joinRoom(
-    @MessageBody('room') room: string,
-    @MessageBody('username') username: string,
-    @MessageBody('access_token') access_token: string,
+    @MessageBody('message') message: any,
     @ConnectedSocket() socket: Socket,
   ): void {
+    const { room, access_token, username } = message;
     let auth = 1;
 
     try {
@@ -67,7 +68,7 @@ export class ChatGateway {
       auth = 1;
     }
 
-    const user = storage.get(socket.id);
+    user = storage.get(socket.id);
     if (user) socket.leave(user.room);
 
     storage.set(socket.id, { auth, room, username, id: socket.id });
@@ -81,7 +82,7 @@ export class ChatGateway {
     @MessageBody('username') username: string,
     @ConnectedSocket() socket: Socket,
   ): void {
-    const user = storage.get(socket.id);
+    user = storage.get(socket.id);
     if (user) {
       let arrayOfUsers = [];
       for (let [_key, value] of storage) {
@@ -100,7 +101,7 @@ export class ChatGateway {
 
   @SubscribeMessage('disconnect')
   disconnect(@ConnectedSocket() socket: Socket): void {
-    const user = storage.get(socket.id);
+    user = storage.get(socket.id);
     if (user) {
       storage.delete(socket.id);
       this.server.to(user.room).emit('online-users', storage.size);
