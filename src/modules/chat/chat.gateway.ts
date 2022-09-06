@@ -103,7 +103,7 @@ export class ChatGateway {
     const user = storage.get(socket.id);
     if (user) {
       storage.delete(socket.id);
-      socket.to(user.room).emit('online-users', storage.size);
+      this.server.to(user.room).emit('online-users', storage.size);
     }
   }
 
