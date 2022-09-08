@@ -57,9 +57,6 @@ export class ChatGateway {
     @MessageBody('access_token') access_token: any,
     @ConnectedSocket() socket: Socket,
   ): void {
-    console.log('----');
-    console.log(username, room, access_token);
-    console.log('----');
     let auth = 1;
 
     try {
@@ -76,11 +73,8 @@ export class ChatGateway {
     if (user) socket.leave(user.room);
 
     storage.set(socket.id, { auth, room, username, id: socket.id });
-    socket.join(room);
     this.server.to(room).emit('online-users', storage.size);
-    console.log(storage.size);
     socket.emit('old-room-messages', previous_messages[room]);
-    console.log(previous_messages[room]);
   }
 
   @SubscribeMessage('search')
@@ -105,8 +99,7 @@ export class ChatGateway {
     }
   }
 
-  @SubscribeMessage('disconnect')
-  disconnect(@ConnectedSocket() socket: Socket): void {
+  handleDisconnect(socket: Socket) {
     user = storage.get(socket.id);
     if (user) {
       storage.delete(socket.id);
