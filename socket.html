@@ -27,10 +27,13 @@
       // const messages = document.getElementById('messages');
 
       const handleSubmitNewMessage = () => {
+        if (!socket.connected) {
+          socket.connect();
+        }
         socket.emit('join-room', {
           username: 'hello',
-          room: 'football',
-          access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiO',
+          room: 'chatroom',
+          // access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiO',
         });
       };
 

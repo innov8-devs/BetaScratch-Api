@@ -52,10 +52,14 @@ export class ChatGateway {
 
   @SubscribeMessage('join-room')
   joinRoom(
-    @MessageBody('message') message: any,
+    @MessageBody('username') username: any,
+    @MessageBody('room') room: any,
+    @MessageBody('access_token') access_token: any,
     @ConnectedSocket() socket: Socket,
   ): void {
-    const { room, access_token, username } = message;
+    console.log('----');
+    console.log(username, room, access_token);
+    console.log('----');
     let auth = 1;
 
     try {
@@ -74,7 +78,9 @@ export class ChatGateway {
     storage.set(socket.id, { auth, room, username, id: socket.id });
     socket.join(room);
     this.server.to(room).emit('online-users', storage.size);
+    console.log(storage.size);
     socket.emit('old-room-messages', previous_messages[room]);
+    console.log(previous_messages[room]);
   }
 
   @SubscribeMessage('search')
