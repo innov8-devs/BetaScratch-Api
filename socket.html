@@ -33,24 +33,44 @@
         socket.emit('join-room', {
           username: 'hello',
           room: 'chatroom',
-          // access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiO',
+          access_token:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjYyODM1OTA3LCJleHAiOjE2NjI4MzY4MDd9.HQyd_J9gT07LY5BZyqTf848pQQ43xzSd-p_XZZbk6_c',
         });
-        socket.disconnect();
+        // socket.disconnect();
+        socket.emit('send-message', { message: message.value });
       };
 
-      // socket.on('send-message', ({ data }) => {
-      //   handleNewMessage(data);
+      socket.on('new-message', (message) => {
+        console.log('Hit');
+        console.log(message);
+        return;
+        messages.appendChild(buildNewMessage(message));
+      });
+
+      // socket.on('online-users', (data) => {
+      //   console.log(data);
       // });
 
-      // const handleNewMessage = (message) => {
-      //   messages.appendChild(buildNewMessage(message));
+      // socket.on('old-room-messages', (data) => {
+      //   console.log(data);
+      // });
+
+      const message = document.getElementById('message');
+      const messages = document.getElementById('messages');
+
+      // const handleSubmitNewMessage = () => {
+      //   socket.emit('send-message', { message: message.value });
       // };
 
-      // const buildNewMessage = (message) => {
-      //   const li = document.createElement('li');
-      //   li.appendChild(document.createTextNode(message));
-      //   return li;
-      // };
+      socket.on('message', ({ data }) => {
+        handleNewMessage(data);
+      });
+
+      const buildNewMessage = (message) => {
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(message));
+        return li;
+      };
     </script>
   </body>
 </html>
