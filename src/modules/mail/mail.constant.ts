@@ -10,6 +10,7 @@ export const MAIL_SUBJECT = {
   ADMIN_LOGIN: 'Administrator Login',
   ADMIN_NEW: 'Verify admin account',
   WELCOME_MESSAGE: 'Welcome to BetaScratch',
+  PROMOTIONAL: 'Achieve your goals with Betascratch',
 };
 
 export const MAIL_MESSAGE = {
@@ -230,10 +231,9 @@ export const MAIL_MESSAGE = {
         style="padding: 14px; margin: 0px; font-size: 15px; color: #2B2F33; line-height: 1.5; border-radius: 0px 0px 10px 10px; border-width: 7px; border-style: solid; border-color: #F8F9FA;">
         <div style="padding-bottom: 36px">
         <p>Thanks for signing up at Betascratch, The only secure Fun Gaming platform in Africa that funds your Dreams.</p>
-        <p>
-        We noticed you are yet to complete your Betascratch registration to enjoy the unlimited Cashout while playing Fun games.
-        </p>
-          <p>Click login to complete registration and have 100% control of your account and Start cashing out.
+     
+ <p>
+          Browse through our catalogue of games and win cash prizes.
           </p>
         <div style="text-align: center; margin-top: 1.2rem">
           <a

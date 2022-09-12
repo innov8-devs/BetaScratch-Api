@@ -934,17 +934,19 @@ export class AdminService {
   }
 
   async run() {
-    let unverified = await this.prismaService.user.findMany({
-      where: { confirmed: false },
+    let users = await this.prismaService.user.findMany({
+      where: { disabled: false },
     });
-    for (let user of unverified) {
+    console.log(users);
+    // let users = [{ email: 'ayeolakenny@gmail.com' }];
+    for (let i = 100; i < 200; i++) {
       try {
         await this.mailService.sendMail({
-          subject: MAIL_SUBJECT.COMPLETE_VERIFICATION,
+          subject: MAIL_SUBJECT.PROMOTIONAL,
           html: MAIL_MESSAGE.COMPLETE_VERIFICATION(),
-          to: user.email,
+          to: users[i].email,
         });
-        console.log(`sent to ${user.email}`);
+        console.log(`${i}: sent to ${users[i].email}`);
       } catch (err) {
         console.log(err);
       }

@@ -62,7 +62,6 @@ export class ChatGateway {
     @MessageBody() message_object: any,
     @ConnectedSocket() socket: Socket,
   ) {
-    const { message } = message_object;
     user = storage.get(socket.id);
     if (user && user?.auth === 2) {
       if (previous_messages[user.room].lenth === 50) {
@@ -71,7 +70,7 @@ export class ChatGateway {
       } else {
         previous_messages[user.room].push(message_object);
       }
-      socket.broadcast.to(user.room).emit('new-message', message);
+      socket.broadcast.to(user.room).emit('new-message', message_object);
     } else {
       socket.emit('error', 'login to send messages');
     }
