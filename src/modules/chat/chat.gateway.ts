@@ -78,10 +78,9 @@ export class ChatGateway {
 
   @SubscribeMessage('search')
   handleSearch(
-    @MessageBody() data: { username: string },
+    @MessageBody() username: string,
     @ConnectedSocket() socket: Socket,
   ) {
-    const { username } = data;
     user = storage.get(socket.id);
     if (user) {
       let arrayOfUsers = [];
