@@ -82,8 +82,6 @@ export class ChatGateway {
     @ConnectedSocket() socket: Socket,
   ) {
     let username = data.text;
-    console.log('Search');
-    console.log(username);
     user = storage.get(socket.id);
     if (user) {
       let arrayOfUsers = [];
