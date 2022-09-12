@@ -29,7 +29,7 @@ export class ChatGateway {
   server: Server;
 
   handleConnection() {
-    console.log('connected');
+    console.log('socket connected');
   }
 
   @SubscribeMessage('join-room')
@@ -78,9 +78,10 @@ export class ChatGateway {
 
   @SubscribeMessage('search')
   handleSearch(
-    @MessageBody() username: string,
+    @MessageBody() data: { text: string },
     @ConnectedSocket() socket: Socket,
   ) {
+    let username = data.text;
     console.log('Search');
     console.log(username);
     user = storage.get(socket.id);
