@@ -81,11 +81,16 @@ export class UserService {
 
     // TODO currency
 
-    await this.walletService.createWallet({
+    const userWallet = await this.walletService.createWallet({
       bonus: 0,
       user: { connect: { id: user.id } },
       withdrawable: 0,
       currency: CURRENCY.NGN,
+    });
+
+    await this.prismaService.wallet.update({
+      where: { id: userWallet.id },
+      data: { withdrawable: { increment: 500 } },
     });
 
     if (invite) {
