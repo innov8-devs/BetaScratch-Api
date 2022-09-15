@@ -20,7 +20,6 @@ export class MessageService {
   public async sendCheckoutMessage(userId: number, cards: any) {
     await this.createMessage(userId, {
       title: 'Your payment was successful',
-      link: WHATSAPP_URL,
       description:
         'To play this card, kindly click on the link here to play with our agent via the whatsapp video call',
       messageType: MESSAGE_TYPE.CART,
@@ -37,7 +36,6 @@ export class MessageService {
   ) {
     await this.createMessage(userId, {
       title: 'Your payment was successful',
-      link: WHATSAPP_URL,
       description: `You have successfully tipped @${receiver} the amount of NGN${amount}`,
       messageType: MESSAGE_TYPE.TIP,
       readStatus: 0,
