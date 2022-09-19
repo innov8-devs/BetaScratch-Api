@@ -138,11 +138,13 @@ export class UserService {
     });
   }
 
-  async getUserByPhoneNumber(mobileNumber: string) {
+  async getUserByPhoneNumber(mobileNumber: string, userId: number) {
     try {
-      return await this.prismaService.user.findUnique({
+      const user = await this.prismaService.user.findUnique({
         where: { mobileNumber },
       });
+      if (user.id === userId) return null;
+      return user;
     } catch (err) {
       throw new NotFoundException({
         name: 'user',
