@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Injectable,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
@@ -135,6 +136,19 @@ export class UserService {
     return await this.prismaService.user.findUnique({
       where: userWhereUniqueInput,
     });
+  }
+
+  async getUserByPhoneNumber(mobileNumber: string) {
+    try {
+      return await this.prismaService.user.findUnique({
+        where: { mobileNumber },
+      });
+    } catch (err) {
+      throw new NotFoundException({
+        name: 'user',
+        message: MESSAGES.AUTH.USER_NOT_FOUND,
+      });
+    }
   }
 
   // confirm account

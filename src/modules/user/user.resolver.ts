@@ -71,6 +71,13 @@ export class UserResolver {
     return await this.userService.forgotPasswordOtp(otp, phoneNumerOrEmail);
   }
 
+  @Query(() => User)
+  async getUserByPhonenumber(
+    @Args('mobileNumber') mobileNumber: string,
+  ): Promise<User> {
+    return await this.userService.getUserByPhoneNumber(mobileNumber);
+  }
+
   @Mutation(() => Boolean)
   async newPassword(
     @Args('otp') otp: string,
