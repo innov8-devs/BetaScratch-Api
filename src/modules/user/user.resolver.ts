@@ -71,6 +71,7 @@ export class UserResolver {
     return await this.userService.forgotPasswordOtp(otp, phoneNumerOrEmail);
   }
 
+  @Auth([ROLE.USER])
   @Query(() => User, { nullable: true })
   async getUserByPhonenumber(
     @Args('mobileNumber') mobileNumber: string,
