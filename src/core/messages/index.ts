@@ -39,6 +39,7 @@ const USER = {
   SHORT_NAME: 'must be greater than 2',
   INVALID_ACCOUNT: 'confirm your account',
   INSUFFICIENT_WALLET_FUND: 'insufficient fund in wallet',
+  INVALID_TIP: 'cannot tip yourself',
 };
 
 const ACCOUNT = {

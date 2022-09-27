@@ -32,6 +32,15 @@ export class ChatGateway {
     console.log('socket connected');
   }
 
+  handleTip(data: {
+    amount: number;
+    to: string;
+    from: string;
+    public: boolean;
+  }): void {
+    this.server.emit('tip', data);
+  }
+
   @SubscribeMessage('join-room')
   handleJoinRoom(
     @MessageBody()

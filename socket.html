@@ -47,9 +47,9 @@
         messages.appendChild(buildNewMessage(message));
       });
 
-      // socket.on('online-users', (data) => {
-      //   console.log(data);
-      // });
+      socket.on('tip', (data) => {
+        console.log(data);
+      });
 
       // socket.on('old-room-messages', (data) => {
       //   console.log(data);

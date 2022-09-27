@@ -936,17 +936,24 @@ export class AdminService {
   async run() {
     let users = await this.prismaService.user.findMany({
       where: { disabled: false },
+      skip: 300,
+      take: 100,
     });
-    console.log(users);
-    // let users = [{ email: 'ayeolakenny@gmail.com' }];
-    for (let i = 100; i < 200; i++) {
+
+    let counter = 0;
+    for (let user of users) {
       try {
-        await this.mailService.sendMail({
-          subject: MAIL_SUBJECT.PROMOTIONAL,
-          html: MAIL_MESSAGE.COMPLETE_VERIFICATION(),
-          to: users[i].email,
+        await this.prismaService.wallet.update({
+          where: { userId: user.id },
+          data: { bonus: { increment: 500 } },
         });
-        console.log(`${i}: sent to ${users[i].email}`);
+        await this.mailService.sendMail({
+          subject: MAIL_SUBJECT.BONUS_MONEY,
+          html: MAIL_MESSAGE.BONUS_MONEY(),
+          to: user.email,
+        });
+        counter += 1;
+        console.log(`${counter}: sent to ${user.email} of userId: ${user.id}`);
       } catch (err) {
         console.log(err);
       }

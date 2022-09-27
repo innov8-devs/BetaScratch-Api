@@ -55,6 +55,12 @@ export class WalletService {
     const sender = await this.prismaService.user.findUnique({
       where: { id: userId },
     });
+    if (sender.mobileNumber === to) {
+      throw new BadRequestException({
+        name: 'wallet',
+        message: MESSAGES.USER.INVALID_TIP,
+      });
+    }
     try {
       const wallet = await this.prismaService.wallet.findUnique({
         where: { userId },
@@ -129,6 +135,13 @@ export class WalletService {
       };
 
       if (input.public) this.chatGateway.server.emit('tip', socketData);
+
+      this.chatGateway.handleTip({
+        amount,
+        public: input.public,
+        from: sender.username,
+        to: reciepient.username,
+      });
 
       return true;
     } catch (err) {

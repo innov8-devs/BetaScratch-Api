@@ -11,6 +11,7 @@ import { TransactionModule } from 'modules/transaction/transaction.module';
 import { TransactionService } from 'modules/transaction/transaction.service';
 import { MessageModule } from 'modules/message/message.module';
 import { ChatModule } from 'modules/chat/chat.module';
+import { ChatGateway } from 'modules/chat/chat.gateway';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { ChatModule } from 'modules/chat/chat.module';
     PrismaService,
     AuthService,
     TransactionService,
+    ChatGateway,
   ],
   exports: [WalletService],
 })

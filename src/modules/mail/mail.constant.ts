@@ -11,6 +11,7 @@ export const MAIL_SUBJECT = {
   ADMIN_NEW: 'Verify admin account',
   WELCOME_MESSAGE: 'Welcome to BetaScratch',
   PROMOTIONAL: 'Achieve your goals with Betascratch',
+  BONUS_MONEY: 'CONGRATULATIONS you just won N500 in your Betascratch wallet.',
 };
 
 export const MAIL_MESSAGE = {
@@ -289,6 +290,94 @@ export const MAIL_MESSAGE = {
                 src='https://childsvoice.org/wp-content/uploads/2016/01/facebook-logo-200x200.png' alt='FB'
                 style='max-height: 25px; border-radius:5px; display: inline-block; margin-right:1em;' /></a>
             <a href='https://twitter.com/betascratch_'><img src='https://awmedu.com/wp-content/uploads/2016/08/twitter-icon-big.png' alt='TW'
+                style='max-height: 28px; display: inline-block; border-radius:5px; margin-right:1em;' /></a>
+            <a href='https://www.linkedin.com/company/betainc/'><img src='http://pngimg.com/uploads/linkedIn/small/linkedIn_PNG16.png' alt='IN'
+                style='max-height: 25px; display: inline-block; border-radius:5px;' />
+          </div>
+          <div style="text-align:center;">
+            <a href="betascratch.com">Home</a> | <a href="betascratch.com/home/?login=true">Login</a> | <a
+              href="betascratch.com/privacy-policy">Privacy</a>
+          </div>
+          <p>Copyright @ Betascratch, <br /> All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
+`,
+
+  BONUS_MONEY: () => `
+ <html>
+<body>
+  <div style="background-color: #F2F2F2; padding: 7px; margin: 0px;">
+    <div style="padding: 0px; margin:0px;">
+      <div style="background-color: #F8F9FA; padding: 14px; margin: 0px;">
+        <img src='https://betascratch.com/assets/loogo2.png' alt='Betascratch logo'
+          style='max-height: 60px; display: block; border-radius: 10px;' />
+      </div>
+      <div
+        style="padding: 14px; margin: 0px; font-size: 15px; color: #2B2F33; line-height: 1.5; border-radius: 0px 0px 10px 10px; border-width: 7px; border-style: solid; border-color: #F8F9FA;">
+        <div style="padding-bottom: 36px">
+        <p>Thanks for signing up at Betascratch, The only secure Fun Gaming platform in Africa that funds your Dreams.</p>
+     
+ <p>
+Congratulations N500 has been added to betascratch wallet to play any game of your choice and win up to 3,000,000 instantly.
+          </p>
+        <div style="text-align: center; margin-top: 1.2rem">
+          <a
+            href="betascratch.com/home/?login=true"
+            style=" background-color: #4CAF50;border: none;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            padding: 10px 100px;
+            margin: 0 auto;"
+          >
+            Login
+          </a>
+          <div>
+          <br>
+          <ol style="list-style-type: none">
+            <li>login</li>
+            <li>Choose your preferred game</li>
+            <li>Add money to your wallet</li>
+            <li>purchase any game of your choice.</li>
+            <li>Play and win instantly.</li>
+          </ol>
+          <p>Thank you for using Betascratch.</p>
+        </div>
+
+<section
+              style="
+                display: flex;
+                justify-content: space-between;
+                padding-bottom: 1.5rem;
+                align-items: center;
+              "
+            >
+              <div style="width: 50%; text-align: center; padding: 0.5rem;">
+                <img src="https://api.betascratch.com/api/game/d5b610ea56b37bdb4420cb4819e4dba3d.png" alt="" style="width: 100%; border-radius: 1rem; display: inline-block;" />
+                <a href="https://betascratch.com/home">win 50k Fast cash</a> 
+                <br> <a href="https://betascratch.com/home" style="border-radius: 1rem; background-color: #f47621; color: black; margin-top: 0.2rem; font-size: 0.8rem; display: inline-block; text-decoration: none; padding: 0.3rem 0.7rem; box-shadow: 3px 3px 3px rgba(0,0,0,0.2);">Play now</a>
+              </div>
+              <div style="width: 50%; text-align: center;padding: 0.5rem;">
+                <img src="https://api.betascratch.com/api/game/c40dfd8a6e7c1ad624ee03cd637f1098a.png" alt=""  style="width: 100%; border-radius: 1rem; display: inline-block;" / />
+                <a href="https://betascratch.com/home">win 50k find the ball</a>
+                <br> <a href="https://betascratch.com/home" style="border-radius: 1rem; background-color: #f47621; color: black; margin-top: 0.2rem; font-size: 0.8rem; display: inline-block; text-decoration: none; padding: 0.3rem 0.7rem; box-shadow: 3px 3px 3px rgba(0,0,0,0.2);">Play now</a>
+              </div>
+            </section>
+
+        <div style="text-align:center; font-size:12px; padding: 16px 22px 0px 22px; border-top: 2px solid #F8F9F2;">
+          <p style="margin-bottom: 14px;">Ademola, Adetokumbo VI, Lagos Nigeria.</p>
+          <div style="display: block; margin: 21px 0; text-align: center;">
+            <a href='https://web.facebook.com/betascratchgames/?_rdc=1&_rdr'><img
+                src='https://betascratch.com/assets/facebook.png' alt='FB'
+                style='max-height: 25px; border-radius:5px; display: inline-block; margin-right:1em;' /></a>
+            <a href='https://twitter.com/betascratch_'><img src='https://betascratch.com/assets/twitter.png' alt='TW'
                 style='max-height: 28px; display: inline-block; border-radius:5px; margin-right:1em;' /></a>
             <a href='https://www.linkedin.com/company/betainc/'><img src='http://pngimg.com/uploads/linkedIn/small/linkedIn_PNG16.png' alt='IN'
                 style='max-height: 25px; display: inline-block; border-radius:5px;' />
