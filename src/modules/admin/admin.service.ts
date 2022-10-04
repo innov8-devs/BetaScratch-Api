@@ -936,7 +936,7 @@ export class AdminService {
   async run() {
     let users = await this.prismaService.user.findMany({
       where: { disabled: false },
-      skip: 300,
+      skip: 500,
       take: 100,
     });
 
