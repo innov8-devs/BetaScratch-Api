@@ -309,6 +309,13 @@ export class WalletService {
     input: Prisma.WithdrawalRequestCreateInput,
     userId: number,
   ) {
+    if (Number(input.amount) < 1000) {
+      throw new BadRequestException({
+        name: 'withdrawal request',
+        message: 'minimum withdrawal is ₦1000',
+      });
+    }
+
     const isPending = await this.prismaService.withdrawalRequest.findFirst({
       where: {
         AND: [{ userId }, { status: 'pending' }],
