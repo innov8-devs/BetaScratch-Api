@@ -74,3 +74,9 @@ export class ChangeUserWithdrawalRequestInput {
   @IsString()
   status: string;
 }
+
+@InputType()
+export class BankTransferDepositInput {
+  @Field(() => Number, { nullable: false })
+  amount!: number;
+}

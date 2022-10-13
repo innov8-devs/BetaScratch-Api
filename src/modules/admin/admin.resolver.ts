@@ -372,6 +372,17 @@ export class AdminResolver {
   }
 
   @Auth([ROLE.ADMIN])
+  @Mutation(() => Boolean)
+  async confirmBankDeposit(
+    @Args('id') id: number,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    return await this.adminService.confirmBankDeposit(id);
+  }
+
+  @Auth([ROLE.ADMIN])
   @Query(() => [Purchase])
   async fetchBankTransferPurchase(
     @Args('input') input: PaginationInput,

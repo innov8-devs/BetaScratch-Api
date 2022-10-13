@@ -4,7 +4,7 @@ import {
   Injectable,
   NotAcceptableException,
 } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Prisma, TRANSACTION_TYPE } from '@prisma/client';
 import { ChatGateway } from 'modules/chat/chat.gateway';
 import { MAIL_MESSAGE, MAIL_SUBJECT } from 'modules/mail/mail.constant';
 import { MailService } from 'modules/mail/mail.service';
@@ -24,6 +24,7 @@ import {
 import { MESSAGES } from '../../core/messages';
 import { PrismaService } from '../prisma.service';
 import {
+  BankTransferDepositInput,
   CashBackTransactionInput,
   ChangeUserWithdrawalRequestInput,
   DeductUserBalanceInput,
@@ -483,5 +484,27 @@ export class WalletService {
 
       await this.messageService.sendWithdrawalRejected(user.id);
     }
+  }
+
+  async bankTransferDeposit(
+    userId: number,
+    input: BankTransferDepositInput,
+  ): Promise<Boolean> {
+    const userWallet = await this.prismaService.wallet.findUnique({
+      where: { userId },
+    });
+
+    await this.transactionService.createTransaction({
+      amount: input.amount,
+      currency: userWallet.currency,
+      purpose: PAYMENT_PURPOSE.DEPOSIT,
+      status: PAYMENT_STATUS.PENDING,
+      type: TRANSACTION_TYPE.BANK_TRANSFER,
+      transactionId: generateRandomNumbers(),
+      transactionRef: generateRandomString(),
+      user: { connect: { id: userId } },
+    });
+
+    return true;
   }
 }

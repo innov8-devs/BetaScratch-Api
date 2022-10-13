@@ -1,6 +1,7 @@
 import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 import { WalletService } from './wallet.service';
 import {
+  BankTransferDepositInput,
   CashBackTransactionInput,
   ChangeUserWithdrawalRequestInput,
   DeductUserBalanceInput,
@@ -109,6 +110,17 @@ export class WalletResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     await this.walletService.changeWithdrawalStatus(input);
     return true;
+  }
+
+  @Auth([ROLE.USER])
+  @Mutation(() => Boolean)
+  async bankTransferDeposit(
+    @Args('input') input: BankTransferDepositInput,
+    @CurrentUser() user: User,
+    @Context() { res }: MyContext,
+  ) {
+    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
+    return await this.walletService.bankTransferDeposit(user.id, input);
   }
 
   // @Auth([ROLE.USER])

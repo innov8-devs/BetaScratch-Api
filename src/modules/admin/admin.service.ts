@@ -890,6 +890,26 @@ export class AdminService {
     }
   }
 
+  async confirmBankDeposit(id: number) {
+    try {
+      const transaction = await this.prismaService.transaction.update({
+        where: { id },
+        data: {
+          status: PAYMENT_STATUS.SUCCESSFUL,
+        },
+      });
+
+      await this.prismaService.wallet.update({
+        where: { userId: transaction.userId },
+        data: { withdrawable: { increment: transaction.amount } },
+      });
+
+      return true;
+    } catch (err) {
+      throw new BadRequestException(err);
+    }
+  }
+
   async fetchBankTransferPurchase(input: PaginationInput) {
     const { orderBy, orderColumn, page, size } = input;
     let skipValue = page * size - size;
