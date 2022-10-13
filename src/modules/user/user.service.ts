@@ -51,14 +51,6 @@ export class UserService {
     const mobileNumberUsed = await this.findUnique({
       mobileNumber: input.mobileNumber,
     });
-    if (input.mobileNumber.slice(0, 4) === '+234') {
-      if (input.mobileNumber.slice(4, 5) === '0') {
-        errMessage.push({
-          name: 'mobileNumber',
-          message: MESSAGES.AUTH.WRONG_MOBILE_NUMBER_FORMAT,
-        });
-      }
-    }
     if (emailUsed)
       errMessage.push({ name: 'email', message: MESSAGES.AUTH.EMAIL_CONFLICT });
     if (usernameUsed)
@@ -346,6 +338,14 @@ export class UserService {
   // Multistep form validation
   async validateRegistrationFormOne(input: ValidateFormOneInput) {
     const { email, mobileNumber } = input;
+    if (mobileNumber.slice(0, 4) === '+234') {
+      if (mobileNumber.slice(4, 5) === '0') {
+        throw new BadRequestException({
+          name: 'mobile',
+          message: MESSAGES.AUTH.WRONG_MOBILE_NUMBER_FORMAT,
+        });
+      }
+    }
     const emailUsed = await this.findUnique({ email: email.toLowerCase() });
     const mobileNumberUsed = await this.findUnique({
       mobileNumber: mobileNumber,
