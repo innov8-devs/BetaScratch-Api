@@ -8,6 +8,7 @@ const AUTH = {
   EMAIL_CONFLICT: 'email address is already registered',
   USERNAME_CONFLICT: 'username is taken',
   MOBILE_NUMBER_CONFLICT: 'mobile number has been taken',
+  WRONG_MOBILE_NUMBER_FORMAT: 'wrong mobile number format',
   SHORT_PASSWORD: 'password must be greater than 6 letters',
   INVALID_TOKEN: 'invalid token',
   INVALID_ADMIN: 'invalid admin type',

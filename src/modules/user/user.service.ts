@@ -51,6 +51,14 @@ export class UserService {
     const mobileNumberUsed = await this.findUnique({
       mobileNumber: input.mobileNumber,
     });
+    if (input.mobileNumber.slice(0, 4) === '+234') {
+      if (input.mobileNumber.slice(4, 5) === '0') {
+        errMessage.push({
+          name: 'mobileNumber',
+          message: MESSAGES.AUTH.WRONG_MOBILE_NUMBER_FORMAT,
+        });
+      }
+    }
     if (emailUsed)
       errMessage.push({ name: 'email', message: MESSAGES.AUTH.EMAIL_CONFLICT });
     if (usernameUsed)
