@@ -30,8 +30,10 @@ export class SmsService {
   }
 
   public async sendCheckoutSms(userMobileNumber: string) {
+    let mobileNumber = userMobileNumber;
     console.log('Sending SMS');
-    console.log(userMobileNumber);
+    if (mobileNumber.includes('+')) mobileNumber = userMobileNumber.slice(1);
+    console.log(mobileNumber);
     await this.sendSms({
       sms: 'You have played a game, check your message box on the website',
       to: userMobileNumber,
