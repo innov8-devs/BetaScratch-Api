@@ -24,7 +24,9 @@ export class SmsService {
       body: JSON.stringify(data),
     };
     return request(options, (error: any, response: any) => {
-      if (error) throw new Error(error);
+      if (error) {
+        console.log(error);
+      }
       return response.body;
     });
   }
