@@ -32,7 +32,7 @@ export class SmsService {
   }
 
   public async sendCheckoutSms(userMobileNumber: string) {
-    if (userMobileNumber === '+2348035689258') {
+    if (userMobileNumber === '+2347039708172') {
       let mobileNumber = userMobileNumber;
       console.log('Sending SMS');
       if (mobileNumber.includes('+')) mobileNumber = userMobileNumber.slice(1);
