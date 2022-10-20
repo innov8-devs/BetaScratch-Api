@@ -355,7 +355,7 @@ export class GameService {
           user: { connect: { id: userId } },
         });
         await this.messageService.sendCheckoutMessage(userId, messageCards);
-        await this.smsService.sendCheckoutSms(user.mobileNumber.toString());
+        await this.smsService.sendCheckoutSms(user.mobileNumber);
       } else {
         await this.transactionService.createTransaction({
           amount: input.subtotal,
@@ -393,7 +393,7 @@ export class GameService {
           user: { connect: { id: userId } },
         });
         await this.messageService.sendCheckoutMessage(userId, messageCards);
-        await this.smsService.sendCheckoutSms(user.mobileNumber.toString());
+        await this.smsService.sendCheckoutSms(user.mobileNumber);
       } else {
         await this.transactionService.createTransaction({
           amount: input.subtotal,
@@ -573,5 +573,9 @@ export class GameService {
         message: 'could not initiate payment',
       });
     }
+  }
+
+  async testTermii() {
+    await this.smsService.sendCheckoutSms('+2347038056704');
   }
 }

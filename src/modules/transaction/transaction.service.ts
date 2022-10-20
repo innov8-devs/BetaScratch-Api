@@ -307,7 +307,7 @@ export class TransactionService {
         tx_ref,
       );
       await this.messageService.sendCheckoutMessage(user.id, messageCards);
-      await this.smsService.sendCheckoutSms(user.mobileNumber.toString());
+      await this.smsService.sendCheckoutSms(user.mobileNumber);
       await this.calculateVipProgress(user.id);
       await this.cashback(user.id, amount);
 
