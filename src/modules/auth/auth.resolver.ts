@@ -22,6 +22,7 @@ export class AuthResolver {
   @Query(() => Boolean)
   async generateAccessToken(@Context() { req, res }: MyContext) {
     const cookieObject = parseCookies(req);
+    console.log(cookieObject);
     if (!cookieObject.refresh_token) return false;
     let decoded: { sub: number; iat: number; exp: number; isAdmin: boolean } =
       jwt_decode(cookieObject.refresh_token);
