@@ -11,6 +11,8 @@ import { TransactionService } from 'modules/transaction/transaction.service';
 import { TransactionModule } from 'modules/transaction/transaction.module';
 import { MessageModule } from 'modules/message/message.module';
 import { AdminController } from './admin.controller';
+import { SmsModule } from 'modules/sms/sms.module';
+import { SmsService } from 'modules/sms/sms.service';
 
 @Module({
   imports: [
@@ -18,6 +20,7 @@ import { AdminController } from './admin.controller';
     JwtModule.register({}),
     TransactionModule,
     MessageModule,
+    SmsModule,
   ],
   controllers: [AdminController],
   providers: [
@@ -28,6 +31,7 @@ import { AdminController } from './admin.controller';
     TokenService,
     AuthService,
     TransactionService,
+    SmsService,
   ],
 })
 export class AdminModule {}

@@ -18,6 +18,7 @@ import { MessageModule } from 'modules/message/message.module';
 import { AdminModule } from 'modules/admin/admin.module';
 import { TokenModule } from 'modules/token/token.module';
 import { ChatModule } from 'modules/chat/chat.module';
+import { SmsModule } from 'modules/sms/sms.module';
 @Module({
   imports: [
     AuthModule,
@@ -32,6 +33,7 @@ import { ChatModule } from 'modules/chat/chat.module';
     AdminModule,
     TransactionModule,
     ChatModule,
+    SmsModule,
     ConfigModule.forRoot({ load: [config], isGlobal: true }),
     MulterModule.register({ dest: '../uploads' }),
     GraphQLModule.forRootAsync<ApolloDriverConfig>({

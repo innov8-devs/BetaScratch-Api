@@ -34,6 +34,7 @@ import {
 import { GameCategoryReturnType } from './dto/game.response';
 import { v4 } from 'uuid';
 import Stripe from 'stripe';
+import { SmsService } from 'modules/sms/sms.service';
 
 @Injectable()
 export class GameService {
@@ -41,6 +42,7 @@ export class GameService {
     private readonly prismaService: PrismaService,
     private readonly transactionService: TransactionService,
     private readonly messageService: MessageService,
+    private readonly smsService: SmsService,
   ) {}
 
   async findOneGame(input: Prisma.GameWhereUniqueInput): Promise<Game> {
@@ -312,6 +314,12 @@ export class GameService {
       where: { userId },
     });
 
+    const user = await this.prismaService.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+
     const transactionRef = generateRandomString();
     const cartDetail = computeCart(input.cart, userId, transactionRef);
     const messageCards = computeCheckoutMessageCards(
@@ -347,6 +355,7 @@ export class GameService {
           user: { connect: { id: userId } },
         });
         await this.messageService.sendCheckoutMessage(userId, messageCards);
+        await this.smsService.sendCheckoutSms(user.mobileNumber.toString());
       } else {
         await this.transactionService.createTransaction({
           amount: input.subtotal,
@@ -384,6 +393,7 @@ export class GameService {
           user: { connect: { id: userId } },
         });
         await this.messageService.sendCheckoutMessage(userId, messageCards);
+        await this.smsService.sendCheckoutSms(user.mobileNumber.toString());
       } else {
         await this.transactionService.createTransaction({
           amount: input.subtotal,

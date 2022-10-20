@@ -12,6 +12,8 @@ import { TransactionService } from 'modules/transaction/transaction.service';
 import { MessageModule } from 'modules/message/message.module';
 import { ChatModule } from 'modules/chat/chat.module';
 import { ChatGateway } from 'modules/chat/chat.gateway';
+import { SmsModule } from 'modules/sms/sms.module';
+import { SmsService } from 'modules/sms/sms.service';
 
 @Module({
   imports: [
@@ -20,6 +22,7 @@ import { ChatGateway } from 'modules/chat/chat.gateway';
     AuthModule,
     TransactionModule,
     MessageModule,
+    SmsModule,
     ChatModule,
     JwtModule.register({}),
   ],
@@ -30,6 +33,7 @@ import { ChatGateway } from 'modules/chat/chat.gateway';
     AuthService,
     TransactionService,
     ChatGateway,
+    SmsService,
   ],
   exports: [WalletService],
 })

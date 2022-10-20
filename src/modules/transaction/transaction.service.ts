@@ -21,12 +21,14 @@ import { CartItems } from 'modules/game/dto/game.request';
 import { calculateVipStatus } from 'helpers/calculateVipStatus';
 import { MessageService } from 'modules/message/message.service';
 import { Response } from 'express';
+import { SmsService } from 'modules/sms/sms.service';
 
 @Injectable()
 export class TransactionService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly messageService: MessageService,
+    private readonly smsService: SmsService,
   ) {}
 
   async createTransaction(input: Prisma.TransactionCreateInput) {
@@ -305,6 +307,7 @@ export class TransactionService {
         tx_ref,
       );
       await this.messageService.sendCheckoutMessage(user.id, messageCards);
+      await this.smsService.sendCheckoutSms(user.mobileNumber.toString());
       await this.calculateVipProgress(user.id);
       await this.cashback(user.id, amount);
 
