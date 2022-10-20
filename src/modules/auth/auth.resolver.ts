@@ -23,9 +23,9 @@ export class AuthResolver {
   async generateAccessToken(@Context() { req, res }: MyContext) {
     const cookieObject = parseCookies(req);
     console.log(cookieObject);
-    if (!cookieObject.refresh_token) return false;
+    if (!cookieObject.beta_refresh_token) return false;
     let decoded: { sub: number; iat: number; exp: number; isAdmin: boolean } =
-      jwt_decode(cookieObject.refresh_token);
+      jwt_decode(cookieObject.beta_refresh_token);
     if (Date.now() >= decoded.exp * 1000) return false;
     if (decoded.isAdmin) authTypeSetterFn(true);
     else authTypeSetterFn(false);
