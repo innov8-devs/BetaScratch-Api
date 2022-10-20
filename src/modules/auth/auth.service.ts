@@ -202,7 +202,7 @@ export class AuthService {
       ? { sub: userId, isAdmin: true }
       : { sub: userId, isAdmin: false };
     const accessToken = await this.generateAccessToken(payload);
-    res.append('Access-Control-Expose-Headers', ['access_token']);
+    res.append('Access-Control-Expose-Headers', ['beta_access_token']);
     res.append('access_token', accessToken);
     res.cookie('access_token', accessToken, {
       sameSite: 'none',
@@ -220,7 +220,7 @@ export class AuthService {
       ? { sub: userId, isAdmin: true }
       : { sub: userId, isAdmin: false };
     const refreshToken = await this.generateRefreshToken(payload);
-    res.append('Access-Control-Expose-Headers', ['refresh_token']);
+    res.append('Access-Control-Expose-Headers', ['beta_refresh_token']);
     res.append('refresh_token', refreshToken);
     res.cookie('refresh_token', refreshToken, {
       sameSite: 'none',
