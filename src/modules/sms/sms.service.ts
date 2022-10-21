@@ -34,7 +34,7 @@ export class SmsService {
   public async sendCheckoutSms(userMobileNumber: string) {
     console.log('Sending SMS');
     await this.sendSms({
-      sms: 'You have played a game, check your message box on the website',
+      sms: 'Congratulations you just purchased a Game to Play and Win. Click the Link to Play Instantly https://betascratch.com/account/messages',
       to: userMobileNumber,
     });
   }

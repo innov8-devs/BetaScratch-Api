@@ -574,8 +574,4 @@ export class GameService {
       });
     }
   }
-
-  async testTermii() {
-    await this.smsService.sendCheckoutSms('+23407038056704');
-  }
 }

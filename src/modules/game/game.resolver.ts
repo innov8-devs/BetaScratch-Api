@@ -173,10 +173,10 @@ export class GameResolver {
     );
   }
 
-  @Query(() => Boolean)
-  async testTermii() {
-    return this.gameService.testTermii();
-  }
+  // @Query(() => Boolean)
+  // async testTermii() {
+  //   return this.gameService.testTermii();
+  // }
 
   // @Auth([ROLE.USER])
   // @Mutation(() => User)
