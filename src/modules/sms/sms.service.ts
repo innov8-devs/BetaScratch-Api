@@ -32,16 +32,10 @@ export class SmsService {
   }
 
   public async sendCheckoutSms(userMobileNumber: string) {
-    if (userMobileNumber === '+2347039708172') {
-      let mobileNumber = userMobileNumber;
-      console.log('Sending SMS');
-      if (mobileNumber.includes('+')) mobileNumber = userMobileNumber.slice(1);
-      console.log(mobileNumber);
-      await this.sendSms({
-        sms: 'You have played a game, check your message box on the website',
-        to: userMobileNumber,
-      });
-    }
-    return;
+    console.log('Sending SMS');
+    await this.sendSms({
+      sms: 'You have played a game, check your message box on the website',
+      to: userMobileNumber,
+    });
   }
 }

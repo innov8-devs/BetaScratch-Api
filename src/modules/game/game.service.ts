@@ -576,6 +576,6 @@ export class GameService {
   }
 
   async testTermii() {
-    await this.smsService.sendCheckoutSms('+2347038056704');
+    await this.smsService.sendCheckoutSms('+23407038056704');
   }
 }
