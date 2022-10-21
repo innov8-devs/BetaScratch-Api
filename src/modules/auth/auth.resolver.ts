@@ -2,6 +2,7 @@ import { User } from '@generated/prisma-nestjs-graphql/user/user.model';
 import { UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { parseCookies } from 'helpers/parseCookie';
+import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import {
   AdminLoginInput,
   AdminLoginOtpInput,
@@ -14,14 +15,16 @@ import { LocalAuthGuard } from './guards/local-auth.guard';
 import jwt_decode from 'jwt-decode';
 import { Admin } from '@generated/prisma-nestjs-graphql/admin/admin.model';
 import { authTypeSetterFn } from 'utils/authType';
+import { Auth } from './decorators/auth.decorator';
 
 @Resolver()
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
+  @Auth([ROLE.USER])
   @Query(() => Boolean)
   async generateAccessToken(@Context() { req, res }: MyContext) {
-    const cookieObject = parseCookies(req);
+    const cookieObject = parseCookies(req.cookies);
     console.log(cookieObject);
     if (!cookieObject.beta_refresh_token) return false;
     let decoded: { sub: number; iat: number; exp: number; isAdmin: boolean } =
