@@ -173,11 +173,6 @@ export class GameResolver {
     );
   }
 
-  // @Query(() => Boolean)
-  // async testTermii() {
-  //   return this.gameService.testTermii();
-  // }
-
   // @Auth([ROLE.USER])
   // @Mutation(() => User)
   // async flutterCheckoutTwo(
@@ -187,5 +182,10 @@ export class GameResolver {
   // ) {
   //   await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
   //   return await this.gameService.flutterCheckoutTwo(input, user.id);
+  // }
+
+  // @Query(() => Boolean)
+  // async testTermii() {
+  //   return this.gameService.testTermii();
   // }
 }
