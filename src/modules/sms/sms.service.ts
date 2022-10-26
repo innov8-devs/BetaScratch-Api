@@ -1,11 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { SmsResponse } from './dto/response.dto';
-import { SendSmsParams } from './dto/sms-params.dto';
 var request = require('request');
 
 @Injectable()
 export class SmsService {
-  async sendSms(input: SendSmsParams): Promise<SmsResponse> {
+  async sendSms(input: {
+    to: string | string[];
+    sms: string;
+  }): Promise<SmsResponse> {
     const { sms, to } = input;
     var data = {
       to,
@@ -32,10 +34,18 @@ export class SmsService {
   }
 
   public async sendCheckoutSms(userMobileNumber: string) {
-    console.log('Sending SMS');
     await this.sendSms({
       sms: 'Congratulations you just purchased a Game to Play and Win. Click the Link to Play Instantly https://betascratch.com/account/messages',
       to: userMobileNumber,
     });
+  }
+
+  public async sendBulkSms(input: { to: string[]; sms: string }) {
+    const { sms, to } = input;
+    await this.sendSms({
+      sms,
+      to,
+    });
+    return true;
   }
 }
