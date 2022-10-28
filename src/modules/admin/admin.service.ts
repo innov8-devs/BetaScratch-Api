@@ -953,6 +953,7 @@ export class AdminService {
     }
   }
 
+  // ! Random methods to test things out
   async run() {
     let users = await this.prismaService.user.findMany({
       where: { disabled: false },
@@ -979,5 +980,87 @@ export class AdminService {
       }
     }
     return true;
+  }
+
+  async tryCascade(userId: number) {
+    try {
+      const deleteMessage = this.prismaService.message.deleteMany({
+        where: {
+          userId,
+        },
+      });
+
+      const deleteOtp = this.prismaService.otp.deleteMany({
+        where: {
+          userId,
+        },
+      });
+
+      const deletePurchase = this.prismaService.purchase.deleteMany({
+        where: {
+          userId,
+        },
+      });
+
+      const deleteToken = this.prismaService.token.deleteMany({
+        where: {
+          userId,
+        },
+      });
+
+      const deleteTransaction = this.prismaService.transaction.deleteMany({
+        where: {
+          userId,
+        },
+      });
+
+      const deleteWallet = this.prismaService.wallet.delete({
+        where: {
+          userId,
+        },
+      });
+
+      const deleteWithdrawalrequest =
+        this.prismaService.withdrawalRequest.deleteMany({
+          where: {
+            userId,
+          },
+        });
+
+      const deleteRefferal = this.prismaService.referral.deleteMany({
+        where: {
+          userId,
+        },
+      });
+
+      const deleteCart = this.prismaService.cart.deleteMany({
+        where: { userId },
+      });
+
+      const deleteUser = this.prismaService.user.delete({
+        where: {
+          id: userId,
+        },
+      });
+
+      const transaction = await this.prismaService.$transaction([
+        deleteMessage,
+        deleteOtp,
+        deletePurchase,
+        deleteToken,
+        deleteTransaction,
+        deleteWallet,
+        deleteWithdrawalrequest,
+        deleteCart,
+        deleteRefferal,
+        deleteUser,
+      ]);
+
+      console.log(transaction);
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
   }
 }

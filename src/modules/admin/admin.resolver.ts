@@ -409,8 +409,9 @@ export class AdminResolver {
     return await this.adminService.deleteBannerUpload(id);
   }
 
+  //! to test the test methods
   @Mutation(() => Boolean)
-  async run() {
-    await this.adminService.run();
+  async run(@Args('userId') userId: number) {
+    return await this.adminService.tryCascade(userId);
   }
 }

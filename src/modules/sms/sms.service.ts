@@ -1,10 +1,13 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'modules/prisma.service';
 import { SmsResponse } from './dto/response.dto';
 var request = require('request');
 
 @Injectable()
 export class SmsService {
-  async sendSms(input: {
+  constructor(private readonly prismaService: PrismaService) {}
+
+  async initiateSms(input: {
     to: string | string[];
     sms: string;
   }): Promise<SmsResponse> {
@@ -34,18 +37,35 @@ export class SmsService {
   }
 
   public async sendCheckoutSms(userMobileNumber: string) {
-    await this.sendSms({
+    await this.initiateSms({
       sms: 'Congratulations you just purchased a Game to Play and Win. Click the Link to Play Instantly https://betascratch.com/account/messages',
       to: userMobileNumber,
     });
   }
 
-  public async sendBulkSms(input: { to: string[]; sms: string }) {
+  public async sendSms(input: { to?: string[]; sms: string }) {
     const { sms, to } = input;
-    await this.sendSms({
-      sms,
-      to,
-    });
-    return true;
+    if (!to) {
+      const phoneNumberTo: string[] = [];
+      const userPhoneNumbers = await this.prismaService.user.findMany({
+        select: {
+          mobileNumber: true,
+        },
+      });
+      for (let phoneNumber of userPhoneNumbers) {
+        phoneNumberTo.push(phoneNumber.mobileNumber);
+      }
+      await this.initiateSms({
+        sms,
+        to: phoneNumberTo,
+      });
+      return true;
+    } else {
+      await this.initiateSms({
+        sms,
+        to,
+      });
+      return true;
+    }
   }
 }
