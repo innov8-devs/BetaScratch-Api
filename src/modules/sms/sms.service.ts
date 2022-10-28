@@ -12,6 +12,7 @@ export class SmsService {
     sms: string;
   }): Promise<SmsResponse> {
     const { sms, to } = input;
+    console.log(to);
     var data = {
       to,
       sms,
