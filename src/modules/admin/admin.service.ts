@@ -954,113 +954,113 @@ export class AdminService {
   }
 
   // ! Random methods to test things out
-  async run() {
-    let users = await this.prismaService.user.findMany({
-      where: { disabled: false },
-      skip: 500,
-      take: 100,
-    });
+  // async run() {
+  //   let users = await this.prismaService.user.findMany({
+  //     where: { disabled: false },
+  //     skip: 500,
+  //     take: 100,
+  //   });
 
-    let counter = 0;
-    for (let user of users) {
-      try {
-        await this.prismaService.wallet.update({
-          where: { userId: user.id },
-          data: { bonus: { increment: 500 } },
-        });
-        await this.mailService.sendMail({
-          subject: MAIL_SUBJECT.BONUS_MONEY,
-          html: MAIL_MESSAGE.BONUS_MONEY(),
-          to: user.email,
-        });
-        counter += 1;
-        console.log(`${counter}: sent to ${user.email} of userId: ${user.id}`);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    return true;
-  }
+  //   let counter = 0;
+  //   for (let user of users) {
+  //     try {
+  //       await this.prismaService.wallet.update({
+  //         where: { userId: user.id },
+  //         data: { bonus: { increment: 500 } },
+  //       });
+  //       await this.mailService.sendMail({
+  //         subject: MAIL_SUBJECT.BONUS_MONEY,
+  //         html: MAIL_MESSAGE.BONUS_MONEY(),
+  //         to: user.email,
+  //       });
+  //       counter += 1;
+  //       console.log(`${counter}: sent to ${user.email} of userId: ${user.id}`);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   }
+  //   return true;
+  // }
 
-  async tryCascade(userId: number) {
-    try {
-      const deleteMessage = this.prismaService.message.deleteMany({
-        where: {
-          userId,
-        },
-      });
+  // async tryCascade(userId: number) {
+  //   try {
+  //     const deleteMessage = this.prismaService.message.deleteMany({
+  //       where: {
+  //         userId,
+  //       },
+  //     });
 
-      const deleteOtp = this.prismaService.otp.deleteMany({
-        where: {
-          userId,
-        },
-      });
+  //     const deleteOtp = this.prismaService.otp.deleteMany({
+  //       where: {
+  //         userId,
+  //       },
+  //     });
 
-      const deletePurchase = this.prismaService.purchase.deleteMany({
-        where: {
-          userId,
-        },
-      });
+  //     const deletePurchase = this.prismaService.purchase.deleteMany({
+  //       where: {
+  //         userId,
+  //       },
+  //     });
 
-      const deleteToken = this.prismaService.token.deleteMany({
-        where: {
-          userId,
-        },
-      });
+  //     const deleteToken = this.prismaService.token.deleteMany({
+  //       where: {
+  //         userId,
+  //       },
+  //     });
 
-      const deleteTransaction = this.prismaService.transaction.deleteMany({
-        where: {
-          userId,
-        },
-      });
+  //     const deleteTransaction = this.prismaService.transaction.deleteMany({
+  //       where: {
+  //         userId,
+  //       },
+  //     });
 
-      const deleteWallet = this.prismaService.wallet.delete({
-        where: {
-          userId,
-        },
-      });
+  //     const deleteWallet = this.prismaService.wallet.delete({
+  //       where: {
+  //         userId,
+  //       },
+  //     });
 
-      const deleteWithdrawalrequest =
-        this.prismaService.withdrawalRequest.deleteMany({
-          where: {
-            userId,
-          },
-        });
+  //     const deleteWithdrawalrequest =
+  //       this.prismaService.withdrawalRequest.deleteMany({
+  //         where: {
+  //           userId,
+  //         },
+  //       });
 
-      const deleteRefferal = this.prismaService.referral.deleteMany({
-        where: {
-          userId,
-        },
-      });
+  //     const deleteRefferal = this.prismaService.referral.deleteMany({
+  //       where: {
+  //         userId,
+  //       },
+  //     });
 
-      const deleteCart = this.prismaService.cart.deleteMany({
-        where: { userId },
-      });
+  //     const deleteCart = this.prismaService.cart.deleteMany({
+  //       where: { userId },
+  //     });
 
-      const deleteUser = this.prismaService.user.delete({
-        where: {
-          id: userId,
-        },
-      });
+  //     const deleteUser = this.prismaService.user.delete({
+  //       where: {
+  //         id: userId,
+  //       },
+  //     });
 
-      const transaction = await this.prismaService.$transaction([
-        deleteMessage,
-        deleteOtp,
-        deletePurchase,
-        deleteToken,
-        deleteTransaction,
-        deleteWallet,
-        deleteWithdrawalrequest,
-        deleteCart,
-        deleteRefferal,
-        deleteUser,
-      ]);
+  //     const transaction = await this.prismaService.$transaction([
+  //       deleteMessage,
+  //       deleteOtp,
+  //       deletePurchase,
+  //       deleteToken,
+  //       deleteTransaction,
+  //       deleteWallet,
+  //       deleteWithdrawalrequest,
+  //       deleteCart,
+  //       deleteRefferal,
+  //       deleteUser,
+  //     ]);
 
-      console.log(transaction);
-      return true;
-    } catch (err) {
-      console.log(err);
-      return false;
-    }
-  }
+  //     console.log(transaction);
+  //     return true;
+  //   } catch (err) {
+  //     console.log(err);
+  //     return false;
+  //   }
+  // }
 }

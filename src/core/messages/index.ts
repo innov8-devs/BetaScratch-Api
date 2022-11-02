@@ -47,4 +47,16 @@ const ACCOUNT = {
   DISABLED: 'account disabled, contact customer service.',
 };
 
-export const MESSAGES = { AUTH, USER, ACCOUNT };
+const COUPON = {
+  UNABLE_TO_CREATE: 'unable to create coupon',
+  UNABLE_TO_CHECK_VALIDITY: 'unable to check validity',
+  UNABLE_TO_INVALIDATE: 'unable to invalidate coupon',
+  COUPON_CONFLICT: 'code has been used previously',
+  AMOUNT_NEEDED: 'kindly provide the amount',
+  PERCENTAGE_NEEDED: 'kindly provide the percentage',
+  PERCENTAGE_TOO_HIGH: 'percentage cannot be more than 100',
+  PERCENTAGE_CONFLICT: 'cannot provide amount for percentage coupon',
+  AMOUNT_CONFLICT: 'cannot provide percentage for amount coupon',
+};
+
+export const MESSAGES = { AUTH, USER, ACCOUNT, COUPON };

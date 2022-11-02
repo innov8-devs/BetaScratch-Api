@@ -298,6 +298,24 @@ model Token {
   adminId      Int?
 }
 
+model Coupon {
+  id         Int         @id @default(autoincrement())
+  /// @Validator.IsString()
+  code       String      @unique
+  /// @Validator.IsBoolean()
+  validity   Boolean
+  /// @Validaror.IsDate()
+  expire     DateTime
+  // @Validator.IsEnum(COUPION_TYPE, { each: true })
+  type       COUPON_TYPE
+  /// @Validaror.IsNumber()
+  percentage Int?
+  /// @Validaror.IsNumber()
+  amount     Int?
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
 model FlutterwaveLog {
   id                  Int      @id @default(autoincrement())
   tx_ref              String
@@ -350,4 +368,9 @@ enum TRANSACTION_TYPE {
   FLUTTERWAVE
   BANK_TRANSFER
   STRIPE
+}
+
+enum COUPON_TYPE {
+  PERCENTAGE
+  AMOUNT
 }

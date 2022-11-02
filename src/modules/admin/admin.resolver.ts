@@ -410,8 +410,8 @@ export class AdminResolver {
   }
 
   //! to test the test methods
-  @Mutation(() => Boolean)
-  async run(@Args('userId') userId: number) {
-    return await this.adminService.tryCascade(userId);
-  }
+  // @Mutation(() => Boolean)
+  // async run(@Args('userId') userId: number) {
+  //   return await this.adminService.tryCascade(userId);
+  // }
 }
