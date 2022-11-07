@@ -37,7 +37,7 @@ model User {
   // @Validator.IsEnum(ROLE, { each: true })
   role               ROLE                @default(USER)
   // @Validator.IsEnum(GENDER, { each: true })
-  gender             GENDER
+  gender             GENDER              @default(OTHER)
   ///@Validator.IsPhoneNumber()
   mobileNumber       String              @unique
   /// @Validator.IsString()
@@ -299,21 +299,23 @@ model Token {
 }
 
 model Coupon {
-  id         Int         @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
+  /// @Validaror.IsNumber()
+  percentage Int
+  /// @Validator.IsBoolean()
+  status     Boolean
+  /// @Validator.IsBoolean()
+  cap        Boolean
+  /// @Validaror.IsNumber()
+  capAmount  Int
   /// @Validator.IsString()
-  code       String      @unique
+  code       String   @unique
   /// @Validator.IsBoolean()
   validity   Boolean
   /// @Validaror.IsDate()
   expire     DateTime
-  // @Validator.IsEnum(COUPION_TYPE, { each: true })
-  type       COUPON_TYPE
-  /// @Validaror.IsNumber()
-  percentage Int?
-  /// @Validaror.IsNumber()
-  amount     Int?
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model FlutterwaveLog {
@@ -368,9 +370,4 @@ enum TRANSACTION_TYPE {
   FLUTTERWAVE
   BANK_TRANSFER
   STRIPE
-}
-
-enum COUPON_TYPE {
-  PERCENTAGE
-  AMOUNT
 }

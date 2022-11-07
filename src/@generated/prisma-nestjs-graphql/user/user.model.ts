@@ -39,7 +39,7 @@ export class User {
     @Field(() => ROLE, {nullable:false,defaultValue:'USER'})
     role!: keyof typeof ROLE;
 
-    @Field(() => GENDER, {nullable:false})
+    @Field(() => GENDER, {nullable:false,defaultValue:'OTHER'})
     gender!: keyof typeof GENDER;
 
     @Field(() => String, {nullable:false})

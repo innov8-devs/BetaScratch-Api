@@ -1,7 +1,6 @@
 import { Field } from '@nestjs/graphql';
 import { ObjectType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
-import { COUPON_TYPE } from '../prisma/coupon-type.enum';
 import { CouponCountAggregate } from './coupon-count-aggregate.output';
 import { CouponAvgAggregate } from './coupon-avg-aggregate.output';
 import { CouponSumAggregate } from './coupon-sum-aggregate.output';
@@ -14,6 +13,18 @@ export class CouponGroupBy {
     @Field(() => Int, {nullable:false})
     id!: number;
 
+    @Field(() => Int, {nullable:false})
+    percentage!: number;
+
+    @Field(() => Boolean, {nullable:false})
+    status!: boolean;
+
+    @Field(() => Boolean, {nullable:false})
+    cap!: boolean;
+
+    @Field(() => Int, {nullable:false})
+    capAmount!: number;
+
     @Field(() => String, {nullable:false})
     code!: string;
 
@@ -22,15 +33,6 @@ export class CouponGroupBy {
 
     @Field(() => Date, {nullable:false})
     expire!: Date | string;
-
-    @Field(() => COUPON_TYPE, {nullable:false})
-    type!: keyof typeof COUPON_TYPE;
-
-    @Field(() => Int, {nullable:true})
-    percentage?: number;
-
-    @Field(() => Int, {nullable:true})
-    amount?: number;
 
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;

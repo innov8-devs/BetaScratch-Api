@@ -1,11 +1,9 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { IntFilter } from '../prisma/int-filter.input';
-import { StringFilter } from '../prisma/string-filter.input';
 import { BoolFilter } from '../prisma/bool-filter.input';
+import { StringFilter } from '../prisma/string-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
-import { EnumCOUPON_TYPEFilter } from '../prisma/enum-coupon-type-filter.input';
-import { IntNullableFilter } from '../prisma/int-nullable-filter.input';
 
 @InputType()
 export class CouponWhereInput {
@@ -22,6 +20,18 @@ export class CouponWhereInput {
     @Field(() => IntFilter, {nullable:true})
     id?: IntFilter;
 
+    @Field(() => IntFilter, {nullable:true})
+    percentage?: IntFilter;
+
+    @Field(() => BoolFilter, {nullable:true})
+    status?: BoolFilter;
+
+    @Field(() => BoolFilter, {nullable:true})
+    cap?: BoolFilter;
+
+    @Field(() => IntFilter, {nullable:true})
+    capAmount?: IntFilter;
+
     @Field(() => StringFilter, {nullable:true})
     code?: StringFilter;
 
@@ -30,15 +40,6 @@ export class CouponWhereInput {
 
     @Field(() => DateTimeFilter, {nullable:true})
     expire?: DateTimeFilter;
-
-    @Field(() => EnumCOUPON_TYPEFilter, {nullable:true})
-    type?: EnumCOUPON_TYPEFilter;
-
-    @Field(() => IntNullableFilter, {nullable:true})
-    percentage?: IntNullableFilter;
-
-    @Field(() => IntNullableFilter, {nullable:true})
-    amount?: IntNullableFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;

@@ -43,8 +43,8 @@ export class UserCreateInput {
     @Field(() => ROLE, {nullable:true})
     role?: keyof typeof ROLE;
 
-    @Field(() => GENDER, {nullable:false})
-    gender!: keyof typeof GENDER;
+    @Field(() => GENDER, {nullable:true})
+    gender?: keyof typeof GENDER;
 
     @Field(() => String, {nullable:false})
     @Validator.IsPhoneNumber()

@@ -8,6 +8,18 @@ export class CouponCountAggregateInput {
     id?: true;
 
     @Field(() => Boolean, {nullable:true})
+    percentage?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    status?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    cap?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    capAmount?: true;
+
+    @Field(() => Boolean, {nullable:true})
     code?: true;
 
     @Field(() => Boolean, {nullable:true})
@@ -15,15 +27,6 @@ export class CouponCountAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     expire?: true;
-
-    @Field(() => Boolean, {nullable:true})
-    type?: true;
-
-    @Field(() => Boolean, {nullable:true})
-    percentage?: true;
-
-    @Field(() => Boolean, {nullable:true})
-    amount?: true;
 
     @Field(() => Boolean, {nullable:true})
     createdAt?: true;

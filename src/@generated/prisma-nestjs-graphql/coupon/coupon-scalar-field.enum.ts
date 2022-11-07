@@ -2,12 +2,13 @@ import { registerEnumType } from '@nestjs/graphql';
 
 export enum CouponScalarFieldEnum {
     id = "id",
+    percentage = "percentage",
+    status = "status",
+    cap = "cap",
+    capAmount = "capAmount",
     code = "code",
     validity = "validity",
     expire = "expire",
-    type = "type",
-    percentage = "percentage",
-    amount = "amount",
     createdAt = "createdAt",
     updatedAt = "updatedAt"
 }

@@ -23,7 +23,7 @@ export class CouponResolver {
     return await this.couponService.invalidateCoupon(code);
   }
 
-  // @Auth([ROLE.ADMIN])
+  @Auth([ROLE.ADMIN])
   @Query(() => Boolean)
   async checkCouponValidity(@Args('code') code: string) {
     return await this.couponService.checkValidity(code);

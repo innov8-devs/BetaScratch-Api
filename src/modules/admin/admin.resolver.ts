@@ -411,7 +411,7 @@ export class AdminResolver {
 
   //! to test the test methods
   // @Mutation(() => Boolean)
-  // async run(@Args('userId') userId: number) {
-  //   return await this.adminService.tryCascade(userId);
+  // async run() {
+  //   return await this.adminService.run();
   // }
 }

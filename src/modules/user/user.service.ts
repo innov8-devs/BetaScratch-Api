@@ -85,7 +85,7 @@ export class UserService {
     await this.walletService.createWallet({
       bonus: 0,
       user: { connect: { id: user.id } },
-      withdrawable: 500,
+      withdrawable: 0,
       currency: CURRENCY.NGN,
     });
 

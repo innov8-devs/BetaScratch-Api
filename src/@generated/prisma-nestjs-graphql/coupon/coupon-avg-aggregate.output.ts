@@ -12,5 +12,5 @@ export class CouponAvgAggregate {
     percentage?: number;
 
     @Field(() => Float, {nullable:true})
-    amount?: number;
+    capAmount?: number;
 }

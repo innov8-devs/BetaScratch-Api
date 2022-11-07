@@ -10,6 +10,18 @@ export class CouponOrderByWithRelationAndSearchRelevanceInput {
     id?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    percentage?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    status?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    cap?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    capAmount?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     code?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
@@ -17,15 +29,6 @@ export class CouponOrderByWithRelationAndSearchRelevanceInput {
 
     @Field(() => SortOrder, {nullable:true})
     expire?: keyof typeof SortOrder;
-
-    @Field(() => SortOrder, {nullable:true})
-    type?: keyof typeof SortOrder;
-
-    @Field(() => SortOrder, {nullable:true})
-    percentage?: keyof typeof SortOrder;
-
-    @Field(() => SortOrder, {nullable:true})
-    amount?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;

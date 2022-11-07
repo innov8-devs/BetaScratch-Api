@@ -12,5 +12,5 @@ export class CouponSumOrderByAggregateInput {
     percentage?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
-    amount?: keyof typeof SortOrder;
+    capAmount?: keyof typeof SortOrder;
 }
