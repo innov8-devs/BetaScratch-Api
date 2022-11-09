@@ -2,7 +2,8 @@ import { registerEnumType } from '@nestjs/graphql';
 
 export enum ResetPasswordMetricsScalarFieldEnum {
     id = "id",
-    userId = "userId"
+    userId = "userId",
+    createdAt = "createdAt"
 }
 
 

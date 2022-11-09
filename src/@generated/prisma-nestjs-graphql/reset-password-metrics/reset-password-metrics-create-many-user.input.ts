@@ -7,4 +7,7 @@ export class ResetPasswordMetricsCreateManyUserInput {
 
     @Field(() => Int, {nullable:true})
     id?: number;
+
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
 }

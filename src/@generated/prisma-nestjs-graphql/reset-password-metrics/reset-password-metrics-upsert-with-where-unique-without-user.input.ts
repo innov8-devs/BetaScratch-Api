@@ -2,7 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { ResetPasswordMetricsWhereUniqueInput } from './reset-password-metrics-where-unique.input';
 import { ResetPasswordMetricsUpdateWithoutUserInput } from './reset-password-metrics-update-without-user.input';
-import { ResetPasswordMetricsUncheckedCreateWithoutUserInput } from './reset-password-metrics-unchecked-create-without-user.input';
+import { ResetPasswordMetricsCreateWithoutUserInput } from './reset-password-metrics-create-without-user.input';
 
 @InputType()
 export class ResetPasswordMetricsUpsertWithWhereUniqueWithoutUserInput {
@@ -13,6 +13,6 @@ export class ResetPasswordMetricsUpsertWithWhereUniqueWithoutUserInput {
     @Field(() => ResetPasswordMetricsUpdateWithoutUserInput, {nullable:false})
     update!: ResetPasswordMetricsUpdateWithoutUserInput;
 
-    @Field(() => ResetPasswordMetricsUncheckedCreateWithoutUserInput, {nullable:false})
-    create!: ResetPasswordMetricsUncheckedCreateWithoutUserInput;
+    @Field(() => ResetPasswordMetricsCreateWithoutUserInput, {nullable:false})
+    create!: ResetPasswordMetricsCreateWithoutUserInput;
 }

@@ -12,5 +12,8 @@ export class ResetPasswordMetricsCountAggregate {
     userId!: number;
 
     @Field(() => Int, {nullable:false})
+    createdAt!: number;
+
+    @Field(() => Int, {nullable:false})
     _all!: number;
 }

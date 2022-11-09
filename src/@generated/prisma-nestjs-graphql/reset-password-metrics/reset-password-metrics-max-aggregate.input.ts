@@ -9,4 +9,7 @@ export class ResetPasswordMetricsMaxAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     userId?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    createdAt?: true;
 }

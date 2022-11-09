@@ -7,4 +7,7 @@ export class ResetPasswordMetricsCreateInput {
 
     @Field(() => UserCreateNestedOneWithoutResetPasswordMetricsInput, {nullable:true})
     user?: UserCreateNestedOneWithoutResetPasswordMetricsInput;
+
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
 }

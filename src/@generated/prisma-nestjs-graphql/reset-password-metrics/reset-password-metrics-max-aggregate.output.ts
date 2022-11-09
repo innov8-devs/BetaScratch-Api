@@ -10,4 +10,7 @@ export class ResetPasswordMetricsMaxAggregate {
 
     @Field(() => Int, {nullable:true})
     userId?: number;
+
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
 }

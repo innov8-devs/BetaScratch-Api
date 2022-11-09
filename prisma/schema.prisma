@@ -346,9 +346,10 @@ model Banner {
 }
 
 model ResetPasswordMetrics {
-  id     Int   @id @default(autoincrement())
-  user   User? @relation(fields: [userId], references: [id])
-  userId Int?
+  id        Int      @id @default(autoincrement())
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
+  createdAt DateTime @default(now())
 }
 
 enum ROLE {

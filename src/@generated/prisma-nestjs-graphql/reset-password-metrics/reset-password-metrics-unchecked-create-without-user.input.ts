@@ -7,4 +7,7 @@ export class ResetPasswordMetricsUncheckedCreateWithoutUserInput {
 
     @Field(() => Int, {nullable:true})
     id?: number;
+
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
 }

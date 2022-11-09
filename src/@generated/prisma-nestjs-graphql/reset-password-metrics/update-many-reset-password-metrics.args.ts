@@ -1,13 +1,13 @@
 import { Field } from '@nestjs/graphql';
 import { ArgsType } from '@nestjs/graphql';
-import { ResetPasswordMetricsUncheckedUpdateManyInput } from './reset-password-metrics-unchecked-update-many.input';
+import { ResetPasswordMetricsUpdateManyMutationInput } from './reset-password-metrics-update-many-mutation.input';
 import { ResetPasswordMetricsWhereInput } from './reset-password-metrics-where.input';
 
 @ArgsType()
 export class UpdateManyResetPasswordMetricsArgs {
 
-    @Field(() => ResetPasswordMetricsUncheckedUpdateManyInput, {nullable:false})
-    data!: ResetPasswordMetricsUncheckedUpdateManyInput;
+    @Field(() => ResetPasswordMetricsUpdateManyMutationInput, {nullable:false})
+    data!: ResetPasswordMetricsUpdateManyMutationInput;
 
     @Field(() => ResetPasswordMetricsWhereInput, {nullable:true})
     where?: ResetPasswordMetricsWhereInput;

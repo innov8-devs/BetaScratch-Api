@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import { IntFilter } from '../prisma/int-filter.input';
 import { UserRelationFilter } from '../user/user-relation-filter.input';
 import { IntNullableFilter } from '../prisma/int-nullable-filter.input';
+import { DateTimeFilter } from '../prisma/date-time-filter.input';
 
 @InputType()
 export class ResetPasswordMetricsWhereInput {
@@ -24,4 +25,7 @@ export class ResetPasswordMetricsWhereInput {
 
     @Field(() => IntNullableFilter, {nullable:true})
     userId?: IntNullableFilter;
+
+    @Field(() => DateTimeFilter, {nullable:true})
+    createdAt?: DateTimeFilter;
 }

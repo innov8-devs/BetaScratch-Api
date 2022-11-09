@@ -16,6 +16,9 @@ export class ResetPasswordMetricsOrderByWithAggregationInput {
     @Field(() => SortOrder, {nullable:true})
     userId?: keyof typeof SortOrder;
 
+    @Field(() => SortOrder, {nullable:true})
+    createdAt?: keyof typeof SortOrder;
+
     @Field(() => ResetPasswordMetricsCountOrderByAggregateInput, {nullable:true})
     _count?: ResetPasswordMetricsCountOrderByAggregateInput;
 

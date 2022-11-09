@@ -15,4 +15,7 @@ export class ResetPasswordMetrics {
 
     @Field(() => Int, {nullable:true})
     userId!: number | null;
+
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date;
 }
