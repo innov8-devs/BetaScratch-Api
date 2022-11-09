@@ -15,6 +15,7 @@ import { CartUpdateManyWithoutUserNestedInput } from '../cart/cart-update-many-w
 import { MessageUpdateManyWithoutUserNestedInput } from '../message/message-update-many-without-user-nested.input';
 import { ReferralUpdateManyWithoutUserNestedInput } from '../referral/referral-update-many-without-user-nested.input';
 import { TokenUpdateManyWithoutUserNestedInput } from '../token/token-update-many-without-user-nested.input';
+import { ResetPasswordMetricsUpdateManyWithoutUserNestedInput } from '../reset-password-metrics/reset-password-metrics-update-many-without-user-nested.input';
 
 @InputType()
 export class UserUpdateWithoutPurchaseInput {
@@ -105,4 +106,7 @@ export class UserUpdateWithoutPurchaseInput {
 
     @Field(() => TokenUpdateManyWithoutUserNestedInput, {nullable:true})
     token?: TokenUpdateManyWithoutUserNestedInput;
+
+    @Field(() => ResetPasswordMetricsUpdateManyWithoutUserNestedInput, {nullable:true})
+    ResetPasswordMetrics?: ResetPasswordMetricsUpdateManyWithoutUserNestedInput;
 }

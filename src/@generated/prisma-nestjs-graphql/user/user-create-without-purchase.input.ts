@@ -12,6 +12,7 @@ import { CartCreateNestedManyWithoutUserInput } from '../cart/cart-create-nested
 import { MessageCreateNestedManyWithoutUserInput } from '../message/message-create-nested-many-without-user.input';
 import { ReferralCreateNestedManyWithoutUserInput } from '../referral/referral-create-nested-many-without-user.input';
 import { TokenCreateNestedManyWithoutUserInput } from '../token/token-create-nested-many-without-user.input';
+import { ResetPasswordMetricsCreateNestedManyWithoutUserInput } from '../reset-password-metrics/reset-password-metrics-create-nested-many-without-user.input';
 
 @InputType()
 export class UserCreateWithoutPurchaseInput {
@@ -114,4 +115,7 @@ export class UserCreateWithoutPurchaseInput {
 
     @Field(() => TokenCreateNestedManyWithoutUserInput, {nullable:true})
     token?: TokenCreateNestedManyWithoutUserInput;
+
+    @Field(() => ResetPasswordMetricsCreateNestedManyWithoutUserInput, {nullable:true})
+    ResetPasswordMetrics?: ResetPasswordMetricsCreateNestedManyWithoutUserInput;
 }

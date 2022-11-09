@@ -13,6 +13,7 @@ import { CartUncheckedCreateNestedManyWithoutUserInput } from '../cart/cart-unch
 import { MessageUncheckedCreateNestedManyWithoutUserInput } from '../message/message-unchecked-create-nested-many-without-user.input';
 import { ReferralUncheckedCreateNestedManyWithoutUserInput } from '../referral/referral-unchecked-create-nested-many-without-user.input';
 import { TokenUncheckedCreateNestedManyWithoutUserInput } from '../token/token-unchecked-create-nested-many-without-user.input';
+import { ResetPasswordMetricsUncheckedCreateNestedManyWithoutUserInput } from '../reset-password-metrics/reset-password-metrics-unchecked-create-nested-many-without-user.input';
 
 @InputType()
 export class UserUncheckedCreateWithoutPurchaseInput {
@@ -118,4 +119,7 @@ export class UserUncheckedCreateWithoutPurchaseInput {
 
     @Field(() => TokenUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
     token?: TokenUncheckedCreateNestedManyWithoutUserInput;
+
+    @Field(() => ResetPasswordMetricsUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
+    ResetPasswordMetrics?: ResetPasswordMetricsUncheckedCreateNestedManyWithoutUserInput;
 }

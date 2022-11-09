@@ -17,6 +17,7 @@ import { MessageUncheckedUpdateManyWithoutUserNestedInput } from '../message/mes
 import { ReferralUncheckedUpdateManyWithoutUserNestedInput } from '../referral/referral-unchecked-update-many-without-user-nested.input';
 import { TokenUncheckedUpdateManyWithoutUserNestedInput } from '../token/token-unchecked-update-many-without-user-nested.input';
 import { PurchaseUncheckedUpdateManyWithoutUserNestedInput } from '../purchase/purchase-unchecked-update-many-without-user-nested.input';
+import { ResetPasswordMetricsUncheckedUpdateManyWithoutUserNestedInput } from '../reset-password-metrics/reset-password-metrics-unchecked-update-many-without-user-nested.input';
 
 @InputType()
 export class UserUncheckedUpdateInput {
@@ -113,4 +114,7 @@ export class UserUncheckedUpdateInput {
 
     @Field(() => PurchaseUncheckedUpdateManyWithoutUserNestedInput, {nullable:true})
     purchase?: PurchaseUncheckedUpdateManyWithoutUserNestedInput;
+
+    @Field(() => ResetPasswordMetricsUncheckedUpdateManyWithoutUserNestedInput, {nullable:true})
+    ResetPasswordMetrics?: ResetPasswordMetricsUncheckedUpdateManyWithoutUserNestedInput;
 }

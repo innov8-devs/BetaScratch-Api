@@ -16,6 +16,7 @@ import { CartUncheckedUpdateManyWithoutUserNestedInput } from '../cart/cart-unch
 import { MessageUncheckedUpdateManyWithoutUserNestedInput } from '../message/message-unchecked-update-many-without-user-nested.input';
 import { ReferralUncheckedUpdateManyWithoutUserNestedInput } from '../referral/referral-unchecked-update-many-without-user-nested.input';
 import { TokenUncheckedUpdateManyWithoutUserNestedInput } from '../token/token-unchecked-update-many-without-user-nested.input';
+import { ResetPasswordMetricsUncheckedUpdateManyWithoutUserNestedInput } from '../reset-password-metrics/reset-password-metrics-unchecked-update-many-without-user-nested.input';
 
 @InputType()
 export class UserUncheckedUpdateWithoutPurchaseInput {
@@ -109,4 +110,7 @@ export class UserUncheckedUpdateWithoutPurchaseInput {
 
     @Field(() => TokenUncheckedUpdateManyWithoutUserNestedInput, {nullable:true})
     token?: TokenUncheckedUpdateManyWithoutUserNestedInput;
+
+    @Field(() => ResetPasswordMetricsUncheckedUpdateManyWithoutUserNestedInput, {nullable:true})
+    ResetPasswordMetrics?: ResetPasswordMetricsUncheckedUpdateManyWithoutUserNestedInput;
 }

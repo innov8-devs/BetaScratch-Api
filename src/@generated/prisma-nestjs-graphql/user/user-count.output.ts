@@ -28,4 +28,7 @@ export class UserCount {
 
     @Field(() => Int, {nullable:false})
     purchase?: number;
+
+    @Field(() => Int, {nullable:false})
+    ResetPasswordMetrics?: number;
 }

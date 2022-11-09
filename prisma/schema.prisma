@@ -20,58 +20,59 @@ datasource db {
 }
 
 model User {
-  id                 Int                 @id @default(autoincrement())
+  id                   Int                    @id @default(autoincrement())
   /// @Validator.IsEmail()
-  email              String              @unique
+  email                String                 @unique
   /// @Validator.MinLength(2)
   /// @Validator.IsString()
-  username           String              @unique
+  username             String                 @unique
   /// @Validator.IsString()
   /// @Validator.MinLength(2)
-  firstName          String
+  firstName            String
   /// @Validator.IsString()
   /// @Validator.MinLength(2)
-  lastName           String
+  lastName             String
   /// @Validator.IsDate()
-  dateOfBirth        DateTime
+  dateOfBirth          DateTime
   // @Validator.IsEnum(ROLE, { each: true })
-  role               ROLE                @default(USER)
+  role                 ROLE                   @default(USER)
   // @Validator.IsEnum(GENDER, { each: true })
-  gender             GENDER              @default(OTHER)
+  gender               GENDER                 @default(OTHER)
   ///@Validator.IsPhoneNumber()
-  mobileNumber       String              @unique
+  mobileNumber         String                 @unique
   /// @Validator.IsString()
-  state              String
+  state                String
   /// @Validator.IsString()
-  country            String
+  country              String
   /// @Validaror.IsBoolean()
   /// @Validation.IsOptional()
-  confirmed          Boolean             @default(true)
+  confirmed            Boolean                @default(true)
   /// @Validaror.IsBoolean()
   /// @Validation.IsOptional()
-  disabled           Boolean             @default(false)
+  disabled             Boolean                @default(false)
   /// @Validator.IsString()
   /// @Validation.HideField({output: true})
-  password           String
-  licenseFrontImage  String?
-  licenseBackImage   String?
-  licenseNumber      String?
-  verificationType   String?
-  verificationStatus String              @default("inactive")
-  vipStatus          Float               @default(0)
-  wallet             Wallet?
+  password             String
+  licenseFrontImage    String?
+  licenseBackImage     String?
+  licenseNumber        String?
+  verificationType     String?
+  verificationStatus   String                 @default("inactive")
+  vipStatus            Float                  @default(0)
+  wallet               Wallet?
   // TODO this is a comment not validator
   // cart         Cart?
-  transactions       Transaction[]
-  createdAt          DateTime            @default(now())
-  updatedAt          DateTime            @updatedAt
-  otp                Otp[]
-  withdrawalRequest  WithdrawalRequest[]
-  purchases          Cart[]
-  message            Message[]
-  referral           Referral[]
-  token              Token[]
-  purchase           Purchase[]
+  transactions         Transaction[]
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  otp                  Otp[]
+  withdrawalRequest    WithdrawalRequest[]
+  purchases            Cart[]
+  message              Message[]
+  referral             Referral[]
+  token                Token[]
+  purchase             Purchase[]
+  ResetPasswordMetrics ResetPasswordMetrics[]
 }
 
 model Admin {
@@ -342,6 +343,12 @@ model Banner {
   imageUrl   String   @unique()
   bannerLink String?
   createdAt  DateTime @default(now())
+}
+
+model ResetPasswordMetrics {
+  id     Int   @id @default(autoincrement())
+  user   User? @relation(fields: [userId], references: [id])
+  userId Int?
 }
 
 enum ROLE {

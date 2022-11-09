@@ -332,6 +332,12 @@ export class UserService {
       otp,
     });
 
+    await this.prismaService.resetPasswordMetrics.create({
+      data: {
+        user: { connect: { id: user.id } },
+      },
+    });
+
     return true;
   }
 

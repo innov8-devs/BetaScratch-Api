@@ -10,6 +10,7 @@ import { MessageOrderByRelationAggregateInput } from '../message/message-order-b
 import { ReferralOrderByRelationAggregateInput } from '../referral/referral-order-by-relation-aggregate.input';
 import { TokenOrderByRelationAggregateInput } from '../token/token-order-by-relation-aggregate.input';
 import { PurchaseOrderByRelationAggregateInput } from '../purchase/purchase-order-by-relation-aggregate.input';
+import { ResetPasswordMetricsOrderByRelationAggregateInput } from '../reset-password-metrics/reset-password-metrics-order-by-relation-aggregate.input';
 import { UserOrderByRelevanceInput } from './user-order-by-relevance.input';
 
 @InputType()
@@ -107,6 +108,9 @@ export class UserOrderByWithRelationAndSearchRelevanceInput {
 
     @Field(() => PurchaseOrderByRelationAggregateInput, {nullable:true})
     purchase?: PurchaseOrderByRelationAggregateInput;
+
+    @Field(() => ResetPasswordMetricsOrderByRelationAggregateInput, {nullable:true})
+    ResetPasswordMetrics?: ResetPasswordMetricsOrderByRelationAggregateInput;
 
     @Field(() => UserOrderByRelevanceInput, {nullable:true})
     _relevance?: UserOrderByRelevanceInput;

@@ -13,6 +13,7 @@ import { Message } from '../message/message.model';
 import { Referral } from '../referral/referral.model';
 import { Token } from '../token/token.model';
 import { Purchase } from '../purchase/purchase.model';
+import { ResetPasswordMetrics } from '../reset-password-metrics/reset-password-metrics.model';
 import { UserCount } from './user-count.output';
 
 @ObjectType()
@@ -110,6 +111,9 @@ export class User {
 
     @Field(() => [Purchase], {nullable:true})
     purchase?: Array<Purchase>;
+
+    @Field(() => [ResetPasswordMetrics], {nullable:true})
+    ResetPasswordMetrics?: Array<ResetPasswordMetrics>;
 
     @Field(() => UserCount, {nullable:false})
     _count?: UserCount;

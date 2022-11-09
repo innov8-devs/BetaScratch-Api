@@ -12,6 +12,7 @@ export const MAIL_SUBJECT = {
   WELCOME_MESSAGE: 'Welcome to BetaScratch',
   PROMOTIONAL: 'Achieve your goals with Betascratch',
   BONUS_MONEY: 'CONGRATULATIONS you just won N500 in your Betascratch wallet.',
+  ACCOUNT_ACTION: '[ACTION REQUIRED], Account might be compromised',
 };
 
 export const MAIL_MESSAGE = {
@@ -232,10 +233,9 @@ export const MAIL_MESSAGE = {
         style="padding: 14px; margin: 0px; font-size: 15px; color: #2B2F33; line-height: 1.5; border-radius: 0px 0px 10px 10px; border-width: 7px; border-style: solid; border-color: #F8F9FA;">
         <div style="padding-bottom: 36px">
         <p>Thanks for signing up at Betascratch, The only secure Fun Gaming platform in Africa that funds your Dreams.</p>
-     
- <p>
+        <p>
           Browse through our catalogue of games and win cash prizes.
-          </p>
+        </p>
         <div style="text-align: center; margin-top: 1.2rem">
           <a
             href="betascratch.com/home/?login=true"
@@ -393,6 +393,159 @@ Congratulations N500 has been added to betascratch wallet to play any game of yo
 </body>
 </html>
 `,
+
+  RESET_PASSWORD: (name: string, email: string) => {
+    const link = `betascratch.com/home/?forgot_password=true&email_address=${email}`;
+    return `
+<html>
+  <body>
+    <div style="background-color: #f2f2f2; padding: 7px; margin: 0px">
+      <div style="padding: 0px; margin: 0px">
+        <div style="background-color: #f8f9fa; padding: 14px; margin: 0px">
+          <img
+            src="https://betascratch.com/assets/loogo2.png"
+            alt="Betascratch logo"
+            style="max-height: 60px; display: block; border-radius: 10px"
+          />
+        </div>
+        <div
+          style="
+            padding: 14px;
+            margin: 0px;
+            font-size: 15px;
+            color: #2b2f33;
+            line-height: 1.5;
+            border-radius: 0px 0px 10px 10px;
+            border-width: 7px;
+            border-style: solid;
+            border-color: #f8f9fa;
+          "
+        >
+          <div style="padding-bottom: 36px; text-align: center">
+            <p>
+              Thanks for signing up at Betascratch, The only secure Fun Gaming
+              platform in Africa that funds your Dreams.
+            </p>
+            <p>
+              Hi ${name}, your Betascratch account may be compromised! Please reset your password with the button below to gain full access to your account.
+            </p>
+
+            <div style="text-align: center; margin-top: 1.2rem">
+              <a
+              href=${link}
+                style="
+                  background-color: #4caf50;
+                  color: white;
+                  border: none;
+                  text-align: center;
+                  text-decoration: none;
+                  display: inline-block;
+                  font-size: 16px;
+                  margin: 4px 2px;
+                  cursor: pointer;
+                  border-radius: 5px;
+                  padding: 10px 100px;
+                  margin: 0 auto;
+                "
+              >
+                Reset Password
+              </a>
+              <div>
+                <br /><br />
+                <p>Thank you for using Betascratch.</p>
+              </div>
+
+              <div
+                style="
+                  text-align: center;
+                  font-size: 12px;
+                  padding: 16px 22px 0px 22px;
+                  border-top: 2px solid #f8f9f2;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    margin-bottom: 21px;
+                  "
+                >
+                  <a href="google.com"
+                    ><img
+                      src="https://betascratch.com/assets/apple.png"
+                      alt="Get on AppleStore"
+                      style="
+                        max-height: 40px;
+                        display: block;
+                        margin-right: 1em;
+                      "
+                  /></a>
+                  <a href="google.com"
+                    ><img
+                      src="https://betascratch.com/assets/google.png"
+                      alt="Get on GooglePlay"
+                      style="max-height: 40px; display: block"
+                  /></a>
+                </div>
+                <p style="margin-bottom: 14px">
+                  Ademola, Adetokumbo VI, Lagos Nigeria.
+                </p>
+                <div style="display: block; margin: 21px 0; text-align: center">
+                  <a
+                    href="https://web.facebook.com/betascratchgames/?_rdc=1&_rdr"
+                    ><img
+                      src="https://betascratch.com/assets/facebook.png"
+                      alt="FB"
+                      style="
+                        max-height: 25px;
+                        border-radius: 5px;
+                        display: inline-block;
+                        margin-right: 1em;
+                      "
+                  /></a>
+                  <a href="https://twitter.com/betascratch_"
+                    ><img
+                      src="https://betascratch.com/assets/twitter.png"
+                      alt="TW"
+                      style="
+                        max-height: 28px;
+                        display: inline-block;
+                        border-radius: 5px;
+                        margin-right: 1em;
+                      "
+                  /></a>
+                  <a href="https://www.linkedin.com/company/betainc/"
+                    ><img
+                      src="http://pngimg.com/uploads/linkedIn/small/linkedIn_PNG16.png"
+                      alt="IN"
+                      style="
+                        max-height: 25px;
+                        display: inline-block;
+                        border-radius: 5px;
+                      "
+                    />
+                    <div style="text-align: center">
+                      <a href="betascratch.com">Home</a> |
+                      <a href="betascratch.com/home/?login=true">Login</a> |
+                      <a href="betascratch.com/privacy-policy">Privacy</a>
+                    </div>
+                    <p>
+                      Copyright @ Betascratch, <br />
+                      All rights reserved.
+                    </p></a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+`;
+  },
 
   ADMIN_LOGIN: (otp: string) =>
     `Login as an administrator with this otp ${otp}`,
