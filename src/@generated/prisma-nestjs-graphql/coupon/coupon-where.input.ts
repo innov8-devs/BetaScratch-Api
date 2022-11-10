@@ -4,6 +4,7 @@ import { IntFilter } from '../prisma/int-filter.input';
 import { StringFilter } from '../prisma/string-filter.input';
 import { BoolFilter } from '../prisma/bool-filter.input';
 import { EnumCOUPON_QUANTITYFilter } from '../prisma/enum-coupon-quantity-filter.input';
+import { IntNullableFilter } from '../prisma/int-nullable-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 
 @InputType()
@@ -42,8 +43,11 @@ export class CouponWhereInput {
     @Field(() => EnumCOUPON_QUANTITYFilter, {nullable:true})
     quantity?: EnumCOUPON_QUANTITYFilter;
 
-    @Field(() => IntFilter, {nullable:true})
-    quantityCount?: IntFilter;
+    @Field(() => IntNullableFilter, {nullable:true})
+    quantityCount?: IntNullableFilter;
+
+    @Field(() => IntNullableFilter, {nullable:true})
+    quantityUsed?: IntNullableFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;

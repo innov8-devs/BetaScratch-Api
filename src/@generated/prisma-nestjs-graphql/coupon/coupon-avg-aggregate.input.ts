@@ -18,4 +18,7 @@ export class CouponAvgAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     quantityCount?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    quantityUsed?: true;
 }

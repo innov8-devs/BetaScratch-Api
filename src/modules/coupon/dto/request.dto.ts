@@ -24,8 +24,8 @@ export class CreateCouponInput {
   @Field(() => COUPON_QUANTITY, { nullable: false })
   quantity!: keyof typeof COUPON_QUANTITY;
 
-  @Field(() => Int, { nullable: false })
-  quantity_count!: number;
+  @Field(() => Int, { nullable: true })
+  quantity_count?: number;
 }
 
 @InputType()

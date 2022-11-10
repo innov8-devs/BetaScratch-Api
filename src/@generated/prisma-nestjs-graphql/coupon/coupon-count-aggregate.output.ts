@@ -33,6 +33,9 @@ export class CouponCountAggregate {
     quantityCount!: number;
 
     @Field(() => Int, {nullable:false})
+    quantityUsed!: number;
+
+    @Field(() => Int, {nullable:false})
     createdAt!: number;
 
     @Field(() => Int, {nullable:false})

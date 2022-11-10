@@ -19,4 +19,7 @@ export class CouponSumAggregate {
 
     @Field(() => Int, {nullable:true})
     quantityCount?: number;
+
+    @Field(() => Int, {nullable:true})
+    quantityUsed?: number;
 }

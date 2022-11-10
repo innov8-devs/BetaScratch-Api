@@ -315,8 +315,8 @@ model Coupon {
   expires       Int
   // @Validator.IsEnum(COUPON_QUANTITY, { each: true })
   quantity      COUPON_QUANTITY
-  /// @Validaror.IsNumber()
-  quantityCount Int
+  quantityCount Int?
+  quantityUsed  Int?
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
 }

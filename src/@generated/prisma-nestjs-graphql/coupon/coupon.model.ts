@@ -31,8 +31,11 @@ export class Coupon {
     @Field(() => COUPON_QUANTITY, {nullable:false})
     quantity!: keyof typeof COUPON_QUANTITY;
 
-    @Field(() => Int, {nullable:false})
-    quantityCount!: number;
+    @Field(() => Int, {nullable:true})
+    quantityCount!: number | null;
+
+    @Field(() => Int, {nullable:true})
+    quantityUsed!: number | null;
 
     @Field(() => Date, {nullable:false})
     createdAt!: Date;

@@ -34,6 +34,9 @@ export class CouponOrderByWithRelationAndSearchRelevanceInput {
     quantityCount?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    quantityUsed?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

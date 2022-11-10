@@ -83,7 +83,7 @@ export class CouponService {
     try {
       await this.prismaService.coupon.update({
         where: { code },
-        data: { status: false },
+        data: { status: 'inactive' },
       });
       return true;
     } catch (err) {

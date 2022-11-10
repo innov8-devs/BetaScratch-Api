@@ -35,8 +35,11 @@ export class CouponGroupBy {
     @Field(() => COUPON_QUANTITY, {nullable:false})
     quantity!: keyof typeof COUPON_QUANTITY;
 
-    @Field(() => Int, {nullable:false})
-    quantityCount!: number;
+    @Field(() => Int, {nullable:true})
+    quantityCount?: number;
+
+    @Field(() => Int, {nullable:true})
+    quantityUsed?: number;
 
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;

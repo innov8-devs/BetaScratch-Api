@@ -33,6 +33,9 @@ export class CouponMinAggregate {
     @Field(() => Int, {nullable:true})
     quantityCount?: number;
 
+    @Field(() => Int, {nullable:true})
+    quantityUsed?: number;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 
