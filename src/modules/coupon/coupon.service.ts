@@ -6,7 +6,7 @@ import {
 import { MESSAGES } from 'core/messages';
 import { PrismaService } from 'modules/prisma.service';
 import { unixDate } from 'utils/date.util';
-import { CreateCouponInput } from './dto/request.dto';
+import { CouponSearch, CreateCouponInput } from './dto/request.dto';
 
 @Injectable()
 export class CouponService {
@@ -105,9 +105,17 @@ export class CouponService {
     }
   }
 
-  async findAll() {
+  async findAll(input: CouponSearch) {
+    const { page, size } = input;
+    let skipValue = page * size - size;
     try {
-      return await this.prismaService.coupon.findMany();
+      return await this.prismaService.coupon.findMany({
+        take: size,
+        skip: skipValue,
+        orderBy: {
+          id: 'desc',
+        },
+      });
     } catch (err) {
       throw new NotFoundException({
         name: 'coupon',

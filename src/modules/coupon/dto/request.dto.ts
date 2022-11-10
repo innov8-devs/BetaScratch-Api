@@ -1,6 +1,6 @@
 import { COUPON_QUANTITY } from '@generated/prisma-nestjs-graphql/prisma/coupon-quantity.enum';
 import { Field, InputType, Int } from '@nestjs/graphql';
-import { IsBoolean, IsString } from 'class-validator';
+import { IsBoolean, IsNumber, IsString } from 'class-validator';
 
 @InputType()
 export class CreateCouponInput {
@@ -26,4 +26,15 @@ export class CreateCouponInput {
 
   @Field(() => Int, { nullable: false })
   quantity_count!: number;
+}
+
+@InputType()
+export class CouponSearch {
+  @Field(() => Number)
+  @IsNumber()
+  page: number;
+
+  @Field(() => Number)
+  @IsNumber()
+  size: number;
 }
