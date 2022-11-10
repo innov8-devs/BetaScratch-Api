@@ -11,13 +11,13 @@ export class CouponResolver {
 
   @Auth([ROLE.ADMIN])
   @Mutation(() => Boolean)
-  async createCoupon(@Args('input') input: CreateCouponInput) {
+  async createCouponFromAdmin(@Args('input') input: CreateCouponInput) {
     return await this.couponService.create(input);
   }
 
   @Auth([ROLE.ADMIN])
   @Mutation(() => Boolean)
-  async invalidateCoupon(@Args('code') code: string) {
+  async invalidateCouponFromAdmin(@Args('code') code: string) {
     return await this.couponService.invalidateCoupon(code);
   }
 
@@ -29,13 +29,13 @@ export class CouponResolver {
 
   @Auth([ROLE.ADMIN])
   @Query(() => Coupon, { nullable: true })
-  async findOneCouponFromAdmin(@Args('id') id: number) {
+  async getCouponFromAdmin(@Args('id') id: number) {
     return await this.couponService.findOne(id);
   }
 
   @Auth([ROLE.ADMIN])
   @Query(() => [Coupon], { nullable: true })
-  async findAllCouponsFromAdmin(@Args('input') input: CouponSearch) {
+  async getAllCouponsFromAdmin(@Args('input') input: CouponSearch) {
     return await this.couponService.findAll(input);
   }
 }

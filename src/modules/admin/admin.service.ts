@@ -800,6 +800,10 @@ export class AdminService {
         return await this.prismaService.$queryRaw`
         SELECT * FROM "Purchase" p WHERE p::text ILIKE ${searchQuery} AND "transactionType" = "BANK_TRANSFER" LIMIT 20
         `;
+      case DB_TYPES.COUPON:
+        return await this.prismaService.$queryRaw`
+            SELECT * FROM "Coupon" c WHERE c::text ILIKE ${searchQuery} LIMIT 20
+          `;
       default:
         break;
     }
@@ -985,7 +989,7 @@ export class AdminService {
     console.log('Here');
     let users = await this.prismaService.user.findMany({
       where: { disabled: false },
-      skip: 150,
+      skip: 200,
       take: 50,
     });
 
