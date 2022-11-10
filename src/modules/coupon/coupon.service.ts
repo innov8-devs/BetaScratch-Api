@@ -69,7 +69,7 @@ export class CouponService {
         where: { code },
       });
       if (!coupon.status) return false;
-      if (Date.now() > coupon.expires) return false;
+      if (unixDate({}) > coupon.expires) return false;
       return true;
     } catch (err) {
       throw new BadRequestException({
