@@ -49,7 +49,7 @@ export class CouponService {
           code,
           expires: expiryHours,
           percentage,
-          status: true,
+          status: 'active',
           quantity,
           quantityCount: quantity_count,
         },
@@ -106,14 +106,14 @@ export class CouponService {
   }
 
   async findAll(input: CouponSearch) {
-    const { page, size } = input;
+    const { page, size, orderBy, orderColumn } = input;
     let skipValue = page * size - size;
     try {
       return await this.prismaService.coupon.findMany({
         take: size,
         skip: skipValue,
         orderBy: {
-          id: 'desc',
+          [orderColumn]: orderBy,
         },
       });
     } catch (err) {

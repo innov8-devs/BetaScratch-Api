@@ -12,8 +12,8 @@ export class CouponMaxAggregate {
     @Field(() => Int, {nullable:true})
     percentage?: number;
 
-    @Field(() => Boolean, {nullable:true})
-    status?: boolean;
+    @Field(() => String, {nullable:true})
+    status?: string;
 
     @Field(() => Boolean, {nullable:true})
     capped?: boolean;

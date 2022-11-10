@@ -303,8 +303,8 @@ model Coupon {
   id            Int             @id @default(autoincrement())
   /// @Validaror.IsNumber()
   percentage    Int
-  /// @Validator.IsBoolean()
-  status        Boolean
+  /// @Validator.IsString()
+  status        String
   /// @Validator.IsBoolean()
   capped        Boolean
   /// @Validaror.IsNumber()

@@ -17,8 +17,8 @@ export class CouponGroupBy {
     @Field(() => Int, {nullable:false})
     percentage!: number;
 
-    @Field(() => Boolean, {nullable:false})
-    status!: boolean;
+    @Field(() => String, {nullable:false})
+    status!: string;
 
     @Field(() => Boolean, {nullable:false})
     capped!: boolean;

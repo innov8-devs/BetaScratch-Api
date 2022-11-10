@@ -37,4 +37,10 @@ export class CouponSearch {
   @Field(() => Number)
   @IsNumber()
   size: number;
+
+  @Field(() => String, { nullable: true })
+  orderColumn?: string = 'id';
+
+  @Field(() => String, { nullable: true })
+  orderBy?: string = 'asc';
 }

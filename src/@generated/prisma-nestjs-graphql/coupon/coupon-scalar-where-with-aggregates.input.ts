@@ -1,8 +1,8 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { IntWithAggregatesFilter } from '../prisma/int-with-aggregates-filter.input';
-import { BoolWithAggregatesFilter } from '../prisma/bool-with-aggregates-filter.input';
 import { StringWithAggregatesFilter } from '../prisma/string-with-aggregates-filter.input';
+import { BoolWithAggregatesFilter } from '../prisma/bool-with-aggregates-filter.input';
 import { EnumCOUPON_QUANTITYWithAggregatesFilter } from '../prisma/enum-coupon-quantity-with-aggregates-filter.input';
 import { DateTimeWithAggregatesFilter } from '../prisma/date-time-with-aggregates-filter.input';
 
@@ -24,8 +24,8 @@ export class CouponScalarWhereWithAggregatesInput {
     @Field(() => IntWithAggregatesFilter, {nullable:true})
     percentage?: IntWithAggregatesFilter;
 
-    @Field(() => BoolWithAggregatesFilter, {nullable:true})
-    status?: BoolWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    status?: StringWithAggregatesFilter;
 
     @Field(() => BoolWithAggregatesFilter, {nullable:true})
     capped?: BoolWithAggregatesFilter;

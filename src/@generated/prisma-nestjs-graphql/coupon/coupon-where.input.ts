@@ -1,8 +1,8 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { IntFilter } from '../prisma/int-filter.input';
-import { BoolFilter } from '../prisma/bool-filter.input';
 import { StringFilter } from '../prisma/string-filter.input';
+import { BoolFilter } from '../prisma/bool-filter.input';
 import { EnumCOUPON_QUANTITYFilter } from '../prisma/enum-coupon-quantity-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 
@@ -24,8 +24,8 @@ export class CouponWhereInput {
     @Field(() => IntFilter, {nullable:true})
     percentage?: IntFilter;
 
-    @Field(() => BoolFilter, {nullable:true})
-    status?: BoolFilter;
+    @Field(() => StringFilter, {nullable:true})
+    status?: StringFilter;
 
     @Field(() => BoolFilter, {nullable:true})
     capped?: BoolFilter;

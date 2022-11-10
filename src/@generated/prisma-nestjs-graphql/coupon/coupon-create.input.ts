@@ -10,9 +10,9 @@ export class CouponCreateInput {
     @Field(() => Int, {nullable:false})
     percentage!: number;
 
-    @Field(() => Boolean, {nullable:false})
-    @Validator.IsBoolean()
-    status!: boolean;
+    @Field(() => String, {nullable:false})
+    @Validator.IsString()
+    status!: string;
 
     @Field(() => Boolean, {nullable:false})
     @Validator.IsBoolean()
