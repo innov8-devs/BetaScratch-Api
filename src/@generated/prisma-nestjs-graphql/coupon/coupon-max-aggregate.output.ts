@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ObjectType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
+import { COUPON_QUANTITY } from '../prisma/coupon-quantity.enum';
 
 @ObjectType()
 export class CouponMaxAggregate {
@@ -15,19 +16,22 @@ export class CouponMaxAggregate {
     status?: boolean;
 
     @Field(() => Boolean, {nullable:true})
-    cap?: boolean;
+    capped?: boolean;
 
     @Field(() => Int, {nullable:true})
-    capAmount?: number;
+    cappedAmount?: number;
 
     @Field(() => String, {nullable:true})
     code?: string;
 
-    @Field(() => Boolean, {nullable:true})
-    validity?: boolean;
+    @Field(() => Int, {nullable:true})
+    expires?: number;
 
-    @Field(() => Date, {nullable:true})
-    expire?: Date | string;
+    @Field(() => COUPON_QUANTITY, {nullable:true})
+    quantity?: keyof typeof COUPON_QUANTITY;
+
+    @Field(() => Int, {nullable:true})
+    quantityCount?: number;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;

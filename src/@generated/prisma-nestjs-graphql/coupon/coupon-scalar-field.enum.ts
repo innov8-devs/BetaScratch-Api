@@ -4,11 +4,12 @@ export enum CouponScalarFieldEnum {
     id = "id",
     percentage = "percentage",
     status = "status",
-    cap = "cap",
-    capAmount = "capAmount",
+    capped = "capped",
+    cappedAmount = "cappedAmount",
     code = "code",
-    validity = "validity",
-    expire = "expire",
+    expires = "expires",
+    quantity = "quantity",
+    quantityCount = "quantityCount",
     createdAt = "createdAt",
     updatedAt = "updatedAt"
 }

@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import { IntWithAggregatesFilter } from '../prisma/int-with-aggregates-filter.input';
 import { BoolWithAggregatesFilter } from '../prisma/bool-with-aggregates-filter.input';
 import { StringWithAggregatesFilter } from '../prisma/string-with-aggregates-filter.input';
+import { EnumCOUPON_QUANTITYWithAggregatesFilter } from '../prisma/enum-coupon-quantity-with-aggregates-filter.input';
 import { DateTimeWithAggregatesFilter } from '../prisma/date-time-with-aggregates-filter.input';
 
 @InputType()
@@ -27,19 +28,22 @@ export class CouponScalarWhereWithAggregatesInput {
     status?: BoolWithAggregatesFilter;
 
     @Field(() => BoolWithAggregatesFilter, {nullable:true})
-    cap?: BoolWithAggregatesFilter;
+    capped?: BoolWithAggregatesFilter;
 
     @Field(() => IntWithAggregatesFilter, {nullable:true})
-    capAmount?: IntWithAggregatesFilter;
+    cappedAmount?: IntWithAggregatesFilter;
 
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     code?: StringWithAggregatesFilter;
 
-    @Field(() => BoolWithAggregatesFilter, {nullable:true})
-    validity?: BoolWithAggregatesFilter;
+    @Field(() => IntWithAggregatesFilter, {nullable:true})
+    expires?: IntWithAggregatesFilter;
 
-    @Field(() => DateTimeWithAggregatesFilter, {nullable:true})
-    expire?: DateTimeWithAggregatesFilter;
+    @Field(() => EnumCOUPON_QUANTITYWithAggregatesFilter, {nullable:true})
+    quantity?: EnumCOUPON_QUANTITYWithAggregatesFilter;
+
+    @Field(() => IntWithAggregatesFilter, {nullable:true})
+    quantityCount?: IntWithAggregatesFilter;
 
     @Field(() => DateTimeWithAggregatesFilter, {nullable:true})
     createdAt?: DateTimeWithAggregatesFilter;

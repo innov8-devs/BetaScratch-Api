@@ -15,19 +15,22 @@ export class CouponMinOrderByAggregateInput {
     status?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
-    cap?: keyof typeof SortOrder;
+    capped?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
-    capAmount?: keyof typeof SortOrder;
+    cappedAmount?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
     code?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
-    validity?: keyof typeof SortOrder;
+    expires?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
-    expire?: keyof typeof SortOrder;
+    quantity?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    quantityCount?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;

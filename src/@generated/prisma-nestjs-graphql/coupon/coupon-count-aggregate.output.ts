@@ -15,19 +15,22 @@ export class CouponCountAggregate {
     status!: number;
 
     @Field(() => Int, {nullable:false})
-    cap!: number;
+    capped!: number;
 
     @Field(() => Int, {nullable:false})
-    capAmount!: number;
+    cappedAmount!: number;
 
     @Field(() => Int, {nullable:false})
     code!: number;
 
     @Field(() => Int, {nullable:false})
-    validity!: number;
+    expires!: number;
 
     @Field(() => Int, {nullable:false})
-    expire!: number;
+    quantity!: number;
+
+    @Field(() => Int, {nullable:false})
+    quantityCount!: number;
 
     @Field(() => Int, {nullable:false})
     createdAt!: number;

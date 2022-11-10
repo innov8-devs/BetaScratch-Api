@@ -14,19 +14,22 @@ export class CouponCountAggregateInput {
     status?: true;
 
     @Field(() => Boolean, {nullable:true})
-    cap?: true;
+    capped?: true;
 
     @Field(() => Boolean, {nullable:true})
-    capAmount?: true;
+    cappedAmount?: true;
 
     @Field(() => Boolean, {nullable:true})
     code?: true;
 
     @Field(() => Boolean, {nullable:true})
-    validity?: true;
+    expires?: true;
 
     @Field(() => Boolean, {nullable:true})
-    expire?: true;
+    quantity?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    quantityCount?: true;
 
     @Field(() => Boolean, {nullable:true})
     createdAt?: true;

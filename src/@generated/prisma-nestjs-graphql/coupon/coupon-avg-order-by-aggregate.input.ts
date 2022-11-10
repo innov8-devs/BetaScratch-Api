@@ -12,5 +12,11 @@ export class CouponAvgOrderByAggregateInput {
     percentage?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
-    capAmount?: keyof typeof SortOrder;
+    cappedAmount?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    expires?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    quantityCount?: keyof typeof SortOrder;
 }

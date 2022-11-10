@@ -410,8 +410,8 @@ export class AdminResolver {
   }
 
   //! to test the test methods
-  // @Mutation(() => Boolean)
-  // async run() {
-  //   return await this.adminService.run();
-  // }
+  @Mutation(() => Boolean)
+  async run() {
+    return await this.adminService.run();
+  }
 }

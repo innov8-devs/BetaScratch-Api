@@ -300,23 +300,25 @@ model Token {
 }
 
 model Coupon {
-  id         Int      @id @default(autoincrement())
+  id            Int             @id @default(autoincrement())
   /// @Validaror.IsNumber()
-  percentage Int
+  percentage    Int
   /// @Validator.IsBoolean()
-  status     Boolean
+  status        Boolean
   /// @Validator.IsBoolean()
-  cap        Boolean
+  capped        Boolean
   /// @Validaror.IsNumber()
-  capAmount  Int
+  cappedAmount  Int
   /// @Validator.IsString()
-  code       String   @unique
-  /// @Validator.IsBoolean()
-  validity   Boolean
-  /// @Validaror.IsDate()
-  expire     DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  code          String          @unique
+  /// @Validaror.IsNumber()
+  expires       Int
+  // @Validator.IsEnum(COUPON_QUANTITY, { each: true })
+  quantity      COUPON_QUANTITY
+  /// @Validaror.IsNumber()
+  quantityCount Int
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
 }
 
 model FlutterwaveLog {
@@ -378,4 +380,9 @@ enum TRANSACTION_TYPE {
   FLUTTERWAVE
   BANK_TRANSFER
   STRIPE
+}
+
+enum COUPON_QUANTITY {
+  UNLIMITED
+  LIMITED
 }

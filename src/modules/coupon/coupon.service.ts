@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { MESSAGES } from 'core/messages';
 import { PrismaService } from 'modules/prisma.service';
-import { addMinutes } from 'utils/date.util';
+import { unixDate } from 'utils/date.util';
 import { CreateCouponInput } from './dto/request.dto';
 
 @Injectable()
@@ -13,7 +13,15 @@ export class CouponService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async create(input: CreateCouponInput): Promise<Boolean> {
-    const { code, expireMinutes, percentage, cap, capAmount, status } = input;
+    const {
+      code,
+      expires,
+      percentage,
+      capped,
+      capped_amount,
+      quantity,
+      quantity_count,
+    } = input;
     try {
       const couponExist = await this.prismaService.coupon.findUnique({
         where: { code },
@@ -32,15 +40,18 @@ export class CouponService {
         });
       }
 
+      const expiryHours = unixDate({ hours: expires });
+
       await this.prismaService.coupon.create({
         data: {
-          expire: addMinutes(new Date(), expireMinutes),
-          cap,
-          capAmount,
+          capped,
+          cappedAmount: capped_amount,
           code,
+          expires: expiryHours,
           percentage,
-          status,
-          validity: true,
+          status: true,
+          quantity,
+          quantityCount: quantity_count,
         },
       });
       return true;
@@ -57,7 +68,7 @@ export class CouponService {
       const coupon = await this.prismaService.coupon.findUnique({
         where: { code },
       });
-      if (!coupon.validity) return false;
+      if (!coupon.status) return false;
       // ? Check for the time validation later
     } catch (err) {
       throw new BadRequestException({
@@ -71,7 +82,7 @@ export class CouponService {
     try {
       await this.prismaService.coupon.update({
         where: { code },
-        data: { validity: false },
+        data: { status: false },
       });
       return true;
     } catch (err) {

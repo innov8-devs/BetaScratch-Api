@@ -1,9 +1,7 @@
-// import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { Coupon } from '@generated/prisma-nestjs-graphql/coupon/coupon.model';
 import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Auth } from 'modules/auth/decorators/auth.decorator';
-// import { Auth } from 'modules/auth/decorators/auth.decorator';
 import { CouponService } from './coupon.service';
 import { CreateCouponInput } from './dto/request.dto';
 

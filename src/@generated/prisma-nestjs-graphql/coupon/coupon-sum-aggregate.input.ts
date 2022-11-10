@@ -11,5 +11,11 @@ export class CouponSumAggregateInput {
     percentage?: true;
 
     @Field(() => Boolean, {nullable:true})
-    capAmount?: true;
+    cappedAmount?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    expires?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    quantityCount?: true;
 }
