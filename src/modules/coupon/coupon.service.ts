@@ -1,3 +1,4 @@
+import { COUPON_QUANTITY } from '@generated/prisma-nestjs-graphql/prisma/coupon-quantity.enum';
 import {
   BadRequestException,
   Injectable,
@@ -5,8 +6,13 @@ import {
 } from '@nestjs/common';
 import { MESSAGES } from 'core/messages';
 import { PrismaService } from 'modules/prisma.service';
-import { unixDate } from 'utils/date.util';
-import { CouponSearch, CreateCouponInput } from './dto/request.dto';
+import { calculateCouponSubtotal } from 'utils/calculateCouponSubtotal';
+import { daysToUnix, unixToDaysLeft } from 'utils/date.util';
+import {
+  CouponSearch,
+  CouponSubtotal,
+  CreateCouponInput,
+} from './dto/request.dto';
 
 @Injectable()
 export class CouponService {
@@ -40,7 +46,7 @@ export class CouponService {
         });
       }
 
-      const expiryHours = unixDate({ hours: expires });
+      const expiryHours = daysToUnix(expires);
 
       await this.prismaService.coupon.create({
         data: {
@@ -69,7 +75,7 @@ export class CouponService {
         where: { code },
       });
       if (!coupon.status) return false;
-      if (unixDate({}) > coupon.expires) return false;
+      if (unixToDaysLeft(coupon.expires) > coupon.expires) return false;
       return true;
     } catch (err) {
       throw new BadRequestException({
@@ -116,6 +122,61 @@ export class CouponService {
           [orderColumn]: orderBy,
         },
       });
+    } catch (err) {
+      throw new NotFoundException({
+        name: 'coupon',
+        message: err,
+      });
+    }
+  }
+
+  async calculateCouponSubtotal(input: CouponSubtotal) {
+    const { couponCode, subtotal } = input;
+    try {
+      const coupon = await this.prismaService.coupon.findUnique({
+        where: { code: couponCode },
+      });
+
+      if (!coupon) {
+        return {
+          couponStatus: false,
+          subtotal,
+          reason: MESSAGES.COUPON.N0T_FOUND,
+        };
+      }
+
+      if (unixToDaysLeft(coupon.expires) <= 0 || coupon.status === 'inactive') {
+        return {
+          couponStatus: false,
+          subtotal,
+          reason: MESSAGES.COUPON.EXPIRED,
+        };
+      }
+
+      if (
+        coupon.quantity === COUPON_QUANTITY.LIMITED &&
+        coupon.quantityUsed >= coupon.quantityCount
+      ) {
+        return {
+          couponStatus: false,
+          subtotal,
+          reason: MESSAGES.COUPON.NOT_AVAILABLE,
+        };
+      }
+
+      const couponSubtotal = coupon.capped
+        ? calculateCouponSubtotal(subtotal, coupon.percentage)
+        : calculateCouponSubtotal(
+            subtotal,
+            coupon.percentage,
+            coupon.cappedAmount,
+          );
+
+      return {
+        couponStatus: true,
+        subtotal: couponSubtotal,
+        reason: 'Successful',
+      };
     } catch (err) {
       throw new NotFoundException({
         name: 'coupon',

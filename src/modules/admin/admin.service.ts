@@ -989,7 +989,7 @@ export class AdminService {
     console.log('Here');
     let users = await this.prismaService.user.findMany({
       where: { disabled: false },
-      skip: 200,
+      skip: 400,
       take: 50,
     });
 

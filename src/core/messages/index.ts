@@ -56,6 +56,9 @@ const COUPON = {
   PERCENTAGE_NEEDED: 'kindly provide the percentage',
   PERCENTAGE_TOO_HIGH: 'percentage cannot be more than 100',
   PERCENTAGE_CONFLICT: 'cannot provide amount for percentage coupon',
+  N0T_FOUND: 'coupon does not exist',
+  EXPIRED: 'coupon has expired',
+  NOT_AVAILABLE: 'coupon not available',
   AMOUNT_CONFLICT: 'cannot provide percentage for amount coupon',
 };
 

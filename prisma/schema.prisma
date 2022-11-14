@@ -316,7 +316,7 @@ model Coupon {
   // @Validator.IsEnum(COUPON_QUANTITY, { each: true })
   quantity      COUPON_QUANTITY
   quantityCount Int?
-  quantityUsed  Int?
+  quantityUsed  Int?            @default(0)
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
 }

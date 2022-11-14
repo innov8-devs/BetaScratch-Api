@@ -34,7 +34,7 @@ export class Coupon {
     @Field(() => Int, {nullable:true})
     quantityCount!: number | null;
 
-    @Field(() => Int, {nullable:true})
+    @Field(() => Int, {nullable:true,defaultValue:0})
     quantityUsed!: number | null;
 
     @Field(() => Date, {nullable:false})

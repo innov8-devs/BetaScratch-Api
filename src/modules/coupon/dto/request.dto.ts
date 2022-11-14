@@ -44,3 +44,14 @@ export class CouponSearch {
   @Field(() => String, { nullable: true })
   orderBy?: string = 'asc';
 }
+
+@InputType()
+export class CouponSubtotal {
+  @Field(() => Number)
+  @IsNumber()
+  subtotal: number;
+
+  @Field(() => String)
+  @IsString()
+  couponCode: string;
+}

@@ -3,7 +3,12 @@ import { ROLE } from '@generated/prisma-nestjs-graphql/prisma/role.enum';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Auth } from 'modules/auth/decorators/auth.decorator';
 import { CouponService } from './coupon.service';
-import { CouponSearch, CreateCouponInput } from './dto/request.dto';
+import {
+  CouponSearch,
+  CouponSubtotal,
+  CreateCouponInput,
+} from './dto/request.dto';
+import { CouponSubtotalResponse } from './dto/response.dto';
 
 @Resolver()
 export class CouponResolver {
@@ -37,5 +42,11 @@ export class CouponResolver {
   @Query(() => [Coupon], { nullable: true })
   async getAllCouponsFromAdmin(@Args('input') input: CouponSearch) {
     return await this.couponService.findAll(input);
+  }
+
+  // @Auth([ROLE.ADMIN])
+  @Mutation(() => CouponSubtotalResponse, { nullable: true })
+  async calculateCouponSubtotal(@Args('input') input: CouponSubtotal) {
+    return await this.couponService.calculateCouponSubtotal(input);
   }
 }

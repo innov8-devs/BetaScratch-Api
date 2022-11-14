@@ -26,6 +26,8 @@ export class TransactionController {
     }
   }
 
+  // ref, type, coupon
+
   @Post('stripe-webhook')
   async verifyStripeTransaction(@Res() res: Response, @Req() req: Request) {
     const sig = req.headers['stripe-signature'];
