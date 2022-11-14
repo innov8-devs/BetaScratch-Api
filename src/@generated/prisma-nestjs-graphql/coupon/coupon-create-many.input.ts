@@ -45,4 +45,7 @@ export class CouponCreateManyInput {
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
+
+    @Field(() => Int, {nullable:true})
+    purchaseId?: number;
 }

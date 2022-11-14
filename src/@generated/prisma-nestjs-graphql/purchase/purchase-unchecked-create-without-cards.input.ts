@@ -2,6 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import { TRANSACTION_TYPE } from '../prisma/transaction-type.enum';
+import { CouponUncheckedCreateNestedManyWithoutPurchaseInput } from '../coupon/coupon-unchecked-create-nested-many-without-purchase.input';
 
 @InputType()
 export class PurchaseUncheckedCreateWithoutCardsInput {
@@ -35,6 +36,12 @@ export class PurchaseUncheckedCreateWithoutCardsInput {
 
     @Field(() => String, {nullable:true})
     flutterwaveType?: string;
+
+    @Field(() => Boolean, {nullable:true})
+    couponUsed?: boolean;
+
+    @Field(() => CouponUncheckedCreateNestedManyWithoutPurchaseInput, {nullable:true})
+    coupon?: CouponUncheckedCreateNestedManyWithoutPurchaseInput;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;

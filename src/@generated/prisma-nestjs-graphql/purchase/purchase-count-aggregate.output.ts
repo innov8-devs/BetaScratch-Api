@@ -36,6 +36,9 @@ export class PurchaseCountAggregate {
     flutterwaveType!: number;
 
     @Field(() => Int, {nullable:false})
+    couponUsed!: number;
+
+    @Field(() => Int, {nullable:false})
     createdAt!: number;
 
     @Field(() => Int, {nullable:false})

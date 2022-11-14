@@ -35,6 +35,9 @@ export class PurchaseMinAggregateInput {
     flutterwaveType?: true;
 
     @Field(() => Boolean, {nullable:true})
+    couponUsed?: true;
+
+    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})

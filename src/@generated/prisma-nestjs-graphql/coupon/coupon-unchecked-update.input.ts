@@ -45,4 +45,7 @@ export class CouponUncheckedUpdateInput {
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;
+
+    @Field(() => NullableIntFieldUpdateOperationsInput, {nullable:true})
+    purchaseId?: NullableIntFieldUpdateOperationsInput;
 }

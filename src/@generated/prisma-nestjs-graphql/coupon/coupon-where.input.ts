@@ -6,6 +6,7 @@ import { BoolFilter } from '../prisma/bool-filter.input';
 import { EnumCOUPON_QUANTITYFilter } from '../prisma/enum-coupon-quantity-filter.input';
 import { IntNullableFilter } from '../prisma/int-nullable-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
+import { PurchaseRelationFilter } from '../purchase/purchase-relation-filter.input';
 
 @InputType()
 export class CouponWhereInput {
@@ -54,4 +55,10 @@ export class CouponWhereInput {
 
     @Field(() => DateTimeFilter, {nullable:true})
     updatedAt?: DateTimeFilter;
+
+    @Field(() => PurchaseRelationFilter, {nullable:true})
+    purchase?: PurchaseRelationFilter;
+
+    @Field(() => IntNullableFilter, {nullable:true})
+    purchaseId?: IntNullableFilter;
 }

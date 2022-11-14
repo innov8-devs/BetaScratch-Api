@@ -6,6 +6,8 @@ import { CartListRelationFilter } from '../cart/cart-list-relation-filter.input'
 import { UserRelationFilter } from '../user/user-relation-filter.input';
 import { EnumTRANSACTION_TYPENullableFilter } from '../prisma/enum-transaction-type-nullable-filter.input';
 import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
+import { BoolFilter } from '../prisma/bool-filter.input';
+import { CouponListRelationFilter } from '../coupon/coupon-list-relation-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 
 @InputType()
@@ -55,6 +57,12 @@ export class PurchaseWhereInput {
 
     @Field(() => StringNullableFilter, {nullable:true})
     flutterwaveType?: StringNullableFilter;
+
+    @Field(() => BoolFilter, {nullable:true})
+    couponUsed?: BoolFilter;
+
+    @Field(() => CouponListRelationFilter, {nullable:true})
+    coupon?: CouponListRelationFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;

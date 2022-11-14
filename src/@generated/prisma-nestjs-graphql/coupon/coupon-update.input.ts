@@ -6,6 +6,7 @@ import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-oper
 import { EnumCOUPON_QUANTITYFieldUpdateOperationsInput } from '../prisma/enum-coupon-quantity-field-update-operations.input';
 import { NullableIntFieldUpdateOperationsInput } from '../prisma/nullable-int-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
+import { PurchaseUpdateOneWithoutCouponNestedInput } from '../purchase/purchase-update-one-without-coupon-nested.input';
 
 @InputType()
 export class CouponUpdateInput {
@@ -42,4 +43,7 @@ export class CouponUpdateInput {
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     updatedAt?: DateTimeFieldUpdateOperationsInput;
+
+    @Field(() => PurchaseUpdateOneWithoutCouponNestedInput, {nullable:true})
+    purchase?: PurchaseUpdateOneWithoutCouponNestedInput;
 }

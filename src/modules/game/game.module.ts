@@ -10,6 +10,7 @@ import { TransactionService } from 'modules/transaction/transaction.service';
 import { MessageService } from 'modules/message/message.service';
 import { GameController } from './game.controller';
 import { SmsService } from 'modules/sms/sms.service';
+import { CouponService } from 'modules/coupon/coupon.service';
 
 @Module({
   imports: [JwtModule.register({}), AuthModule, TransactionModule],
@@ -22,6 +23,7 @@ import { SmsService } from 'modules/sms/sms.service';
     TransactionService,
     MessageService,
     SmsService,
+    CouponService,
   ],
 })
 export class GameModule {}

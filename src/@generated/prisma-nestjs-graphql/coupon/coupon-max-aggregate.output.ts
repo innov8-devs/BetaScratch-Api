@@ -41,4 +41,7 @@ export class CouponMaxAggregate {
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
+
+    @Field(() => Int, {nullable:true})
+    purchaseId?: number;
 }

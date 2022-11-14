@@ -54,4 +54,7 @@ export class CouponScalarWhereWithAggregatesInput {
 
     @Field(() => DateTimeWithAggregatesFilter, {nullable:true})
     updatedAt?: DateTimeWithAggregatesFilter;
+
+    @Field(() => IntNullableWithAggregatesFilter, {nullable:true})
+    purchaseId?: IntNullableWithAggregatesFilter;
 }

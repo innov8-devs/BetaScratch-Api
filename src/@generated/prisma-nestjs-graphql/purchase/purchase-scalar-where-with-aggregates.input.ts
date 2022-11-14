@@ -4,6 +4,7 @@ import { IntWithAggregatesFilter } from '../prisma/int-with-aggregates-filter.in
 import { StringWithAggregatesFilter } from '../prisma/string-with-aggregates-filter.input';
 import { EnumTRANSACTION_TYPENullableWithAggregatesFilter } from '../prisma/enum-transaction-type-nullable-with-aggregates-filter.input';
 import { StringNullableWithAggregatesFilter } from '../prisma/string-nullable-with-aggregates-filter.input';
+import { BoolWithAggregatesFilter } from '../prisma/bool-with-aggregates-filter.input';
 import { DateTimeWithAggregatesFilter } from '../prisma/date-time-with-aggregates-filter.input';
 
 @InputType()
@@ -47,6 +48,9 @@ export class PurchaseScalarWhereWithAggregatesInput {
 
     @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
     flutterwaveType?: StringNullableWithAggregatesFilter;
+
+    @Field(() => BoolWithAggregatesFilter, {nullable:true})
+    couponUsed?: BoolWithAggregatesFilter;
 
     @Field(() => DateTimeWithAggregatesFilter, {nullable:true})
     createdAt?: DateTimeWithAggregatesFilter;

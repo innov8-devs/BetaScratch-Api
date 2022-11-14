@@ -40,4 +40,7 @@ export class CouponCountOrderByAggregateInput {
 
     @Field(() => SortOrder, {nullable:true})
     updatedAt?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    purchaseId?: keyof typeof SortOrder;
 }

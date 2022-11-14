@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { SortOrder } from '../prisma/sort-order.enum';
+import { PurchaseOrderByWithRelationAndSearchRelevanceInput } from '../purchase/purchase-order-by-with-relation-and-search-relevance.input';
 import { CouponOrderByRelevanceInput } from './coupon-order-by-relevance.input';
 
 @InputType()
@@ -41,6 +42,12 @@ export class CouponOrderByWithRelationAndSearchRelevanceInput {
 
     @Field(() => SortOrder, {nullable:true})
     updatedAt?: keyof typeof SortOrder;
+
+    @Field(() => PurchaseOrderByWithRelationAndSearchRelevanceInput, {nullable:true})
+    purchase?: PurchaseOrderByWithRelationAndSearchRelevanceInput;
+
+    @Field(() => SortOrder, {nullable:true})
+    purchaseId?: keyof typeof SortOrder;
 
     @Field(() => CouponOrderByRelevanceInput, {nullable:true})
     _relevance?: CouponOrderByRelevanceInput;

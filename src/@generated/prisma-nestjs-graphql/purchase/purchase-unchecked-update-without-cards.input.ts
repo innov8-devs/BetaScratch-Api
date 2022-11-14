@@ -4,6 +4,8 @@ import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operat
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
 import { NullableEnumTRANSACTION_TYPEFieldUpdateOperationsInput } from '../prisma/nullable-enum-transaction-type-field-update-operations.input';
 import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-string-field-update-operations.input';
+import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-operations.input';
+import { CouponUncheckedUpdateManyWithoutPurchaseNestedInput } from '../coupon/coupon-unchecked-update-many-without-purchase-nested.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 
 @InputType()
@@ -38,6 +40,12 @@ export class PurchaseUncheckedUpdateWithoutCardsInput {
 
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     flutterwaveType?: NullableStringFieldUpdateOperationsInput;
+
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    couponUsed?: BoolFieldUpdateOperationsInput;
+
+    @Field(() => CouponUncheckedUpdateManyWithoutPurchaseNestedInput, {nullable:true})
+    coupon?: CouponUncheckedUpdateManyWithoutPurchaseNestedInput;
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;

@@ -4,6 +4,7 @@ import { IntFilter } from '../prisma/int-filter.input';
 import { StringFilter } from '../prisma/string-filter.input';
 import { EnumTRANSACTION_TYPENullableFilter } from '../prisma/enum-transaction-type-nullable-filter.input';
 import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
+import { BoolFilter } from '../prisma/bool-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 
 @InputType()
@@ -47,6 +48,9 @@ export class PurchaseScalarWhereInput {
 
     @Field(() => StringNullableFilter, {nullable:true})
     flutterwaveType?: StringNullableFilter;
+
+    @Field(() => BoolFilter, {nullable:true})
+    couponUsed?: BoolFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;

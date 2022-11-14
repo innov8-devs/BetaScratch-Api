@@ -22,4 +22,7 @@ export class CouponAvgAggregate {
 
     @Field(() => Float, {nullable:true})
     quantityUsed?: number;
+
+    @Field(() => Float, {nullable:true})
+    purchaseId?: number;
 }

@@ -7,4 +7,7 @@ export class PurchaseCount {
 
     @Field(() => Int, {nullable:false})
     cards?: number;
+
+    @Field(() => Int, {nullable:false})
+    coupon?: number;
 }

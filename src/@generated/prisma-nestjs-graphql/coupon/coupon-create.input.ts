@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import * as Validator from 'class-validator';
 import { COUPON_QUANTITY } from '../prisma/coupon-quantity.enum';
+import { PurchaseCreateNestedOneWithoutCouponInput } from '../purchase/purchase-create-nested-one-without-coupon.input';
 
 @InputType()
 export class CouponCreateInput {
@@ -42,4 +43,7 @@ export class CouponCreateInput {
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
+
+    @Field(() => PurchaseCreateNestedOneWithoutCouponInput, {nullable:true})
+    purchase?: PurchaseCreateNestedOneWithoutCouponInput;
 }

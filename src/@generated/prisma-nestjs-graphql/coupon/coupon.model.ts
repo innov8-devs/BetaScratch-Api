@@ -3,6 +3,7 @@ import { ObjectType } from '@nestjs/graphql';
 import { ID } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import { COUPON_QUANTITY } from '../prisma/coupon-quantity.enum';
+import { Purchase } from '../purchase/purchase.model';
 
 @ObjectType()
 export class Coupon {
@@ -42,4 +43,10 @@ export class Coupon {
 
     @Field(() => Date, {nullable:false})
     updatedAt!: Date;
+
+    @Field(() => Purchase, {nullable:true})
+    purchase?: Purchase | null;
+
+    @Field(() => Int, {nullable:true})
+    purchaseId!: number | null;
 }

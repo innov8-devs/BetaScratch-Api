@@ -12,7 +12,8 @@ export enum CouponScalarFieldEnum {
     quantityCount = "quantityCount",
     quantityUsed = "quantityUsed",
     createdAt = "createdAt",
-    updatedAt = "updatedAt"
+    updatedAt = "updatedAt",
+    purchaseId = "purchaseId"
 }
 
 

@@ -33,6 +33,9 @@ export class PurchaseCreateManyUserInput {
     @Field(() => String, {nullable:true})
     flutterwaveType?: string;
 
+    @Field(() => Boolean, {nullable:true})
+    couponUsed?: boolean;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

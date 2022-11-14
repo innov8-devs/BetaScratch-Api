@@ -41,6 +41,9 @@ export class PurchaseOrderByWithAggregationInput {
     flutterwaveType?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    couponUsed?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

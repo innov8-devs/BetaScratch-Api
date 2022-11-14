@@ -35,12 +35,14 @@ import { GameCategoryReturnType } from './dto/game.response';
 import { v4 } from 'uuid';
 import Stripe from 'stripe';
 import { SmsService } from 'modules/sms/sms.service';
+import { CouponService } from 'modules/coupon/coupon.service';
 
 @Injectable()
 export class GameService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly transactionService: TransactionService,
+    private readonly couponService: CouponService,
     private readonly messageService: MessageService,
     private readonly smsService: SmsService,
   ) {}
@@ -285,6 +287,7 @@ export class GameService {
     subtotal: number,
     transactionType: TRANSACTION_TYPE,
     status?: string,
+    couponId?: number,
   ) {
     const user = await this.prismaService.user.findUnique({
       where: { id: userId },
@@ -300,6 +303,8 @@ export class GameService {
         status: status ? status : PURCHASE_STATUS.ACTIVE,
         transactionType,
         userId,
+        coupon: couponId && { connect: { id: couponId } },
+        couponUsed: couponId ? true : false,
         cards: {
           createMany: {
             data: cartDetail,
@@ -310,6 +315,8 @@ export class GameService {
   }
 
   async cartCheckout(userId: number, input: CartCheckoutInput) {
+    let newSubtotal: number;
+    let coupon;
     const userWallet = await this.prismaService.wallet.findUnique({
       where: { userId },
     });
@@ -328,24 +335,47 @@ export class GameService {
       transactionRef,
     );
 
+    if (input.couponCode) {
+      coupon = await this.prismaService.coupon.findUnique({
+        where: { code: input.couponCode },
+      });
+      if (!coupon) newSubtotal = input.subtotal;
+      const calculateSubtotal =
+        await this.couponService.calculateCouponSubtotal({
+          couponCode: input.couponCode,
+          subtotal: input.subtotal,
+        });
+      newSubtotal = calculateSubtotal.subtotal;
+    } else newSubtotal = input.subtotal;
+
     if (input.transaction_type === TRANSACTION.WALLET) {
       const response = await this.checkoutWithAccount(
         userId,
-        input.subtotal,
+        newSubtotal,
         userWallet,
       );
       if (response === true) {
-        await this.recordPurchase(
-          userId,
-          cartDetail,
-          transactionRef,
-          input.subtotal,
-          TRANSACTION_TYPE.WALLET,
-        );
+        coupon.id
+          ? await this.recordPurchase(
+              userId,
+              cartDetail,
+              transactionRef,
+              newSubtotal,
+              TRANSACTION_TYPE.WALLET,
+              PURCHASE_STATUS.ACTIVE,
+              coupon.id,
+            )
+          : await this.recordPurchase(
+              userId,
+              cartDetail,
+              transactionRef,
+              newSubtotal,
+              TRANSACTION_TYPE.WALLET,
+            );
         await this.transactionService.calculateVipProgress(userId);
-        await this.transactionService.cashback(userId, input.subtotal);
+        await this.transactionService.cashback(userId, newSubtotal);
         await this.transactionService.createTransaction({
-          amount: input.subtotal,
+          amount: newSubtotal,
           currency: userWallet.currency,
           purpose: PAYMENT_PURPOSE.CART,
           status: PAYMENT_STATUS.SUCCESSFUL,
@@ -358,7 +388,7 @@ export class GameService {
         await this.smsService.sendCheckoutSms(user.mobileNumber);
       } else {
         await this.transactionService.createTransaction({
-          amount: input.subtotal,
+          amount: newSubtotal,
           currency: userWallet.currency,
           purpose: PAYMENT_PURPOSE.CART,
           status: PAYMENT_STATUS.FAILED,
@@ -371,19 +401,29 @@ export class GameService {
     } else if (input.transaction_type === TRANSACTION.BONUS) {
       const response = await this.checkoutWithBonus(
         userId,
-        input.subtotal,
+        newSubtotal,
         userWallet,
       );
       if (response === true) {
-        await this.recordPurchase(
-          userId,
-          cartDetail,
-          transactionRef,
-          input.subtotal,
-          TRANSACTION_TYPE.BONUS,
-        );
+        coupon.id
+          ? await this.recordPurchase(
+              userId,
+              cartDetail,
+              transactionRef,
+              newSubtotal,
+              TRANSACTION_TYPE.BONUS,
+              PURCHASE_STATUS.ACTIVE,
+              coupon.id,
+            )
+          : await this.recordPurchase(
+              userId,
+              cartDetail,
+              transactionRef,
+              newSubtotal,
+              TRANSACTION_TYPE.BONUS,
+            );
         await this.transactionService.createTransaction({
-          amount: input.subtotal,
+          amount: newSubtotal,
           currency: userWallet.currency,
           purpose: PAYMENT_PURPOSE.CART,
           status: PAYMENT_STATUS.SUCCESSFUL,
@@ -396,7 +436,7 @@ export class GameService {
         await this.smsService.sendCheckoutSms(user.mobileNumber);
       } else {
         await this.transactionService.createTransaction({
-          amount: input.subtotal,
+          amount: newSubtotal,
           currency: userWallet.currency,
           purpose: PAYMENT_PURPOSE.CART,
           status: PAYMENT_STATUS.FAILED,
@@ -438,22 +478,40 @@ export class GameService {
     userId: number,
     input: FlutterCheckoutOneInput,
   ): Promise<Boolean> {
+    let coupon;
+
     const userWallet = await this.prismaService.wallet.findUnique({
       where: { userId },
     });
 
     const initialSubtotal = 0;
 
+    if (input.couponCode) {
+      coupon = await this.prismaService.coupon.findUnique({
+        where: { code: input.couponCode },
+      });
+    }
+
     const cartDetail = computeCart(input.cart, userId, input.tx_ref);
 
-    await this.recordPurchase(
-      userId,
-      cartDetail,
-      input.tx_ref,
-      initialSubtotal,
-      TRANSACTION_TYPE.FLUTTERWAVE,
-      PURCHASE_STATUS.INACTIVE,
-    );
+    coupon.id
+      ? await this.recordPurchase(
+          userId,
+          cartDetail,
+          input.tx_ref,
+          initialSubtotal,
+          TRANSACTION_TYPE.FLUTTERWAVE,
+          PURCHASE_STATUS.INACTIVE,
+          coupon.id,
+        )
+      : await this.recordPurchase(
+          userId,
+          cartDetail,
+          input.tx_ref,
+          initialSubtotal,
+          TRANSACTION_TYPE.FLUTTERWAVE,
+          PURCHASE_STATUS.INACTIVE,
+        );
 
     await this.transactionService.createTransaction({
       amount: initialSubtotal,

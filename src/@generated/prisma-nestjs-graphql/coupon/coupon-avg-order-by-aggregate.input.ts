@@ -22,4 +22,7 @@ export class CouponAvgOrderByAggregateInput {
 
     @Field(() => SortOrder, {nullable:true})
     quantityUsed?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    purchaseId?: keyof typeof SortOrder;
 }

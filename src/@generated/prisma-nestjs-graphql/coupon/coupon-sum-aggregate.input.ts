@@ -21,4 +21,7 @@ export class CouponSumAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     quantityUsed?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    purchaseId?: true;
 }

@@ -130,7 +130,9 @@ export class CouponService {
     }
   }
 
-  async calculateCouponSubtotal(input: CouponSubtotal) {
+  async calculateCouponSubtotal(
+    input: CouponSubtotal,
+  ): Promise<{ couponStatus: boolean; subtotal: number; reason: string }> {
     const { couponCode, subtotal } = input;
     try {
       const coupon = await this.prismaService.coupon.findUnique({

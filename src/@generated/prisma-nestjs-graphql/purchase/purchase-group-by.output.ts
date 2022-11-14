@@ -41,6 +41,9 @@ export class PurchaseGroupBy {
     @Field(() => String, {nullable:true})
     flutterwaveType?: string;
 
+    @Field(() => Boolean, {nullable:false})
+    couponUsed!: boolean;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;
 

@@ -39,4 +39,7 @@ export class CouponMaxAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     updatedAt?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    purchaseId?: true;
 }

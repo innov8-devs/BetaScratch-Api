@@ -42,5 +42,8 @@ export class CouponCountAggregate {
     updatedAt!: number;
 
     @Field(() => Int, {nullable:false})
+    purchaseId!: number;
+
+    @Field(() => Int, {nullable:false})
     _all!: number;
 }

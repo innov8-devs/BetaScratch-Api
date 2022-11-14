@@ -47,6 +47,9 @@ export class CouponGroupBy {
     @Field(() => Date, {nullable:false})
     updatedAt!: Date | string;
 
+    @Field(() => Int, {nullable:true})
+    purchaseId?: number;
+
     @Field(() => CouponCountAggregate, {nullable:true})
     _count?: CouponCountAggregate;
 

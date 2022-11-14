@@ -104,6 +104,9 @@ export class CartCheckoutInput {
   subtotal!: number;
 
   @Field(() => String, { nullable: false })
+  couponCode?: string;
+
+  @Field(() => String, { nullable: false })
   @IsEnum(TRANSACTION, { each: true })
   transaction_type!: TRANSACTION | string;
 
@@ -127,6 +130,9 @@ export class FlutterCheckoutOneInput {
   @Field(() => [CartItems], { nullable: false })
   @IsArray()
   cart: CartItems[];
+
+  @Field(() => String, { nullable: false })
+  couponCode?: string;
 }
 
 @InputType()

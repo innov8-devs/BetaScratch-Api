@@ -41,5 +41,8 @@ export class CouponCountAggregateInput {
     updatedAt?: true;
 
     @Field(() => Boolean, {nullable:true})
+    purchaseId?: true;
+
+    @Field(() => Boolean, {nullable:true})
     _all?: true;
 }
