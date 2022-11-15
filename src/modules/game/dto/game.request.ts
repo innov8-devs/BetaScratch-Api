@@ -103,7 +103,7 @@ export class CartCheckoutInput {
   @IsNumber()
   subtotal!: number;
 
-  @Field(() => String, { nullable: false })
+  @Field(() => String, { nullable: true })
   couponCode?: string;
 
   @Field(() => String, { nullable: false })
@@ -131,7 +131,7 @@ export class FlutterCheckoutOneInput {
   @IsArray()
   cart: CartItems[];
 
-  @Field(() => String, { nullable: false })
+  @Field(() => String, { nullable: true })
   couponCode?: string;
 }
 
