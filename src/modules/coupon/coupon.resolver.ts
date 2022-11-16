@@ -44,7 +44,7 @@ export class CouponResolver {
     return await this.couponService.findAll(input);
   }
 
-  // @Auth([ROLE.ADMIN])
+  @Auth([ROLE.USER])
   @Mutation(() => CouponSubtotalResponse, { nullable: true })
   async calculateCouponSubtotal(@Args('input') input: CouponSubtotal) {
     return await this.couponService.calculateCouponSubtotal(input);
