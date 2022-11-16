@@ -3,8 +3,9 @@ export const calculateCouponSubtotal = (
   couponPercentage: number,
   couponCap?: number,
 ): number => {
-  const percentagePrice = (subtotal * couponPercentage) / 10;
+  const percentagePrice = (subtotal * couponPercentage) / 100;
+  const calculatedPrice = subtotal - percentagePrice;
   if (couponCap)
-    return percentagePrice > couponCap ? couponCap : percentagePrice;
-  else return percentagePrice;
+    return calculatedPrice > couponCap ? couponCap : calculatedPrice;
+  else return calculatedPrice;
 };
