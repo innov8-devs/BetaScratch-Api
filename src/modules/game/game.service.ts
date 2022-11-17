@@ -355,7 +355,7 @@ export class GameService {
         userWallet,
       );
       if (response === true) {
-        coupon.id
+        input.couponCode
           ? await this.recordPurchase(
               userId,
               cartDetail,
@@ -405,7 +405,7 @@ export class GameService {
         userWallet,
       );
       if (response === true) {
-        coupon.id
+        input.couponCode
           ? await this.recordPurchase(
               userId,
               cartDetail,
