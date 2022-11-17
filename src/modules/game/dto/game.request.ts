@@ -146,6 +146,9 @@ export class BankTransferCheckoutInput {
   @Field(() => [CartItems], { nullable: false })
   @IsArray()
   cart: CartItems[];
+
+  @Field(() => String, { nullable: true })
+  couponCode?: string;
 }
 
 @InputType()

@@ -531,9 +531,16 @@ export class GameService {
     userId: number,
     input: BankTransferCheckoutInput,
   ): Promise<Boolean> {
+    let coupon;
     const userWallet = await this.prismaService.wallet.findUnique({
       where: { userId },
     });
+
+    if (input.couponCode) {
+      coupon = await this.prismaService.coupon.findUnique({
+        where: { code: input.couponCode },
+      });
+    }
 
     let calcSubtotal = 0;
     const transactionRef = generateRandomString();
@@ -560,6 +567,25 @@ export class GameService {
       TRANSACTION_TYPE.BANK_TRANSFER,
       PURCHASE_STATUS.INACTIVE,
     );
+
+    coupon.id
+      ? await this.recordPurchase(
+          userId,
+          cartDetail,
+          transactionRef,
+          calcSubtotal,
+          TRANSACTION_TYPE.BANK_TRANSFER,
+          PURCHASE_STATUS.INACTIVE,
+          coupon.id,
+        )
+      : await this.recordPurchase(
+          userId,
+          cartDetail,
+          transactionRef,
+          calcSubtotal,
+          TRANSACTION_TYPE.BANK_TRANSFER,
+          PURCHASE_STATUS.INACTIVE,
+        );
 
     await this.transactionService.createTransaction({
       amount: calcSubtotal,
