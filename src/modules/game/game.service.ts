@@ -494,7 +494,7 @@ export class GameService {
 
     const cartDetail = computeCart(input.cart, userId, input.tx_ref);
 
-    coupon.id
+    input.couponCode
       ? await this.recordPurchase(
           userId,
           cartDetail,
@@ -580,7 +580,7 @@ export class GameService {
       PURCHASE_STATUS.INACTIVE,
     );
 
-    coupon.id
+    input.couponCode
       ? await this.recordPurchase(
           userId,
           cartDetail,
