@@ -550,7 +550,19 @@ export class GameService {
       calcSubtotal += price;
     }
 
-    if (input.subtotal !== calcSubtotal) {
+    if (input.couponCode) {
+      coupon = await this.prismaService.coupon.findUnique({
+        where: { code: input.couponCode },
+      });
+      const calculateSubtotal =
+        await this.couponService.calculateCouponSubtotal({
+          couponCode: input.couponCode,
+          subtotal: calcSubtotal,
+        });
+      calcSubtotal = calculateSubtotal.subtotal;
+    }
+
+    if (!input.couponCode && input.subtotal !== calcSubtotal) {
       throw new BadRequestException({
         name: 'amount',
         message: 'Total does not correlate',
