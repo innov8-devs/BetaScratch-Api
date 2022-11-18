@@ -339,6 +339,8 @@ export class TransactionService {
         finalAmount = calculateSubtotal.subtotal;
       } else finalAmount = amount;
 
+      console.log(finalAmount);
+
       if (amount !== finalAmount) {
         await this.prismaService.transaction.updateMany({
           where: {
@@ -354,6 +356,12 @@ export class TransactionService {
         });
 
         return res.status(200).end();
+      }
+
+      if (purchase.couponUsed) {
+        await this.couponService.incrementCouponQuantityUsed(
+          purchase.coupon[0].code,
+        );
       }
 
       await this.prismaService.transaction.updateMany({

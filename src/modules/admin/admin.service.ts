@@ -52,6 +52,7 @@ import {
 import { Transaction, TRANSACTION_TYPE } from '@prisma/client';
 import { computeCheckoutMessageCards } from 'helpers/computeCheckoutMessageCards';
 import { MessageService } from 'modules/message/message.service';
+import { CouponService } from 'modules/coupon/coupon.service';
 
 @Injectable()
 export class AdminService {
@@ -61,6 +62,7 @@ export class AdminService {
     private readonly tokenService: TokenService,
     private readonly transactionService: TransactionService,
     private readonly messageService: MessageService,
+    private readonly couponService: CouponService,
   ) {}
 
   // Get current logged in user
@@ -902,6 +904,18 @@ export class AdminService {
           status: PAYMENT_STATUS.SUCCESSFUL,
         },
       });
+
+      const purchase = await this.prismaService.purchase.findFirst({
+        where: {
+          reference: transaction.transactionRef,
+        },
+        include: { coupon: true },
+      });
+
+      if (purchase.couponUsed)
+        await this.couponService.incrementCouponQuantityUsed(
+          purchase.coupon[0].code,
+        );
 
       await this.prismaService.wallet.update({
         where: { userId: transaction.userId },

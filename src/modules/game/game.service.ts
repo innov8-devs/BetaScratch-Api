@@ -385,6 +385,8 @@ export class GameService {
           type: TRANSACTION.WALLET,
           user: { connect: { id: userId } },
         });
+        if (input.couponCode)
+          await this.couponService.incrementCouponQuantityUsed(coupon.code);
         await this.messageService.sendCheckoutMessage(userId, messageCards);
         await this.smsService.sendCheckoutSms(user.mobileNumber);
       } else {
@@ -433,6 +435,8 @@ export class GameService {
           transactionRef,
           user: { connect: { id: userId } },
         });
+        if (input.couponCode)
+          await this.couponService.incrementCouponQuantityUsed(coupon.code);
         await this.messageService.sendCheckoutMessage(userId, messageCards);
         await this.smsService.sendCheckoutSms(user.mobileNumber);
       } else {
@@ -571,15 +575,6 @@ export class GameService {
     }
 
     const cartDetail = computeCart(input.cart, userId, transactionRef);
-
-    await this.recordPurchase(
-      userId,
-      cartDetail,
-      transactionRef,
-      calcSubtotal,
-      TRANSACTION_TYPE.BANK_TRANSFER,
-      PURCHASE_STATUS.INACTIVE,
-    );
 
     input.couponCode
       ? await this.recordPurchase(

@@ -186,4 +186,11 @@ export class CouponService {
       });
     }
   }
+
+  async incrementCouponQuantityUsed(code: string) {
+    await this.prismaService.coupon.update({
+      where: { code },
+      data: { quantityUsed: { increment: 1 } },
+    });
+  }
 }
