@@ -349,6 +349,7 @@ export class GameService {
     } else newSubtotal = input.subtotal;
 
     if (input.transaction_type === TRANSACTION.WALLET) {
+      console.log('Calculated: ', newSubtotal);
       const response = await this.checkoutWithAccount(
         userId,
         newSubtotal,
