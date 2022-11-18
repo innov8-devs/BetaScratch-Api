@@ -485,7 +485,7 @@ export class GameService {
       where: { userId },
     });
 
-    const initialSubtotal = 0;
+    const initialSubtotal = input.subtotal;
 
     if (input.couponCode) {
       coupon = await this.prismaService.coupon.findUnique({

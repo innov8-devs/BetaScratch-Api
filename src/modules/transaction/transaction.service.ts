@@ -22,12 +22,14 @@ import { calculateVipStatus } from 'helpers/calculateVipStatus';
 import { MessageService } from 'modules/message/message.service';
 import { Response } from 'express';
 import { SmsService } from 'modules/sms/sms.service';
+import { CouponService } from 'modules/coupon/coupon.service';
 
 @Injectable()
 export class TransactionService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly messageService: MessageService,
+    private readonly couponService: CouponService,
     private readonly smsService: SmsService,
   ) {}
 
@@ -224,8 +226,9 @@ export class TransactionService {
   async verifyCheckout(data: any, res: Response) {
     const tx_ref = data.tx_ref;
     const status = data.status;
-    const amount = data.amount;
     const paymentType = data.payment_type;
+    const amount = data.amount;
+    let finalAmount = data.amount;
 
     const user = await this.prismaService.user.findUnique({
       where: { email: data.customer.email },
@@ -310,6 +313,48 @@ export class TransactionService {
       await this.smsService.sendCheckoutSms(user.mobileNumber);
       await this.calculateVipProgress(user.id);
       await this.cashback(user.id, amount);
+
+      const purchase = await this.prismaService.purchase.findFirst({
+        where: {
+          AND: [
+            {
+              reference: { equals: tx_ref },
+              userId: { equals: user.id },
+            },
+          ],
+        },
+        include: { coupon: true },
+      });
+
+      if (purchase.couponUsed) {
+        const coupon = await this.prismaService.coupon.findUnique({
+          where: { code: purchase.coupon[0].code },
+        });
+        if (!coupon) finalAmount = amount;
+        const calculateSubtotal =
+          await this.couponService.calculateCouponSubtotal({
+            couponCode: purchase.coupon[0].code,
+            subtotal: purchase.subtotal,
+          });
+        finalAmount = calculateSubtotal.subtotal;
+      } else finalAmount = amount;
+
+      if (amount !== finalAmount) {
+        await this.prismaService.transaction.updateMany({
+          where: {
+            transactionRef: tx_ref,
+          },
+          data: {
+            status: PAYMENT_STATUS.FAILED,
+          },
+        });
+        await this.prismaService.purchase.updateMany({
+          where: { reference: tx_ref },
+          data: { status, subtotal: amount },
+        });
+
+        return res.status(200).end();
+      }
 
       await this.prismaService.transaction.updateMany({
         where: {

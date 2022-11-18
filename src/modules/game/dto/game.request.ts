@@ -131,6 +131,9 @@ export class FlutterCheckoutOneInput {
   @IsArray()
   cart: CartItems[];
 
+  @Field(() => Number, { nullable: false })
+  subtotal!: number;
+
   @Field(() => String, { nullable: true })
   couponCode?: string;
 }

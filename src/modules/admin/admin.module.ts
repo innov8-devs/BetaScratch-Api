@@ -13,6 +13,8 @@ import { MessageModule } from 'modules/message/message.module';
 import { AdminController } from './admin.controller';
 import { SmsModule } from 'modules/sms/sms.module';
 import { SmsService } from 'modules/sms/sms.service';
+import { CouponModule } from 'modules/coupon/coupon.module';
+import { CouponService } from 'modules/coupon/coupon.service';
 
 @Module({
   imports: [
@@ -21,6 +23,7 @@ import { SmsService } from 'modules/sms/sms.service';
     TransactionModule,
     MessageModule,
     SmsModule,
+    CouponModule,
   ],
   controllers: [AdminController],
   providers: [
@@ -32,6 +35,7 @@ import { SmsService } from 'modules/sms/sms.service';
     AuthService,
     TransactionService,
     SmsService,
+    CouponService,
   ],
 })
 export class AdminModule {}

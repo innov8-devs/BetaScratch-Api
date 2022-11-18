@@ -14,6 +14,8 @@ import { ChatModule } from 'modules/chat/chat.module';
 import { ChatGateway } from 'modules/chat/chat.gateway';
 import { SmsModule } from 'modules/sms/sms.module';
 import { SmsService } from 'modules/sms/sms.service';
+import { CouponModule } from 'modules/coupon/coupon.module';
+import { CouponService } from 'modules/coupon/coupon.service';
 
 @Module({
   imports: [
@@ -25,6 +27,7 @@ import { SmsService } from 'modules/sms/sms.service';
     SmsModule,
     ChatModule,
     JwtModule.register({}),
+    CouponModule,
   ],
   providers: [
     WalletResolver,
@@ -34,6 +37,7 @@ import { SmsService } from 'modules/sms/sms.service';
     TransactionService,
     ChatGateway,
     SmsService,
+    CouponService,
   ],
   exports: [WalletService],
 })
