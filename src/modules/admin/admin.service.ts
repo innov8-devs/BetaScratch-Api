@@ -249,7 +249,7 @@ export class AdminService {
     const dummyPass = await argon2.hash(v4());
     const newAdmin = await this.prismaService.admin.create({
       data: {
-        username: input.username,
+        username: input.username.toLowerCase(),
         firstName: input.firstName,
         lastName: input.lastName,
         mobileNumber: input.mobileNumber,

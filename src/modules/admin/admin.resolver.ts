@@ -44,7 +44,13 @@ export class AdminResolver {
     private readonly authService: AuthService,
   ) {}
   // Get logged in user
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Query(() => Admin, { nullable: true })
   async meAdmin(
     @CurrentUser() user: User,
@@ -53,6 +59,7 @@ export class AdminResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.meAdmin(user);
   }
+
   @Auth([ROLE.ADMIN])
   @Query(() => DashboardDataResponse)
   async getDashboardData(
@@ -62,15 +69,18 @@ export class AdminResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return await this.adminService.getDashboardData();
   }
+
   @Auth([ROLE.ADMIN])
   @Mutation(() => Boolean)
   async createNewAdmin(@Args('input') input: RegisterAdminInput) {
     return await this.adminService.createNewAdmin(input);
   }
+
   @Query(() => Boolean)
   async confirmAdminToken(@Args('token') token: string) {
     return await this.adminService.confirmAdminToken(token);
   }
+
   @Mutation(() => Boolean)
   async resetNewAdminPassword(
     @Args('password') password: string,
@@ -78,6 +88,7 @@ export class AdminResolver {
   ) {
     return await this.adminService.resetNewAdminPassword(password, token);
   }
+
   @Auth([ROLE.ADMIN])
   @Query(() => [User], { nullable: true })
   async getUsersFromAdmin(
@@ -88,6 +99,7 @@ export class AdminResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getUsersFromAdmin(input);
   }
+
   @Auth([ROLE.ADMIN])
   @Query(() => User, { nullable: true })
   async getOneUserFromAdmin(
@@ -98,7 +110,8 @@ export class AdminResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getOneUserFromAdmin(userId);
   }
-  @Auth([ROLE.ADMIN])
+
+  @Auth([ROLE.ADMIN, ROLE.CUSTOMER_SUPPORT_ADMIN])
   @Query(() => [Wallet], { nullable: true })
   async getWalletsFromAdmin(
     @CurrentUser() user: User,
@@ -120,7 +133,7 @@ export class AdminResolver {
     return this.adminService.getTransactionsFromAdmin(input);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([ROLE.ADMIN, ROLE.CUSTOMER_SUPPORT_ADMIN])
   @Query(() => Wallet, { nullable: true })
   async getOneWalletFromAdmin(
     @CurrentUser() user: User,
@@ -130,6 +143,7 @@ export class AdminResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getOneWalletFromAdmin(userId);
   }
+
   @Auth([ROLE.ADMIN])
   @Query(() => [Game], { nullable: true })
   async getGamesFromAdmin(
@@ -140,6 +154,7 @@ export class AdminResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getGamesFromAdmin(input);
   }
+
   @Auth([ROLE.ADMIN])
   @Query(() => Game, { nullable: true })
   async getOneGameFromAdmin(
@@ -150,6 +165,7 @@ export class AdminResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getOneGameFromAdmin(gameId);
   }
+
   @Auth([ROLE.ADMIN])
   @Query(() => [Purchase], { nullable: true })
   async getUserPurchasesFromAdmin(
@@ -160,6 +176,7 @@ export class AdminResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getUserPurchasesFromAdmin(input);
   }
+
   @Auth([ROLE.ADMIN])
   @Mutation(() => Purchase, { nullable: true })
   async editUserPurchaseStatusFromAdmin(
@@ -170,6 +187,7 @@ export class AdminResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.editUserPurchaseStatusFromAdmin(input);
   }
+
   @Auth([ROLE.ADMIN])
   @Query(() => Number, { nullable: true })
   async getCount(
@@ -180,7 +198,8 @@ export class AdminResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getCount(input);
   }
-  @Auth([ROLE.ADMIN])
+
+  @Auth([ROLE.ADMIN, ROLE.CUSTOMER_SUPPORT_ADMIN])
   @Mutation(() => Wallet, { nullable: true })
   async updateUserWallet(
     @CurrentUser() user: User,
@@ -190,6 +209,7 @@ export class AdminResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.updateUserWallet(input);
   }
+
   @Auth([ROLE.ADMIN])
   @Query(() => [WithdrawalRequest], { nullable: true })
   async getWithdrawRequestFromAdmin(
@@ -200,6 +220,7 @@ export class AdminResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getWithdrawRequestFromAdmin(input);
   }
+
   @Auth([ROLE.ADMIN])
   @Query(() => [User], { nullable: true })
   async getPendingVerificationsFromAdmin(
@@ -210,6 +231,7 @@ export class AdminResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.getPendingVerificationsFromAdmin(input);
   }
+
   @Auth([ROLE.ADMIN])
   @Mutation(() => Boolean, { nullable: true })
   async changeVerificationStatus(
@@ -220,6 +242,7 @@ export class AdminResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return this.adminService.changeVerificationStatus(input);
   }
+
   @Auth([ROLE.ADMIN])
   @Query(() => [Admin], { nullable: true })
   async getAdminList(
@@ -230,6 +253,7 @@ export class AdminResolver {
     await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
     return await this.adminService.getAdminList(input);
   }
+
   @Auth([ROLE.ADMIN])
   @Mutation(() => Boolean, { nullable: true })
   async toggleGameStatus(
@@ -242,6 +266,7 @@ export class AdminResolver {
     await this.adminService.toggleGameStatus(id, status);
     return true;
   }
+
   @Auth([ROLE.ADMIN])
   @Mutation(() => Boolean, { nullable: true })
   async toggleCardPlayedStatus(
@@ -261,11 +286,13 @@ export class AdminResolver {
     );
     return true;
   }
+
   @Mutation(() => Boolean)
   async resetPurchases() {
     await this.adminService.resetPurchases();
     return true;
   }
+
   @Auth([ROLE.ADMIN])
   @Query(() => [FlutterTansactionResponse])
   async getFlutterwaveTransactions(
@@ -293,6 +320,7 @@ export class AdminResolver {
       user.id,
     );
   }
+
   @Auth([ROLE.ADMIN])
   @Mutation(() => Boolean)
   async updateAdminPassword(
@@ -324,7 +352,7 @@ export class AdminResolver {
     );
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([ROLE.ADMIN, ROLE.CUSTOMER_SUPPORT_ADMIN])
   @Query(() => [SortReturnData])
   async adminSearch(
     @Args('table') table: DB_TYPES,
@@ -410,8 +438,8 @@ export class AdminResolver {
   }
 
   //! to test the test methods
-  @Mutation(() => Boolean)
-  async run() {
-    return await this.adminService.run();
-  }
+  // @Mutation(() => Boolean)
+  // async run() {
+  //   return await this.adminService.run();
+  // }
 }
