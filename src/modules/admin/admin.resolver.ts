@@ -28,7 +28,7 @@ import {
   GetWithdrawlistFromAdminInput,
   PaginationInput,
   RegisterAdminInput,
-  UpdateUserWalletInput,
+  UpdateUserBalanceInput,
 } from './dto/admin.request';
 import {
   DashboardDataResponse,
@@ -261,10 +261,10 @@ export class AdminResolver {
 
   @Auth([ROLE.ADMIN, ROLE.CUSTOMER_SUPPORT_ADMIN])
   @Mutation(() => Wallet, { nullable: true })
-  async updateUserWallet(
+  async updateUserBalance(
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
-    @Args('input') input: UpdateUserWalletInput,
+    @Args('input') input: UpdateUserBalanceInput,
   ) {
     await this.authService.setAccessTokenHeaderCredentials(
       user.id,
@@ -272,7 +272,7 @@ export class AdminResolver {
       true,
       user.role,
     );
-    return this.adminService.updateUserWallet(input);
+    return this.adminService.updateUserBalance(input);
   }
 
   @Auth([ROLE.ADMIN])

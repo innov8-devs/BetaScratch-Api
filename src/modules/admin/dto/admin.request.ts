@@ -133,7 +133,7 @@ export class GetUsersCountInput {
 }
 
 @InputType()
-export class UpdateUserWalletInput {
+export class UpdateUserBalanceInput {
   @Field()
   userId: number;
 

@@ -28,7 +28,7 @@ import {
   GetWithdrawlistFromAdminInput,
   PaginationInput,
   RegisterAdminInput,
-  UpdateUserWalletInput,
+  UpdateUserBalanceInput,
   UploadBannerImageDto,
 } from './dto/admin.request';
 import { v4 } from 'uuid';
@@ -476,7 +476,9 @@ export class AdminService {
     });
   }
 
-  public async updateUserWallet(input: UpdateUserWalletInput): Promise<Wallet> {
+  public async updateUserBalance(
+    input: UpdateUserBalanceInput,
+  ): Promise<Wallet> {
     if (input.type === WALLET_TYPE.WALLET) {
       if (input.amount.toString().includes('-')) {
         await this.transactionService.createTransaction({
