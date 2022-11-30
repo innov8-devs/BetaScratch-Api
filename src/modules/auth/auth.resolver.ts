@@ -27,8 +27,13 @@ export class AuthResolver {
     const cookieObject = parseCookies(req.cookies);
     console.log(cookieObject);
     if (!cookieObject.beta_refresh_token) return false;
-    let decoded: { sub: number; iat: number; exp: number; isAdmin: boolean } =
-      jwt_decode(cookieObject.beta_refresh_token);
+    let decoded: {
+      sub: number;
+      iat: number;
+      exp: number;
+      isAdmin: boolean;
+      role: string;
+    } = jwt_decode(cookieObject.beta_refresh_token);
     if (Date.now() >= decoded.exp * 1000) return false;
     if (decoded.isAdmin) authTypeSetterFn(true);
     else authTypeSetterFn(false);
@@ -36,11 +41,13 @@ export class AuthResolver {
       decoded.sub,
       res,
       decoded.isAdmin,
+      decoded.role,
     );
     await this.authService.setRefreshTokenHeaderCredentials(
       decoded.sub,
       res,
       decoded.isAdmin,
+      decoded.role,
     );
     return true;
   }
@@ -52,11 +59,17 @@ export class AuthResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
+    await this.authService.setAccessTokenHeaderCredentials(
+      user.id,
+      res,
+      false,
+      user.role,
+    );
     await this.authService.setRefreshTokenHeaderCredentials(
       user.id,
       res,
       false,
+      user.role,
     );
     return await this.authService.login(input);
   }
@@ -73,11 +86,17 @@ export class AuthResolver {
     @CurrentUser() admin: Admin,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(admin.id, res, true);
+    await this.authService.setAccessTokenHeaderCredentials(
+      admin.id,
+      res,
+      true,
+      admin.role,
+    );
     await this.authService.setRefreshTokenHeaderCredentials(
       admin.id,
       res,
       true,
+      admin.role,
     );
     return await this.authService.adminLogin(input);
   }

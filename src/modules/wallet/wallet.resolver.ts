@@ -32,7 +32,12 @@ export class WalletResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
+    await this.authService.setAccessTokenHeaderCredentials(
+      user.id,
+      res,
+      false,
+      user.role,
+    );
     return await this.walletService.getUserBalance(user.id);
   }
 
@@ -43,7 +48,12 @@ export class WalletResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
+    await this.authService.setAccessTokenHeaderCredentials(
+      user.id,
+      res,
+      false,
+      user.role,
+    );
     return await this.walletService.tip(input, user.id);
   }
 
@@ -76,7 +86,12 @@ export class WalletResolver {
     @Context() { res }: MyContext,
     @CurrentUser() user: User,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
+    await this.authService.setAccessTokenHeaderCredentials(
+      user.id,
+      res,
+      false,
+      user.role,
+    );
     return await this.walletService.recordWithdrawalRequest(input, user.id);
   }
 
@@ -107,7 +122,12 @@ export class WalletResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    await this.authService.setAccessTokenHeaderCredentials(
+      user.id,
+      res,
+      true,
+      user.role,
+    );
     await this.walletService.changeWithdrawalStatus(input);
     return true;
   }
@@ -119,7 +139,12 @@ export class WalletResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
+    await this.authService.setAccessTokenHeaderCredentials(
+      user.id,
+      res,
+      false,
+      user.role,
+    );
     return await this.walletService.bankTransferDeposit(user.id, input);
   }
 

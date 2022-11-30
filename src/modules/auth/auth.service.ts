@@ -197,10 +197,11 @@ export class AuthService {
     userId: number,
     res: Response,
     isAdmin: boolean,
+    role: string,
   ) {
     const payload = isAdmin
-      ? { sub: userId, isAdmin: true }
-      : { sub: userId, isAdmin: false };
+      ? { sub: userId, isAdmin: true, role }
+      : { sub: userId, isAdmin: false, role };
     const accessToken = await this.generateAccessToken(payload);
     res.append('Access-Control-Expose-Headers', ['access_token']);
     res.append('access_token', accessToken);
@@ -215,10 +216,11 @@ export class AuthService {
     userId: number,
     res: Response,
     isAdmin: boolean,
+    role: string,
   ) {
     const payload = isAdmin
-      ? { sub: userId, isAdmin: true }
-      : { sub: userId, isAdmin: false };
+      ? { sub: userId, isAdmin: true, role }
+      : { sub: userId, isAdmin: false, role };
     const refreshToken = await this.generateRefreshToken(payload);
     res.append('Access-Control-Expose-Headers', ['refresh_token']);
     res.append('refresh_token', refreshToken);

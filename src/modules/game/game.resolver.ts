@@ -42,7 +42,12 @@ export class GameResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ): Promise<Boolean> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    await this.authService.setAccessTokenHeaderCredentials(
+      user.id,
+      res,
+      true,
+      user.role,
+    );
     return await this.gameService.createGame(input);
   }
 
@@ -53,7 +58,12 @@ export class GameResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ): Promise<Boolean> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    await this.authService.setAccessTokenHeaderCredentials(
+      user.id,
+      res,
+      true,
+      user.role,
+    );
     return await this.gameService.createGameCategory(input);
   }
 
@@ -64,7 +74,12 @@ export class GameResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ): Promise<Boolean> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    await this.authService.setAccessTokenHeaderCredentials(
+      user.id,
+      res,
+      true,
+      user.role,
+    );
     return await this.gameService.editGame(input);
   }
 
@@ -101,7 +116,12 @@ export class GameResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, true);
+    await this.authService.setAccessTokenHeaderCredentials(
+      user.id,
+      res,
+      true,
+      user.role,
+    );
     return this.gameService.findAllGameCategories();
   }
 
@@ -122,7 +142,12 @@ export class GameResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
+    await this.authService.setAccessTokenHeaderCredentials(
+      user.id,
+      res,
+      false,
+      user.role,
+    );
     return await this.gameService.cartCheckout(user.id, input);
   }
 
@@ -133,7 +158,12 @@ export class GameResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
+    await this.authService.setAccessTokenHeaderCredentials(
+      user.id,
+      res,
+      false,
+      user.role,
+    );
     return await this.gameService.purchaseHistory(user.id, input);
   }
 
@@ -144,7 +174,12 @@ export class GameResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
+    await this.authService.setAccessTokenHeaderCredentials(
+      user.id,
+      res,
+      false,
+      user.role,
+    );
     return await this.gameService.flutterCheckout(user.id, input);
   }
 
@@ -155,7 +190,12 @@ export class GameResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ) {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
+    await this.authService.setAccessTokenHeaderCredentials(
+      user.id,
+      res,
+      false,
+      user.role,
+    );
     return await this.gameService.bankTransferCheckout(user.id, input);
   }
 
@@ -166,7 +206,12 @@ export class GameResolver {
     @CurrentUser() user: User,
     @Context() { res }: MyContext,
   ): Promise<StripeTokenResponse> {
-    await this.authService.setAccessTokenHeaderCredentials(user.id, res, false);
+    await this.authService.setAccessTokenHeaderCredentials(
+      user.id,
+      res,
+      false,
+      user.role,
+    );
     return await this.gameService.getStripeTokenAndRecordPurchase(
       input,
       user.id,
