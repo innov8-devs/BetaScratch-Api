@@ -65,7 +65,13 @@ export class AdminResolver {
     return this.adminService.meAdmin(user);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Query(() => DashboardDataResponse)
   async getDashboardData(
     @CurrentUser() user: User,
@@ -80,7 +86,13 @@ export class AdminResolver {
     return await this.adminService.getDashboardData();
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Mutation(() => Boolean)
   async createNewAdmin(@Args('input') input: RegisterAdminInput) {
     return await this.adminService.createNewAdmin(input);
@@ -99,7 +111,13 @@ export class AdminResolver {
     return await this.adminService.resetNewAdminPassword(password, token);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Query(() => [User], { nullable: true })
   async getUsersFromAdmin(
     @CurrentUser() user: User,
@@ -115,7 +133,13 @@ export class AdminResolver {
     return this.adminService.getUsersFromAdmin(input);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Query(() => User, { nullable: true })
   async getOneUserFromAdmin(
     @CurrentUser() user: User,
@@ -131,7 +155,13 @@ export class AdminResolver {
     return this.adminService.getOneUserFromAdmin(userId);
   }
 
-  @Auth([ROLE.ADMIN, ROLE.CUSTOMER_SUPPORT_ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Query(() => [Wallet], { nullable: true })
   async getWalletsFromAdmin(
     @CurrentUser() user: User,
@@ -147,7 +177,13 @@ export class AdminResolver {
     return this.adminService.getWalletsFromAdmin(input);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Query(() => [Transaction], { nullable: true })
   async getTransactionsFromAdmin(
     @CurrentUser() user: User,
@@ -163,7 +199,13 @@ export class AdminResolver {
     return this.adminService.getTransactionsFromAdmin(input);
   }
 
-  @Auth([ROLE.ADMIN, ROLE.CUSTOMER_SUPPORT_ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Query(() => Wallet, { nullable: true })
   async getOneWalletFromAdmin(
     @CurrentUser() user: User,
@@ -179,7 +221,13 @@ export class AdminResolver {
     return this.adminService.getOneWalletFromAdmin(userId);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Query(() => [Game], { nullable: true })
   async getGamesFromAdmin(
     @CurrentUser() user: User,
@@ -195,7 +243,13 @@ export class AdminResolver {
     return this.adminService.getGamesFromAdmin(input);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Query(() => Game, { nullable: true })
   async getOneGameFromAdmin(
     @CurrentUser() user: User,
@@ -211,7 +265,13 @@ export class AdminResolver {
     return this.adminService.getOneGameFromAdmin(gameId);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Query(() => [Purchase], { nullable: true })
   async getUserPurchasesFromAdmin(
     @CurrentUser() user: User,
@@ -227,7 +287,13 @@ export class AdminResolver {
     return this.adminService.getUserPurchasesFromAdmin(input);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Mutation(() => Purchase, { nullable: true })
   async editUserPurchaseStatusFromAdmin(
     @CurrentUser() user: User,
@@ -243,7 +309,13 @@ export class AdminResolver {
     return this.adminService.editUserPurchaseStatusFromAdmin(input);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Query(() => Number, { nullable: true })
   async getCount(
     @CurrentUser() user: User,
@@ -259,7 +331,13 @@ export class AdminResolver {
     return this.adminService.getCount(input);
   }
 
-  @Auth([ROLE.ADMIN, ROLE.CUSTOMER_SUPPORT_ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Mutation(() => Wallet, { nullable: true })
   async updateUserBalance(
     @CurrentUser() user: User,
@@ -275,7 +353,13 @@ export class AdminResolver {
     return this.adminService.updateUserBalance(input);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Query(() => [WithdrawalRequest], { nullable: true })
   async getWithdrawRequestFromAdmin(
     @CurrentUser() user: User,
@@ -291,7 +375,13 @@ export class AdminResolver {
     return this.adminService.getWithdrawRequestFromAdmin(input);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Query(() => [User], { nullable: true })
   async getPendingVerificationsFromAdmin(
     @CurrentUser() user: User,
@@ -307,7 +397,13 @@ export class AdminResolver {
     return this.adminService.getPendingVerificationsFromAdmin(input);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Mutation(() => Boolean, { nullable: true })
   async changeVerificationStatus(
     @CurrentUser() user: User,
@@ -323,7 +419,13 @@ export class AdminResolver {
     return this.adminService.changeVerificationStatus(input);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Query(() => [Admin], { nullable: true })
   async getAdminList(
     @CurrentUser() user: User,
@@ -339,7 +441,13 @@ export class AdminResolver {
     return await this.adminService.getAdminList(input);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Mutation(() => Boolean, { nullable: true })
   async toggleGameStatus(
     @CurrentUser() user: User,
@@ -357,7 +465,13 @@ export class AdminResolver {
     return true;
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Mutation(() => Boolean, { nullable: true })
   async toggleCardPlayedStatus(
     @CurrentUser() user: User,
@@ -388,7 +502,13 @@ export class AdminResolver {
     return true;
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Query(() => [FlutterTansactionResponse])
   async getFlutterwaveTransactions(
     @Args('from') from: string,
@@ -405,7 +525,13 @@ export class AdminResolver {
     return await this.adminService.getFlutterwaveTransactions(from, to);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Mutation(() => Boolean)
   async updateAdminPersonalInformation(
     @Args('firstName') firstName: string,
@@ -426,7 +552,13 @@ export class AdminResolver {
     );
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Mutation(() => Boolean)
   async updateAdminPassword(
     @Args('oldPassword') oldPassword: string,
@@ -447,7 +579,13 @@ export class AdminResolver {
     );
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Mutation(() => Boolean)
   async toggleUserAccountDisalility(
     @Args('userId') userId: number,
@@ -467,7 +605,13 @@ export class AdminResolver {
     );
   }
 
-  @Auth([ROLE.ADMIN, ROLE.CUSTOMER_SUPPORT_ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Query(() => [SortReturnData])
   async adminSearch(
     @Args('table') table: DB_TYPES,
@@ -484,7 +628,13 @@ export class AdminResolver {
     return this.adminService.adminSearch(table, search);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Query(() => [FlutterwaveLog])
   async getFlutterwaveLogs(
     @Args('input') input: PaginationInput,
@@ -500,7 +650,13 @@ export class AdminResolver {
     return this.adminService.getFlutterwaveLogs(input);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Query(() => FlutterTransactionsTimelineResponse)
   async fetchFlutterTransactionTimeline(
     @Args('transaction_id') transaction_Id: string,
@@ -518,7 +674,13 @@ export class AdminResolver {
     );
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Mutation(() => Boolean)
   async confirmBankPurchase(
     @Args('id') id: number,
@@ -534,7 +696,13 @@ export class AdminResolver {
     return await this.adminService.confirmBankPurchase(id);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Mutation(() => Boolean)
   async confirmBankDeposit(
     @Args('id') id: number,
@@ -550,7 +718,13 @@ export class AdminResolver {
     return await this.adminService.confirmBankDeposit(id);
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Query(() => [Purchase])
   async fetchBankTransferPurchase(
     @Args('input') input: PaginationInput,
@@ -571,7 +745,13 @@ export class AdminResolver {
     return await this.adminService.getAllBannerUploads();
   }
 
-  @Auth([ROLE.ADMIN])
+  @Auth([
+    ROLE.ADMIN,
+    ROLE.ACCOUNT_ADMIN,
+    ROLE.BUSINESS_DEV_ADMIN,
+    ROLE.CUSTOMER_SUPPORT_ADMIN,
+    ROLE.IT_ADMIN,
+  ])
   @Mutation(() => Boolean)
   async deleteBannerUpload(
     @Args('id') id: number,
