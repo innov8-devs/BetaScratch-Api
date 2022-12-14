@@ -135,14 +135,16 @@ export class WalletService {
         amount,
       };
 
-      if (input.public) this.chatGateway.server.emit('tip', socketData);
+      if (input.public) {
+        this.chatGateway.server.emit('tip', socketData);
 
-      this.chatGateway.handleTip({
-        amount,
-        public: input.public,
-        from: sender.username,
-        to: reciepient.username,
-      });
+        this.chatGateway.handleTip({
+          amount,
+          public: input.public,
+          from: sender.username,
+          to: reciepient.username,
+        });
+      }
 
       return true;
     } catch (err) {

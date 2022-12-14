@@ -1001,45 +1001,45 @@ export class AdminService {
   //   return true;
   // }
 
-  async run() {
-    console.log('Here');
-    let users = await this.prismaService.user.findMany({
-      where: { disabled: false },
-      skip: 600,
-      take: 50,
-    });
+  // async run() {
+  //   console.log('Here');
+  //   let users = await this.prismaService.user.findMany({
+  //     where: { disabled: false },
+  //     skip: 600,
+  //     take: 50,
+  //   });
 
-    // let users = await this.prismaService.user.findMany({
-    //   where: { email: 'ayeolakenny@gmail.com' },
-    //   // where: {
-    //   //   AND: [
-    //   //     { email: 'ayeolakenny@gmail.com' },
-    //   //     { email: 'fashanutosin7@gmail.com' },
-    //   //     { email: 'oyinbaybes@yahoo.com' },
-    //   //   ],
-    //   // },
-    // });
+  //   // let users = await this.prismaService.user.findMany({
+  //   //   where: { email: 'ayeolakenny@gmail.com' },
+  //   //   // where: {
+  //   //   //   AND: [
+  //   //   //     { email: 'ayeolakenny@gmail.com' },
+  //   //   //     { email: 'fashanutosin7@gmail.com' },
+  //   //   //     { email: 'oyinbaybes@yahoo.com' },
+  //   //   //   ],
+  //   //   // },
+  //   // });
 
-    let counter = 0;
-    for (let user of users) {
-      try {
-        await this.prismaService.wallet.update({
-          where: { userId: user.id },
-          data: { bonus: { increment: 500 } },
-        });
-        await this.mailService.sendMail({
-          subject: MAIL_SUBJECT.ACCOUNT_ACTION,
-          html: MAIL_MESSAGE.RESET_PASSWORD(user.firstName, user.email),
-          to: user.email,
-        });
-        counter += 1;
-        console.log(`${counter}: sent to ${user.email} of userId: ${user.id}`);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    return true;
-  }
+  //   let counter = 0;
+  //   for (let user of users) {
+  //     try {
+  //       await this.prismaService.wallet.update({
+  //         where: { userId: user.id },
+  //         data: { bonus: { increment: 500 } },
+  //       });
+  //       await this.mailService.sendMail({
+  //         subject: MAIL_SUBJECT.ACCOUNT_ACTION,
+  //         html: MAIL_MESSAGE.RESET_PASSWORD(user.firstName, user.email),
+  //         to: user.email,
+  //       });
+  //       counter += 1;
+  //       console.log(`${counter}: sent to ${user.email} of userId: ${user.id}`);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   }
+  //   return true;
+  // }
 
   // async run(userId: number) {
   //   try {
@@ -1122,4 +1122,14 @@ export class AdminService {
   //     return false;
   //   }
   // }
+
+  async run() {
+    const mail = {
+      to: 'ayeolakenny@gmail.com',
+      subject: 'Hello from sendgrid',
+      html: '<h1>Hello</h1>',
+    };
+
+    return await this.mailService.sendMail(mail);
+  }
 }
