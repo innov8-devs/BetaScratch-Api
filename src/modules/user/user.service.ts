@@ -138,12 +138,26 @@ export class UserService {
     });
   }
 
-  async getUserByPhoneNumber(mobileNumber: string, userId: number) {
+  async getUserByPhoneOrEmail(phoneOrEmail: string, userId: number) {
     try {
-      const user = await this.prismaService.user.findUnique({
-        where: { mobileNumber },
+      const user = await this.prismaService.user.findFirst({
+        where: {
+          OR: [
+            {
+              email: {
+                equals: phoneOrEmail.toLowerCase(),
+              },
+            },
+            {
+              mobileNumber: {
+                equals: phoneOrEmail,
+              },
+            },
+          ],
+        },
+        include: { wallet: true },
       });
-      if (user.id === userId) return null;
+      if (user.id !== userId) return null;
       return user;
     } catch (err) {
       throw new NotFoundException({

@@ -78,11 +78,11 @@ export class UserResolver {
 
   @Auth([ROLE.USER])
   @Query(() => User, { nullable: true })
-  async getUserByPhonenumber(
-    @Args('mobileNumber') mobileNumber: string,
+  async getUserByPhoneOrEmail(
+    @Args('phoneOrEmail') phoneOrEmail: string,
     @CurrentUser() user: User,
   ): Promise<User | null> {
-    return await this.userService.getUserByPhoneNumber(mobileNumber, user.id);
+    return await this.userService.getUserByPhoneOrEmail(phoneOrEmail, user.id);
   }
 
   @Mutation(() => Boolean)
