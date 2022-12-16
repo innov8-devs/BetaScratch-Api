@@ -36,7 +36,7 @@ export class ChatGateway {
     amount: number;
     to: string;
     from: string;
-    public: boolean;
+    type: string;
   }): void {
     this.server.emit('tip', data);
   }

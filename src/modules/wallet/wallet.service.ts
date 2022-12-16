@@ -133,6 +133,7 @@ export class WalletService {
         from: sender.username,
         to: reciepient.username,
         amount,
+        type: 'tip',
       };
 
       if (input.public) {
@@ -140,9 +141,9 @@ export class WalletService {
 
         this.chatGateway.handleTip({
           amount,
-          public: input.public,
           from: sender.username,
           to: reciepient.username,
+          type: 'tip',
         });
       }
 
