@@ -39,6 +39,7 @@ export class ChatGateway {
     type: string;
   }): void {
     this.server.emit('tip', data);
+    previous_messages[rooms[0]].push(data);
   }
 
   @SubscribeMessage('join-room')
