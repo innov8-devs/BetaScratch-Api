@@ -138,7 +138,7 @@ export class UserService {
     });
   }
 
-  async getUserByPhoneOrEmail(phoneOrEmail: string, userId: number) {
+  async getUserByPhoneOrEmail(phoneOrEmail: string) {
     try {
       const user = await this.prismaService.user.findFirst({
         where: {
@@ -157,7 +157,6 @@ export class UserService {
         },
         include: { wallet: true },
       });
-      if (user.id !== userId) return null;
       return user;
     } catch (err) {
       throw new NotFoundException({
