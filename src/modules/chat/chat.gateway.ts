@@ -9,7 +9,7 @@ import { Server, Socket } from 'socket.io';
 import jwtDecode from 'jwt-decode';
 
 const storage = new Map();
-const rooms = ['competition', 'scratch and win', 'chatroom'];
+const rooms = ['competition', 'predict and win', 'chatroom'];
 
 let previous_messages: any = {
   [rooms[0]]: [],
