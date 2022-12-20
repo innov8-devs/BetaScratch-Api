@@ -17,6 +17,7 @@ import {
   TRANSACTION,
   WALLET_TYPE,
 } from 'types/constants/enum';
+import { timezoneToDate } from 'utils/date.util';
 import {
   generateRandomNumbers,
   generateRandomString,
@@ -52,7 +53,7 @@ export class WalletService {
   }
 
   async tip(input: TipFromWalletInput, userId: number) {
-    const { amount, to } = input;
+    const { amount, to, timezone } = input;
     const sender = await this.prismaService.user.findUnique({
       where: { id: userId },
     });
@@ -144,6 +145,7 @@ export class WalletService {
           from: sender.username,
           to: reciepient.username,
           type: 'tip',
+          time: timezoneToDate(timezone),
         });
       }
 

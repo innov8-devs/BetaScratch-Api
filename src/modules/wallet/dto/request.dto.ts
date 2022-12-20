@@ -37,6 +37,9 @@ export class TipFromWalletInput {
   @Field(() => String, { nullable: false })
   to!: string;
 
+  @Field(() => String, { nullable: false })
+  timezone!: string;
+
   @Field(() => Boolean, { nullable: false })
   @IsBoolean()
   public!: boolean;

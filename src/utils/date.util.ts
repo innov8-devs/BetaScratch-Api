@@ -42,3 +42,20 @@ export const unixToDaysLeft = (unix: any) => {
 
 // console.log(daysToUnix(1));
 // console.log(unixToDaysLeft(1668219539));
+
+export const timezoneToDate = (timezone: any) => {
+  const options = {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    timeZoneName: 'shortGeneric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true,
+    timeZone: timezone, // 'Africa/Lagos',
+  };
+  const today = new Date();
+  return today.toLocaleString('en-US', options as any);
+};
+// console.log(timezoneToDate('Africa/Lagos'));
+// will return 12/19/2022, 1:14 PM Nigeria Time
