@@ -135,6 +135,7 @@ export class WalletService {
         to: reciepient.username,
         amount,
         type: 'tip',
+        time: timezone ? timezoneToDate(timezone) : null,
       };
 
       if (input.public) {
@@ -145,7 +146,7 @@ export class WalletService {
           from: sender.username,
           to: reciepient.username,
           type: 'tip',
-          time: timezoneToDate(timezone),
+          time: timezone ? timezoneToDate(timezone) : null,
         });
       }
 

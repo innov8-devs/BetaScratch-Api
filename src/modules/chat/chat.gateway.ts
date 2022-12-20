@@ -77,7 +77,11 @@ export class ChatGateway {
     @ConnectedSocket() socket: Socket,
   ) {
     user = storage.get(socket.id);
-    message_object.time = timezoneToDate(message_object.timezone);
+
+    message_object.timezone
+      ? (message_object.time = timezoneToDate(message_object.timezone))
+      : (message_object.time = null);
+
     if (user && user?.auth === 2) {
       if (previous_messages[user.room].lenth === 50) {
         previous_messages[user.room].shift();
