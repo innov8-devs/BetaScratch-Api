@@ -34,10 +34,16 @@
           username: 'hello',
           room: 'chatroom',
           access_token:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjYyODM1OTA3LCJleHAiOjE2NjI4MzY4MDd9.HQyd_J9gT07LY5BZyqTf848pQQ43xzSd-p_XZZbk6_c',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjk4NiwiaXNBZG1pbiI6ZmFsc2UsInJvbGUiOiJVU0VSIiwiaWF0IjoxNjcxNjI2NTY0LCJleHAiOjE2NzE2Mjc0NjR9.b5t7uk18L8r-TPOPna1vNITl-rjRL8n3PGmYp_X0P0k',
         });
         // socket.disconnect();
-        socket.emit('send-message', { message: message.value });
+        socket.emit('send-message', {
+          message: message.value,
+          username: 'kenny',
+          at: [],
+          type: 'message',
+          timezone: 'Africa/Lagos',
+        });
       };
 
       socket.on('new-message', (message) => {
