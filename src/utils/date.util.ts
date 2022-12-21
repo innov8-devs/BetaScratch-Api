@@ -48,7 +48,6 @@ export const timezoneToDate = (timezone: any) => {
     year: 'numeric',
     month: 'numeric',
     day: 'numeric',
-    timeZoneName: 'shortGeneric',
     hour: 'numeric',
     minute: 'numeric',
     hour12: true,

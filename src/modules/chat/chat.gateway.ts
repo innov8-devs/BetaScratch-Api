@@ -7,7 +7,7 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import jwtDecode from 'jwt-decode';
-// import { timezoneToDate } from 'utils/date.util';
+import { timezoneToDate } from 'utils/date.util';
 
 const storage = new Map();
 const rooms = ['competition', 'predict and win', 'chatroom'];
@@ -80,9 +80,13 @@ export class ChatGateway {
 
     user = storage.get(socket.id);
 
-    // message_object.timezone
-    //   ? (message_object.time = timezoneToDate(message_object.timezone))
-    //   : (message_object.time = null);
+    message_object.timezone
+      ? (message_object.time = timezoneToDate(message_object.timezone))
+      : (message_object.time = null);
+
+    console.log(
+      timezoneToDate(message_object.timezone) + ' ' + message_object.timezone,
+    );
 
     if (user && user?.auth === 2) {
       if (previous_messages[user.room].lenth === 50) {
