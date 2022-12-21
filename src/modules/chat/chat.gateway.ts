@@ -81,12 +81,11 @@ export class ChatGateway {
     user = storage.get(socket.id);
 
     message_object.timezone
-      ? (message_object.time = timezoneToDate(message_object.timezone))
+      ? (message_object.time =
+          timezoneToDate(message_object.timezone) +
+          ' ' +
+          message_object.timezone)
       : (message_object.time = null);
-
-    console.log(
-      timezoneToDate(message_object.timezone) + ' ' + message_object.timezone,
-    );
 
     if (user && user?.auth === 2) {
       if (previous_messages[user.room].lenth === 50) {

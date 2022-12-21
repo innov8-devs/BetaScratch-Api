@@ -130,12 +130,14 @@ export class WalletService {
         sender.username,
       );
 
+      const time = timezone ? timezoneToDate(timezone) + ' ' + timezone : null;
+
       const socketData = {
         from: sender.username,
         to: reciepient.username,
         amount,
         type: 'tip',
-        time: timezone ? timezoneToDate(timezone) : null,
+        time,
       };
 
       if (input.public) {
@@ -146,7 +148,7 @@ export class WalletService {
           from: sender.username,
           to: reciepient.username,
           type: 'tip',
-          time: timezone ? timezoneToDate(timezone) : null,
+          time,
         });
       }
 
