@@ -24,8 +24,8 @@ export class CouponMinAggregate {
     @Field(() => String, {nullable:true})
     code?: string;
 
-    @Field(() => Int, {nullable:true})
-    expires?: number;
+    @Field(() => String, {nullable:true})
+    expires?: string;
 
     @Field(() => COUPON_QUANTITY, {nullable:true})
     quantity?: keyof typeof COUPON_QUANTITY;

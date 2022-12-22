@@ -28,8 +28,8 @@ export class CouponCreateManyPurchaseInput {
     @Validator.IsString()
     code!: string;
 
-    @Field(() => Int, {nullable:false})
-    expires!: number;
+    @Field(() => String, {nullable:false})
+    expires!: string;
 
     @Field(() => COUPON_QUANTITY, {nullable:false})
     quantity!: keyof typeof COUPON_QUANTITY;

@@ -37,8 +37,8 @@ export class CouponScalarWhereWithAggregatesInput {
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     code?: StringWithAggregatesFilter;
 
-    @Field(() => IntWithAggregatesFilter, {nullable:true})
-    expires?: IntWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    expires?: StringWithAggregatesFilter;
 
     @Field(() => EnumCOUPON_QUANTITYWithAggregatesFilter, {nullable:true})
     quantity?: EnumCOUPON_QUANTITYWithAggregatesFilter;

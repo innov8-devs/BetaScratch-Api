@@ -2,7 +2,8 @@ import { registerEnumType } from '@nestjs/graphql';
 
 export enum CouponOrderByRelevanceFieldEnum {
     status = "status",
-    code = "code"
+    code = "code",
+    expires = "expires"
 }
 
 

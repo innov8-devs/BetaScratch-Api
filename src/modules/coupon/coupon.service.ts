@@ -47,13 +47,14 @@ export class CouponService {
       }
 
       const expiryHours = daysToUnix(expires);
+      console.log(expiryHours);
 
       await this.prismaService.coupon.create({
         data: {
           capped,
           cappedAmount: capped_amount,
           code,
-          expires: expiryHours,
+          expires: `${daysToUnix(expires)}`,
           percentage,
           status: 'active',
           quantity,
@@ -62,6 +63,7 @@ export class CouponService {
       });
       return true;
     } catch (err) {
+      console.log(err);
       throw new BadRequestException({
         name: 'coupon',
         message: MESSAGES.COUPON.UNABLE_TO_CREATE,
@@ -75,7 +77,8 @@ export class CouponService {
         where: { code },
       });
       if (!coupon.status) return false;
-      if (unixToDaysLeft(coupon.expires) > coupon.expires) return false;
+      if (unixToDaysLeft(Number(coupon.expires)) > Number(coupon.expires))
+        return false;
       return true;
     } catch (err) {
       throw new BadRequestException({
@@ -147,7 +150,10 @@ export class CouponService {
         };
       }
 
-      if (unixToDaysLeft(coupon.expires) <= 0 || coupon.status === 'inactive') {
+      if (
+        unixToDaysLeft(Number(coupon.expires)) <= 0 ||
+        coupon.status === 'inactive'
+      ) {
         return {
           couponStatus: false,
           subtotal,

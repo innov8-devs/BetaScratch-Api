@@ -314,7 +314,7 @@ model Coupon {
   /// @Validator.IsString()
   code          String          @unique
   /// @Validaror.IsNumber()
-  expires       Int
+  expires       String
   // @Validator.IsEnum(COUPON_QUANTITY, { each: true })
   quantity      COUPON_QUANTITY
   quantityCount Int?

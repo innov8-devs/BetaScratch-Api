@@ -15,9 +15,6 @@ export class CouponAvgAggregate {
     cappedAmount?: number;
 
     @Field(() => Float, {nullable:true})
-    expires?: number;
-
-    @Field(() => Float, {nullable:true})
     quantityCount?: number;
 
     @Field(() => Float, {nullable:true})

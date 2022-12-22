@@ -14,9 +14,6 @@ export class CouponSumAggregateInput {
     cappedAmount?: true;
 
     @Field(() => Boolean, {nullable:true})
-    expires?: true;
-
-    @Field(() => Boolean, {nullable:true})
     quantityCount?: true;
 
     @Field(() => Boolean, {nullable:true})

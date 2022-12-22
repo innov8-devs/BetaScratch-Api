@@ -37,8 +37,8 @@ export class CouponScalarWhereInput {
     @Field(() => StringFilter, {nullable:true})
     code?: StringFilter;
 
-    @Field(() => IntFilter, {nullable:true})
-    expires?: IntFilter;
+    @Field(() => StringFilter, {nullable:true})
+    expires?: StringFilter;
 
     @Field(() => EnumCOUPON_QUANTITYFilter, {nullable:true})
     quantity?: EnumCOUPON_QUANTITYFilter;

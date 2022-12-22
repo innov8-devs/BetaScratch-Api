@@ -28,8 +28,8 @@ export class CouponUncheckedUpdateWithoutPurchaseInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     code?: StringFieldUpdateOperationsInput;
 
-    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
-    expires?: IntFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    expires?: StringFieldUpdateOperationsInput;
 
     @Field(() => EnumCOUPON_QUANTITYFieldUpdateOperationsInput, {nullable:true})
     quantity?: EnumCOUPON_QUANTITYFieldUpdateOperationsInput;
