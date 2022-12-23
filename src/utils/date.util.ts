@@ -58,9 +58,6 @@ export const unixToDaysLeft = (unix: number) => {
 
 export const timezoneToDate = (timezone: any) => {
   const options = {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
     hour: 'numeric',
     minute: 'numeric',
     hour12: true,
