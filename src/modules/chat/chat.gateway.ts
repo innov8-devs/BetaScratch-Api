@@ -76,7 +76,7 @@ export class ChatGateway {
     @MessageBody() message_object: any,
     @ConnectedSocket() socket: Socket,
   ) {
-    console.log(message_object);
+    console.log('MESSAGE OBJECT', message_object);
 
     user = storage.get(socket.id);
 
