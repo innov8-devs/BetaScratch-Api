@@ -130,7 +130,7 @@ export class WalletService {
         sender.username,
       );
 
-      const time = timezone ? timezoneToDate(timezone) + ' ' + timezone : null;
+      const time = timezone ? timezoneToDate(timezone) : null;
 
       const socketData = {
         from: sender.username,

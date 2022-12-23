@@ -81,10 +81,7 @@ export class ChatGateway {
     user = storage.get(socket.id);
 
     message_object.timezone
-      ? (message_object.time =
-          timezoneToDate(message_object.timezone) +
-          ' ' +
-          message_object.timezone)
+      ? (message_object.time = timezoneToDate(message_object.timezone))
       : (message_object.time = null);
 
     if (user && user?.auth === 2) {
