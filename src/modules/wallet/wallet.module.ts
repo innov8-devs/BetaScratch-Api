@@ -10,8 +10,6 @@ import { JwtModule } from '@nestjs/jwt';
 import { TransactionModule } from 'modules/transaction/transaction.module';
 import { TransactionService } from 'modules/transaction/transaction.service';
 import { MessageModule } from 'modules/message/message.module';
-import { ChatModule } from 'modules/chat/chat.module';
-import { ChatGateway } from 'modules/chat/chat.gateway';
 import { SmsModule } from 'modules/sms/sms.module';
 import { SmsService } from 'modules/sms/sms.service';
 import { CouponModule } from 'modules/coupon/coupon.module';
@@ -25,7 +23,6 @@ import { CouponService } from 'modules/coupon/coupon.service';
     TransactionModule,
     MessageModule,
     SmsModule,
-    ChatModule,
     JwtModule.register({}),
     CouponModule,
   ],
@@ -35,7 +32,6 @@ import { CouponService } from 'modules/coupon/coupon.service';
     PrismaService,
     AuthService,
     TransactionService,
-    ChatGateway,
     SmsService,
     CouponService,
   ],

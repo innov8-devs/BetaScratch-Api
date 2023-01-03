@@ -36,7 +36,6 @@
           access_token:
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjk4NiwiaXNBZG1pbiI6ZmFsc2UsInJvbGUiOiJVU0VSIiwiaWF0IjoxNjcxNzg5MTU4LCJleHAiOjE2NzE3OTAwNTh9.JrEqZOeMYTa5AfxsxVKDEI5Ki4buGfotaZw-NOGWJhM',
         });
-        // socket.disconnect();
         socket.emit('send-message', {
           message: message.value,
           username: 'kenny',
@@ -44,14 +43,15 @@
           type: 'message',
           timezone: 'Africa/Lagos',
         });
+        // socket.disconnect();
       };
 
-      socket.on('new-message', (message) => {
-        console.log('Hit');
-        console.log(message);
-        return;
-        messages.appendChild(buildNewMessage(message));
-      });
+      // socket.on('new-message', (message) => {
+      //   console.log('Hit');
+      //   console.log(message);
+      //   return;
+      //   messages.appendChild(buildNewMessage(message));
+      // });
 
       socket.on('tip', (data) => {
         console.log('FROM SOCKER', data);
@@ -69,9 +69,9 @@
       //   socket.emit('send-message', { message: message.value });
       // };
 
-      socket.on('message', ({ data }) => {
-        handleNewMessage(data);
-      });
+      // socket.on('message', ({ data }) => {
+      //   handleNewMessage(data);
+      // });
 
       const buildNewMessage = (message) => {
         const li = document.createElement('li');

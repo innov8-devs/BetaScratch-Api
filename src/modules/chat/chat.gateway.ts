@@ -76,8 +76,6 @@ export class ChatGateway {
     @MessageBody() message_object: any,
     @ConnectedSocket() socket: Socket,
   ) {
-    console.log('MESSAGE OBJECT', message_object);
-
     user = storage.get(socket.id);
 
     message_object.timezone
@@ -85,7 +83,7 @@ export class ChatGateway {
       : (message_object.time = null);
 
     if (user && user?.auth === 2) {
-      if (previous_messages[user.room].lenth === 50) {
+      if (previous_messages[user.room].length === 50) {
         previous_messages[user.room].shift();
         previous_messages[user.room].push(message_object);
       } else {
@@ -127,4 +125,7 @@ export class ChatGateway {
       this.server.to(user.room).emit('online-users', storage.size);
     }
   }
+
+  // @SubscribeMessage('message')
+  // handleMessage(@MessageBody() message: string): void {}
 }
