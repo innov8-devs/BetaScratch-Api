@@ -1,0 +1,29 @@
+import { Field } from '@nestjs/graphql';
+import { ObjectType } from '@nestjs/graphql';
+import { Int } from '@nestjs/graphql';
+import { RAFFLE_TYPE } from '../prisma/raffle-type.enum';
+
+@ObjectType()
+export class RaffleMaxAggregate {
+
+    @Field(() => Int, {nullable:true})
+    id?: number;
+
+    @Field(() => RAFFLE_TYPE, {nullable:true})
+    type?: keyof typeof RAFFLE_TYPE;
+
+    @Field(() => Int, {nullable:true})
+    win?: number;
+
+    @Field(() => Int, {nullable:true})
+    stake?: number;
+
+    @Field(() => Date, {nullable:true})
+    expiriy?: Date | string;
+
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
+
+    @Field(() => Date, {nullable:true})
+    updatedAt?: Date | string;
+}

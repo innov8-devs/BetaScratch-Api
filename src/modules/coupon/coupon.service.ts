@@ -63,7 +63,6 @@ export class CouponService {
       });
       return true;
     } catch (err) {
-      console.log(err);
       throw new BadRequestException({
         name: 'coupon',
         message: MESSAGES.COUPON.UNABLE_TO_CREATE,

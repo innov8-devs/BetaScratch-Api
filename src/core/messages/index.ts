@@ -62,4 +62,9 @@ const COUPON = {
   AMOUNT_CONFLICT: 'cannot provide percentage for amount coupon',
 };
 
-export const MESSAGES = { AUTH, USER, ACCOUNT, COUPON };
+const RAFFLE = {
+  UNABLE_TO_UPDATE: 'unable to update raffle',
+  UNABLE_TO_FIND: 'unable to find raffle',
+};
+
+export const MESSAGES = { AUTH, USER, ACCOUNT, COUPON, RAFFLE };

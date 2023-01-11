@@ -358,6 +358,16 @@ model ResetPasswordMetrics {
   createdAt DateTime @default(now())
 }
 
+model Raffle {
+  id        Int         @id @default(autoincrement())
+  type      RAFFLE_TYPE @unique
+  win       Int
+  stake     Int
+  expiriy   DateTime
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
 enum ROLE {
   USER
   ADMIN
@@ -389,4 +399,10 @@ enum TRANSACTION_TYPE {
 enum COUPON_QUANTITY {
   UNLIMITED
   LIMITED
+}
+
+enum RAFFLE_TYPE {
+  WEEKLY
+  MONTHLY
+  YEARLY
 }

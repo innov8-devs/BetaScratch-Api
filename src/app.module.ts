@@ -20,6 +20,7 @@ import { TokenModule } from 'modules/token/token.module';
 import { ChatModule } from 'modules/chat/chat.module';
 import { SmsModule } from 'modules/sms/sms.module';
 import { CouponModule } from 'modules/coupon/coupon.module';
+import { RaffleModule } from 'modules/raffle/raffle.module';
 @Module({
   imports: [
     AuthModule,
@@ -36,6 +37,7 @@ import { CouponModule } from 'modules/coupon/coupon.module';
     ChatModule,
     SmsModule,
     CouponModule,
+    RaffleModule,
     ConfigModule.forRoot({ load: [config], isGlobal: true }),
     MulterModule.register({ dest: '../uploads' }),
     GraphQLModule.forRootAsync<ApolloDriverConfig>({
