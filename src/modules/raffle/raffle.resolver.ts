@@ -21,4 +21,11 @@ export class RaffleResolver {
   async getRaffleDetails(): Promise<Raffle[]> {
     return await this.raffleService.getRaffleDetails();
   }
+
+  //  @Mutation(() => Boolean, { nullable: true })
+  //   async stakeRaffle(
+  //     @Args('input') input: StakeRaffleInput,
+  //   ): Promise<Boolean> {
+  //     return await this.raffleService.();
+  //   }
 }

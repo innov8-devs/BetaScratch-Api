@@ -14,6 +14,7 @@ import { ReferralCreateNestedManyWithoutUserInput } from '../referral/referral-c
 import { TokenCreateNestedManyWithoutUserInput } from '../token/token-create-nested-many-without-user.input';
 import { PurchaseCreateNestedManyWithoutUserInput } from '../purchase/purchase-create-nested-many-without-user.input';
 import { ResetPasswordMetricsCreateNestedManyWithoutUserInput } from '../reset-password-metrics/reset-password-metrics-create-nested-many-without-user.input';
+import { StakedRaffleCreateNestedManyWithoutUserInput } from '../staked-raffle/staked-raffle-create-nested-many-without-user.input';
 
 @InputType()
 export class UserCreateInput {
@@ -122,4 +123,7 @@ export class UserCreateInput {
 
     @Field(() => ResetPasswordMetricsCreateNestedManyWithoutUserInput, {nullable:true})
     ResetPasswordMetrics?: ResetPasswordMetricsCreateNestedManyWithoutUserInput;
+
+    @Field(() => StakedRaffleCreateNestedManyWithoutUserInput, {nullable:true})
+    stakedRaffle?: StakedRaffleCreateNestedManyWithoutUserInput;
 }

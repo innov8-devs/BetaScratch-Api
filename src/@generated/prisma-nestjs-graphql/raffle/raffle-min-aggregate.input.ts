@@ -17,7 +17,7 @@ export class RaffleMinAggregateInput {
     stake?: true;
 
     @Field(() => Boolean, {nullable:true})
-    expiriy?: true;
+    expiry?: true;
 
     @Field(() => Boolean, {nullable:true})
     createdAt?: true;

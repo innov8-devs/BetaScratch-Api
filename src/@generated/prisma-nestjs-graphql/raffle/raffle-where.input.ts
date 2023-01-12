@@ -29,7 +29,7 @@ export class RaffleWhereInput {
     stake?: IntFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
-    expiriy?: DateTimeFilter;
+    expiry?: DateTimeFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;

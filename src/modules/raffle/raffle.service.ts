@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { MESSAGES } from 'core/messages';
 import { PrismaService } from 'modules/prisma.service';
-import { UpdateRaffleInput } from './dto/request.dto';
+import { StakeRaffleInput, UpdateRaffleInput } from './dto/request.dto';
 
 @Injectable()
 export class RaffleService {
@@ -9,10 +9,10 @@ export class RaffleService {
 
   async updateRaffleDetails(input: UpdateRaffleInput) {
     try {
-      const { stake, win, expiriy, type } = input;
+      const { stake, win, expiry, type } = input;
       await this.prismaService.raffle.update({
         where: { type },
-        data: { stake, win, expiriy },
+        data: { stake, win, expiry },
       });
       return true;
     } catch (err) {
@@ -30,6 +30,27 @@ export class RaffleService {
       throw new BadRequestException({
         name: 'raffle',
         message: MESSAGES.RAFFLE.UNABLE_TO_FIND,
+      });
+    }
+  }
+
+  async stakeUserRaffle(userId: number, input: StakeRaffleInput) {
+    const { stakes, type } = input;
+    try {
+      for (let stake of stakes) {
+        await this.prismaService.stakedRaffle.create({
+          data: {
+            type,
+            numbers: stake,
+            user: { connect: { id: userId } },
+          },
+        });
+      }
+      return true;
+    } catch (err) {
+      throw new BadRequestException({
+        name: 'raffle',
+        message: MESSAGES.RAFFLE.UNABLE_TO_STAKE,
       });
     }
   }

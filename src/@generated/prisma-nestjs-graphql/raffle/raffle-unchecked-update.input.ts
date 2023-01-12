@@ -20,7 +20,7 @@ export class RaffleUncheckedUpdateInput {
     stake?: IntFieldUpdateOperationsInput;
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
-    expiriy?: DateTimeFieldUpdateOperationsInput;
+    expiry?: DateTimeFieldUpdateOperationsInput;
 
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;

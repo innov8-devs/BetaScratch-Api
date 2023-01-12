@@ -20,7 +20,7 @@ export class Raffle {
     stake!: number;
 
     @Field(() => Date, {nullable:false})
-    expiriy!: Date;
+    expiry!: Date;
 
     @Field(() => Date, {nullable:false})
     createdAt!: Date;

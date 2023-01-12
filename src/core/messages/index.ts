@@ -65,6 +65,7 @@ const COUPON = {
 const RAFFLE = {
   UNABLE_TO_UPDATE: 'unable to update raffle',
   UNABLE_TO_FIND: 'unable to find raffle',
+  UNABLE_TO_STAKE: 'unable to stake raffle',
 };
 
 export const MESSAGES = { AUTH, USER, ACCOUNT, COUPON, RAFFLE };

@@ -19,7 +19,7 @@ export class RaffleMinAggregate {
     stake?: number;
 
     @Field(() => Date, {nullable:true})
-    expiriy?: Date | string;
+    expiry?: Date | string;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;

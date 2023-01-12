@@ -23,7 +23,7 @@ export class RaffleOrderByWithAggregationInput {
     stake?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
-    expiriy?: keyof typeof SortOrder;
+    expiry?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;

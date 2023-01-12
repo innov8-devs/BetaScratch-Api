@@ -14,6 +14,7 @@ import { MessageUncheckedCreateNestedManyWithoutUserInput } from '../message/mes
 import { TokenUncheckedCreateNestedManyWithoutUserInput } from '../token/token-unchecked-create-nested-many-without-user.input';
 import { PurchaseUncheckedCreateNestedManyWithoutUserInput } from '../purchase/purchase-unchecked-create-nested-many-without-user.input';
 import { ResetPasswordMetricsUncheckedCreateNestedManyWithoutUserInput } from '../reset-password-metrics/reset-password-metrics-unchecked-create-nested-many-without-user.input';
+import { StakedRaffleUncheckedCreateNestedManyWithoutUserInput } from '../staked-raffle/staked-raffle-unchecked-create-nested-many-without-user.input';
 
 @InputType()
 export class UserUncheckedCreateWithoutReferralInput {
@@ -122,4 +123,7 @@ export class UserUncheckedCreateWithoutReferralInput {
 
     @Field(() => ResetPasswordMetricsUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
     ResetPasswordMetrics?: ResetPasswordMetricsUncheckedCreateNestedManyWithoutUserInput;
+
+    @Field(() => StakedRaffleUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
+    stakedRaffle?: StakedRaffleUncheckedCreateNestedManyWithoutUserInput;
 }

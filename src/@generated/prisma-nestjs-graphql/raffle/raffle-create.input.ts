@@ -16,7 +16,7 @@ export class RaffleCreateInput {
     stake!: number;
 
     @Field(() => Date, {nullable:false})
-    expiriy!: Date | string;
+    expiry!: Date | string;
 
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;

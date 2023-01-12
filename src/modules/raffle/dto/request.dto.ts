@@ -13,5 +13,14 @@ export class UpdateRaffleInput {
   stake?: number;
 
   @Field(() => Date, { nullable: true })
-  expiriy?: Date;
+  expiry?: Date;
+}
+
+@InputType()
+export class StakeRaffleInput {
+  @Field(() => RAFFLE_TYPE)
+  type: RAFFLE_TYPE;
+
+  @Field(() => [Number])
+  stakes: number[];
 }

@@ -18,7 +18,7 @@ export class RaffleCountAggregate {
     stake!: number;
 
     @Field(() => Int, {nullable:false})
-    expiriy!: number;
+    expiry!: number;
 
     @Field(() => Int, {nullable:false})
     createdAt!: number;

@@ -29,7 +29,7 @@ export class RaffleScalarWhereWithAggregatesInput {
     stake?: IntWithAggregatesFilter;
 
     @Field(() => DateTimeWithAggregatesFilter, {nullable:true})
-    expiriy?: DateTimeWithAggregatesFilter;
+    expiry?: DateTimeWithAggregatesFilter;
 
     @Field(() => DateTimeWithAggregatesFilter, {nullable:true})
     createdAt?: DateTimeWithAggregatesFilter;

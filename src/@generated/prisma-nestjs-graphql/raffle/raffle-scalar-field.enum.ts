@@ -5,7 +5,7 @@ export enum RaffleScalarFieldEnum {
     type = "type",
     win = "win",
     stake = "stake",
-    expiriy = "expiriy",
+    expiry = "expiry",
     createdAt = "createdAt",
     updatedAt = "updatedAt"
 }
