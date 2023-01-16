@@ -5,7 +5,11 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Auth } from 'modules/auth/decorators/auth.decorator';
 import { CurrentUser } from 'modules/auth/decorators/current-user.decorator';
 import { ROLE } from 'types/constants/enum';
-import { StakeRaffleInput, UpdateRaffleInput } from './dto/request.dto';
+import {
+  RaffleSearch,
+  StakeRaffleInput,
+  UpdateRaffleInput,
+} from './dto/request.dto';
 import { RaffleService } from './raffle.service';
 
 @Resolver()
@@ -34,10 +38,12 @@ export class RaffleResolver {
     return await this.raffleService.stakeUserRaffle(user.id, input);
   }
 
-  @Auth([ROLE.ADMIN, ROLE.USER])
+  @Auth([ROLE.ADMIN])
   @Query(() => [StakedRaffleTickets], { nullable: true })
-  async findAllStakedRaffle(): Promise<StakedRaffleTickets[]> {
-    return await this.raffleService.findAllStakedRaffle();
+  async findAllStakedRaffle(
+    @Args('input') input: RaffleSearch,
+  ): Promise<StakedRaffleTickets[]> {
+    return await this.raffleService.findAllStakedRaffle(input);
   }
 
   // @Auth([ROLE.USER, ROLE.ADMIN])

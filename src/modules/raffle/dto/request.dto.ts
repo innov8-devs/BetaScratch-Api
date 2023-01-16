@@ -1,6 +1,7 @@
 import { RAFFLE_TYPE } from '@generated/prisma-nestjs-graphql/prisma/raffle-type.enum';
 import { TRANSACTION_TYPE } from '@generated/prisma-nestjs-graphql/prisma/transaction-type.enum';
 import { Field, InputType } from '@nestjs/graphql';
+import { IsNumber } from 'class-validator';
 
 @InputType()
 export class UpdateRaffleInput {
@@ -39,4 +40,15 @@ export class StakeRaffleInput {
 
   @Field(() => [RaffleTicketInput])
   ticket: RaffleTicketInput[];
+}
+
+@InputType()
+export class RaffleSearch {
+  @Field(() => Number)
+  @IsNumber()
+  page: number;
+
+  @Field(() => Number)
+  @IsNumber()
+  size: number;
 }

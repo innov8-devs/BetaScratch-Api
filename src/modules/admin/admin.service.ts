@@ -808,6 +808,10 @@ export class AdminService {
         return await this.prismaService.$queryRaw`
             SELECT * FROM "Coupon" c WHERE c::text ILIKE ${searchQuery} LIMIT 20
           `;
+      case DB_TYPES.STAKED_RAFFLE:
+        return await this.prismaService.$queryRaw`
+            SELECT * FROM "StakedRaffleTickets" r WHERE r::text ILIKE ${searchQuery} LIMIT 20
+          `;
       default:
         break;
     }

@@ -11,7 +11,11 @@ import {
   generateRandomNumbers,
   generateRandomString,
 } from 'utils/generateRandomString.util';
-import { StakeRaffleInput, UpdateRaffleInput } from './dto/request.dto';
+import {
+  RaffleSearch,
+  StakeRaffleInput,
+  UpdateRaffleInput,
+} from './dto/request.dto';
 
 @Injectable()
 export class RaffleService {
@@ -166,9 +170,15 @@ export class RaffleService {
     }
   }
 
-  async findAllStakedRaffle() {
+  async findAllStakedRaffle(input: RaffleSearch) {
     try {
-      return await this.prismaService.stakedRaffleTickets.findMany();
+      const { page, size } = input;
+      let skipValue = page * size - size;
+      return await this.prismaService.stakedRaffleTickets.findMany({
+        take: size,
+        skip: skipValue,
+        orderBy: { id: 'desc' },
+      });
     } catch (err) {
       throw new BadRequestException({
         name: 'raffle',
