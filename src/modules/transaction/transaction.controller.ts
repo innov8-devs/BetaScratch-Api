@@ -1,7 +1,6 @@
 import { Controller, Post, Req, Res } from '@nestjs/common';
 import { FLUTTER_TRANSACTION_TYPE } from 'types/constants/enum';
 import { Request, Response } from 'express';
-import { splitFlutterRef } from 'helpers/splitFlutterRef';
 import { TransactionService } from './transaction.service';
 import Stripe from 'stripe';
 
