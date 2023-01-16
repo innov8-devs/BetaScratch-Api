@@ -105,4 +105,5 @@ export enum GAME_STATUS {
 export enum FLUTTER_TRANSACTION_TYPE {
   CHECKOUT = 'checkout',
   DEPOSIT = 'deposit',
+  RAFFLE = 'raffle',
 }
