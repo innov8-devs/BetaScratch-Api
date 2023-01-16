@@ -17,7 +17,7 @@ import { ReferralUncheckedUpdateManyWithoutUserNestedInput } from '../referral/r
 import { TokenUncheckedUpdateManyWithoutUserNestedInput } from '../token/token-unchecked-update-many-without-user-nested.input';
 import { PurchaseUncheckedUpdateManyWithoutUserNestedInput } from '../purchase/purchase-unchecked-update-many-without-user-nested.input';
 import { ResetPasswordMetricsUncheckedUpdateManyWithoutUserNestedInput } from '../reset-password-metrics/reset-password-metrics-unchecked-update-many-without-user-nested.input';
-import { StakedRaffleUncheckedUpdateManyWithoutUserNestedInput } from '../staked-raffle/staked-raffle-unchecked-update-many-without-user-nested.input';
+import { StakedRaffleTicketsUncheckedUpdateManyWithoutUserNestedInput } from '../staked-raffle-tickets/staked-raffle-tickets-unchecked-update-many-without-user-nested.input';
 
 @InputType()
 export class UserUncheckedUpdateWithoutWalletInput {
@@ -115,6 +115,6 @@ export class UserUncheckedUpdateWithoutWalletInput {
     @Field(() => ResetPasswordMetricsUncheckedUpdateManyWithoutUserNestedInput, {nullable:true})
     ResetPasswordMetrics?: ResetPasswordMetricsUncheckedUpdateManyWithoutUserNestedInput;
 
-    @Field(() => StakedRaffleUncheckedUpdateManyWithoutUserNestedInput, {nullable:true})
-    stakedRaffle?: StakedRaffleUncheckedUpdateManyWithoutUserNestedInput;
+    @Field(() => StakedRaffleTicketsUncheckedUpdateManyWithoutUserNestedInput, {nullable:true})
+    stakedRaffleTickets?: StakedRaffleTicketsUncheckedUpdateManyWithoutUserNestedInput;
 }

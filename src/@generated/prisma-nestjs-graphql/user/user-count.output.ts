@@ -33,5 +33,5 @@ export class UserCount {
     ResetPasswordMetrics?: number;
 
     @Field(() => Int, {nullable:false})
-    stakedRaffle?: number;
+    stakedRaffleTickets?: number;
 }

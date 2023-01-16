@@ -14,7 +14,7 @@ import { Referral } from '../referral/referral.model';
 import { Token } from '../token/token.model';
 import { Purchase } from '../purchase/purchase.model';
 import { ResetPasswordMetrics } from '../reset-password-metrics/reset-password-metrics.model';
-import { StakedRaffle } from '../staked-raffle/staked-raffle.model';
+import { StakedRaffleTickets } from '../staked-raffle-tickets/staked-raffle-tickets.model';
 import { UserCount } from './user-count.output';
 
 @ObjectType()
@@ -116,8 +116,8 @@ export class User {
     @Field(() => [ResetPasswordMetrics], {nullable:true})
     ResetPasswordMetrics?: Array<ResetPasswordMetrics>;
 
-    @Field(() => [StakedRaffle], {nullable:true})
-    stakedRaffle?: Array<StakedRaffle>;
+    @Field(() => [StakedRaffleTickets], {nullable:true})
+    stakedRaffleTickets?: Array<StakedRaffleTickets>;
 
     @Field(() => UserCount, {nullable:false})
     _count?: UserCount;

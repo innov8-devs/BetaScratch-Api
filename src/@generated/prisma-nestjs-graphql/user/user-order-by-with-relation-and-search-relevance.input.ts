@@ -11,7 +11,7 @@ import { ReferralOrderByRelationAggregateInput } from '../referral/referral-orde
 import { TokenOrderByRelationAggregateInput } from '../token/token-order-by-relation-aggregate.input';
 import { PurchaseOrderByRelationAggregateInput } from '../purchase/purchase-order-by-relation-aggregate.input';
 import { ResetPasswordMetricsOrderByRelationAggregateInput } from '../reset-password-metrics/reset-password-metrics-order-by-relation-aggregate.input';
-import { StakedRaffleOrderByRelationAggregateInput } from '../staked-raffle/staked-raffle-order-by-relation-aggregate.input';
+import { StakedRaffleTicketsOrderByRelationAggregateInput } from '../staked-raffle-tickets/staked-raffle-tickets-order-by-relation-aggregate.input';
 import { UserOrderByRelevanceInput } from './user-order-by-relevance.input';
 
 @InputType()
@@ -113,8 +113,8 @@ export class UserOrderByWithRelationAndSearchRelevanceInput {
     @Field(() => ResetPasswordMetricsOrderByRelationAggregateInput, {nullable:true})
     ResetPasswordMetrics?: ResetPasswordMetricsOrderByRelationAggregateInput;
 
-    @Field(() => StakedRaffleOrderByRelationAggregateInput, {nullable:true})
-    stakedRaffle?: StakedRaffleOrderByRelationAggregateInput;
+    @Field(() => StakedRaffleTicketsOrderByRelationAggregateInput, {nullable:true})
+    stakedRaffleTickets?: StakedRaffleTicketsOrderByRelationAggregateInput;
 
     @Field(() => UserOrderByRelevanceInput, {nullable:true})
     _relevance?: UserOrderByRelevanceInput;

@@ -16,7 +16,7 @@ import { MessageUpdateManyWithoutUserNestedInput } from '../message/message-upda
 import { ReferralUpdateManyWithoutUserNestedInput } from '../referral/referral-update-many-without-user-nested.input';
 import { TokenUpdateManyWithoutUserNestedInput } from '../token/token-update-many-without-user-nested.input';
 import { PurchaseUpdateManyWithoutUserNestedInput } from '../purchase/purchase-update-many-without-user-nested.input';
-import { StakedRaffleUpdateManyWithoutUserNestedInput } from '../staked-raffle/staked-raffle-update-many-without-user-nested.input';
+import { StakedRaffleTicketsUpdateManyWithoutUserNestedInput } from '../staked-raffle-tickets/staked-raffle-tickets-update-many-without-user-nested.input';
 
 @InputType()
 export class UserUpdateWithoutResetPasswordMetricsInput {
@@ -111,6 +111,6 @@ export class UserUpdateWithoutResetPasswordMetricsInput {
     @Field(() => PurchaseUpdateManyWithoutUserNestedInput, {nullable:true})
     purchase?: PurchaseUpdateManyWithoutUserNestedInput;
 
-    @Field(() => StakedRaffleUpdateManyWithoutUserNestedInput, {nullable:true})
-    stakedRaffle?: StakedRaffleUpdateManyWithoutUserNestedInput;
+    @Field(() => StakedRaffleTicketsUpdateManyWithoutUserNestedInput, {nullable:true})
+    stakedRaffleTickets?: StakedRaffleTicketsUpdateManyWithoutUserNestedInput;
 }

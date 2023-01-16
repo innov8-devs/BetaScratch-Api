@@ -13,7 +13,7 @@ import { MessageCreateNestedManyWithoutUserInput } from '../message/message-crea
 import { ReferralCreateNestedManyWithoutUserInput } from '../referral/referral-create-nested-many-without-user.input';
 import { TokenCreateNestedManyWithoutUserInput } from '../token/token-create-nested-many-without-user.input';
 import { PurchaseCreateNestedManyWithoutUserInput } from '../purchase/purchase-create-nested-many-without-user.input';
-import { StakedRaffleCreateNestedManyWithoutUserInput } from '../staked-raffle/staked-raffle-create-nested-many-without-user.input';
+import { StakedRaffleTicketsCreateNestedManyWithoutUserInput } from '../staked-raffle-tickets/staked-raffle-tickets-create-nested-many-without-user.input';
 
 @InputType()
 export class UserCreateWithoutResetPasswordMetricsInput {
@@ -120,6 +120,6 @@ export class UserCreateWithoutResetPasswordMetricsInput {
     @Field(() => PurchaseCreateNestedManyWithoutUserInput, {nullable:true})
     purchase?: PurchaseCreateNestedManyWithoutUserInput;
 
-    @Field(() => StakedRaffleCreateNestedManyWithoutUserInput, {nullable:true})
-    stakedRaffle?: StakedRaffleCreateNestedManyWithoutUserInput;
+    @Field(() => StakedRaffleTicketsCreateNestedManyWithoutUserInput, {nullable:true})
+    stakedRaffleTickets?: StakedRaffleTicketsCreateNestedManyWithoutUserInput;
 }

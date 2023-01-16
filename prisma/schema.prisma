@@ -73,7 +73,7 @@ model User {
   token                Token[]
   purchase             Purchase[]
   ResetPasswordMetrics ResetPasswordMetrics[]
-  stakedRaffle         StakedRaffle[]
+  stakedRaffleTickets  StakedRaffleTickets[]
 }
 
 model Admin {
@@ -369,14 +369,18 @@ model Raffle {
   updatedAt DateTime    @updatedAt
 }
 
-model StakedRaffle {
-  id        Int         @id @default(autoincrement())
-  type      RAFFLE_TYPE @unique
-  numbers   Int[]
-  user      User?       @relation(fields: [userId], references: [id])
-  userId    Int?
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+model StakedRaffleTickets {
+  id              Int              @id @default(autoincrement())
+  type            RAFFLE_TYPE
+  originalNumbers String
+  sortedNumbers   String
+  reference       String?
+  transactionType TRANSACTION_TYPE
+  user            User?            @relation(fields: [userId], references: [id])
+  userId          Int?
+  isPaid          Boolean
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
 }
 
 enum ROLE {

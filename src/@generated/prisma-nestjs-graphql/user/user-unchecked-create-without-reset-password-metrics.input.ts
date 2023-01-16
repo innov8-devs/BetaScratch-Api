@@ -14,7 +14,7 @@ import { MessageUncheckedCreateNestedManyWithoutUserInput } from '../message/mes
 import { ReferralUncheckedCreateNestedManyWithoutUserInput } from '../referral/referral-unchecked-create-nested-many-without-user.input';
 import { TokenUncheckedCreateNestedManyWithoutUserInput } from '../token/token-unchecked-create-nested-many-without-user.input';
 import { PurchaseUncheckedCreateNestedManyWithoutUserInput } from '../purchase/purchase-unchecked-create-nested-many-without-user.input';
-import { StakedRaffleUncheckedCreateNestedManyWithoutUserInput } from '../staked-raffle/staked-raffle-unchecked-create-nested-many-without-user.input';
+import { StakedRaffleTicketsUncheckedCreateNestedManyWithoutUserInput } from '../staked-raffle-tickets/staked-raffle-tickets-unchecked-create-nested-many-without-user.input';
 
 @InputType()
 export class UserUncheckedCreateWithoutResetPasswordMetricsInput {
@@ -124,6 +124,6 @@ export class UserUncheckedCreateWithoutResetPasswordMetricsInput {
     @Field(() => PurchaseUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
     purchase?: PurchaseUncheckedCreateNestedManyWithoutUserInput;
 
-    @Field(() => StakedRaffleUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
-    stakedRaffle?: StakedRaffleUncheckedCreateNestedManyWithoutUserInput;
+    @Field(() => StakedRaffleTicketsUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
+    stakedRaffleTickets?: StakedRaffleTicketsUncheckedCreateNestedManyWithoutUserInput;
 }
