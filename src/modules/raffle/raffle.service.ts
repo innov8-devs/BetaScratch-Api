@@ -161,6 +161,7 @@ export class RaffleService {
     try {
       return await this.prismaService.stakedRaffleTickets.findUnique({
         where: { id: raffleId },
+        include: { user: true },
       });
     } catch (err) {
       throw new BadRequestException({
@@ -178,6 +179,7 @@ export class RaffleService {
         take: size,
         skip: skipValue,
         orderBy: { id: 'desc' },
+        include: { user: true },
       });
     } catch (err) {
       throw new BadRequestException({
