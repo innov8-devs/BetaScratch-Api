@@ -51,8 +51,8 @@ export class CouponService {
 
       await this.prismaService.coupon.create({
         data: {
-          capped,
           cappedAmount: capped_amount,
+          capped,
           code,
           expires: `${daysToUnix(expires)}`,
           percentage,
